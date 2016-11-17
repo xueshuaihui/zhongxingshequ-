@@ -575,6 +575,8 @@ if(!submitcheck('settingsubmit')) {
 		showsetting('setting_styles_index_hideprivate', 'settingnew[hideprivate]', $setting['hideprivate'], 'radio');
 		showsetting('setting_styles_index_showfollowcollection', 'settingnew[showfollowcollection]', $setting['showfollowcollection'], 'text');
 		showsetting('setting_styles_index_disfixednv', 'settingnew[disfixednv_forumindex]', !empty($setting['disfixednv_forumindex']), 'radio');
+		/*self define banner*/
+		showsetting('setting_styles_index_banner', 'settingnew[banner]', !empty($setting['disfixednv_forumindex']), 'banner');
 		showtablefooter();
 
 		showtips('setting_tips', 'forumdisplay_tips', $_GET['anchor'] == 'forumdisplay');
