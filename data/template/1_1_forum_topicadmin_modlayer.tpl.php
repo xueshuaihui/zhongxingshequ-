@@ -18,9 +18,9 @@
 <span class="pipe">|</span>
 <strong><a href="javascript:;" onclick="tmodthreads(5, 'recommend_group');return false;">推荐到版块</a></strong>
 <?php } if(CURMODULE == 'forumdisplay') { ?>
-<?php if(!empty($_G['setting']['pluginhooks']['forumdisplay_modlayer'])) echo $_G['setting']['pluginhooks']['forumdisplay_modlayer'];?>
+<?php echo '<hook>[string forumdisplay_modlayer]</hook>';if(!empty($_G['setting']['pluginhooks']['forumdisplay_modlayer'])) echo $_G['setting']['pluginhooks']['forumdisplay_modlayer'];?>
 <?php } elseif(CURMODULE == 'modcp') { ?>
-<?php if(!empty($_G['setting']['pluginhooks']['modcp_modlayer'])) echo $_G['setting']['pluginhooks']['modcp_modlayer'];?>
+<?php echo '<hook>[string modcp_modlayer]</hook>';if(!empty($_G['setting']['pluginhooks']['modcp_modlayer'])) echo $_G['setting']['pluginhooks']['modcp_modlayer'];?>
 <?php } ?>
 </p>
 <p>
