@@ -1,3 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/
 data
+uc_client/data
+uc_server/data
+install
