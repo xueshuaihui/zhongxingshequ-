@@ -990,10 +990,6 @@ $lang = array
     'setting_styles_index_disfixednv' => '关闭顶部导航固定',
     'setting_styles_index_disfixednv_comment' => '当向上滚动屏幕时，主导航将即时出现在屏幕的顶部',
 
-    /*self define banner*/
-    'setting_styles_index_banner' => '设置首页轮播图Banner',
-    'setting_styles_index_banner_comment' => 'banner setting',
-
 	'setting_styles_forumdisplay' => '主题列表页',
 	'setting_styles_forumdisplay_tpp' => '每页显示主题数',
 	'setting_styles_forumdisplay_tpp_comment' => '主题列表中每页显示主题数目',

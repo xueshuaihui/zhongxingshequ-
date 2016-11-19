@@ -787,10 +787,7 @@ function showsetting($setname, $varname, $value, $type = 'radio', $disabled = ''
 			"<input id=\"c$colorid\" onclick=\"c{$colorid}_frame.location='static/image/admincp/getcolor.htm?c{$colorid}|c{$colorid}_v';showMenu({'ctrlid':'c$colorid'})\" type=\"button\" class=\"colorwd\" value=\"\" style=\"background: $background\"><span id=\"c{$colorid}_menu\" style=\"display: none\"><iframe name=\"c{$colorid}_frame\" src=\"\" frameborder=\"0\" width=\"210\" height=\"148\" scrolling=\"no\"></iframe></span>\n$extra";
 	} elseif($type == 'calendar') {
 		$s .= "<input type=\"text\" class=\"txt\" name=\"$varname\" value=\"".dhtmlspecialchars($value)."\" onclick=\"showcalendar(event, this".($extra ? ', 1' : '').")\">\n";
-	} elseif($type = 'banner') {
-        /*self define banner*/
-        $s .= '<input type="text" class="txt" placeholder="我草拟妹"><br/>';
-    } elseif(in_array($type, array('multiply', 'range', 'daterange'))) {
+	} elseif(in_array($type, array('multiply', 'range', 'daterange'))) {
 		$onclick = $type == 'daterange' ? ' onclick="showcalendar(event, this)"' : '';
 		if(isset($_G['showsetting_multi'])) {
 			$varname[1] = preg_replace('/\w+new/', 'multinew['.$_G['showsetting_multi'].'][\\0]', $varname[1]);
