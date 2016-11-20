@@ -939,6 +939,21 @@ $lang = array
 	'setting_styles_sitemessage_reply' => '回复页面',
 	'setting_styles_sitemessage_reply_comment' => '回复页面的弹出信息，每行填写一条信息，多条信息将随机显示',
 
+    /*reshared add for banner lang*/
+    'setting_styles_banner' => '轮播图',
+    'setting_styles_banner_upload' => '点击图片上传',
+    'setting_styles_banner_upload_comment' => '点击图片上传，并设置此图的顺序值来排序',
+    'setting_styles_banner_display' => '已经长传的图像',
+    'setting_styles_banner_display_comment' => '左侧为缩略图，右侧为图片名',
+    'setting_styles_banner_order' => '排序设置',
+    'setting_styles_banner_order_comment' => '将图片名填入，逗号分开',
+    'setting_styles_banner_title' => '显示标题',
+    'setting_styles_banner_title_comment' => '显示在轮播图上的标题',
+    'setting_styles_banner_jump' => '需跳转的url',
+    'setting_styles_banner_jump_comment' => '需跳转的地址链接',
+    /********************************************/
+
+
 	'setting_styles_index' => '论坛首页',
 	'setting_styles_index_allowindextype' => '在首页切换显示风格',
 	'setting_styles_index_indextype' => '首页显示风格',

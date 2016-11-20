@@ -134,7 +134,18 @@ if(!submitcheck('settingsubmit')) {
 			array('setting_attach_portal_article_attach', 'portalarticle', $_GET['anchor'] == 'portalarticle'),
 		));
 	} elseif($operation == 'styles') {
-		$_GET['anchor'] = in_array($_GET['anchor'], array('global', 'index', 'forumdisplay', 'viewthread', 'threadprofile', 'numbercard', 'refresh', 'sitemessage')) ? $_GET['anchor'] : 'global';
+		$_GET['anchor'] = in_array($_GET['anchor'], array(
+			'global',
+			'index',
+			'forumdisplay',
+			'viewthread',
+			'threadprofile',
+			'numbercard',
+			'refresh',
+			'sitemessage',
+			/*reshared add for banner anchor*/
+			'banner'
+		)) ? $_GET['anchor'] : 'global';
 		$current = array($_GET['anchor'] => 1);
 		showsubmenu('setting_styles', array(
 			array('setting_styles_global', 'setting&operation=styles&anchor=global', $current['global']),
@@ -144,7 +155,9 @@ if(!submitcheck('settingsubmit')) {
 			array('setting_styles_threadprofile', 'setting&operation=styles&anchor=threadprofile', $current['threadprofile']),
 			array('members_profile_numbercard', 'setting&operation=styles&anchor=numbercard', $current['numbercard']),
 			array('setting_styles_refresh', 'setting&operation=styles&anchor=refresh', $current['refresh']),
-			array('setting_styles_sitemessage', 'setting&operation=styles&anchor=sitemessage', $current['sitemessage'])
+			array('setting_styles_sitemessage', 'setting&operation=styles&anchor=sitemessage', $current['sitemessage']),
+			/*reshared add for banner nav*/
+			array('setting_styles_banner', 'setting&operation=styles&anchor=banner', $current['banner'])
 		));
 	} elseif($operation == 'functions') {
 		$_GET['anchor'] = in_array($_GET['anchor'], array('curscript', 'mod', 'heatthread', 'recommend', 'comment', 'activity', 'other', 'threadexp', 'guide')) ? $_GET['anchor'] : 'curscript';
@@ -755,6 +768,37 @@ if(!submitcheck('settingsubmit')) {
 		showsetting('setting_styles_sitemessage_reply', 'settingnew[sitemessage][reply]', $setting['sitemessage']['reply'], 'textarea');
 		showtagfooter('tbody');
 		showtablefooter();
+
+
+		/*reshared add for banner setting item*/
+		showtableheader('setting_styles_banner', 'nobottom', 'id="banner"'.($_GET['anchor'] != 'banner' ? ' style="display: none"' : ''));
+		/*setting*/
+		if(isset($setting['has_banner'])){
+			$bannerSetting = explode(',', $setting['has_banner']);
+			$values = array();
+			foreach ($bannerSetting as $item) {
+				$values[$item] = array(
+					'title' => $setting[$item.'title'],
+					'jump' => $setting[$item.'jump'],
+					'url' => $setting[$item.'url']
+				);
+			}
+		} else {
+			$values = null;
+		}
+		/*title*/
+		showsetting('setting_styles_banner_title', 'uploadTitle', '', 'text');
+		/*跳转url*/
+		showsetting('setting_styles_banner_jump', 'uploadJump', '', 'text');
+		/*upload*/
+		showsetting('setting_styles_banner_upload', 'uploadUrl', '', 'banner');
+		/*display*/
+		showsetting('setting_styles_banner_display', '', $values, 'banner_display');
+		/*order*/
+		showsetting('setting_styles_banner_order', 'settingnew[banner_order]', $setting['banner_order'], 'text');
+		showtagfooter('tbody');
+		showtablefooter();
+		/**************************************/
 
 		showtableheader('', 'notop');
 		showsubmit('settingsubmit');
@@ -2511,6 +2555,45 @@ EOT;
 
 	$settingnew = $_GET['settingnew'];
 
+	/*reshared add for banner save*/
+	if($_GET['uploadUrl'] != '' || $_GET['uploadTitle'] != '' || $_GET['uploadJump'] != '' || ($_FILES['uploadUrl'] && $_FILES['uploadUrl']['size'] > 0)) {
+		if(!isset($_GET['uploadTitle']) || $_GET['uploadTitle'] == '') {
+			cpmsg('upload_title_no', '', 'error');
+		}
+
+		if(!isset($_GET['uploadJump']) || $_GET['uploadJump'] == '') {
+			cpmsg('upload_jump_no', '', 'error');
+		}
+
+
+		if(!isset($_GET['uploadUrl']) || $_GET['uploadUrl'] == '') {
+			if(!$_FILES['uploadUrl'] || $_FILES['uploadUrl']['size'] == 0){
+				cpmsg('upload_banner_no', '', 'error');
+			}
+		}
+
+		$uploadUrl = isset($_GET['uploadUrl'])?$_GET['uploadUrl']:'';
+		if ($_FILES['uploadUrl'] && $_FILES['uploadUrl']['size'] > 0) {
+			$uploadUrl = uploadFile($_FILES['uploadUrl'], $setting['attachdir']);
+		} elseif (substr($uploadUrl, 0, 4) !== 'http') {
+			cpmsg('upload_url_error', '', 'error');
+		}
+
+		if (isset($settingnew['uploadUrl'])) {
+			unset($settingnew['uploadUrl']);
+		}
+		if (isset($uploadUrl)) {
+			$k = substr(time(), -2) . substr(microtime(), -4);
+			$title = $_GET['uploadTitle'];
+			$jump = $_GET['uploadJump'];
+			$settingnew[$k.'url'] = $uploadUrl;
+			$settingnew[$k.'title'] = $title;
+			$settingnew[$k.'jump'] = $jump;
+			$settingnew['has_banner'] = $setting['has_banner'] ? ($setting['has_banner'] . ',' . $k) : $k;
+		}
+	}
+ 	/******************************/
+
 	if($operation == 'credits') {
 		$extcredits_exists = 0;
 		foreach($settingnew['extcredits'] as $val) {
@@ -3682,4 +3765,33 @@ function showsetting_threadprfile($authorinfoitems, $template = array()) {
 		<tr><td colspan="2"><div class="threadprofilenode">'.$buttons.'</div><textarea name="templatenew[top]" id="ttop" class="marginbot" style="width:80%" rows="10" onkeyup="textareasize(this)" onkeydown="textareakey(this, event)">'.$template_top.'</textarea></td></tr>';
 }
 
+/*reshared add for banner upload function*/
+function uploadFile ($file, $basePath) {
+	if($file['error'] > 0) {
+		cpmsg('upload_error', '', 'error');
+	}
+	if($file['type'] == 'image/jpg') {
+		$ext = '.jpg';
+	} elseif ($file['type'] == 'image/png') {
+		$ext = '.png';
+	} else {
+		echo $file['type'];
+		cpmsg('upload_file_type_error', '', 'error');
+	}
+
+
+	$path = $basePath.DIRECTORY_SEPARATOR.'banner';
+	if(!is_dir($path)){
+		mkdir($path);
+	}
+	$name = uniqid('banner').substr(microtime(), -10).$ext;
+	$res = move_uploaded_file($file['tmp_name'], $path.DIRECTORY_SEPARATOR.$name);
+	if(!$res) {
+		cpmsg('upload_error', '', 'error');
+	}
+	$siteUrl = $_SERVER['HTTP_HOST'].DIRECTORY_SEPARATOR;
+	$url = str_replace('./', $siteUrl, $path);
+	return $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://' . $url.DIRECTORY_SEPARATOR.$name;
+}
+/*************************************/
 ?>

@@ -793,7 +793,25 @@ function showsetting($setname, $varname, $value, $type = 'radio', $disabled = ''
 			$varname[1] = preg_replace('/\w+new/', 'multinew['.$_G['showsetting_multi'].'][\\0]', $varname[1]);
 		}
 		$s .= "<input type=\"text\" class=\"txt\" name=\"$varname[0]\" value=\"".dhtmlspecialchars($value[0])."\" style=\"width: 108px; margin-right: 5px;\"$onclick>".($type == 'multiply' ? ' X ' : ' -- ')."<input type=\"text\" class=\"txt\" name=\"$varname[1]\" value=\"".dhtmlspecialchars($value[1])."\"class=\"txt\" style=\"width: 108px; margin-left: 5px;\"$onclick>";
-	} else {
+	}
+	/*reshared add for banner item show*/
+	/*
+	 * varname
+	 * value
+	 * */
+    elseif ($type == 'banner') {
+        $s .= '图片url：<input type="text" class="txt" name="'.$varname.'"><br/><br/>或本地上传：<br/><br/><input type = "file" name="'.$varname.'">';
+    } elseif ($type == 'banner_display') {
+        $s .= '<table><tr><td>ID</td><td>缩略图</td><td>标题</td><td>跳转链接</td></tr>';
+        if($value){
+            foreach ($value as $id=>$item) {
+                $s .= '<tr><td>'.$id.'</td><td><img style="width:100px;" src = "'.$item['url'].'"></td><td>'.$item['title'].'</td><td>'.$item['jump'].'</td>';
+            }
+        }
+        $s .= '</table>';
+    }
+	/************************************/
+	else {
 		$s .= $type;
 	}
 	$name = cplang($setname);

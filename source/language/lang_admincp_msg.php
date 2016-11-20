@@ -634,6 +634,14 @@ $lang = array (
   'admincp_makehtml_cleanhtml_error' => '对不起，开启生成HTML静态文件时，不能清理HTML文件。',
   'admincp_makehtml_cleanhtml_succeed' => '清理HTML文件成功。',
   'admincp_makehtml_cleanhtml_choose_item' => '对不起，请选择需要清理HTML文件。',
+    /*reshared add for banner upload tips*/
+    'upload_url_error' => '图片URL错误，请以http:// 或 https:// 开头',
+    'upload_error' => '上传图片失败，请重试',
+    'upload_file_type_error' => '图片格式错误，请选择jpg,png格式的图片',
+    'upload_title_no' => '未填写标题',
+    'upload_jump_no' => '未填写跳转地址，以http://或https://开头',
+    'upload_banner_no' => '未上传图片，或填写图片url地址'
+    /*************************************/
 );
 
 ?>
