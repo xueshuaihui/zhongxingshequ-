@@ -57,6 +57,15 @@ class helper_makehtml {
 		}
 	}
 
+	/*reshared add for index make html*/
+    public static function index_index() {
+        global $_G;
+        if(!empty($_G['setting']['makehtml']['flag'])) {
+            $_G['dynamicurl'] = 'ztindex.php';
+            self::$htmlfilename = $_G['setting']['makehtml']['indexname'] ? $_G['setting']['makehtml']['indexname'] : 'index';
+        }
+	}
+
 	public static function portal_list($cat) {
 		global $_G;
 		if(!empty($_G['setting']['makehtml']['flag']) && $cat['fullfoldername']) {

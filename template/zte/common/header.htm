@@ -1,0 +1,35 @@
+<!--{subtemplate common/head_base}-->
+<div class="xue_header">
+    <div class="xue_header_margin">
+        <div class="xsh_header_search">
+            <form action="" method="" target="_blank" class="xsh_form">
+                <input  class="search" type="text" placeholder="请输入搜索内容" name="searchtext">
+                <button class="searchsubmit" value="true" name="searchsubmit" type="submit">搜索</button>
+            </form>
+        </div>
+        <div class="tell">
+            <p>中兴热线：000-000-0000</p>
+        </div>
+    </div>
+</div>
+<div class="xsh_navbox">
+    <div class="xsh_nav">
+        <div class="xsh_nav_logo">
+            <img src="/static/zte/images/u4.png" alt="">
+        </div>
+        <!--{eval $mnid = getcurrentnav();}-->
+        <div class="xsh_nav_navtext">
+            <ul>
+                <!--{loop $_G['setting']['navs'] $nav}-->
+                <!--{if $nav['available'] && (!$nav['level'] || ($nav['level'] == 1 && $_G['uid']) || ($nav['level'] == 2 && $_G['adminid'] > 0) || ($nav['level'] == 3 && $_G['adminid'] == 1))}--><li {if $mnid == $nav[navid]}class="nav_hot" {/if}$nav[nav]></li><!--{/if}-->
+                <!--{/loop}-->
+            </ul>
+        </div>
+        <div class="login">
+            <a href=""><span>登录</span></a>
+            <span class="login_span"></span>
+            <a href=""><span>注册</span></a>
+        </div>
+    </div>
+</div>
+

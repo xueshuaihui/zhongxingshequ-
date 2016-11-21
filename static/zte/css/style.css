@@ -1,0 +1,105 @@
+.xue_header{background: #505050;color: #DADADA;line-height: 36px;border: 0;width: 100%;min-width: 100%;height: 36px;}
+.xue_header_margin{width: 960px;height: 100%;margin: auto;}
+.xsh_header_search{float: left;}
+.xsh_form{padding: 5px;}
+.search{float: left;height: 19px;padding: 2px 5px;width: 160px;border: 1px solid #ABABAB;border-radius: 5px 0 0 5px;}
+.searchsubmit{float: left;font-size: 0;text-indent: -9999px;width: 28px;height: 25px;background: url(http://forum.h3c.com/template/h3c/images/icon.png) no-repeat 0 0;border: 0;}
+.tell{float: right;}
+.xsh_navbox{width: 100%;margin: auto;background: #ffffff;border-bottom: 1px solid #eee;padding: 20px 0;}
+.xsh_nav{;width: 960px;height: 100%;margin: auto;overflow: hidden;}
+.xsh_nav_logo{max-width: 120px;height: 40px;;overflow: hidden;float: left;margin-right: 30px;}
+.xsh_nav_logo>img{height: 100%;}
+.xsh_nav_navtext{float: left;max-width: 700px;}
+.xsh_nav_navtext>ul>li{float: left;font-size: 16px;margin: 0 15px;height: 40px;line-height: 40px;}
+.xsh_nav_navtext>ul>li:hover{cursor: pointer;}
+.nav_hot{color: #5597ED;}
+.login{width: 100px;float: right;height: 40px;line-height: 40px;font-size: 16px;}
+.login>a{float: left;}
+.login_span{width: 1px;height: 50%;background: #333;float: left;margin: 10px 10px;}
+/**/
+.xsh_box{width: 960px;height: auto;margin: auto;}
+/*轮播图长最大960px  高最大380px;*/
+.xsh_carousel{width: 100%;height: 380px;border-radius: 10px;background: #eee;margin-top: 10px;overflow: hidden;position: relative;}
+.xsh_carimg{width: 100%;height: 100%;position: absolute;overflow: hidden;display: none;}
+.xsh_car_now{display: block;}
+.xsh_car{display: block;width: 100%;height: 100%;max-width: 960px;max-height: 380px;margin: auto;}
+.xsh_car_button{width: 29px;height: 50px;position: absolute;display: none;}
+.xsh_car_buttonl{left: 20px;top: 0;bottom: 0;margin: auto;background: url("/static/zte/images/u440.png") center no-repeat;}
+.xsh_car_buttonl:hover{cursor: pointer;}
+.xsh_car_buttonr{right: 20px;top: 0;bottom: 0;margin: auto;background: url("/static/zte/images/u438.png") center no-repeat;}
+.xsh_car_buttonr:hover{cursor: pointer;}
+.xsh_car_radbox{display: none;position: absolute;bottom: 20px;width: auto;height: 15px;left: 50%;transform: translateX(-50%);-webkit-transform: translateX(-50%);}
+.xsh_car_radius{width: 15px;height: 15px;border-radius: 50%;background: url("/static/zte/images/u432.png") center no-repeat;overflow: hidden;margin: 0 5px;float: left;}
+.xsh_car_radius:hover{cursor: pointer;}
+.xhs_car_hot{background: url("/static/zte/images/u434.png")}
+/*主体内容*/
+.xsh_content_box{width: 100%;height: auto;margin-top: 40px;display: block;}
+.xsh_con_left{width: 700px;border-radius: 10px;padding: 30px 0;background: #ffffff;}
+.xsh_con_right{width: 246px;margin-left: 14px;}
+.xsh_con_right>div{border-radius: 10px;overflow: hidden;margin-bottom: 10px;}
+.xsh_con_left,.xsh_con_right{height: auto;float: left;}
+/*tab*/
+.xsh_tab_header{font-family: '微软雅黑 Bold', '微软雅黑 Regular', '微软雅黑';font-size: 18px;margin: 0 20px;}
+.xsh_tab_title{float: left;margin-right: 30px;display: block;padding-bottom: 5px;border: 2px solid #ffffff;height: 25px;margin-bottom: 30px;}
+.xsh_tab_title:hover{color: #0186D1;font-weight: 900;cursor: pointer;border-bottom: 2px solid #0186D1;}
+.xsh_tab_content{margin:  0 20px;}
+.xsh_tab_con{display: none;}
+.xsh_tab_now{display: block;}
+.xsh_tab_conbox{width: 100%;height: 150px;margin-top: 25px;overflow: hidden;}
+.xsh_tab_img,.xsh_tab_writing{height: 100%;float: left;}
+.xsh_tab_img{width: 230px;height: 150px;border-radius: 8px;overflow: hidden;}
+.xsh_tab_img img{width: 100%;height: 100%;}
+.xsh_tab_writing{width: 400px;margin-left: 20px;overflow: hidden;line-height: 30px;}
+.xsh_tab_contitle{font-size: 20px;font-weight: 600;color: #333333;}
+.xsh_tab_concise{color: #666666;font-size: 14px;position: relative;}
+.xsh_tab_more>a{color: #5597ED;}
+.xsh_tab_more>a>img{transform: translateY(2px);-webkit-transform: translateY(2px);margin-left: 3px;}
+.xsh_tab_time{color: #909596;font-size: 12px;}
+.xsh_tab_time>span{margin-right: 30px;}
+.liulanl{background: url("/static/zte/images/liulannum_03.jpg") no-repeat left;padding-left: 15px;}
+/*页码*/
+.xsh_page_box{margin: 80px 0 30px 0;width: 100%;height: 35px;overflow: hidden;}
+.xsh_page_box>ul{margin-left: 50px;}
+.xsh_page_box>ul>li{width: 30px;height: 30px;text-align: center;line-height: 30px;font-size: 16px;border: 1px solid #5597ED;border-radius: 5px;float: left;margin-right: 2px;}
+.xsh_page_box>ul>.xsh_pages_hot{border-color: #ffffff;}
+.xsh_page_box>ul>li:hover{border-color: #ffffff;cursor: pointer;}
+.xsh_pages_Previous{background: url("/static/zte/images/u98.png") no-repeat center;}
+.xsh_pages_next{background: url("/static/zte/images/u99.png") no-repeat center;}
+/*互动专栏*/
+.xsh_interaction{background: #ffffff;}
+.xsh_intera_header,.xsh_intera_content>ul>a>li{height: 50px;line-height: 50px;padding-left: 15px;}
+.xsh_intera_header{font-size: 18px;font-weight: 900;}
+.xsh_intera_content>ul>a>li{border: 1px solid #eee;;width: 107px;float: left;border-left: 1px solid rgba(255,255,255,0);margin-right: -1px;margin-bottom: -1px;}
+.xsh_intera_logo,.xsh_intera_text{float: left;display: block;line-height: 50px;font-size: 14px;}
+.xsh_intera_logo{width: 25px;height: 25px;margin-right: 10px;margin-top: 8px;}
+.xsh_intera_logo>img{width: 100%;height: 100%;}
+/*专家互动*/
+.xsh_con_right_header{border-bottom: 1px solid #eee;position: relative;}
+.xsh_expert>ul>li{width: 100%;height: 76px;border-top: 1px solid #eee;margin-top: -1px;padding: 15px 0;}
+.xsh_expert_sort_first{color: #ff0000;}
+.xsh_expert_sort_two{color: #00cc00;}
+.xsh_expert_sort_three{color: #0186d1;}
+.xsh_expert_sort,.xsh_expert_name,.xsh_expert_add{float: left;}
+.xsh_expert_sort{width: 50px;}
+.xsh_expert_sort>.xsh_expert_sort_num{width: 25px;height: 25px;display: block;color: #ffffff;text-align: center;font-size: 16px;background: url("/static/zte/images/u346.png") no-repeat center;margin: 10px auto;}
+.xsh_expert_sort_first>.xsh_expert_sort>.xsh_expert_sort_num{background: url("/static/zte/images/u308.png") no-repeat center;}
+.xsh_expert_sort_two>.xsh_expert_sort>.xsh_expert_sort_num{background: url("/static/zte/images/u316.png") no-repeat center;}
+.xsh_expert_sort_three>.xsh_expert_sort>.xsh_expert_sort_num{background: url("/static/zte/images/u318.png") no-repeat center;}
+.xsh_expert_name{width: 80px;overflow: hidden;}
+.xsh_expert_name>a>.xsh_expert_logo{width: 46px;height: 46px;border-radius: 50%;overflow: hidden;background: #EEEEEE;margin: auto;}
+.xsh_expert_name>a>.xsh_expert_logo>img{width: 100%;height: 100%;border-radius: 50%;overflow: hidden;}
+.xsh_expert_name>a>.xsh_expert_user{text-align: center;width: 100%;font-size: 14px;margin-top: 15px;color: #000000;}
+.xsh_expert_add{width: 116px;overflow: hidden;}
+.xsh_expert_integral{font-size: 14px;}
+.xsh_expert_addbtn{width: 70px;height: 25px;border-radius: 5px;border: 2px solid #5597ED;margin: 15px auto;}
+.xsh_expert_addbtn>a{display: block;font-size: 15px;text-align: center;line-height: 25px;color: #5597ED;}
+/*积分兑换*/
+.xsh_integral{font-size: 14px;line-height: 35px;text-align: center;color: #666666;}
+.xsh_header_more{position: absolute;right: 10px;top: 0;}
+.xsh_header_more>a{color: #5597ED;font-size: 16px;}
+/*下载中兴这区APP*/
+.xsh_download>img{display: block;margin: 30px auto;}
+/*友情链接*/
+.xsh_link>ul>li{color: #666666;font-size: 14px;float: left;width: 107px;height: 20px;border-left: 1px solid #666666;border-right: 1px solid #ffffff;text-align: center;margin: 10px 0 10px -1px;}
+/*底部*/
+.xsh_foot{background: #333333;width: 100%;float: left;margin-top: 50px;color: #ffffff;text-align: center;font-size: 14px;line-height: 25px;padding: 10px 0;}
