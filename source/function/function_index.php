@@ -73,3 +73,27 @@ function addDot ($arr) {
     }
     return $arr;
 }
+
+function getHDZL($bkId, $for = 1) {
+    switch ($for){
+        case 1:
+            return C::t('forum_forum')->fetch_info_by_fid($bkId)['name'];
+        break;
+        case 2:
+            $data = C::t('forum_forum')->fetch_all_by_fup($bkId);
+            foreach ($data as $k => $v) {
+                $data[$k]['icon'] = getHDZL($v['fid'], 3);
+            }
+            return $data;
+        break;
+        case 3:
+            $url = C::t('forum_forumfield')->fetch_icon_by_fid($bkId);
+            if(strpos($url, 'http') === false){
+                return ($_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://').$_SERVER['HTTP_HOST'].DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'attachment'.DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.$url;
+            }else{
+                return $url;
+            }
+        break;
+        default: return false;
+    }
+}

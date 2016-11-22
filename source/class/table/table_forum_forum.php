@@ -26,6 +26,10 @@ class table_forum_forum extends discuz_table
 		$ordersql = $orderby ? 'ORDER BY t.type, t.displayorder' : '';
 		return DB::fetch_all('SELECT * FROM '.DB::table($this->_table)." t WHERE t.status='$status' $ordersql");
 	}
+    public function fetch_all_by_fup($fup, $orderby = 1) {
+        $ordersql = $orderby ? 'ORDER BY t.type, t.displayorder' : '';
+        return DB::fetch_all('SELECT * FROM '.DB::table($this->_table)." t WHERE t.fup='$fup' $ordersql");
+    }
 	public function fetch_all_fids($allstatus = 0, $type = '', $fup = '', $start = 0, $limit = 0, $count = 0) {
 		$typesql = empty($type) ? "type<>'group'" : DB::field('type', $type);
 		$statussql = empty($allstatus) ? ' AND status<>3' : '';

@@ -1008,7 +1008,9 @@ $lang = array
     'setting_styles_index_list_count_comment' =>'首页信息流显示数量',
     'setting_styles_index_newtab' => '点击信息流是否打开新页面',
     'setting_styles_index_newtab_comment' =>'点击信息流是否打开新页面',
-
+    'setting_styles_index_hdzl' => '填写互动专栏版块ID',
+    'setting_styles_index_hdzl_comment' =>'在【论坛】中设置并查看',
+    
 	'setting_styles_forumdisplay' => '主题列表页',
 	'setting_styles_forumdisplay_tpp' => '每页显示主题数',
 	'setting_styles_forumdisplay_tpp_comment' => '主题列表中每页显示主题数目',

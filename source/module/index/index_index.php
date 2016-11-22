@@ -44,6 +44,8 @@ if(isset($_G['makehtml'])){
 }
 $banner = explode(',', $_G['setting']['banner_order']);
 
+$hdzl = getHDZL($_G['setting']['index_hdzl'], 1);
+$subBk = getHDZL($_G['setting']['index_hdzl'], 2);
 $curType = isset($threadTypeId)?$threadTypeId:$threadType[0]['typeid'];
 $curPage = isset($pageId)?$pageId:1;
 $infoFlow = getInfo($curType, $curPage, $_G['setting']['index_list_count']);

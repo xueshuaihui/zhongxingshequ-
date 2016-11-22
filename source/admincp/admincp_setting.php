@@ -591,6 +591,7 @@ if(!submitcheck('settingsubmit')) {
 		showsetting('setting_styles_index_showfollowcollection', 'settingnew[showfollowcollection]', $setting['showfollowcollection'], 'text');
         showsetting('setting_styles_index_disfixednv', 'settingnew[disfixednv_forumindex]', !empty($setting['disfixednv_forumindex']), 'radio');
         showsetting('setting_styles_index_list_count', 'settingnew[index_list_count]', $setting['index_list_count'], 'text');
+        showsetting('setting_styles_index_hdzl', 'settingnew[index_hdzl]', $setting['index_hdzl'], 'text');
         showsetting('setting_styles_index_newtab', 'settingnew[newtab]', !empty($setting['newtab']), 'radio');
 		showtablefooter();
 

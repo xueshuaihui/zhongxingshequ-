@@ -61,40 +61,18 @@
         <!--互动专栏-->
         <div class="xsh_interaction">
             <div class="xsh_intera_header">
-                <h3>互动专栏</h3>
+                <h3>{$hdzl}</h3>
             </div>
             <div class="xsh_intera_content">
                 <ul>
+                    <!--{loop $subBk $bk}-->
                     <a href="">
                         <li>
-                            <span class="xsh_intera_logo"><img src="/template/html/images/u260.png" alt=""></span>
-                            <span class="xsh_intera_text">无线</span>
+                            <span class="xsh_intera_logo"><img src="{$bk['icon']}" alt="{$bk['name']}"></span>
+                            <span class="xsh_intera_text">{$bk['name']}</span>
                         </li>
                     </a>
-                    <a href="">
-                        <li>
-                            <span class="xsh_intera_logo"><img src="/template/html/images/u260.png" alt=""></span>
-                            <span class="xsh_intera_text">无线</span>
-                        </li>
-                    </a>
-                    <a href="">
-                        <li>
-                            <span class="xsh_intera_logo"><img src="/template/html/images/u260.png" alt=""></span>
-                            <span class="xsh_intera_text">无线</span>
-                        </li>
-                    </a>
-                    <a href="">
-                        <li>
-                            <span class="xsh_intera_logo"><img src="/template/html/images/u260.png" alt=""></span>
-                            <span class="xsh_intera_text">无线</span>
-                        </li>
-                    </a>
-                    <a href="">
-                        <li>
-                            <span class="xsh_intera_logo"><img src="/template/html/images/u260.png" alt=""></span>
-                            <span class="xsh_intera_text">无线</span>
-                        </li>
-                    </a>
+                    <!--{/loop}-->
                 </ul>
             </div>
         </div>
