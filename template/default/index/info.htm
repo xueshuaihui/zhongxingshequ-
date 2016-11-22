@@ -14,17 +14,17 @@
                         <!--{loop $infoFlow $info}-->
                         <li class="xsh_tab_conbox">
                             <div class="xsh_tab_img">
-                                <a href="forum.php?mod=viewthread&tid={$info['tid']}" target="_blank">
+                                <a href="forum.php?mod=viewthread&tid={$info['tid']}" <!--{if $_G['setting']['newtab']}-->target="_blank"<!--{else}-->target="_self"<!--{/if}-->>
                                     <img src="{$info['image']}" alt="{$info['subject']}" title="{$info['subject']}">
                                 </a>
                             </div>
                             <div class="xsh_tab_writing">
                                 <div class="xsh_tab_contitle">
-                                    <a href="forum.php?mod=viewthread&tid={$info['tid']}" target="_blank"><p>{$info['subject']}</p></a>
+                                    <a href="forum.php?mod=viewthread&tid={$info['tid']}" <!--{if $_G['setting']['newtab']}-->target="_blank"<!--{else}-->target="_self"<!--{/if}-->><p>{$info['subject']}</p></a>
                                 </div>
                                 <div class="xsh_tab_concise">
                                     <p>{$info['message']}
-                                        <span class="xsh_tab_more"><a href="forum.php?mod=viewthread&tid={$info['tid']}">全文<img src="{$_G['setting']['jspath']}../zte/images/u76.png" alt=""></a></span>
+                                        <span class="xsh_tab_more"><a href="forum.php?mod=viewthread&tid={$info['tid']}" <!--{if $_G['setting']['newtab']}-->target="_blank"<!--{else}-->target="_self"<!--{/if}-->>全文<img src="{$_G['setting']['jspath']}../zte/images/u76.png" alt=""></a></span>
                                     </p>
                                 </div>
                                 <div class="xsh_tab_time">

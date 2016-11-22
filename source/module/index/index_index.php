@@ -46,7 +46,7 @@ $banner = explode(',', $_G['setting']['banner_order']);
 
 $curType = isset($threadTypeId)?$threadTypeId:$threadType[0]['typeid'];
 $curPage = isset($pageId)?$pageId:1;
-$infoFlow = getInfo($curType, $curPage);
+$infoFlow = getInfo($curType, $curPage, $_G['setting']['index_list_count']);
 $pagnate = ['pre',1,2,3,4,5,6,7,8,9,10,11,'next'];//getPagnate($curType, $curPage);
 $pagnate = addDot($pagnate);
 include_once template('index/index');

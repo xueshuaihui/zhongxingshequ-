@@ -572,8 +572,10 @@ if(!submitcheck('settingsubmit')) {
 		showsetting('setting_styles_index_indexhot_limit', 'settingnew[indexhot][limit]', $setting['indexhot']['limit'], 'text');
 		showsetting('setting_styles_index_indexhot_days', 'settingnew[indexhot][days]', $setting['indexhot']['days'], 'text');
 		showsetting('setting_styles_index_indexhot_expiration', 'settingnew[indexhot][expiration]', $setting['indexhot']['expiration'], 'text');
-		showsetting('setting_styles_index_indexhot_messagecut', 'settingnew[indexhot][messagecut]', $setting['indexhot']['messagecut'], 'text');
+        showsetting('setting_styles_index_indexhot_messagecut', 'settingnew[indexhot][messagecut]', $setting['indexhot']['messagecut'], 'text');
 		showtagfooter('tbody');
+
+
 		showsetting('setting_styles_index_subforumsindex', 'settingnew[subforumsindex]', $setting['subforumsindex'], 'radio');
 		showsetting('setting_styles_index_forumlinkstatus', 'settingnew[forumlinkstatus]', $setting['forumlinkstatus'], 'radio');
 		showsetting('setting_styles_index_forumallowside', 'settingnew[forumallowside]', $setting['forumallowside'], 'radio');
@@ -587,7 +589,9 @@ if(!submitcheck('settingsubmit')) {
 		showsetting('setting_styles_index_online_more_members', 'settingnew[maxonlinelist]', $setting['maxonlinelist'], 'text');
 		showsetting('setting_styles_index_hideprivate', 'settingnew[hideprivate]', $setting['hideprivate'], 'radio');
 		showsetting('setting_styles_index_showfollowcollection', 'settingnew[showfollowcollection]', $setting['showfollowcollection'], 'text');
-		showsetting('setting_styles_index_disfixednv', 'settingnew[disfixednv_forumindex]', !empty($setting['disfixednv_forumindex']), 'radio');
+        showsetting('setting_styles_index_disfixednv', 'settingnew[disfixednv_forumindex]', !empty($setting['disfixednv_forumindex']), 'radio');
+        showsetting('setting_styles_index_list_count', 'settingnew[index_list_count]', $setting['index_list_count'], 'text');
+        showsetting('setting_styles_index_newtab', 'settingnew[newtab]', !empty($setting['newtab']), 'radio');
 		showtablefooter();
 
 		showtips('setting_tips', 'forumdisplay_tips', $_GET['anchor'] == 'forumdisplay');

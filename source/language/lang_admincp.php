@@ -1004,6 +1004,10 @@ $lang = array
 	'setting_styles_index_online_more_members_comment' => '此设置只有在显示在线用户启用时才有效。设置为 0 则为不限制',
     'setting_styles_index_disfixednv' => '关闭顶部导航固定',
     'setting_styles_index_disfixednv_comment' => '当向上滚动屏幕时，主导航将即时出现在屏幕的顶部',
+    'setting_styles_index_list_count' => '首页信息流显示数量',
+    'setting_styles_index_list_count_comment' =>'首页信息流显示数量',
+    'setting_styles_index_newtab' => '点击信息流是否打开新页面',
+    'setting_styles_index_newtab_comment' =>'点击信息流是否打开新页面',
 
 	'setting_styles_forumdisplay' => '主题列表页',
 	'setting_styles_forumdisplay_tpp' => '每页显示主题数',

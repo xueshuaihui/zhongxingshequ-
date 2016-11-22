@@ -19,8 +19,7 @@ function apiReturn($r, $d, $data = null) {
     exit;
 }
 
-function getInfo($sortId, $pageId){
-    $perpage = 3;
+function getInfo($sortId, $pageId, $perpage){
     $data =  C::t('forum_thread')->fetch_all_by_sortid($sortId, ($pageId-1)*$perpage, $perpage);
     foreach ($data as $k => $v){
         $data[$k]['tid'] = $v['tid'];
@@ -46,8 +45,7 @@ function getInfo($sortId, $pageId){
     return $data;
 }
 
-function getPagnate($sortId, $pageId){
-    $perpage = 3;
+function getPagnate($sortId, $pageId, $perpage){
     /*分页信息*/
     $itemCount = C::t('forum_thread')->count_all_by_sortid($sortId);
     $pageCount = ceil($itemCount / $perpage);
