@@ -3,6 +3,10 @@
 <link rel="stylesheet" href="{$_G[setting][jspath]}../zte/css/style.css">
     <link rel="stylesheet" href="{$_G[setting][jspath]}../zte/css/reset.css">
     
+    <style>
+        .xsh_con_left{background: none;padding: 0;}
+    </style>
+    
     
 <div class="xsh_box">
     <div class="xsh_box">
@@ -64,6 +68,8 @@
                     <!--list-->
                     <div class="xsh_circle_list">
                         <ul>
+                        	<!--{if $_G['forum_threadcount']}-->
+                        	<!--{loop $_G['forum_threadlist'] $key $thread}-->
                             <li>
                                 <div class="xsh_cirlis_logo">
                                     <a href="">
@@ -71,44 +77,50 @@
                                     </a>
                                 </div>
                                 <div class="xsh_cirlis_name">
-                                    <h3 class="xsh_cirlis_cirname"><a href="">明明白白的了解自己的贡献是怎么来的</a></h3>
-                                    <p><span>linda</span> | <span>2016-10-17</span> | <span>核心网资料社区</span> </p>
+                                	<!--{if $thread[folder] == 'lock'}-->
+										<img src="{IMGDIR}/folder_lock.gif" />
+									<!--{elseif $thread['special'] == 1}-->
+										<img src="{IMGDIR}/pollsmall.gif" alt="{lang thread_poll}" />
+									<!--{elseif $thread['special'] == 2}-->
+										<img src="{IMGDIR}/tradesmall.gif" alt="{lang thread_trade}" />
+									<!--{elseif $thread['special'] == 3}-->
+										<img src="{IMGDIR}/rewardsmall.gif" alt="{lang thread_reward}" />
+									<!--{elseif $thread['special'] == 4}-->
+										<img src="{IMGDIR}/activitysmall.gif" alt="{lang thread_activity}" />
+									<!--{elseif $thread['special'] == 5}-->
+										<img src="{IMGDIR}/debatesmall.gif" alt="{lang thread_debate}" />
+									<!--{elseif in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
+										<img src="{IMGDIR}/pin_$thread[displayorder].gif" alt="$_G[setting][threadsticky][3-$thread[displayorder]]" />
+									<!--{else}-->
+										<img src="{IMGDIR}/folder_$thread[folder].gif" />
+									<!--{/if}-->
+                                    <h3 class="xsh_cirlis_cirname"><a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"$thread[highlight] class="xst">$thread[subject]</a></h3>
+                                    <p><span>
+                                    	<!--{if $thread['authorid'] && $thread['author']}-->
+										<a href="home.php?mod=space&uid=$thread[authorid]">$thread[author]</a><!--{if !empty($verify[$thread['authorid']])}-->$verify[$thread[authorid]]<!--{/if}-->
+									<!--{else}-->
+										<!--{if $_G['forum']['ismoderator']}-->
+											<a href="home.php?mod=space&uid=$thread[authorid]">{lang anonymous}</a>
+										<!--{else}-->
+											{lang anonymous}
+										<!--{/if}-->
+									<!--{/if}-->
+                                    	
+                                    </span> | <span>
+                                    	$thread[dateline]
+                                    </span> | <span>核心网资料社区</span> </p>
                                 </div>
                                 <div class="xsh_cirlis_data">
-                                    <span class="liuyanl">65465465</span>
-                                    <span class="liulanl">6546546</span>
+                                    <span class="liuyanl">$thread[allreplies]</span>
+                                    <span class="liulanl">$thread[views]</span>
                                 </div>
                             </li>
-                            <li>
-                                <div class="xsh_cirlis_logo">
-                                    <a href="">
-                                        <img src="http://img.dahe.cn/qf/2016/11/20/1941MZCD59.jpg" alt="加载不成功">
-                                    </a>
-                                </div>
-                                <div class="xsh_cirlis_name">
-                                    <h3 class="xsh_cirlis_cirname"><a href="">明明白白的了解自己的贡献是怎么来的</a></h3>
-                                    <p><span>linda</span> | <span>2016-10-17</span> | <span>核心网资料社区</span> </p>
-                                </div>
-                                <div class="xsh_cirlis_data">
-                                    <span class="liuyanl">65465465</span>
-                                    <span class="liulanl">6546546</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="xsh_cirlis_logo">
-                                    <a href="">
-                                        <img src="http://img.dahe.cn/qf/2016/11/20/1941MZCD59.jpg" alt="加载不成功">
-                                    </a>
-                                </div>
-                                <div class="xsh_cirlis_name">
-                                    <h3 class="xsh_cirlis_cirname"><a href="">明明白白的了解自己的贡献是怎么来的</a></h3>
-                                    <p><span>linda</span> | <span>2016-10-17</span> | <span>核心网资料社区</span> </p>
-                                </div>
-                                <div class="xsh_cirlis_data">
-                                    <span class="liuyanl">65465465</span>
-                                    <span class="liulanl">6546546</span>
-                                </div>
-                            </li>
+                            <!--{/loop}-->
+                            <!--{else}-->
+								<p class="emp">{lang forum_nothreads}</p>
+							<!--{/if}-->	
+                            
+                            
                         </ul>
                     </div>
                     <!--页码-->
