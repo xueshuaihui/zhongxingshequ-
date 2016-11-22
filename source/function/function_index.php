@@ -31,8 +31,8 @@ function getInfo($sortId, $pageId, $perpage){
         if(strlen($data[$k]['message']) > 80) {
             $data[$k]['message'] = mb_substr($data[$k]['message'],0,80,"utf-8").'...';
         }
-        if(strlen($data[$k]['subject']) > 3*13){
-            $data[$k]['subject'] = substr($data[$k]['subject'], 0, 3*13).'...';
+        if(strlen($data[$k]['subject']) > 25){
+            $data[$k]['subject'] = mb_substr($data[$k]['subject'], 0, 25,"utf-8").'...';
         }
         if($firstImg) {
             $data[$k]['image'] = $firstImg;
