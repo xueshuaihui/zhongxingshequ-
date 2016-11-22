@@ -1252,6 +1252,20 @@ class table_forum_thread extends discuz_table
 		}
 		return false;
 	}
+
+	/*reshared add for fetch all by thread id*/
+    public function fetch_all_by_sortid($sortid, $start = 0, $limit = 0, $tableid = 0) {
+        $sortid = dintval($sortid, true);
+        return DB::fetch_all("SELECT `tid`,`dateline`,`views` FROM %t WHERE %i ORDER BY dateline DESC ".DB::limit($start, $limit), array($this->get_table_name($tableid), DB::field('sortid', $sortid)), $this->_pk);
+    }
+
+    public function count_all_by_sortid($sortid) {
+        $sortid = dintval($sortid, true);
+        $table = DB::table('forum_thread');
+        $condition = DB::field('sortid', $sortid);
+        $sql = sprintf('SELECT COUNT(*) FROM %s WHERE %s', $table, $condition);
+        return DB::result_first($sql);
+    }
 }
 
 ?>

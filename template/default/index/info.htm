@@ -1,0 +1,257 @@
+<div class="xsh_content_box">
+    <div class="xsh_con_left">
+        <div class="xsh_tab">
+            <div class="xsh_tab_header">
+                <ul>
+                    <!--{loop $threadType $tt}-->
+                    <li class="xsh_tab_title" id="{$tt['typeid']}">{$tt['name']}</li>
+                    <!--{/loop}-->
+                </ul>
+            </div>
+            <div class="xsh_tab_content">
+                <div class="xsh_tab_con xsh_tab_now">
+                    <ul>
+                        <!--{loop $infoFlow $info}-->
+                        <li class="xsh_tab_conbox">
+                            <div class="xsh_tab_img">
+                                <a href="forum.php?mod=viewthread&tid={$info['tid']}" target="_blank">
+                                    <img src="{$info['image']}" alt="{$info['subject']}" title="{$info['subject']}">
+                                </a>
+                            </div>
+                            <div class="xsh_tab_writing">
+                                <div class="xsh_tab_contitle">
+                                    <a href="forum.php?mod=viewthread&tid={$info['tid']}" target="_blank"><p>{$info['subject']}</p></a>
+                                </div>
+                                <div class="xsh_tab_concise">
+                                    <p>{$info['message']}
+                                        <span class="xsh_tab_more"><a href="forum.php?mod=viewthread&tid={$info['tid']}">全文<img src="{$_G['setting']['jspath']}../zte/images/u76.png" alt=""></a></span>
+                                    </p>
+                                </div>
+                                <div class="xsh_tab_time">
+                                    <span>{$info['dateline']}</span>
+                                    <span class="liulanl">{$info['views']}</span>
+                                </div>
+                            </div>
+                        </li>
+                        <!--{/loop}-->
+                    </ul>
+                    <div class="xsh_page_box">
+                        <ul>
+                            <li class="xsh_pages_Previous"></li>
+                            <li class="xsh_pages_hot">1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                            <li>5</li>
+                            <li>6</li>
+                            <li>7</li>
+                            <li>8</li>
+                            <li>9</li>
+                            <li>...</li>
+                            <li class="xsh_pages_next"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="xsh_tab_con"></div>
+                <div class="xsh_tab_con"></div>
+            </div>
+        </div>
+    </div>
+    <div class="xsh_con_right">
+        <!--互动专栏-->
+        <div class="xsh_interaction">
+            <div class="xsh_intera_header">
+                <h3>互动专栏</h3>
+            </div>
+            <div class="xsh_intera_content">
+                <ul>
+                    <a href="">
+                        <li>
+                            <span class="xsh_intera_logo"><img src="/template/html/images/u260.png" alt=""></span>
+                            <span class="xsh_intera_text">无线</span>
+                        </li>
+                    </a>
+                    <a href="">
+                        <li>
+                            <span class="xsh_intera_logo"><img src="/template/html/images/u260.png" alt=""></span>
+                            <span class="xsh_intera_text">无线</span>
+                        </li>
+                    </a>
+                    <a href="">
+                        <li>
+                            <span class="xsh_intera_logo"><img src="/template/html/images/u260.png" alt=""></span>
+                            <span class="xsh_intera_text">无线</span>
+                        </li>
+                    </a>
+                    <a href="">
+                        <li>
+                            <span class="xsh_intera_logo"><img src="/template/html/images/u260.png" alt=""></span>
+                            <span class="xsh_intera_text">无线</span>
+                        </li>
+                    </a>
+                    <a href="">
+                        <li>
+                            <span class="xsh_intera_logo"><img src="/template/html/images/u260.png" alt=""></span>
+                            <span class="xsh_intera_text">无线</span>
+                        </li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+        <!--专家排行-->
+        <div class="xsh_interaction">
+            <div class="xsh_intera_header xsh_con_right_header">
+                <h3>专家排行</h3>
+            </div>
+            <div class="xsh_expert">
+                <ul>
+                    <li class="xsh_expert_sort_first">
+                        <div class="xsh_expert_sort">
+                            <span class="xsh_expert_sort_num">1</span>
+                        </div>
+                        <div class="xsh_expert_name">
+                            <a href="">
+                                <div class="xsh_expert_logo">
+                                    <img src="http://img.huafans.cn/data/attachment/portal/201611/18/155603xcqn2hwg6cxbnnji.jpg" alt="加载不成功">
+                                </div>
+                                <div class="xsh_expert_user">
+                                    <span>额看来惹...</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="xsh_expert_add">
+                            <div class="xsh_expert_integral"><span>234311234</span>积分</div>
+                            <div class="xsh_expert_addbtn">
+                                <a href="">+ 好友</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="xsh_expert_sort_two">
+                        <div class="xsh_expert_sort">
+                            <span class="xsh_expert_sort_num">2</span>
+                        </div>
+                        <div class="xsh_expert_name">
+                            <a href="">
+                                <div class="xsh_expert_logo">
+                                    <img src="http://img.huafans.cn/data/attachment/portal/201611/18/155603xcqn2hwg6cxbnnji.jpg" alt="加载不成功">
+                                </div>
+                                <div class="xsh_expert_user">
+                                    <span>额看来惹...</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="xsh_expert_add">
+                            <div class="xsh_expert_integral"><span>234311234</span>积分</div>
+                            <div class="xsh_expert_addbtn">
+                                <a href="">+ 好友</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="xsh_expert_sort_three">
+                        <div class="xsh_expert_sort">
+                            <span class="xsh_expert_sort_num">3</span>
+                        </div>
+                        <div class="xsh_expert_name">
+                            <a href="">
+                                <div class="xsh_expert_logo">
+                                    <img src="http://img.huafans.cn/data/attachment/portal/201611/18/155603xcqn2hwg6cxbnnji.jpg" alt="加载不成功">
+                                </div>
+                                <div class="xsh_expert_user">
+                                    <span>额看来惹...</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="xsh_expert_add">
+                            <div class="xsh_expert_integral"><span>234311234</span>积分</div>
+                            <div class="xsh_expert_addbtn">
+                                <a href="">+ 好友</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="xsh_expert_sort">
+                            <span class="xsh_expert_sort_num">4</span>
+                        </div>
+                        <div class="xsh_expert_name">
+                            <a href="">
+                                <div class="xsh_expert_logo">
+                                    <img src="http://img.huafans.cn/data/attachment/portal/201611/18/155603xcqn2hwg6cxbnnji.jpg" alt="加载不成功">
+                                </div>
+                                <div class="xsh_expert_user">
+                                    <span>额看来惹...</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="xsh_expert_add">
+                            <div class="xsh_expert_integral"><span>234311234</span>积分</div>
+                            <div class="xsh_expert_addbtn">
+                                <a href="">+ 好友</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="xsh_expert_sort">
+                            <span class="xsh_expert_sort_num">5</span>
+                        </div>
+                        <div class="xsh_expert_name">
+                            <a href="">
+                                <div class="xsh_expert_logo">
+                                    <img src="http://img.huafans.cn/data/attachment/portal/201611/18/155603xcqn2hwg6cxbnnji.jpg" alt="加载不成功">
+                                </div>
+                                <div class="xsh_expert_user">
+                                    <span>额看来惹...</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="xsh_expert_add">
+                            <div class="xsh_expert_integral"><span>234311234</span>积分</div>
+                            <div class="xsh_expert_addbtn">
+                                <a href="">+ 好友</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--积分兑换-->
+        <div class="xsh_interaction">
+            <div class="xsh_intera_header xsh_con_right_header">
+                <h3>积分兑换</h3>
+                <div class="xsh_header_more"><a href="">更多<img src="/template/html/images/u76.png" alt=""></a></div>
+            </div>
+            <div class="xsh_integral">
+                <ul>
+                    <li>135xxxx0127 兑换 iphone6 一部</li>
+                    <li>135xxxx0127 兑换 iphone6 一部</li>
+                    <li>135xxxx0127 兑换 iphone6 一部</li>
+                    <li>135xxxx0127 兑换 iphone6 一部</li>
+                    <li>135xxxx0127 兑换 iphone6 一部</li>
+                </ul>
+            </div>
+        </div>
+        <!--下载社区APP-->
+        <div class="xsh_interaction">
+            <div class="xsh_intera_header xsh_con_right_header">
+                <h3>下载中兴社区APP</h3>
+            </div>
+            <div class="xsh_download">
+                <img src="/template/html/images/u42.png" alt="加载不成功">
+            </div>
+        </div>
+        <!--友情链接-->
+        <div class="xsh_interaction">
+            <div class="xsh_intera_header xsh_con_right_header">
+                <h3>友情链接</h3>
+            </div>
+            <div class="xsh_link">
+                <ul>
+                    <li>中兴通讯</li>
+                    <li>中兴云服务</li>
+                    <li>中兴手机官网</li>
+                    <li>中兴手机商城</li>
+                    <li>中兴应用商城</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
