@@ -94,9 +94,9 @@
             </div>
         </div>
         <!--{else}-->
-        <!--{subtemplate common/window_login}-->
         <div class="login">
-            <a href="javascript:;" onclick="$('#forLogin').submit()"><span>登录</span></a>
+            <a href="member.php?mod=logging&action=login&referer={echo rawurlencode($dreferer)}" onclick="showWindow('login', this.href);return false;"><span>登录</span></a>
+            <!--<a href="javascript:;" onclick="$('#forLogin').submit()"><span>登录</span></a>-->
             <span class="login_span"></span>
             <a href="member.php?mod={$_G[setting][regname]}" target="_blank"><span>注册</span></a>
         </div>
