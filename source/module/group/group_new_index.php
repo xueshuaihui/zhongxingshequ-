@@ -73,7 +73,7 @@ if ($_GET['action'] == 'group_list') {
 
 $grouplist_join = count($grouplist_join) ? array_slice($grouplist_join, 0, 4) : array();
 $grouplist_manage = count($grouplist_manage) ? array_slice($grouplist_manage, 0, 4) : array();
-$grouplist_join = count($grouplist_all) ? array_slice($grouplist_all, 0, 4) : array();
+$grouplist_all = count($grouplist_all) ? array_slice($grouplist_all, 0, 4) : array();
 
 //======帖子列表==============
 

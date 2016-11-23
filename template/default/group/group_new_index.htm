@@ -15,16 +15,16 @@
                 <div class="xsh_circle_box">
                     <div class="xsh_circle_header">
                         <ul>
-                            <li class="xsh_circle_hot">我加入的圈子</li>
-                            <li>我加入的圈子</li>
-                            <li>全部圈子</li>
+                            <li><span class="xsh_circle_hot">我加入的圈子</span></li>
+                            <li><span>我管理的圈子</span></li>
+                            <li><span>全部圈子</span></li>
                         </ul>
                     </div>
-                    <div class="xsh_circle_content">
+                    
+                    <div class="xsh_circle_content xsh_circle_tabcon xsh_circle_tabconnow">
                         <ul>
-                        	
-                        	<!--{loop $grouplist_join $group}-->
                             <!--圈子-->
+                            <!--{loop $grouplist_join $group}-->
                             <li>
                                 <div class="xsh_circle_logobox">
                                     <div class="xsh_circle_logo">
@@ -41,20 +41,88 @@
                                     </div>
                                 </div>
                             </li>
-                            
-                            <!--{/loop}-->
-                            
+						<!--{/loop}-->
                         </ul>
+                    </div>
+                    <div class="xsh_circle_content xsh_circle_tabcon">
+                        <ul>
+                            <!--圈子-->
+                            <!--{loop $grouplist_manage $group}-->
+                            <li>
+                                <div class="xsh_circle_logobox">
+                                    <div class="xsh_circle_logo">
+                                        <a href="">
+                                            <img src="http://img.dahe.cn/qf/2016/11/20/1941MZCD59.jpg" alt="加载不成功">
+                                        </a>
+                                    </div>
+                                    <div class="xsh_circle_card">
+                                        <div class="xsh_circle_name"><a href="">$group['name']</a></div>
+                                        <div class="xsh_circle_data">
+                                            <div class="xsh_circle_num">成员:<span>$group['membernum']</span></div>
+                                            <div class="xsh_circle_cardnum">帖子:<span>$group['posts']</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--{/loop}-->
+                        </ul>
+                    </div>
+                    <div class="xsh_circle_content xsh_circle_tabcon">
+                        <ul>
+                            <!--圈子-->
+                            <!--{loop $grouplist_all $group}-->
+                            <li>
+                                <div class="xsh_circle_logobox">
+                                    <div class="xsh_circle_logo">
+                                        <a href="">
+                                            <img src="http://img.dahe.cn/qf/2016/11/20/1941MZCD59.jpg" alt="加载不成功">
+                                        </a>
+                                    </div>
+                                    <div class="xsh_circle_card">
+                                        <div class="xsh_circle_name"><a href="">$group['name']</a></div>
+                                        <div class="xsh_circle_data">
+                                            <div class="xsh_circle_num">成员:<span>$group['membernum']</span></div>
+                                            <div class="xsh_circle_cardnum">帖子:<span>$group['posts']</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--{/loop}-->
+                        </ul>
+                    </div>
+                    
+               
+                  
+                    
+                </div>
+                
+                <!--more-->
+                <div class="xsh_more">
+                    <a href="javascript:;" onclick="morecircle()"><span>MORE</span></a>
+                </div>
+                
+            </div>
+            
+            <!--更多-->
+            <div class="morecircle_mask">
+                <div class="morecircle_box">
+                    <div class="xsh_close morecircle_close" onclick="closeMask()"></div>
+                    <div class="morecircle">
                     </div>
                 </div>
             </div>
+            
             <div class="xsh_circle_content">
                 <div class="xsh_circle_conbox">
-                    <form action="" method="" target="" name="" class="xsh_circle_form">
+                    <form action="http://baidu.com/" method="GET"  class="xsh_circle_form">
                         <select name="主题" id="12">
-                            <option value="">全部主题</option>
-                            <option value="">全部主题</option>
-                            <option value="">全部主题</option>
+                            <option value="forum.php?mod=forumdisplay&fid=$_G[fid]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}">{lang all}主题</option>
+			<!--{if $showpoll}--><option value="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=specialtype&specialtype=poll$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}">{lang thread_poll}</option><!--{/if}-->
+			<!--{if $showtrade}--><option value="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=specialtype&specialtype=trade$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}">{lang thread_trade}</option><!--{/if}-->
+			<!--{if $showreward}--><option value="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=specialtype&specialtype=reward$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}">{lang thread_reward}</option><!--{/if}-->
+			<!--{if $showactivity}--><option value="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=specialtype&specialtype=activity$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}">{lang thread_activity}</option><!--{/if}-->
+			<!--{if $showdebate}--><option value="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=specialtype&specialtype=debate$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}">{lang thread_debate}</option><!--{/if}-->
+		
                         </select>
                         <select name="排序" id="32">
                             <option value="">全部主题</option>
@@ -253,4 +321,6 @@
     </div>
 </div>
 </div>
+<script src="/static/zte/js/jquery-1.11.3.min.js"></script>
+<script src="{$_G[setting][jspath]}../zte/js/circle.js"></script>
 <!--{template common/footer}-->
