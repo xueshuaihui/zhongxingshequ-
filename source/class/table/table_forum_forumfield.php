@@ -32,6 +32,10 @@ class table_forum_forumfield extends discuz_table
     public function fetch_icon_by_fid($fid) {
         return DB::result_first("SELECT `icon` FROM ".DB::table($this->_table)." WHERE fid =".$fid);
 	}
+
+    public function get_all_username_by_fid($fup) {
+        return DB::fetch_all("SELECT `moderators` FROM ".DB::table($this->_table)." WHERE fid in (".$fup.")");
+	}
 	public function fetch_all_field_perm() {
 		return DB::fetch_all("SELECT fid, viewperm, postperm, replyperm, getattachperm, postattachperm, postimageperm FROM ".DB::table($this->_table)." WHERE founderuid=0");
 	}

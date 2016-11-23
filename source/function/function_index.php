@@ -54,24 +54,8 @@ function getPagnate($sortId, $pageId, $perpage){
         for ($i=1; $i<=$pageCount; $i++){
             array_push($pagnate, $i);
         }
-        if($pageId != $pageCount) {
-            array_push($pagnate, 'next');
-        }
-        if($pageId != 1) {
-            array_unshift($pagnate, 'pre');
-        }
     }
-    return count($pagnate) > 0 ? $pagnate : 0;
-}
-
-function addDot ($arr) {
-    if(count($arr) > 10) {
-        foreach ($arr as $k=>$v){
-            if($k == 9) $arr[$k] = '...';
-            if($k > 10) unset($arr[$k]);
-        }
-    }
-    return $arr;
+    return pageFormat($pagnate, $pageId);
 }
 
 function getHDZL($bkId, $for = 1) {
@@ -96,4 +80,54 @@ function getHDZL($bkId, $for = 1) {
         break;
         default: return false;
     }
+}
+
+function getExpertList ($subBk) {
+    if(!is_array($subBk)) {
+        return exit('error');
+    }
+    $fids = '';
+    foreach ($subBk as $bk){
+        $fids .= $bk['fid'].',';
+    }
+    $expertInfo = C::t('forum_forumfield')->get_all_username_by_fid(trim($fids, ','));
+    $expertName = [];
+    foreach ($expertInfo as $k=>$username) {
+        $name = $username['moderators'];
+        if($name){
+            $temp = explode('	', $name);
+            if(!in_array($temp[0], $expertName)){
+                $expertName[$k] = $temp[0];
+            }
+        }
+    }
+     return C::t('common_member')->fetch_all_by_username($expertName);
+}
+
+function friendLink () {
+    return C::t('common_friendlink')->fetch_all_by_displayorder();
+}
+
+function pageFormat($pageArr, $cur = 1) {
+    $result = '';
+    if($cur > 1) {
+        $result .= '<li onclick="asyncLoad('.($cur-1).')" class="xsh_pages_Previous"></li>';
+    }
+    if(count($pageArr) > 10 && $cur > 4){
+        $result .= '<li>...</li>';
+    }
+    foreach ($pageArr as $page) {
+        if($page == $cur) {
+            $result .= '<li class="xsh_pages_hot" onclick="asyncLoad('.$page.')">'.$page.'</li>';
+        }else{
+            $result .= '<li onclick="asyncLoad('.$page.')">'.$page.'</li>';
+        }
+    }
+    if(count($pageArr) > 10 && (end($pageArr) - $cur) > 5){
+        $result .= '<li>...</li>';
+    }
+    if($cur < count($pageArr)) {
+        $result .= '<li onclick="asyncLoad('.($cur+1).')" class="xsh_pages_next"></li>';
+    }
+    return $result;
 }
