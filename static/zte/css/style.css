@@ -21,7 +21,7 @@
 .xsh_user_logobox{width: 40px;height: 40px;border-radius: 50%;overflow: hidden;float: left;}
 .xsh_user_logobox>img{width: 100%;height: 100%;border-radius: 50%;}
 .xsh_user_namebox{width: 100px;float: left;font-size: 16px;line-height: 40px;margin-left: 10px;position: relative;}
-.xsh_xiala{width: 17px;height: 11px;position: absolute;right: 0;top: 0;}
+.xsh_xiala{width: 17px;height: 11px;position: absolute;right: 0;top: 14px;}
 .xsh_xiala>img{width: 100%;}
 .xsh_user_namebox:hover{cursor: pointer;}
 .xsh_user_data{width: 250px;height: auto;position: absolute;left: -130px;top: 40px;background: #ffffff;padding: 20px 15px;z-index: 999;border: 2px solid #5597ED;display: none;border-radius: 10px;}
