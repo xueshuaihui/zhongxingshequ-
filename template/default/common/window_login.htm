@@ -1,0 +1,5 @@
+<script type="text/javascript" src="{$_G[setting][jspath]}logging.js?{VERHASH}"></script>
+<form id="forLogin" onsubmit="{if $_G['setting']['pwdsafety']}pwmd5('ls_password');{/if}return lsSubmit();">
+    <input type="submit">
+    <input type="hidden" id="ls_username"/>
+</form>

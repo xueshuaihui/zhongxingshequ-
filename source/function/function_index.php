@@ -49,13 +49,7 @@ function getPagnate($sortId, $pageId, $perpage){
     /*分页信息*/
     $itemCount = C::t('forum_thread')->count_all_by_sortid($sortId);
     $pageCount = ceil($itemCount / $perpage);
-    $pagnate = [];
-    if($pageCount > 1) {
-        for ($i=1; $i<=$pageCount; $i++){
-            array_push($pagnate, $i);
-        }
-    }
-    return pageFormat($pagnate, $pageId);
+    return pageFormat($pageCount, $pageId);
 }
 
 function getHDZL($bkId, $for = 1) {
@@ -108,25 +102,47 @@ function friendLink () {
     return C::t('common_friendlink')->fetch_all_by_displayorder();
 }
 
-function pageFormat($pageArr, $cur = 1) {
+function pageFormat($count, $cur = 1) {
+    if($count < 1){
+        return '';
+    }
     $result = '';
     if($cur > 1) {
         $result .= '<li onclick="asyncLoad('.($cur-1).')" class="xsh_pages_Previous"></li>';
     }
-    if(count($pageArr) > 10 && $cur > 4){
-        $result .= '<li>...</li>';
+    if($count >= 10 && $cur > 4){
+        $result .= '<li>1</li>';
+        if($cur > 5){
+            $result .= '<li>...</li>';
+        }
     }
-    foreach ($pageArr as $page) {
+    if($cur > 4 && $count > 10 && ($count - $cur > 6)){
+        $page = $cur-3;
+    }elseif($count > 10 && ($count - $cur < 7) ){
+        $page = $count-9;
+    }else{
+        $page = 1;
+    }
+    if($count > 10 && $count - $cur < 7) {
+        $range = 10;
+    }else{
+        $range = (min(10, $count));
+    }
+    for ($i = 1; $i <= $range; $i++) {
         if($page == $cur) {
             $result .= '<li class="xsh_pages_hot" onclick="asyncLoad('.$page.')">'.$page.'</li>';
         }else{
             $result .= '<li onclick="asyncLoad('.$page.')">'.$page.'</li>';
         }
+        $page++;
     }
-    if(count($pageArr) > 10 && (end($pageArr) - $cur) > 5){
-        $result .= '<li>...</li>';
+    if($count > 10 && ($count - $cur) > 6){
+        if(($count - $cur) > 7){
+            $result .= '<li>...</li>';
+        }
+        $result .= '<li>'.$count.'</li>';
     }
-    if($cur < count($pageArr)) {
+    if($cur < $count) {
         $result .= '<li onclick="asyncLoad('.($cur+1).')" class="xsh_pages_next"></li>';
     }
     return $result;
