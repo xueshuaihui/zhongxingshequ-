@@ -1010,6 +1010,10 @@ $lang = array
     'setting_styles_index_newtab_comment' =>'点击信息流是否打开新页面',
     'setting_styles_index_hdzl' => '填写互动专栏版块ID',
     'setting_styles_index_hdzl_comment' =>'在【论坛】中设置并查看',
+    'setting_styles_index_zjph_order' => '专家排行排序指标',
+    'setting_styles_index_zjph_order_comment' =>'专家排行排序指标',
+    'setting_styles_index_zjph_count' =>'专家排行显示个数',
+    'setting_styles_index_zjph_count_comment' =>'专家排行显示个数',
     
 	'setting_styles_forumdisplay' => '主题列表页',
 	'setting_styles_forumdisplay_tpp' => '每页显示主题数',
