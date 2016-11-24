@@ -57,7 +57,7 @@
             <div class="xsh_intera_content">
                 <ul>
                     <!--{loop $subBk $bk}-->
-                    <a href="javascript:;" onclick="expertInteraction(1)">
+                    <a href="javascript:;" onclick="expertInteraction({$bk['fid']})">
                         <li>
                             <span class="xsh_intera_logo"><img src="{$bk['icon']}" alt="{$bk['name']}"></span>
                             <span class="xsh_intera_text">{$bk['name']}</span>
@@ -92,7 +92,7 @@
                             <div class="xsh_expert_cad">
                                 <ul>
                                     <li><h3>用户名:</h3><span>{$expert['username']}</span></li>
-                                    <li><h3>用户状态:</h3><span>用户在线</span></li>
+                                    <li><h3>用户状态:</h3><span>用户离线</span></li>
                                     <li><h3>积分：</h3><span>{$expert['credits']}</span></li>
                                 </ul>
                             </div>
@@ -114,6 +114,9 @@
                 <h3>下载中兴社区APP</h3>
             </div>
             <div class="xsh_download">
+                <img src="/static/zte/images/u42.png" alt="加载不成功">
+                <img src="/static/zte/images/u42.png" alt="加载不成功">
+                <img src="/static/zte/images/u42.png" alt="加载不成功">
                 <img src="/static/zte/images/u42.png" alt="加载不成功">
             </div>
         </div>

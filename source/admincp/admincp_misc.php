@@ -12,8 +12,53 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 }
 
 cpheader();
-
-if($operation == 'onlinelist') {
+if($operation == 'download') {
+    if(!submitcheck('downloadsubmit')) {
+        shownav('extended', 'misc_download');
+        showsubmenu('nav_misc_download');
+        showtips('misc_download_tips');
+        showformheader('misc&operation=download&', 'enctype');
+        showtableheader('', 'fixpadding');
+        $imgs = isset($_G['setting']['index_qrcode_imgs'])?$_G['setting']['index_qrcode_imgs']:null;
+        if(!is_null($imgs) && $imgs != '') $imgs = explode(',', $imgs);
+        if(!is_null($imgs)){
+            foreach ($imgs as $k=>$img) {
+                $temp = '<label><input type="checkbox" class="checkbox" name="'.'del_indexqrcode'.$k.'" value="yes" /> '.$lang['delete'].'</label><br /><img src="'.$_G['setting'][$img].'" /><br />';
+                showsetting('', 'indexqrcode'.$k, $_G['setting'][$img], 'filetext', '', 0, $temp);
+            }
+        }
+        showsetting('forums_edit_basic_icon', 'indexqrcode'.($k+1), '', 'filetext', '', 0);
+        showsubmit('downloadsubmit', 'submit', 'td');
+        showtablefooter();
+        showformfooter();
+    }else{
+        $forSave = array();
+        foreach ($_FILES as $k => $v){
+            if($_FILES[$k]['size'] > 0){
+                $forSave[$k] = uploadFile($v, 'data/attachment');
+            }
+        }
+        foreach ($_POST as $item => $value){
+            if(substr($item, 0, 11) == 'indexqrcode'){
+                if(strpos($value, 'http') === false) {
+                    cpmsg('upload_url_error', '', 'error');
+                }elseif(isset($_POST['del_'.$item]) && $_POST['del_'.$item] == 'yes'){
+                    continue;
+                }else{
+                    $forSave[$item] = $value;
+                }
+            }
+        }
+        $index = '';
+        foreach ($forSave as $kk=>$vv){
+            $index .= $kk.',';
+        }
+        $forSave['index_qrcode_imgs'] = trim($index, ',');
+        C::t('common_setting')->update_batch($forSave);
+        updatecache(array('download', 'groupicon'));
+        cpmsg('index_download_qrcode_succeed', 'action=misc&operation=download', 'succeed');
+    }
+} elseif($operation == 'onlinelist') {
 
 	if(!submitcheck('onlinesubmit')) {
 
@@ -1583,5 +1628,30 @@ EOT;
 	}
 
 }
+function uploadFile ($file, $basePath) {
+    if($file['error'] > 0) {
+        cpmsg('upload_error', '', 'error');
+    }
+    if($file['type'] == 'image/jpg' || $file['type'] == 'image/jpeg') {
+        $ext = '.jpg';
+    } elseif ($file['type'] == 'image/png') {
+        $ext = '.png';
+    } else {
+        echo $file['type'];
+        cpmsg('upload_file_type_error', '', 'error');
+    }
 
+    $path = $basePath.DIRECTORY_SEPARATOR.'qrcode';
+    if(!is_dir($path)){
+        mkdir($path);
+    }
+    $name = uniqid('qrcode').substr(microtime(), -10).$ext;
+    $res = move_uploaded_file($file['tmp_name'], $path.DIRECTORY_SEPARATOR.$name);
+    if(!$res) {
+        cpmsg('upload_error', '', 'error');
+    }
+    $siteUrl = $_SERVER['HTTP_HOST'].DIRECTORY_SEPARATOR;
+    $url = $siteUrl.$path;
+    return $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://' . $url.DIRECTORY_SEPARATOR.$name;
+}
 ?>

@@ -359,6 +359,8 @@ $lang = array (
   'membersplit_split_check_table_fail' => '数据表数据结构整理失败，请手工处理将主表({tablename})和优化表({tablename}_archive)的数据结构调整按顺序调整一致。',
 
   'onlinelist_succeed' => '在线列表项目更新成功 ',
+    'index_download_qrcode_succeed' => '主页下载区二维码更新成功',
+    'index_download_qrcode_fail' => '主页下载区二维码更新失败',
   'forumlinks_succeed' => '友情链接更新成功 ',
   'relatedlink_succeed' => '关联链接更新成功 ',
   'bbcode_not_found' => '标签未找到',

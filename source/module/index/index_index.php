@@ -6,15 +6,23 @@ if(!defined('IN_DISCUZ')) {
 require_once libfile('function/index');
 
 if(isset($isApi) && $isApi){
-    if(!isset($param['threadTypeId']) || !isset($param['pageId'])){
-        apiReturn(0, '缺少参数');
+    if($get == 'info'){
+        if(!isset($param['threadTypeId']) || !isset($param['pageId'])){
+            apiReturn(0, '缺少参数');
+        }
+        $threadTypeId = $param['threadTypeId'];
+        $pageId = $param['pageId'];
+        /*获取分类信息下的信息流*/
+        $infoFlow = getInfo($threadTypeId, $pageId, $_G['setting']['index_list_count']);
+        $pagnate = getPagnate($threadTypeId, $pageId, $_G['setting']['index_list_count']);
+        apiReturn(1, '获取成功', ['data'=>$infoFlow, 'pagnate'=>$pagnate]);
+    } elseif ($get == 'thread') {
+        $header = getHDZL($param['tid'], 1);
+        $data = getHDZL($param['tid'], 2);
+        apiReturn(1, '获取成功', ['header'=>$header, 'experts'=>$data]);
     }
-    $threadTypeId = $param['threadTypeId'];
-    $pageId = $param['pageId'];
-    /*获取分类信息下的信息流*/
-    $infoFlow = getInfo($threadTypeId, $pageId, $_G['setting']['index_list_count']);
-    $pagnate = getPagnate($threadTypeId, $pageId, $_G['setting']['index_list_count']);
-    apiReturn(1, '获取成功', ['data'=>$infoFlow, 'pagnate'=>$pagnate]);
+
+    apiReturn(0, '完蛋玩意');
 }
 /*页面配置*/
 list($navtitle, $metadescription, $metakeywords) = get_seosetting('index');

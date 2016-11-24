@@ -449,7 +449,8 @@ $lang = array
 
 	'nav_repeat' => '马甲',
 
-	'nav_misc_onlinelist' => '在线列表图标',
+    'nav_misc_onlinelist' => '在线列表图标',
+    'nav_misc_download' => '下载区二维码',
 	'nav_misc_links' => '友情链接',
 	'nav_misc_relatedlink' => '关联链接',
 	'nav_posting_censor' => '词语过滤',
@@ -5015,6 +5016,10 @@ $lang = array
 	'misc_link_edit_url' => '站点 URL',
 	'misc_link_edit_description' => '文字说明(可选)',
 	'misc_link_edit_logo' => 'logo 地址(可选)',
+
+    'misc_download' => '首页下载区二维码',
+    'misc_download_tips' => '点击图片上传或填写地址url',
+
 	'misc_relatedlink' => '关联链接',
 	'misc_relatedlink_status' => 'SEO兼容模式',
 	'misc_relatedlink_status_comment' => '注意：开启后对搜索引擎有好处，但会对服务器造成压力',
@@ -6428,6 +6433,7 @@ $lang = array
 	'cplog_announce_edit' => '编辑公告',
 
 	'cplog_misc_link' => '友情链接',
+    'cplog_misc_download' => '下载区二维码',
 	'cplog_misc_onlinelist' => '在线列表图标',
 	'cplog_misc_censor' => '词语过滤',
 	'cplog_misc_bbcode' => 'Discuz! 代码',

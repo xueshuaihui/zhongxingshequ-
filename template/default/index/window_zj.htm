@@ -1,0 +1,27 @@
+<!--专家留言-->
+<div class="xsh_expert_box">
+    <div class="xsh_expert">
+        <div class="xsh_close" onclick="closeform()"></div>
+        <div class="xsh_expert_form_header"><h3></h3>
+        </div>
+        <!--<form method="post" class="xsh_expert_form" name="xsh_expert_form" onsubmit="this.message.value = parseurl(this.message.value);ajaxpost('postform', 'return_newthread', 'return_newthread', 'onerror');return false;" fwin="newthread">-->
+        <!--<h3>请选择类型</h3>-->
+            <!--<div class="xsh_expert_radio">-->
+            <!--</div>-->
+            <!--<input type="hidden" name="formhash" value="ab8baa53" fwin="newthread">-->
+            <!--<input type="hidden" name="handlekey" value="newthread">-->
+            <!--<input id="title" name="subject" type="hidden" value="" fwin="newthread">-->
+            <!--<div class="xsh_expert_textarea">-->
+                <!--<textarea name="message" id="" cols="100" rows="10" required="required" placeholder="留下您的建议/问题，专家会尽快给您回复" fwin="newthread"></textarea>-->
+            <!--</div>-->
+            <!--<input type="submit" class="xsh_expert_form_submit" value="发送">-->
+        <!--</form>-->
+        <form method="post" autocomplete="off" id="postform" action="forum.php?mod=post&amp;infloat=yes&amp;action=newthread&amp;fid=38&amp;extra=&amp;topicsubmit=yes&amp;jet=rmbplus" onsubmit="this.message.value = parseurl(this.message.value);ajaxpost('postform', 'return_newthread', 'return_newthread', 'onerror');return false;" fwin="newthread">
+            <input type="hidden" name="formhash" id="formhash" value="ab8baa53" fwin="newthread">
+            <input type="hidden" name="handlekey" value="newthread">
+            <input name="subject" id="subject" class="px" value="" tabindex="21" style="width: 25em" fwin="newthread">
+            <textarea rows="7" cols="80" name="message" id="postmessage" onkeydown="seditor_ctlent(event, '$(\'postsubmit\').click();')" tabindex="22" class="pt" fwin="newthread"></textarea>
+            <button type="submit" id="postsubmit" class="pn pnc z" value="true" name="topicsubmit" tabindex="23" fwin="newthread"><span>发表帖子</span></button>
+        </form>
+    </div>
+</div>
