@@ -528,6 +528,11 @@ if($_G['forum']['relatedgroup']) {
 	$filterarr['inforum'] = $relatedgroup;
 } else {
 	$filterarr['inforum'] = $_G['fid'];
+	//===============================================yy-start============================================
+	if ($mod == 'new_index') {
+	    $filterarr['inforum'] = $yy_fids;
+	}
+	//===============================================yy-end==============================================
 }
 if(empty($filter) && empty($_GET['sortid']) && empty($_G['forum']['relatedgroup'])) {
 	if($forumarchive) {
@@ -618,6 +623,13 @@ $realpages = @ceil($_G['forum_threadcount']/$_G['tpp']);
 $maxpage = ($_G['setting']['threadmaxpages'] && $_G['setting']['threadmaxpages'] < $realpages) ? $_G['setting']['threadmaxpages'] : $realpages;
 $nextpage = ($page + 1) > $maxpage ? 1 : ($page + 1);
 $multipage_more = "forum.php?mod=forumdisplay&fid=$_G[fid]".$forumdisplayadd['page'].($multiadd ? '&'.implode('&', $multiadd) : '')."$multipage_archive".'&page='.$nextpage;
+
+//===============================================yy-start============================================
+if ($mod == 'new_index') {
+    $_G['forum_threadcount'] = C::t('forum_thread')->count_search($filterarr, $tableid);
+    $page_str = pageFormat("ztgroup.php?".$forumdisplayadd['page'].($multiadd ? '&'.implode('&', $multiadd) : '')."$multipage_archive", @ceil($_G['forum_threadcount']/$_G['tpp']), $page);
+}
+
 
 $extra = rawurlencode(!IS_ROBOT ? 'page='.$page.($forumdisplayadd['page'] ? '&filter='.$filter.$forumdisplayadd['page'] : '') : 'page=1');
 

@@ -3,26 +3,19 @@
 //我加入的圈子、管理的圈子、全部圈子
 require_once libfile('function/group');
 
-$perpage = 20;
-$page = intval($_GET['page']) ? intval($_GET['page']) : 1;
-$start = ($page - 1) * $perpage;
-
 //加入的圈子列表
 $ismanager = 2;
 $num = mygrouplist($_G['uid'], 'lastupdate', array('f.name', 'ff.icon'), 0, 0, $ismanager, 1);
-//$multipage = multi($num, $perpage, $page, 'group.php?mod=my&view='.$view);
 $grouplist_join = mygrouplist($_G['uid'], 'lastupdate', array(), 10000, 0, $ismanager);
 
 //管理的圈子列表
 $ismanager = 1;
 $num = mygrouplist($_G['uid'], 'lastupdate', array('f.name', 'ff.icon'), 0, 0, $ismanager, 1);
-//$multipage = multi($num, $perpage, $page, 'group.php?mod=my&view='.$view);
 $grouplist_manage = mygrouplist($_G['uid'], 'lastupdate', array(), 10000, 0, $ismanager);
 
 //全部圈子列表
 $ismanager = 0;
 $num = mygrouplist($_G['uid'], 'lastupdate', array('f.name', 'ff.icon'), 0, 0, $ismanager, 1);
-//$multipage = multi($num, $perpage, $page, 'group.php?mod=my&view='.$view);
 $grouplist_all = mygrouplist($_G['uid'], 'lastupdate', array(), 10000, 0, $ismanager);
 
 //计算圈子成员数
