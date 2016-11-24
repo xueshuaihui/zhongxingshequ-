@@ -13,6 +13,16 @@ if(!defined('IN_DISCUZ')) {
 
 require_once libfile('function/forumlist');
 
+
+//===============================================yy-start============================================
+if ($mod == 'new_index') {
+    $yy_fids = array('36', '37', '38', '39');
+    $_G['fid'] = $yy_fids[0];
+    $_GET['fid'] = $yy_fids[0];
+    $_G['forum']['fid'] = $yy_fids[0];
+}
+//===============================================yy-end==============================================
+
 if($_G['forum']['redirect']) {
 	dheader("Location: {$_G[forum][redirect]}");
 } elseif($_G['forum']['type'] == 'group') {
@@ -959,6 +969,13 @@ if($_G['forum']['status'] == 3) {
 	write_groupviewed($_G['fid']);
 	$template = 'diy:group/group:'.$_G['fid'];
 }
+
+//===============================================yy-start============================================
+if ($mod == 'new_index') {
+    $template = 'group/group_new_index';
+    $_G['forum_threadcount'] = C::t('forum_thread')->count_search($filterarr, $tableid);
+}
+//===============================================yy-end==============================================
 
 if(!defined('IN_ARCHIVER')) {
 	include template($template);
