@@ -1,9 +1,9 @@
 <div class="xsh_carousel">
     <!--图片-->
     <ul>
-        <!--{loop $banner $ban}-->
+        <!--{loop $banner $k $ban}-->
         <a href="{$_G['setting'][$ban.'jump']}" target="_blank">
-            <li class="xsh_carimg xsh_car_now">
+            <li class="xsh_carimg {if $k == 0 }xsh_car_now {/if}">
                 <img src="{$_G['setting'][$ban.'url']}" alt="{$ban}" title="{$_G['setting'][$ban.'title']}" class="xsh_car">
             </li>
         </a>

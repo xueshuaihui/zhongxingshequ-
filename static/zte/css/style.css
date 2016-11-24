@@ -21,7 +21,7 @@
 .xsh_user_logobox{width: 40px;height: 40px;border-radius: 50%;overflow: hidden;float: left;}
 .xsh_user_logobox>img{width: 100%;height: 100%;border-radius: 50%;}
 .xsh_user_namebox{width: 100px;float: left;font-size: 16px;line-height: 40px;margin-left: 10px;position: relative;}
-.xsh_xiala{width: 17px;height: 11px;position: absolute;right: 0;top: 0;}
+.xsh_xiala{width: 17px;height: 11px;position: absolute;right: 0;top: 14px;}
 .xsh_xiala>img{width: 100%;}
 .xsh_user_namebox:hover{cursor: pointer;}
 .xsh_user_data{width: 250px;height: auto;position: absolute;left: -130px;top: 40px;background: #ffffff;padding: 20px 15px;z-index: 999;border: 2px solid #5597ED;display: none;border-radius: 10px;}
@@ -128,7 +128,7 @@
 .xsh_expert_textarea>textarea{border: none;font-size: 12px;width: 100%;}
 .xsh_expert_form_submit{font-size: 22px;color: #ffffff;background: #5597ED;position: relative;left: 80%;width: 130px;height: 50px;text-align: center;line-height: 50px;border-radius: 10px;display: block;margin-top: 20px;}
 .xsh_input_submit{width: 130px;height: 50px;background: none;border: none;}
-.xsh_close{width: 20px;height: 20px;position: absolute;top: 20px;right: 30px;background: url("/static/zte/images/close.jpg") no-repeat center;background-size: 100% 100%;}
+.xsh_close{width: 20px;height: 20px;position: absolute;top: 20px;right: 30px;background: url("/static/zte/images/close.jpg") no-repeat center;background-size: 100% 100%; cursor: pointer;}
 /*积分兑换*/
 .xsh_integral{font-size: 14px;line-height: 35px;text-align: center;color: #666666;}
 .xsh_header_more{position: absolute;right: 10px;top: 0;}

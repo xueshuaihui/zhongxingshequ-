@@ -1124,4 +1124,8 @@ function getreplybg($replybg = '') {
 	return $style;
 }
 
+function getForumList() {
+    $data = C::t();
+}
+
 ?>

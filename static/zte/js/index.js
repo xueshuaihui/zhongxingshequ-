@@ -16,7 +16,7 @@ var car_radbox = $(".xsh_car_radbox");
 if( max_carnum > 1){
     car_button.css({display:"block"});
     car_radbox.css({display:'block'});
-    var t = setInterval(car_move,2000);
+    var t = setInterval(car_move,5000);
     $(".xsh_carousel").hover(function(){
         carstiop();
     },function(){
@@ -26,12 +26,12 @@ if( max_carnum > 1){
 var car_num = 0;
 function car_move(){
     /*图片轮播*/
-    carimg.eq(car_num).fadeOut(200,"linear",function(){});
+    carimg.eq(car_num).fadeOut(200,"linear");
     car_num++;
     if(car_num>=max_carnum){
         car_num=0;
     }
-    carimg.eq(car_num).fadeIn(200,"linear",function(){});
+    carimg.eq(car_num).fadeIn(200,"linear");
     /*标识符轮播*/
     carradiu_move();
 }
@@ -52,24 +52,24 @@ function carstart(){
 car_buttonl.on("click",function(){
     carstiop();
     /*图片上翻*/
-    carimg.eq(car_num).fadeOut(200,"linear",function(){});
+    carimg.eq(car_num).fadeOut(200,"linear");
     car_num--;
     if(car_num < 0){
         car_num=max_carnum-1;
     }
-    carimg.eq(car_num).fadeIn(200,"linear",function(){});
+    carimg.eq(car_num).fadeIn(200,"linear");
     /*标识符上翻*/
     carradiu_move();
 })
 car_buttonr.on("click",function(){
     carstiop();
     /*图片下翻*/
-    carimg.eq(car_num).fadeOut(200,"linear",function(){});
+    carimg.eq(car_num).fadeOut(200,"linear");
     car_num++;
     if(car_num>=max_carnum){
         car_num=0;
     }
-    carimg.eq(car_num).fadeIn(200,"linear",function(){});
+    carimg.eq(car_num).fadeIn(200,"linear");
     /*标识符下翻*/
     carradiu_move();
 })
@@ -78,9 +78,9 @@ car_radius.each(function(index,obj){
     $(this).on("click",function(){
         carstiop();
         /*图片轮播*/
-        carimg.eq(car_num).fadeOut(200,"linear",function(){});
+        carimg.eq(car_num).fadeOut(200,"linear");
         car_num = index;
-        carimg.eq(car_num).fadeIn(200,"linear",function(){});
+        carimg.eq(car_num).fadeIn(200,"linear");
         /*标识符轮播*/
         carradiu_move();
     })
@@ -94,20 +94,21 @@ var expertTextarea = $(".xsh_expert_textarea");
 var expertForm = $(".xsh_expert_form");
 var expertFormSubmit = $(".xsh_expert_form_submit");
 function expertInteraction(hid){
-    var hid=hid;
     $.ajax({
-        url:"",
-        type:"post",
-        data:{hid:hid},
+        url:"ztindex.php?api=1&thread="+hid,
+        type:"get",
         success:function(result){
+            result = JSON.parse(result);
             //result={code:10000,data:{header:"无线",experts:[{id:13,name:"路由器/专家:dfjkg"},{id:13,name:"路由器/专家:dfjkg"},{id:13,name:"路由器/专家:dfjkg"}]}}
-            if(result.code == 10000){
+            if(result.state == 1){
                 var header = result.data.header;
+                $(".xsh_expert_box #title").val("测试一下");
                 expertFormHeader.children("h3").text(header);
+                expertForm.children("form").action = "forum.php?mod=post&amp;infloat=yes&amp;action=newthread&amp;fid=38&amp;extra=&amp;topicsubmit=yes&amp;jet=rmbplus";
                 var data = result.data.experts;
                 var str = "";
                 for(var i in data){
-                    str+='<label><input name="experts" type="radio" value="'+(data[i].id)+'" />'+(data[i].name)+'</label>';
+                    str+='<label><input name="experts" type="radio" value="'+(data[i].fid)+'" />'+(data[i].name)+'</label>';
                 }
                 expertRadio.html(str);
                 expertBox.css({display:"block"});
