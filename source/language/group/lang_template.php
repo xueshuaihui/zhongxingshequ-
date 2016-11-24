@@ -9,7 +9,9 @@
  *      This file is automatically generate
  */
 
-$lang = array (
+include_once DISCUZ_ROOT.'./source/language/forum/lang_template.php';
+
+$lang1 = array (
   'credits' => '积分',
   'favorite' => '收藏',
   'group_admin' => '管理{$_G[setting][navs][3][navname]}',
@@ -214,5 +216,7 @@ $lang = array (
   'no_permission_to_post' => '您现在无权发帖。',
   'click_to_show_reason' => '点击查看原因',
 );
+
+$lang = array_merge($lang, $lang1);
 
 ?>

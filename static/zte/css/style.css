@@ -4,7 +4,7 @@
 .xsh_header_search{float: left;}
 .xsh_form{padding: 5px;}
 .search{float: left;height: 19px;padding: 2px 5px;width: 160px;border: 1px solid #ABABAB;border-radius: 5px 0 0 5px;}
-.searchsubmit{float: left;font-size: 0;text-indent: -9999px;width: 28px;height: 25px;background: url(http://forum.h3c.com/template/h3c/images/icon.png) no-repeat 0 0;border: 0;}
+.searchsubmit{float: left;font-size: 0;text-indent: -9999px;width: 28px;height: 25px;background: url("/static/zte/images/seach_01.png") no-repeat 0 0;border: 0;}
 .tell{float: right;}
 .xsh_navbox{width: 100%;margin: auto;background: #ffffff;border-bottom: 1px solid #eee;padding: 20px 0;}
 .xsh_nav{;width: 960px;height: 100%;margin: auto;/*overflow: hidden;*/display: table;}
@@ -141,11 +141,13 @@
 .xsh_foot{background: #5597ED;width: 100%;float: left;margin-top: 50px;color: #ffffff;text-align: center;font-size: 14px;line-height: 25px;padding: 10px 0;}
 .xsh_foot a{color: #ffffff;}
 /**/
-.xsh_circle_tabbox{background: #ffffff;border-radius: 10px;overflow: hidden;padding-bottom: 50px;}
+.xsh_circle_tabbox{background: #ffffff;border-radius: 10px;overflow: hidden;padding-bottom: 50px;position: relative;}
+.xsh_more{position: absolute;bottom: 15px;right: 50px;}
+.xsh_more>a{font-size: 14px;color: #5597ED;}
 .xsh_circle_header{width: 90%;height: auto;font-size: 18px;overflow: hidden;border-bottom: 1px solid #eee;margin: auto;padding: 20px 0;}
-.xsh_circle_header>ul>li{height: 30px;float: left;margin-right: 15px;}
+.xsh_circle_header>ul>li{width: 33.3333%;height: 30px;float: left;}
 .xsh_circle_header>ul>li:hover{cursor: pointer;}
-.xsh_circle_header>ul>.xsh_circle_hot{border-bottom: 2px solid #5597ED;color: #5597ED;}
+.xsh_circle_header>ul>li>.xsh_circle_hot{border-bottom: 2px solid #5597ED;color: #5597ED;padding-bottom: 10px;}
 .xsh_circle_content>ul{width: 90%;margin: auto;}
 .xsh_circle_logobox{width: 280px;height: 60px;overflow: hidden;float: left;margin: 30px 30px 0 0;}
 .xsh_circle_logo{width: 60px;height: 60px;overflow: hidden;border-radius: 10px;float: left;}
@@ -154,17 +156,19 @@
 .xsh_circle_name,.xsh_circle_data{width: 100%;height: 30px;font-size: 18px;overflow: hidden;}
 .xsh_circle_num,.xsh_circle_cardnum{width: 50%;height: 100%;float: left;font-size: 15px;color: #CCCCCC;}
 /**/
+.xsh_circle_cad{left: 50px;}
+/**/
 .xsh_circle_content{background: #ffffff;border-radius: 10px;margin-top: 10px;padding-bottom: 50px;}
 .xsh_circle_conbox{width: 90%;margin: auto;}
 .xsh_circle_form{display: block;padding-bottom: 30px;border-bottom: 1px solid #eee;}
 .xsh_circle_form>select{width: 100px;height: 30px;font-size: 18px;margin: 30px 15px 0 0;}
 .xsh_circle_list{width: 100%;height: auto;}
-.xsh_circle_list>ul>li{width: 100%;height: 50px;border-bottom: 1px solid #eee;overflow: hidden;padding: 20px 0;}
-.xsh_cirlis_logo{width: 50px;height: 50px;border-radius: 50%;overflow: hidden;float: left;}
+.xsh_circle_list>ul>li{width: 100%;height: 50px;border-bottom: 1px solid #eee;/*overflow: hidden;*/padding: 20px 0;}
+.xsh_cirlis_logo{width: 50px;height: 50px;border-radius: 50%;/*overflow: hidden;*/float: left;position: relative;}
 .xsh_cirlis_logo>a>img{width: 100%;height: 100%;border-radius: 50%;}
 .xsh_cirlis_name{width: auto;height: 100%;line-height: 25px;float: left;margin-left: 15px;}
 .xsh_cirlis_cirname{font-size: 18px;height: 50%;}
-.xsh_cirlis_name>p{color: #CCCCCC;font-size: 12px;}
+.xsh_cirlis_name>p,.xsh_cirlis_name>p>span>a{color: #CCCCCC;font-size: 12px;}
 .xsh_cirlis_data{float: right;line-height: 50px;}
 .xsh_inter_cir_btn{background: #5597ED;border-radius: 10px;margin: 20px;padding: 10px;text-align: center;}
 .xsh_create_post,.xsh_create_circle{height: 42px;width: auto;font-size: 20px;color: #ffffff;line-height: 42px;font-weight: 900;padding-left: 30px;}
@@ -174,5 +178,11 @@
 .xsh_circle_hitlis  .xsh_circle_logo{width: 45px;height: 45px;overflow: hidden;border-radius: 10px;float: left;}
 .xsh_circle_hitlis .xsh_circle_logo>a>img{width: 100%;height: 100%;border-radius: 10px;}
 .xsh_circle_hitlis .xsh_circle_card{width: 156px;height: 100%;float: left;overflow: hidden;margin-left: 10px;line-height: 20px;}
-.xsh_circle_hitlis .xsh_circle_name,.xsh_circle_data{width: 100%;height: 20px;font-size: 16px;overflow: hidden;}
-.xsh_circle_hitlis .xsh_circle_num,.xsh_circle_cardnum{width: 50%;height: 100%;float: left;font-size: 12px;color: #CCCCCC;}
+.xsh_circle_hitlis .xsh_circle_name,.xsh_circle_hitlis .xsh_circle_data{width: 100%;height: 20px;font-size: 16px;overflow: hidden;}
+.xsh_circle_hitlis .xsh_circle_num,.xsh_circle_hitlis .xsh_circle_cardnum{width: 50%;height: 100%;float: left;font-size: 12px;color: #CCCCCC;}
+/*圈子tab*/
+.xsh_circle_tabcon{display: none;}
+.xsh_circle_tabconnow{display: block;}
+.morecircle_mask{width: 100%;height: 100%;background: rgba(80,80,80,0.7);position: fixed;top: 0;left: 0;z-index: 99;display: none;}
+.morecircle_box{width: 960px;max-height: 500px;overflow: hidden;border-radius: 10px;background: #ffffff;padding: 30px 20px;border: 2px solid #5597ED;position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);-webkit-transform: translate(-50%,-50%);-o-transform: translate(-50%,-50%);-ms-transform: translate(-50%,-50%);-mso-transform: translate(-50%,-50%);-moz-transform: translate(-50%,-50%);}
+.morecircle{width: 108%;height: auto;max-height: 500px;overflow: auto;overflow-y: auto;overflow-x: hidden;}

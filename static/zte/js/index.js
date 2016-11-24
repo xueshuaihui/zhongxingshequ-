@@ -46,7 +46,7 @@ function carstiop(){
 }
 /*滑出开始*/
 function carstart(){
-    t = setInterval(car_move,2000);
+    t = setInterval(car_move,5000);
 }
 /*点击左右按钮*/
 car_buttonl.on("click",function(){
@@ -181,27 +181,26 @@ tab_title.each(function(index,obj){
 })
 /*点击页码*/
 function asyncLoad(page){
-    ajaxtext(box, typeid, page);
+    ajaxtext(box,tabid,page);
 }
 /*异步加载请求*/
 function ajaxtext(box,tab,page){
     /*box:数据插入的地方
-     * tab:tab栏的位置
-     * page:页码
-     * */
+    * tab:tab栏的位置
+    * page:页码
+    * */
     $.ajax({
         url:"ztindex.php?api=1&t="+tab+"&p="+page,
-        type:"get",
+        type:"post",
         success:function(result){
-            result = JSON.parse(result);
-            if(result.state == 1){
+            if(result.code == 10000){
+            // {code:100000,data:[{img:"http://img.huafans.cn/data/attachment/portal/201611/18/155603xcqn2hwg6cxbnnji.jpg",href:"www.baidu.com",theme:"图片提示",title:"文章标题",syn:"帖子简介",time:"发帖时间",num:"点击量"}]}
                 var data = result.data;
                 var str='';
-                for(var i in data['data']){
-                    str = '<li class="xsh_tab_conbox"><div class="xsh_tab_img"><a href="forum.php?mod=viewthread&tid='+(data['data'][i].tid)+'" target="'+target+'"><img src="'+(data['data'][i].image)+'" alt="加载不成功" title="'+(data['data'][i].subject)+'"></a></div><div class="xsh_tab_writing"><div class="xsh_tab_contitle"><a href="forum.php?mod=viewthread&tid='+(data['data'][i].tid)+'" target="'+target+'"><p>'+(data['data'][i].subject)+'</p></a></div><div class="xsh_tab_concise"><p>'+(data['data'][i].message)+'<span class="xsh_tab_more"><a href="forum.php?mod=viewthread&tid='+(data['data'][i].tid)+'" target="'+target+'">全文<img src="/static/zte/images/u76.png" alt=""></a></span></p></div><div class="xsh_tab_time"><span>'+(data['data'][i].dateline)+'</span><span class="liulanl">'+(data['data'][i].views)+'</span></div></div></li>' + str;
+                for(var i in data){
+                    str+='<li class="xsh_tab_conbox"><div class="xsh_tab_img"><a href="'+(data[i].href)+'" target="_blank"><img src="'+(data[i].img)+'" alt="加载不成功" title="'+(data[i].theme)+'"></a></div><div class="xsh_tab_writing"><div class="xsh_tab_contitle"><a href="'+(data[i].href)+'" target="_blank"><p>'+(data[i].title)+'</p></a></div><div class="xsh_tab_concise"><p>'+(data[i].syn)+'<span class="xsh_tab_more"><a href="'+(data[i].href)+'">全文<img src="/static/zte/images/u76.png" alt=""></a></span></p></div><div class="xsh_tab_time"><span>'+(data[i].time)+'</span><span class="liulanl">'+(data[i].num)+'</span></div></div></li>';
                 }
-                box.html(str);
-                $(".xsh_page_box ul").html(data['pagnate']);
+               box.html(str);
             }else{
                 alert("网络错误！");
                 return;
