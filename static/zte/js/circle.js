@@ -68,5 +68,6 @@ cirlis_logo.each(function(){
 /**/
 var circle_form = $(".xsh_circle_form");
 circle_form.find("select").change(function(){
-    circle_form.submit()
+    window.location.href = $(this).val();
+    
 })
