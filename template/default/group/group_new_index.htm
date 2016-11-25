@@ -119,7 +119,7 @@
                 <div class="xsh_circle_conbox">
                     <form action="ztgroup.php" method="GET"  class="xsh_circle_form">
                         <select name="主题" id="12">
-                            <option value="ztgroup.php?{if $_GET['archiveid']}archiveid={$_GET['archiveid']}{/if}" >{lang all}{lang forum_threads}</option>
+                            <option value="ztgroup.php{if $_GET['archiveid']}?archiveid={$_GET['archiveid']}{/if}" >{lang all}{lang forum_threads}</option>
 							<option value="ztgroup.php?filter=specialtype&specialtype=poll$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['specialtype'] == 'poll'}selected=selected{/if}>{lang thread_poll}</option>
 							<option value="ztgroup.php?filter=specialtype&specialtype=trade$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['specialtype'] == 'trade'}selected=selected{/if}>{lang thread_trade}</option>
 							<option value="ztgroup.php?filter=specialtype&specialtype=reward$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['specialtype'] == 'reward'}selected=selected{/if}>{lang thread_reward}</option>
