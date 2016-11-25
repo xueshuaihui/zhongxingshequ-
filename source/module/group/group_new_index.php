@@ -69,6 +69,7 @@ $topgrouplist = grouplist('activity', array('f.commoncredits', 'ff.membernum', '
 //推荐圈子
 $setting = &$_G['setting'];
 $group_recommend = $setting['group_recommend'] ? dunserialize($setting['group_recommend']) : '';
+$group_id_recommend = array_keys($group_recommend);
 
 function display_json ($data = array(), $code = 10000, $error_msg = '') {
     $arr = ['code' => $code];

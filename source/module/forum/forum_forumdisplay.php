@@ -16,7 +16,21 @@ require_once libfile('function/forumlist');
 
 //===============================================yy-start============================================
 if ($mod == 'new_index') {
-    $yy_fids = array('36', '37', '38', '39');
+    $fids_join = array();
+    $fids_manage = array();
+    foreach ($grouplist_join as $group) {
+        $fids_join[] = $group['fid'];
+    }
+    foreach ($grouplist_manage as $group) {
+        $fids_manage[] = $group['fid'];
+    }
+    $yy_ids = array_merge($fids_join, $fids_manage);
+    if (!empty($yy_ids)) {
+        $yy_fids = $yy_ids;
+    } else {
+        $yy_fids = $group_id_recommend;
+    }
+    
     $_G['fid'] = $yy_fids[0];
     $_GET['fid'] = $yy_fids[0];
     $_G['forum']['fid'] = $yy_fids[0];
