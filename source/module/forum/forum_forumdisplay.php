@@ -13,6 +13,30 @@ if(!defined('IN_DISCUZ')) {
 
 require_once libfile('function/forumlist');
 
+
+//===============================================yy-start============================================
+if ($mod == 'new_index') {
+    $fids_join = array();
+    $fids_manage = array();
+    foreach ($grouplist_join as $group) {
+        $fids_join[] = $group['fid'];
+    }
+    foreach ($grouplist_manage as $group) {
+        $fids_manage[] = $group['fid'];
+    }
+    $yy_ids = array_merge($fids_join, $fids_manage);
+    if (!empty($yy_ids)) {
+        $yy_fids = $yy_ids;
+    } else {
+        $yy_fids = $group_id_recommend;
+    }
+    
+    $_G['fid'] = $yy_fids[0];
+    $_GET['fid'] = $yy_fids[0];
+    $_G['forum']['fid'] = $yy_fids[0];
+}
+//===============================================yy-end==============================================
+
 if($_G['forum']['redirect']) {
 	dheader("Location: {$_G[forum][redirect]}");
 } elseif($_G['forum']['type'] == 'group') {
@@ -518,6 +542,12 @@ if($_G['forum']['relatedgroup']) {
 	$filterarr['inforum'] = $relatedgroup;
 } else {
 	$filterarr['inforum'] = $_G['fid'];
+	//===============================================yy-start============================================
+	if ($mod == 'new_index') {
+	    $filterarr['inforum'] = $yy_fids;
+	    $_G['forum_threadcount'] = C::t('forum_thread')->count_search($filterarr, $tableid);
+	}
+	//===============================================yy-end==============================================
 }
 if(empty($filter) && empty($_GET['sortid']) && empty($_G['forum']['relatedgroup'])) {
 	if($forumarchive) {
@@ -595,6 +625,12 @@ if($_G['forum']['picstyle']) {
 	}
 }
 
+//===============================================yy-start============================================
+if ($mod == 'new_index') {
+    $_G['forum_threadcount'] = C::t('forum_thread')->count_search($filterarr, $tableid);
+    
+}
+
 if($filter != 'hot' && @ceil($_G['forum_threadcount']/$_G['tpp']) < $page) {
 	$page = 1;
 }
@@ -608,6 +644,16 @@ $realpages = @ceil($_G['forum_threadcount']/$_G['tpp']);
 $maxpage = ($_G['setting']['threadmaxpages'] && $_G['setting']['threadmaxpages'] < $realpages) ? $_G['setting']['threadmaxpages'] : $realpages;
 $nextpage = ($page + 1) > $maxpage ? 1 : ($page + 1);
 $multipage_more = "forum.php?mod=forumdisplay&fid=$_G[fid]".$forumdisplayadd['page'].($multiadd ? '&'.implode('&', $multiadd) : '')."$multipage_archive".'&page='.$nextpage;
+
+//===============================================yy-start============================================
+if ($mod == 'new_index') {
+    $_G['forum_threadcount'] = C::t('forum_thread')->count_search($filterarr, $tableid);
+    $forumdisplayadd['page'] = empty($forumdisplayadd['page']) ? '' : '?'.substr($forumdisplayadd['page'], 1);
+    $first_char = empty($forumdisplayadd['page']) ? '?' : '&';
+    $url = preg_replace("/(.*?)([\&|\?]page=\d+)(.*?)/i", '$1$3', $_SERVER['REQUEST_URI']);
+    $page_str = pageFormat($url, @ceil($_G['forum_threadcount']/$_G['tpp']), $page);
+}
+
 
 $extra = rawurlencode(!IS_ROBOT ? 'page='.$page.($forumdisplayadd['page'] ? '&filter='.$filter.$forumdisplayadd['page'] : '') : 'page=1');
 
@@ -959,6 +1005,13 @@ if($_G['forum']['status'] == 3) {
 	write_groupviewed($_G['fid']);
 	$template = 'diy:group/group:'.$_G['fid'];
 }
+
+//===============================================yy-start============================================
+if ($mod == 'new_index') {
+    $template = 'group/group_new_index';
+    $_G['forum_threadcount'] = C::t('forum_thread')->count_search($filterarr, $tableid);
+}
+//===============================================yy-end==============================================
 
 if(!defined('IN_ARCHIVER')) {
 	include template($template);
