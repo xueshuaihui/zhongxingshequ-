@@ -20,6 +20,42 @@ if(isset($isApi) && $isApi){
         $header = getHDZL($param['tid'], 1);
         $data = getHDZL($param['tid'], 2);
         apiReturn(1, '获取成功', ['header'=>$header, 'experts'=>$data]);
+    } elseif ($get == 'post') {
+        require_once libfile('function/forum');
+        $newthread = array(
+            'fid' => $param['tid'],
+            'posttableid' => 0,
+            'readperm' => 0,
+            'sortid' => 0,
+            'author' => $_G['username'],
+            'authorid' => $_G['uid'],
+            'subject' => '专家提问：',
+            'dateline' => getglobal('timestamp'),
+            'lastpost' => getglobal('timestamp'),
+            'lastposter' => $_G['username'],
+            'status' => 32
+        );
+        //主题
+        $ztid = C::t('forum_thread')->insert($newthread, true);
+        $data = array(
+            'fid' => $param['tid'],
+            'first' => '0',
+            'tid' => $ztid,
+            'author' => $_G['username'],
+            'authorid' => $_G['uid'],
+            'subject' => '专家提问：',
+            'dateline' => getglobal('timestamp'),
+            'message' => $param['content'],
+            'useip' => $_G['clientip']?:getglobal('clientip'),
+            'port' => $_G['remoteport']?:getglobal('remoteport'),
+        );
+        //帖子
+        $pid = insertpost($data);
+        if($pid){
+            $banzhu_ids = C::t('forum_moderator')->fetch_all_by_fid($param['tid']);
+            sendMessageToIds($banzhu_ids, $_G['uid'], $_G['username'], $ztid, $param['tid'], $pid);
+            apiReturn(1);
+        }
     }
 
     apiReturn(0, '完蛋玩意');

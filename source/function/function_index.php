@@ -8,7 +8,7 @@ function dd($d){
     exit;
 }
 
-function apiReturn($r, $d, $data = null) {
+function apiReturn($r, $d = 'ok', $data = null) {
     echo json_encode(
         array(
             'state' => $r?1:0,
@@ -36,8 +36,10 @@ function getInfo($sortId, $pageId, $perpage){
         }
         if($firstImg) {
             $data[$k]['image'] = $firstImg;
-        } else {
+        } elseif($img = C::t('forum_threadimage')->fetch($v['tid'])['attachment']) {
             $data[$k]['image'] = $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'attachment'.DIRECTORY_SEPARATOR.'forum'.DIRECTORY_SEPARATOR.C::t('forum_threadimage')->fetch($v['tid'])['attachment'];
+        }else{
+            $data[$k]['image'] = $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].DIRECTORY_SEPARATOR.'static'.DIRECTORY_SEPARATOR.'zte'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'default.png';
         }
         $data[$k]['views'] = $v['views'];
         $data[$k]['dateline'] = date('Y-m-d', $v['dateline']);
@@ -103,7 +105,7 @@ function friendLink () {
 }
 
 function pageFormat($count, $cur = 1) {
-    if($count < 1){
+    if($count < 2){
         return '';
     }
     $result = '';
@@ -146,4 +148,23 @@ function pageFormat($count, $cur = 1) {
         $result .= '<li onclick="asyncLoad('.($cur+1).')" class="xsh_pages_next"></li>';
     }
     return $result;
+}
+
+function sendMessageToIds ($ids, $authorid, $author, $zt, $lt, $tz){
+    if(is_numeric($ids)){
+        $ids = array($ids);
+    }
+    foreach ($ids as $id) {
+        if(!is_numeric($id)){
+            $id = $id['uid'];
+        }
+        notification_add($id, 'post', '<a href="home.php?mod=space&uid='.$authorid.'">'.$author.'</a> 向您提出了问题 <a href="forum.php?mod=redirect&goto=findpost&tid='.$zt.'&pid='.$tz.'" target="_blank" class="lit">点击查看详情</a>', array(
+            'tid' => $zt, //主题ID
+            'subject' => '',//标题
+            'fid' => $lt,//论坛ID
+            'pid' => $tz,//帖子ID
+            'from_id' => $zt,//主题ID
+            'from_idtype' => 'post',
+        ));
+    }
 }

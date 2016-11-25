@@ -55,7 +55,7 @@ if($operation == 'download') {
         }
         $forSave['index_qrcode_imgs'] = trim($index, ',');
         C::t('common_setting')->update_batch($forSave);
-        updatecache(array('download', 'groupicon'));
+        updatecache();
         cpmsg('index_download_qrcode_succeed', 'action=misc&operation=download', 'succeed');
     }
 } elseif($operation == 'onlinelist') {
