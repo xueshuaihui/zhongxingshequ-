@@ -1,4 +1,5 @@
 <?php
+
 define('APPTYPEID', 250);
 define('CURSCRIPT', 'ztindex');
 
