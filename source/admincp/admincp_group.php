@@ -1204,7 +1204,9 @@ function cacherecommend($fidstr, $return = true) {
 		foreach($query as $val) {
 			$row = array();
 			if($val['type'] == 'sub') {
-				$row = array('fid' => $val['fid'], 'name' => $val['name'], 'description' => $val['description'], 'icon' => $val['icon']);
+				$row = array('fid' => $val['fid'], 'name' => $val['name'], 'description' => $val['description'], 'icon' => $val['icon'],
+				    'membernum' => $val['membernum'], 'posts' => $val['posts']
+				);
 				$row['icon'] = get_groupimg($row['icon'], 'icon');
 				$temp[$row[fid]] = $row;
 			}

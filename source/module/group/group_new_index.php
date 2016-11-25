@@ -66,7 +66,9 @@ $grouplist_all = count($grouplist_all) ? array_slice($grouplist_all, 0, 4) : arr
 
 //热门圈子
 $topgrouplist = grouplist('activity', array('f.commoncredits', 'ff.membernum', 'ff.icon'), 10);
-
+//推荐圈子
+$setting = &$_G['setting'];
+$group_recommend = $setting['group_recommend'] ? dunserialize($setting['group_recommend']) : '';
 
 function display_json ($data = array(), $code = 10000, $error_msg = '') {
     $arr = ['code' => $code];
