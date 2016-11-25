@@ -49,7 +49,7 @@ if ($_GET['action'] == 'group_list') {
     }
     
     foreach ($group_list as &$group) {
-        $group['href'] = 'http://www.sina.com.cn';
+        $group['href'] = 'forum.php?mod=forumdisplay&action=list&fid='.$group['fid'];
     }
     
     if (empty($group_list)) {
