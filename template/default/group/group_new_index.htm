@@ -18,12 +18,18 @@
                 <div class="xsh_circle_box">
                     <div class="xsh_circle_header">
                         <ul>
+                        	<!--{if !empty($grouplist_join)}-->
                             <li><span class="xsh_circle_hot">我加入的圈子</span></li>
-                            <li><span>我管理的圈子</span></li>
-                            <li><span>全部圈子</span></li>
+                            <!--{/if}-->
+                            <!--{if !empty($grouplist_manage)}-->
+                            <li><span {if empty($grouplist_join)}class="xsh_circle_hot"{/if}>我管理的圈子</span></li>
+                            <!--{/if}-->
+                         	<!--{if !empty($grouplist_all)}-->
+                            <li><span {if empty($grouplist_manage)}class="xsh_circle_hot"{/if}>全部圈子</span></li>
+                            <!--{/if}-->
                         </ul>
                     </div>
-                    
+                    <!--{if !empty($grouplist_join)}-->
                     <div class="xsh_circle_content xsh_circle_tabcon xsh_circle_tabconnow">
                         <ul>
                             <!--圈子-->
@@ -47,7 +53,9 @@
 						<!--{/loop}-->
                         </ul>
                     </div>
-                    <div class="xsh_circle_content xsh_circle_tabcon">
+                    <!--{/if}-->
+                    <!--{if !empty($grouplist_manage)}-->
+                    <div class="xsh_circle_content xsh_circle_tabcon {if empty($grouplist_join)}xsh_circle_tabconnow{/if}">
                         <ul>
                             <!--圈子-->
                             <!--{loop $grouplist_manage $group}-->
@@ -70,7 +78,9 @@
                             <!--{/loop}-->
                         </ul>
                     </div>
-                    <div class="xsh_circle_content xsh_circle_tabcon">
+                    <!--{/if}-->
+                    <!--{if !empty($grouplist_all)}-->
+                    <div class="xsh_circle_content xsh_circle_tabcon {if empty($grouplist_manage)}xsh_circle_tabconnow{/if}">
                         <ul>
                             <!--圈子-->
                             <!--{loop $grouplist_all $group}-->
@@ -93,7 +103,7 @@
                             <!--{/loop}-->
                         </ul>
                     </div>
-                    
+                    <!--{/if}-->
                
                   
                     
