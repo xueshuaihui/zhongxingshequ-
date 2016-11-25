@@ -248,61 +248,30 @@
             <div class="xsh_interaction">
                 <div class="xsh_intera_header xsh_con_right_header">
                     <h3>热门圈子</h3>
-                    <div class="xsh_header_more"><a href="">更多<img src="{$_G[setting][jspath]}../zte/images/u76.png" alt=""></a></div>
+                    <div class="xsh_header_more"></div>
                 </div>
                 <div class="xsh_circle_hitlis">
                     <ul>
                         <!--圈子-->
+                        <!--{loop $topgrouplist $fid $group}-->
                         <li>
                             <div class="xsh_circle_logobox">
                                 <div class="xsh_circle_logo">
                                     <a href="">
-                                        <img src="http://img.dahe.cn/qf/2016/11/20/1941MZCD59.jpg" alt="加载不成功">
+                                        <img src="$group[icon]" alt="加载不成功">
                                     </a>
                                 </div>
                                 <div class="xsh_circle_card">
-                                    <div class="xsh_circle_name"><a href="">新手学习新手学习新手学习</a></div>
+                                    <div class="xsh_circle_name"><a href="forum.php?mod=forumdisplay&action=list&fid=$group[fid]">$group[name]</a></div>
                                     <div class="xsh_circle_data">
-                                        <div class="xsh_circle_num">成员:<span>46845</span></div>
-                                        <div class="xsh_circle_cardnum">帖子:<span>5465</span></div>
+                                        <div class="xsh_circle_num">成员:<span>$group[membernum]</span></div>
+                                        <div class="xsh_circle_cardnum">帖子:<span>$group[posts]</span></div>
                                     </div>
                                 </div>
                             </div>
                         </li>
-                        <!--圈子-->
-                        <li>
-                            <div class="xsh_circle_logobox">
-                                <div class="xsh_circle_logo">
-                                    <a href="">
-                                        <img src="http://img.dahe.cn/qf/2016/11/20/1941MZCD59.jpg" alt="加载不成功">
-                                    </a>
-                                </div>
-                                <div class="xsh_circle_card">
-                                    <div class="xsh_circle_name"><a href="">新手学习新手学习新手学习</a></div>
-                                    <div class="xsh_circle_data">
-                                        <div class="xsh_circle_num">成员:<span>46845</span></div>
-                                        <div class="xsh_circle_cardnum">帖子:<span>5465</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <!--圈子-->
-                        <li>
-                            <div class="xsh_circle_logobox">
-                                <div class="xsh_circle_logo">
-                                    <a href="">
-                                        <img src="http://img.dahe.cn/qf/2016/11/20/1941MZCD59.jpg" alt="加载不成功">
-                                    </a>
-                                </div>
-                                <div class="xsh_circle_card">
-                                    <div class="xsh_circle_name"><a href="">新手学习新手学习新手学习</a></div>
-                                    <div class="xsh_circle_data">
-                                        <div class="xsh_circle_num">成员:<span>46845</span></div>
-                                        <div class="xsh_circle_cardnum">帖子:<span>5465</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                        <!--{/loop}-->
+                        
                     </ul>
                 </div>
             </div>

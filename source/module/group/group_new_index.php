@@ -64,6 +64,8 @@ $grouplist_join = count($grouplist_join) ? array_slice($grouplist_join, 0, 4) : 
 $grouplist_manage = count($grouplist_manage) ? array_slice($grouplist_manage, 0, 4) : array();
 $grouplist_all = count($grouplist_all) ? array_slice($grouplist_all, 0, 4) : array();
 
+//热门圈子
+$topgrouplist = grouplist('activity', array('f.commoncredits', 'ff.membernum', 'ff.icon'), 10);
 
 
 function display_json ($data = array(), $code = 10000, $error_msg = '') {

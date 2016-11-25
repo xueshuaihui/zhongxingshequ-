@@ -4,6 +4,8 @@ require './source/class/class_core.php';
 
 require './source/function/function_forum.php';
 
+require_once libfile('function/ztegroup');
+
 
 $modarray = array('ajax','announcement','attachment','forumdisplay',
     'group','image','index','medal','misc','modcp','notice','post','redirect',
