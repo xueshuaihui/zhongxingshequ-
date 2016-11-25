@@ -2,6 +2,9 @@
 
     <style>
         .xsh_con_left{background: none;padding: 0;}
+        .xsh_page_box>ul>a>li{width: 30px;height: 30px;text-align: center;line-height: 30px;font-size: 16px;border: 1px solid #5597ED;border-radius: 5px;float: left;margin-right: 2px;}
+    	.xsh_page_box>ul>a>.xsh_pages_hot{border-color: #ffffff;}
+
     </style>
     
     
@@ -29,11 +32,11 @@
                                 <div class="xsh_circle_logobox">
                                     <div class="xsh_circle_logo">
                                         <a href="">
-                                            <img src="http://img.dahe.cn/qf/2016/11/20/1941MZCD59.jpg" alt="加载不成功">
+                                            <img src="$group['icon']" alt="加载不成功">
                                         </a>
                                     </div>
                                     <div class="xsh_circle_card">
-                                        <div class="xsh_circle_name"><a href="">$group['name']</a></div>
+                                        <div class="xsh_circle_name"><a href="forum.php?mod=forumdisplay&action=list&fid=$group[fid]">$group['name']</a></div>
                                         <div class="xsh_circle_data">
                                             <div class="xsh_circle_num">成员:<span>$group['membernum']</span></div>
                                             <div class="xsh_circle_cardnum">帖子:<span>$group['posts']</span></div>
@@ -52,11 +55,11 @@
                                 <div class="xsh_circle_logobox">
                                     <div class="xsh_circle_logo">
                                         <a href="">
-                                            <img src="http://img.dahe.cn/qf/2016/11/20/1941MZCD59.jpg" alt="加载不成功">
+                                            <img src="$group['icon']" alt="加载不成功">
                                         </a>
                                     </div>
                                     <div class="xsh_circle_card">
-                                        <div class="xsh_circle_name"><a href="">$group['name']</a></div>
+                                        <div class="xsh_circle_name"><a href="forum.php?mod=forumdisplay&action=list&fid=$group[fid]">$group['name']</a></div>
                                         <div class="xsh_circle_data">
                                             <div class="xsh_circle_num">成员:<span>$group['membernum']</span></div>
                                             <div class="xsh_circle_cardnum">帖子:<span>$group['posts']</span></div>
@@ -75,11 +78,11 @@
                                 <div class="xsh_circle_logobox">
                                     <div class="xsh_circle_logo">
                                         <a href="">
-                                            <img src="http://img.dahe.cn/qf/2016/11/20/1941MZCD59.jpg" alt="加载不成功">
+                                            <img src="$group['icon']" alt="加载不成功">
                                         </a>
                                     </div>
                                     <div class="xsh_circle_card">
-                                        <div class="xsh_circle_name"><a href="">$group['name']</a></div>
+                                        <div class="xsh_circle_name"><a href="forum.php?mod=forumdisplay&action=list&fid=$group[fid]">$group['name']</a></div>
                                         <div class="xsh_circle_data">
                                             <div class="xsh_circle_num">成员:<span>$group['membernum']</span></div>
                                             <div class="xsh_circle_cardnum">帖子:<span>$group['posts']</span></div>
@@ -275,6 +278,39 @@
                     </ul>
                 </div>
             </div>
+            
+            <!--推荐圈子-->
+            <div class="xsh_interaction">
+                <div class="xsh_intera_header xsh_con_right_header">
+                    <h3>推荐圈子</h3>
+                    <div class="xsh_header_more"></div>
+                </div>
+                <div class="xsh_circle_hitlis">
+                    <ul>
+                        <!--圈子-->
+                        <!--{loop $topgrouplist $fid $group}-->
+                        <li>
+                            <div class="xsh_circle_logobox">
+                                <div class="xsh_circle_logo">
+                                    <a href="">
+                                        <img src="$group[icon]" alt="加载不成功">
+                                    </a>
+                                </div>
+                                <div class="xsh_circle_card">
+                                    <div class="xsh_circle_name"><a href="forum.php?mod=forumdisplay&action=list&fid=$group[fid]">$group[name]</a></div>
+                                    <div class="xsh_circle_data">
+                                        <div class="xsh_circle_num">成员:<span>$group[membernum]</span></div>
+                                        <div class="xsh_circle_cardnum">帖子:<span>$group[posts]</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!--{/loop}-->
+                        
+                    </ul>
+                </div>
+            </div>
+            
         </div>
     </div>
 </div>

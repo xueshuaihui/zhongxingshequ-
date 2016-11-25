@@ -531,6 +531,7 @@ if($_G['forum']['relatedgroup']) {
 	//===============================================yy-start============================================
 	if ($mod == 'new_index') {
 	    $filterarr['inforum'] = $yy_fids;
+	    $_G['forum_threadcount'] = C::t('forum_thread')->count_search($filterarr, $tableid);
 	}
 	//===============================================yy-end==============================================
 }
@@ -610,6 +611,12 @@ if($_G['forum']['picstyle']) {
 	}
 }
 
+//===============================================yy-start============================================
+if ($mod == 'new_index') {
+    $_G['forum_threadcount'] = C::t('forum_thread')->count_search($filterarr, $tableid);
+    
+}
+
 if($filter != 'hot' && @ceil($_G['forum_threadcount']/$_G['tpp']) < $page) {
 	$page = 1;
 }
@@ -627,7 +634,10 @@ $multipage_more = "forum.php?mod=forumdisplay&fid=$_G[fid]".$forumdisplayadd['pa
 //===============================================yy-start============================================
 if ($mod == 'new_index') {
     $_G['forum_threadcount'] = C::t('forum_thread')->count_search($filterarr, $tableid);
-    $page_str = pageFormat("ztgroup.php?".$forumdisplayadd['page'].($multiadd ? '&'.implode('&', $multiadd) : '')."$multipage_archive", @ceil($_G['forum_threadcount']/$_G['tpp']), $page);
+    $forumdisplayadd['page'] = empty($forumdisplayadd['page']) ? '' : '?'.substr($forumdisplayadd['page'], 1);
+    $first_char = empty($forumdisplayadd['page']) ? '?' : '&';
+    $url = preg_replace("/(.*?)([\&|\?]page=\d+)(.*?)/i", '$1$3', $_SERVER['REQUEST_URI']);
+    $page_str = pageFormat($url, @ceil($_G['forum_threadcount']/$_G['tpp']), $page);
 }
 
 
