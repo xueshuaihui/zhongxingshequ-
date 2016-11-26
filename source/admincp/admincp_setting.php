@@ -593,7 +593,7 @@ if(!submitcheck('settingsubmit')) {
         showsetting('setting_styles_index_list_count', 'settingnew[index_list_count]', $setting['index_list_count'], 'text');
         showsetting('setting_styles_index_hdzl', 'settingnew[index_hdzl]', $setting['index_hdzl'], 'text');
         showsetting('setting_styles_index_newtab', 'settingnew[newtab]', !empty($setting['newtab']), 'radio');
-        //showsetting('setting_styles_index_zjph_order', array('settingnew[index_zjph_count]', array(array(0,))), $setting['index_zjph_order'], 'select');
+        showsetting('setting_styles_index_zjph_order', array('settingnew[index_zjph_order]', array(array('credits', '积分正序'), array('credits desc', '积分倒序'), array('regdate', '注册时间正序'), array('regdate', '注册时间倒序'))), $setting['index_zjph_order'], 'select');
         showsetting('setting_styles_index_zjph_count', 'settingnew[index_zjph_count]', $setting['index_zjph_count'], 'text');
 		showtablefooter();
 

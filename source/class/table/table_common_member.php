@@ -70,10 +70,10 @@ class table_common_member extends discuz_table_archive
 		return $user;
 	}
 
-	public function fetch_all_by_username($usernames, $fetch_archive = 1) {
+	public function fetch_all_by_username($usernames, $order, $limit, $fetch_archive = 1) {
 		$users = array();
 		if(!empty($usernames)) {
-			$users = DB::fetch_all('SELECT * FROM %t WHERE username IN (%n)', array($this->_table, (array)$usernames), 'username');
+			$users = DB::fetch_all('SELECT * FROM %t WHERE username IN (%n) ORDER BY %s LIMIT %d', array($this->_table, (array)$usernames, $order, $limit), 'username');
 			if(isset($this->membersplit) && $fetch_archive && count($usernames) !== count($users)) {
 				$users += C::t($this->_table.'_archive')->fetch_all_by_username($usernames, 0);
 			}

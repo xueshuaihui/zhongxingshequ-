@@ -78,14 +78,19 @@ function getHDZL($bkId, $for = 1) {
     }
 }
 
-function getExpertList ($subBk) {
+function getExpertList ($subBk, $order, $limit) {
     if(!is_array($subBk)) {
         return exit('error');
     }
     $fids = '';
     foreach ($subBk as $bk){
-        $fids .= $bk['fid'].',';
+        //获取子模块
+        $subsubk = C::t('forum_forum')->fetch_all_by_fup($bk['fid']);
+        foreach ($subsubk as $item){
+            $fids .= $item['fid'].',';
+        }
     }
+
     $expertInfo = C::t('forum_forumfield')->get_all_username_by_fid(trim($fids, ','));
     $expertName = [];
     foreach ($expertInfo as $k=>$username) {
@@ -97,7 +102,7 @@ function getExpertList ($subBk) {
             }
         }
     }
-     return C::t('common_member')->fetch_all_by_username($expertName);
+     return C::t('common_member')->fetch_all_by_username($expertName, $order, $limit);
 }
 
 function friendLink () {
