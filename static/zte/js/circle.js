@@ -14,13 +14,7 @@ tabheader.each(function(index,obj){
         }else{
             xsh_more.css({display:"block"})
         }
-        if(index == 0){
-            grouptype = "join";
-        }else if(index == 1){
-            grouptype = "manage";
-        }else if(index == 2){
-            grouptype = "all";
-        }
+        grouptype = $(this).attr("xid");
     })
 })
 /*显示更多*/
@@ -69,5 +63,4 @@ cirlis_logo.each(function(){
 var circle_form = $(".xsh_circle_form");
 circle_form.find("select").change(function(){
     window.location.href = $(this).val();
-    
 })
