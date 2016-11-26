@@ -1,23 +1,25 @@
-var conleft = $(".xsh_con_left");
+var jq = jQuery.noConflict();
+
+var conleft = jq(".xsh_con_left");
 /*轮播图框*/
-var carousel = $(".xsh_carousel");
+var carousel = jq(".xsh_carousel");
 /*轮播图*/
-var carimg = $(".xsh_carimg");
+var carimg = jq(".xsh_carimg");
 var max_carnum = carimg.length;
 /*标识符*/
-var car_radius = $(".xsh_car_radius");
+var car_radius = jq(".xsh_car_radius");
 /*左右按钮*/
-var car_button = $(".xsh_car_button");
-var car_buttonl = $(".xsh_car_buttonl");
-var car_buttonr = $(".xsh_car_buttonr");
+var car_button = jq(".xsh_car_button");
+var car_buttonl = jq(".xsh_car_buttonl");
+var car_buttonr = jq(".xsh_car_buttonr");
 /*标识符*/
-var car_radbox = $(".xsh_car_radbox");
+var car_radbox = jq(".xsh_car_radbox");
 /*轮播图大于一张执行轮播*/
 if( max_carnum > 1){
     car_button.css({display:"block"});
     car_radbox.css({display:'block'});
     var t = setInterval(car_move,5000);
-    $(".xsh_carousel").hover(function(){
+    jq(".xsh_carousel").hover(function(){
         carstiop();
     },function(){
         carstart()
@@ -75,7 +77,7 @@ car_buttonr.on("click",function(){
 })
 /*点击标识符*/
 car_radius.each(function(index,obj){
-    $(this).on("click",function(){
+    jq(this).on("click",function(){
         carstiop();
         /*图片轮播*/
         carimg.eq(car_num).fadeOut(200,"linear");
@@ -86,15 +88,15 @@ car_radius.each(function(index,obj){
     })
 })
 /*专家互动*/
-var expertFormHeader = $(".xsh_expert_form_header");
-var expertRadio = $(".xsh_expert_radio");
-var expertBox = $(".xsh_expert_box");
-var expertTextarea = $(".xsh_expert_textarea");
+var expertFormHeader = jq(".xsh_expert_form_header");
+var expertRadio = jq(".xsh_expert_radio");
+var expertBox = jq(".xsh_expert_box");
+var expertTextarea = jq(".xsh_expert_textarea");
 /*获取表单*/
-var expertForm = $(".xsh_expert_form");
-var expertFormSubmit = $(".xsh_expert_form_submit");
+var expertForm = jq(".xsh_expert_form");
+var expertFormSubmit = jq(".xsh_expert_form_submit");
 function expertInteraction(hid){
-    $.ajax({
+    jq.ajax({
         url:"ztindex.php?api=1&thread="+hid,
         type:"get",
         success:function(result){
@@ -102,7 +104,7 @@ function expertInteraction(hid){
             //result={code:10000,data:{header:"无线",experts:[{id:13,name:"路由器/专家:dfjkg"},{id:13,name:"路由器/专家:dfjkg"},{id:13,name:"路由器/专家:dfjkg"}]}}
             if(result.state == 1){
                 var header = result.data.header;
-                $(".xsh_expert_box #title").val("测试一下");
+                jq(".xsh_expert_box #title").val("测试一下");
                 expertFormHeader.children("h3").text(header);
                 expertForm.children("form").action = "forum.php?mod=post&amp;infloat=yes&amp;action=newthread&amp;fid=38&amp;extra=&amp;topicsubmit=yes&amp;jet=rmbplus";
                 var data = result.data.experts;
@@ -123,12 +125,13 @@ function formsubmit(){
     var text = expertTextarea.children("textarea").val();
     var id = expertRadio.find("input:checked").val();
     var action = expertForm.attr("action");
-    $.ajax({
+    jq.ajax({
         url:action,
         type:"post",
         data:{id:id,text:text},
         success:function(result){
-            if(result==10000){
+            result = JSON.parse(result);
+            if(result.state==1){
                 /*成功*/
                 closeform();
                 alert("发送成功！")
@@ -149,32 +152,33 @@ function closeform(){
     expertBox.css({display:"none"});
 }
 /*划上去显示标签卡*/
-var user_data = $(".xsh_user_data");
-$(".xsh_user_box").hover(function(){
+var user_data = jq(".xsh_user_data");
+jq(".xsh_user_box").hover(function(){
     user_data.css({display:"block"});
 },function(){
     user_data.css({display:"none"});
 })
-var expertCad = $(".xsh_expert_cad");
-var expert_name = $(".xsh_expert_name");
+var expertCad = jq(".xsh_expert_cad");
+var expert_name = jq(".xsh_expert_name");
 expert_name.each(function(index,obj){
-    $(this).hover(function(){
+    jq(this).hover(function(){
         expertCad.eq(index).css({display:"block"});
     },function(){
         expertCad.eq(index).css({display:"none"});
     })
 })
 /*tab*/
-var tab_title = $(".xsh_tab_title");
-var tab_content = $(".xsh_tab_con");
-var tabid,box = tab_content.eq(0).children("ul");
+var tab_title = jq(".xsh_tab_title");
+var tab_content = jq(".xsh_tab_con");
+var tabid = tab_title.eq(0).attr("id");
+var box = tab_content.eq(0).children("ul");
 tab_title.each(function(index,obj){
-    $(this).on("click",function(){
+    jq(this).on("click",function(){
         tab_title.removeClass("xsh_tab_title_hot");
-        tabid = $(this).addClass("xsh_tab_title_hot").attr("id");
+        tabid = jq(this).addClass("xsh_tab_title_hot").attr("id");
         tab_content.removeClass("xsh_tab_now").eq(index).addClass("xsh_tab_now");
         box = tab_content.eq(index).children("ul");
-        if(!box.children()){
+        if(!box.html()){
             ajaxtext(box,tabid,1);
         }
     })
@@ -189,18 +193,19 @@ function ajaxtext(box,tab,page){
     * tab:tab栏的位置
     * page:页码
     * */
-    $.ajax({
+    jq.ajax({
         url:"ztindex.php?api=1&t="+tab+"&p="+page,
-        type:"post",
+        type:"get",
         success:function(result){
-            if(result.code == 10000){
-            // {code:100000,data:[{img:"http://img.huafans.cn/data/attachment/portal/201611/18/155603xcqn2hwg6cxbnnji.jpg",href:"www.baidu.com",theme:"图片提示",title:"文章标题",syn:"帖子简介",time:"发帖时间",num:"点击量"}]}
+            result = JSON.parse(result);
+            if(result.state == 1){
                 var data = result.data;
                 var str='';
-                for(var i in data){
-                    str+='<li class="xsh_tab_conbox"><div class="xsh_tab_img"><a href="'+(data[i].href)+'" target="_blank"><img src="'+(data[i].img)+'" alt="加载不成功" title="'+(data[i].theme)+'"></a></div><div class="xsh_tab_writing"><div class="xsh_tab_contitle"><a href="'+(data[i].href)+'" target="_blank"><p>'+(data[i].title)+'</p></a></div><div class="xsh_tab_concise"><p>'+(data[i].syn)+'<span class="xsh_tab_more"><a href="'+(data[i].href)+'">全文<img src="/static/zte/images/u76.png" alt=""></a></span></p></div><div class="xsh_tab_time"><span>'+(data[i].time)+'</span><span class="liulanl">'+(data[i].num)+'</span></div></div></li>';
+                for(var i in data['data']){
+                    str = '<li class="xsh_tab_conbox"><div class="xsh_tab_img"><a href="forum.php?mod=viewthread&tid='+(data['data'][i].tid)+'" target="'+target+'"><img src="'+(data['data'][i].image)+'" alt="加载不成功" title="'+(data['data'][i].subject)+'"></a></div><div class="xsh_tab_writing"><div class="xsh_tab_contitle"><a href="forum.php?mod=viewthread&tid='+(data['data'][i].tid)+'" target="'+target+'"><p>'+(data['data'][i].subject)+'</p></a></div><div class="xsh_tab_concise"><p>'+(data['data'][i].message)+'<span class="xsh_tab_more"><a href="forum.php?mod=viewthread&tid='+(data['data'][i].tid)+'" target="'+target+'">全文<img src="/static/zte/images/u76.png" alt=""></a></span></p></div><div class="xsh_tab_time"><span>'+(data['data'][i].dateline)+'</span><span class="liulanl">'+(data['data'][i].views)+'</span></div></div></li>' + str;
                 }
-               box.html(str);
+                box.html(str);
+                jq(".xsh_page_box ul").html(data['pagnate']);
             }else{
                 alert("网络错误！");
                 return;
@@ -214,7 +219,7 @@ function addfriend1(){
 }
 function addfriend2(){
     if(confirm("确认添加为好友？")){
-        $.ajax({
+        jq.ajax({
             url:"",
             data:{userid:312},
             type:"post",

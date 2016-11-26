@@ -485,6 +485,7 @@ $lang = array (
   'home_show_members' => '竞价排名',
   'hot_feed' => '热点动态',
   'invite_code' => '邀请码',
+    'user_tag'=>'选择标签',
   'level' => '等级',
   'magic' => '道具',
   'magic_empty' => '此道具缺货',
