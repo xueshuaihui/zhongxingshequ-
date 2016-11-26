@@ -1031,6 +1031,7 @@ $lang = array (
   'register_ctrl' => '抱歉，您的 IP 地址在 {regctrl} 小时内无法注册',
   'register_flood_ctrl' => '抱歉，IP 地址在 24 小时内只能注册 {regfloodctrl} 次',
   'profile_uid_duplicate' => '抱歉，用户 ID {uid} 已被占用',
+    'profile_user_tag_useless' => '请选择用户标签',
   'register_email_verify' => '感谢您注册 {bbname}，<br />系统给您发送了一封激活邮件，快去登录邮箱激活账号吧',
   'register_email_verify_location' => '<a href="home.php?mod=spacecp&ac=profile&op=password">重新接收验证邮件</a> <a href="home.php?mod=space&do=home">先去逛逛</a>',
   'register_manual_verify' => '感谢您的注册，站点开启了人工验证注册用户，请等待审核',

@@ -517,7 +517,11 @@ class register_ctl {
 			}
 			$bbrulestxt = nl2br("\n$bbrulestxt\n\n");
 			$dreferer = dreferer();
-
+            /**
+             * reshared
+             */
+            $tags = C::t('common_tag')->fetch_all_by_status(3);
+            /*****/
 			include template($this->template);
 
 		} else {
@@ -622,7 +626,20 @@ class register_ctl {
 					$password = md5(random(10));
 				}
 			}
-
+            /*reshared verify user tag*/
+            if(isset($_POST['user_tag'])){
+                $userTags = C::t('common_tag')->fetch_all_by_status(3);
+                foreach ($userTags as $s => $tag) {
+                    $userTags[$s] = $tag['tagid'];
+                }
+                if(!in_array($_POST['user_tag'], $userTags)){
+                    //未选择用户标签
+                    showmessage('profile_user_tag_useless');
+                }
+            }else{
+                showmessage('profile_user_tag_useless');
+            }
+	        /**/
 			$censorexp = '/^('.str_replace(array('\\*', "\r\n", ' '), array('.*', '|', ''), preg_quote(($this->setting['censoruser'] = trim($this->setting['censoruser'])), '/')).')$/i';
 
 			if($this->setting['censoruser'] && @preg_match($censorexp, $username)) {
@@ -779,7 +796,14 @@ class register_ctl {
 			$init_arr = array('credits' => explode(',', $this->setting['initcredits']), 'profile'=>$profile, 'emailstatus' => $emailstatus);
 
 			C::t('common_member')->insert($uid, $username, $password, $email, $_G['clientip'], $groupinfo['groupid'], $init_arr);
-			if($emailstatus) {
+			/*reshared 公司标签ID为：3*/
+            C::t('common_tagitem')->insert(array(
+                'tagid' => $_GET['user_tag'],
+                'itemid'=> $uid,
+                'idtype'=>'uid'
+            ));
+            /**********/
+            if($emailstatus) {
 				updatecreditbyaction('realemail', $uid);
 			}
 			if($verifyarr) {

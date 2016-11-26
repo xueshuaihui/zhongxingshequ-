@@ -39,7 +39,7 @@ function getInfo($sortId, $pageId, $perpage){
         } elseif($img = C::t('forum_threadimage')->fetch($v['tid'])['attachment']) {
             $data[$k]['image'] = $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'attachment'.DIRECTORY_SEPARATOR.'forum'.DIRECTORY_SEPARATOR.C::t('forum_threadimage')->fetch($v['tid'])['attachment'];
         }else{
-            $data[$k]['image'] = $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].DIRECTORY_SEPARATOR.'static'.DIRECTORY_SEPARATOR.'zte'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'default.png';
+            $data[$k]['image'] = $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].DIRECTORY_SEPARATOR.'static'.DIRECTORY_SEPARATOR.'zte'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'default.jpg';
         }
         $data[$k]['views'] = $v['views'];
         $data[$k]['dateline'] = date('Y-m-d', $v['dateline']);
