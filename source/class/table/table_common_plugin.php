@@ -52,6 +52,13 @@ class table_common_plugin extends discuz_table
 		}
 		DB::delete('common_plugin', DB::field('identifier', $identifier));
 	}
+	
+	public function add_group_power_plugin()
+	{
+	    DB::query("insert %t (available, adminid, name, identifier, description, datatables, directory, copyright, modules, version) values ('1', '1', '圈子加强功能', 'grouppower', '', '', 'grouppower/', 'Wuhaguo Inc.', 'a:1:{i:0;a:11:{s:4:\"name\";s:9:\"g_setting\";s:5:\"param\";s:0:\"\";s:4:\"menu\";s:6:\"设置\";s:3:\"url\";s:0:\"\";s:4:\"type\";s:1:\"3\";s:7:\"adminid\";s:1:\"0\";s:12:\"displayorder\";s:0:\"\";s:8:\"navtitle\";s:0:\"\";s:7:\"navicon\";s:0:\"\";s:10:\"navsubname\";s:0:\"\";s:9:\"navsuburl\";s:0:\"\";}}', '1.0');
+	        ", array($this->_table));
+	    return DB::insert_id();
+	}
 
 }
 

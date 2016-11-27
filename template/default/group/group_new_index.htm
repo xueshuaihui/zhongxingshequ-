@@ -19,13 +19,13 @@
                     <div class="xsh_circle_header">
                         <ul>
                         	<!--{if !empty($grouplist_join)}-->
-                            <li><span class="xsh_circle_hot">我加入的圈子</span></li>
+                            <li><span class="xsh_circle_hot" xid="join">我加入的圈子</span></li>
                             <!--{/if}-->
                             <!--{if !empty($grouplist_manage)}-->
-                            <li><span {if empty($grouplist_join)}class="xsh_circle_hot"{/if}>我管理的圈子</span></li>
+                            <li><span xid="manage" {if empty($grouplist_join)}class="xsh_circle_hot"{/if}>我管理的圈子</span></li>
                             <!--{/if}-->
                          	<!--{if !empty($grouplist_all)}-->
-                            <li><span {if empty($grouplist_manage)}class="xsh_circle_hot"{/if}>全部圈子</span></li>
+                            <li><span xid="all" {if empty($grouplist_manage)}class="xsh_circle_hot"{/if}>全部圈子</span></li>
                             <!--{/if}-->
                         </ul>
                     </div>

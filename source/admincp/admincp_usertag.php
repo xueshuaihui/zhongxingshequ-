@@ -43,6 +43,7 @@ if($operation == '') {
 	if($tagcount) {
 		showsubtitle(array('', 'tagname', 'usernum', 'operation'));
 		$query = C::t('common_tag')->fetch_all_by_status(3, $_GET['srchname'], $start, $lpp);
+		
 		foreach($query as $row) {
 			showtablerow('', array('class="td25"', 'width=100', ''), array(
 					'<input type="checkbox" class="checkbox" name="tagids[]" value="'.$row['tagid'].'" />',

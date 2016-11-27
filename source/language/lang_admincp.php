@@ -4425,6 +4425,7 @@ $lang = array
 	'groups_manage_postcount' => '帖子数',
 	'groups_manage_replycount' => '回复数',
 	'groups_manage_createtime' => '创建时间',
+	'groups_manage_tagname' => '圈子面向用户',
 	'groups_manage_updatetime' => '最后更新时间',
 	'groups_manage_threadcount' => '主题数',
 	'groups_manage_membercount' => '成员数',
