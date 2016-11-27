@@ -978,6 +978,9 @@ EOT;
 			C::t('forum_forum')->validate_level_for_group($_GET['fidarray']);
 			$updateforum = '';
 			foreach($groups as $fid => $group) {
+			    foreach ($_POST['user_tag'][$fid] as $tag_id) {
+			        C::t('common_tagitem')->replace($tag_id, $fid, 'groupid');
+			    }
 				notification_add($group['founderuid'], 'group', 'group_mod_check', array('fid' => $fid, 'groupname' => $group['name'], 'url' => $_G['siteurl'].'forum.php?mod=group&fid='.$fid), 1);
 			}
 		} elseif(submitcheck('delsubmit')) {
@@ -991,6 +994,15 @@ EOT;
 		}
 		cpmsg('group_mod_succeed', 'action=group&operation=mod', 'succeed');
 	}
+	
+	//======================yy================================
+	$user_tag_list = C::t('common_tag')->fetch_all_by_status(3, '', 0, 1000);
+	$select_str = '<select name="user_tag[%s][]" multiple = "multiple">';
+	foreach ($user_tag_list as $tag) {
+	    $select_str .='<option value="'.$tag["tagid"].'">'.$tag["tagname"].'</option>';
+	}
+	$select_str .= '</select>';
+	//======================yy================================
 
 	loadcache('grouptype');
 	$perpage = 50;
@@ -1006,14 +1018,14 @@ EOT;
 			empty($_G['cache']['grouptype']['first'][$group[fup]]) ? $_G['cache']['grouptype']['second'][$group[fup]]['name'] : $_G['cache']['grouptype']['first'][$group[fup]]['name'],
 			"<a href=\"home.php?mod=space&uid=$group[founderuid]\" target=\"_blank\">$group[foundername]</a>",
 			dgmdate($group['dateline'])
-		), TRUE);
+		, sprintf($select_str, $group[fid])), TRUE);
 		$groups .=showtablerow('', array('','colspan="4"'), array('',cplang('group_mod_description').'&nbsp;:&nbsp;'.$group['description']), TRUE);
 	}
 	shownav('group', 'nav_group_mod');
 	showsubmenu('nav_group_mod');
 	showformheader("group&operation=mod");
 	showtableheader('group_mod_wait');
-	showsubtitle(array('', 'groups_manage_name', 'groups_editgroup_category', 'groups_manage_founder', 'groups_manage_createtime'));
+	showsubtitle(array('', 'groups_manage_name', 'groups_editgroup_category', 'groups_manage_founder', 'groups_manage_createtime', 'groups_manage_tagname'));
 	echo $groups;
 	showsubmit('', '', '', '<input type="checkbox" name="chkall" id="chkall" class="checkbox" onclick="checkAll(\'prefix\', this.form, \'fidarray\')" /><label for="chkall">'.cplang('select_all').'</label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="btn" name="validate" value="'.cplang('validate').'" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="btn" name="delsubmit" value="'.cplang('delete').'" onclick="return confirm(\''.cplang('group_mod_delconfirm').'\')" />', $multipage);
 	showtablefooter();
