@@ -73,7 +73,11 @@ class discuz_database {
 		} elseif (is_array($condition)) {
 			$where = self::implode($condition, ' AND ');
 		} else {
-			$where = '1 '.$condition;
+            if(strpos('AND', $condition)){
+                $where = '1 '.$condition;
+            }else{
+                $where = $condition;
+            }
 		}
 		$res = self::query("$cmd $table SET $sql WHERE $where", $unbuffered ? 'UNBUFFERED' : '');
 		return (bool)$res;
