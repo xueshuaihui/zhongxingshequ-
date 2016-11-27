@@ -86,7 +86,7 @@ $banner = explode(',', $_G['setting']['banner_order']);
 $hdzl = getHDZL($_G['setting']['index_hdzl'], 1);
 $subBk = getHDZL($_G['setting']['index_hdzl'], 2);
 
-$expertList = getExpertList($subBk);
+$expertList = getExpertList($subBk, 'credits', $_G['setting']['index_zjph_count']);
 
 $curType = isset($threadTypeId)?$threadTypeId:$threadType[0]['typeid'];
 $curPage = 1;
