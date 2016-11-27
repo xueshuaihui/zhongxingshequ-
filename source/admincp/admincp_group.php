@@ -1002,6 +1002,10 @@ EOT;
 	    $select_str .='<option value="'.$tag["tagid"].'">'.$tag["tagname"].'</option>';
 	}
 	$select_str .= '</select>';
+	$select_str_all = sprintf($select_str, $group[fid]);
+	if (!$_G['setting']['grouppowerpluginidisopen']) {
+	    $select_str_all = '';
+	}
 	//======================yy================================
 
 	loadcache('grouptype');
@@ -1018,14 +1022,18 @@ EOT;
 			empty($_G['cache']['grouptype']['first'][$group[fup]]) ? $_G['cache']['grouptype']['second'][$group[fup]]['name'] : $_G['cache']['grouptype']['first'][$group[fup]]['name'],
 			"<a href=\"home.php?mod=space&uid=$group[founderuid]\" target=\"_blank\">$group[foundername]</a>",
 			dgmdate($group['dateline'])
-		, sprintf($select_str, $group[fid])), TRUE);
+		, $select_str_all), TRUE);
 		$groups .=showtablerow('', array('','colspan="4"'), array('',cplang('group_mod_description').'&nbsp;:&nbsp;'.$group['description']), TRUE);
 	}
 	shownav('group', 'nav_group_mod');
 	showsubmenu('nav_group_mod');
 	showformheader("group&operation=mod");
 	showtableheader('group_mod_wait');
-	showsubtitle(array('', 'groups_manage_name', 'groups_editgroup_category', 'groups_manage_founder', 'groups_manage_createtime', 'groups_manage_tagname'));
+	if (!$_G['setting']['grouppowerpluginidisopen']) {
+	    showsubtitle(array('', 'groups_manage_name', 'groups_editgroup_category', 'groups_manage_founder', 'groups_manage_createtime'));
+	} else {
+	   showsubtitle(array('', 'groups_manage_name', 'groups_editgroup_category', 'groups_manage_founder', 'groups_manage_createtime', 'groups_manage_tagname'));
+	}
 	echo $groups;
 	showsubmit('', '', '', '<input type="checkbox" name="chkall" id="chkall" class="checkbox" onclick="checkAll(\'prefix\', this.form, \'fidarray\')" /><label for="chkall">'.cplang('select_all').'</label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="btn" name="validate" value="'.cplang('validate').'" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="btn" name="delsubmit" value="'.cplang('delete').'" onclick="return confirm(\''.cplang('group_mod_delconfirm').'\')" />', $multipage);
 	showtablefooter();
