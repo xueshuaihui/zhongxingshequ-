@@ -18,6 +18,19 @@
 			<!--{/if}-->
 		</div>
 	<!--{/if}-->
+	
+	<!--{if $_G['setting']['grouppowerpluginidisopen']}-->
+		<div class="ftid">
+			<select name="user_tag[]" id="typeid" width="80" multiple="multiple" style="height:60px;">
+			<!--{loop $user_tag_list $user_tag}-->
+				<!--{if empty($_G['forum']['threadtypes']['moderators'][$typeid]) || $_G['forum']['ismoderator']}-->
+				<option value="$user_tag['tagid']"{if $thread['typeid'] == $typeid || $_GET['typeid'] == $typeid} selected="selected"{/if}><!--{echo strip_tags($user_tag['tagname']);}--></option>
+				<!--{/if}-->
+			<!--{/loop}-->
+			</select>
+		</div>
+	<!--{/if}-->
+	
 	<div class="z">
 		<!--{if $_GET[action] == 'reply' && !empty($_GET['addtrade']) || $_GET[action] == 'edit' && $thread['special'] == 2 && !$postinfo['first']}-->
 			<input name="subject" type="hidden" value="" />

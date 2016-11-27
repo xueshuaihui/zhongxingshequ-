@@ -135,6 +135,14 @@ if(!submitcheck('topicsubmit', 0, $seccodecheck, $secqaacheck)) {
 
 	!isset($attachs['unused']) && $attachs['unused'] = array();
 	!isset($imgattachs['unused']) && $imgattachs['unused'] = array();
+	
+	
+	//======================yy================================
+	global $_G;
+	if ($_G['setting']['grouppowerpluginidisopen']) {
+	    $user_tag_list = C::t('common_tag')->fetch_all_by_status(3, '', 0, 1000);
+	}
+	//======================yy================================
 
 	getgpc('infloat') ? include template('forum/post_infloat') : include template('forum/post');
 
@@ -282,7 +290,9 @@ if(!submitcheck('topicsubmit', 0, $seccodecheck, $secqaacheck)) {
 
 
 
-
+	foreach ($_POST['user_tag'] as $tag_id) {
+	    C::t('common_tagitem')->replace($tag_id, $tid, 'threadid');
+	}
 
 
 
