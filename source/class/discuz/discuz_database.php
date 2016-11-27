@@ -73,10 +73,10 @@ class discuz_database {
 		} elseif (is_array($condition)) {
 			$where = self::implode($condition, ' AND ');
 		} else {
-			$where = $condition;
+			$where = '1 '.$condition;
 		}
 		$res = self::query("$cmd $table SET $sql WHERE $where", $unbuffered ? 'UNBUFFERED' : '');
-		return $res;
+		return (bool)$res;
 	}
 
 	public static function insert_id() {
