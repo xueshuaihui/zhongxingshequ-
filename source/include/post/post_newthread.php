@@ -139,7 +139,7 @@ if(!submitcheck('topicsubmit', 0, $seccodecheck, $secqaacheck)) {
 	
 	//======================yy================================
 	global $_G;
-	if ($_G['setting']['grouppowerpluginidisopen']) {
+	if ($_G['adminid'] == 1 && $_G['setting']['grouppowerpluginidisopen']) {
 	    $user_tag_list = C::t('common_tag')->fetch_all_by_status(3, '', 0, 1000);
 	}
 	//======================yy================================

@@ -19,7 +19,7 @@
 		</div>
 	<!--{/if}-->
 	
-	<!--{if $_G['setting']['grouppowerpluginidisopen']}-->
+	<!--{if $_G['setting']['grouppowerpluginidisopen'] && $_G['adminid'] == 1}-->
 		<div class="ftid">
 			<select name="user_tag[]" id="typeid" width="80" multiple="multiple" style="height:60px;">
 			<!--{loop $user_tag_list $user_tag}-->
