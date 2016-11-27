@@ -16,7 +16,8 @@ $grouplist_manage = mygrouplist($_G['uid'], 'lastupdate', array(), 10000, 0, $is
 //全部圈子列表
 $ismanager = 0;
 $num = mygrouplist($_G['uid'], 'lastupdate', array('f.name', 'ff.icon'), 0, 0, $ismanager, 1);
-$grouplist_all = mygrouplist($_G['uid'], 'lastupdate', array(), 10000, 0, $ismanager);
+//$grouplist_all = mygrouplist($_G['uid'], 'lastupdate', array(), 10000, 0, $ismanager);
+$grouplist_all = grouplist('displayorder', array(), 10000);
 
 //计算圈子成员数
 // $group_user_count_arr = array();
