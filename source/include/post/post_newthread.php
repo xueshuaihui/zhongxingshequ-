@@ -289,12 +289,20 @@ if(!submitcheck('topicsubmit', 0, $seccodecheck, $secqaacheck)) {
 	$pid = $modthread->pid;
 
 
-
+    //==============================yy======================================
+    //管理员的帖子打标签
 	foreach ($_POST['user_tag'] as $tag_id) {
 	    C::t('common_tagitem')->replace($tag_id, $tid, 'threadid');
 	}
-
-
+	//普通用户的帖子打标签
+	if ($_G['setting']['grouppowerpluginidisopen']) {
+	    $group_tag_list = C::t('common_tagitem')->select(0, $_G['fid'], 'groupid');
+	    
+	    foreach ($group_tag_list as $tagitem) {
+	        C::t('common_tagitem')->replace($tagitem['tagid'], $tid, 'threadid');
+	    }
+	}
+	//==============================yy======================================
 
 
 
