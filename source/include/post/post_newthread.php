@@ -291,8 +291,10 @@ if(!submitcheck('topicsubmit', 0, $seccodecheck, $secqaacheck)) {
 
     //==============================yy======================================
     //管理员的帖子打标签
-	foreach ($_POST['user_tag'] as $tag_id) {
-	    C::t('common_tagitem')->replace($tag_id, $tid, 'threadid');
+	if ($_G['setting']['grouppowerpluginidisopen']) {
+	   foreach ($_POST['user_tag'] as $tag_id) {
+	       C::t('common_tagitem')->replace($tag_id, $tid, 'threadid');
+	   }
 	}
 	//普通用户的帖子打标签
 	if ($_G['setting']['grouppowerpluginidisopen']) {

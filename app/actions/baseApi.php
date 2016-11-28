@@ -4,7 +4,7 @@ use discuz\request;
 /**
  * @SWG\Swagger(
  *     schemes={"http","https"},
- *     host="local.discuz.com/app.php?action=",
+ *     host="zte.rmbplus.com/app.php?action=",
  *     basePath="/",
  *     @SWG\Info(
  *         version="不确定",
