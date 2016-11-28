@@ -29,15 +29,19 @@
 <!--</ul>-->
 <form action="" method="" target="" name="" class="xsh_circle_form">
 	<select name="主题" id="12">
-		<option value="www.baidu.com">baidu</option>
-		<option value="www.baidu.com">xinlang</option>
-		<option value="www.baidu.com">全部主题</option>
-	</select>
-	<select name="排序" id="32">
-		<option value="www.baidu.com">全部主题</option>
-		<option value="www.baidu.com">全部主题</option>
-		<option value="www.baidu.com">全部主题</option>
-	</select>
+                            <option value="forum.php?mod=forumdisplay&action=list&fid={$_G[fid]}{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" >{lang all}{lang forum_threads}</option>
+							<option value="forum.php?mod=forumdisplay&action=list&fid={$_G[fid]}&filter=specialtype&specialtype=poll$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['specialtype'] == 'poll'}selected=selected{/if}>{lang thread_poll}</option>
+							<option value="forum.php?mod=forumdisplay&action=list&fid={$_G[fid]}&filter=specialtype&specialtype=trade$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['specialtype'] == 'trade'}selected=selected{/if}>{lang thread_trade}</option>
+							<option value="forum.php?mod=forumdisplay&action=list&fid={$_G[fid]}&filter=specialtype&specialtype=reward$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['specialtype'] == 'reward'}selected=selected{/if}>{lang thread_reward}</option>
+							<option value="forum.php?mod=forumdisplay&action=list&fid={$_G[fid]}&filter=specialtype&specialtype=activity$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['specialtype'] == 'activity'}selected=selected{/if}>{lang thread_activity}</option>
+							<option value="forum.php?mod=forumdisplay&action=list&fid={$_G[fid]}&filter=specialtype&specialtype=debate$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['specialtype'] == 'debate'}selected=selected{/if}>{lang thread_debate}</option>
+		
+                        </select>
+                        <select name="排序" id="32">
+                        <option value="forum.php?mod=forumdisplay&action=list&fid={$_G[fid]}&filter=author&orderby=dateline$forumdisplayadd[author]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['orderby'] == 'dateline'}selected='selected'{/if}>{lang list_post_time}</option>
+				        <option value="forum.php?mod=forumdisplay&action=list&fid={$_G[fid]}&filter=reply&orderby=replies$forumdisplayadd[reply]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['orderby'] == 'replies'}selected='selected'{/if}>{lang replies}</option>
+				        <option value="forum.php?mod=forumdisplay&action=list&fid={$_G[fid]}&filter=reply&orderby=views$forumdisplayadd[view]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['orderby'] == 'views'}selected='selected'selected='selected'{/if}>{lang views}</option>
+                        </select>
 </form>
 <div id="threadlist" class="tl bm" style="position: relative;">
 	<!--<div class="th">
