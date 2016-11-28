@@ -4,7 +4,6 @@ require_once 'baseApi.php';
 require_once RESPOSITORY.'authRepository.php';
 
 class authApi extends baseApi {
-    protected $ucenter;
     protected $tool;
     public function __construct() {
         parent::__construct();
@@ -13,7 +12,7 @@ class authApi extends baseApi {
     /**
      * @SWG\Post(
      *   path="auth-login",
-     *   tags={"login"},
+     *   tags={"oauth"},
      *   summary="登录",
      *   description="用户登录,登录成功后将返回数据为到期的时间戳，否则将会提示错误，并返回错误代码",
      *   operationId="login",
@@ -39,7 +38,7 @@ class authApi extends baseApi {
     /**
      * @SWG\Post(
      *   path="auth-register",
-     *   tags={"register"},
+     *   tags={"oauth"},
      *   summary="注册",
      *   description="用户注册功能, 此接口前，请先获取注册页面的接口",
      *   operationId="register",
@@ -70,9 +69,9 @@ class authApi extends baseApi {
     }
 
     /**
-     * @SWG\Post(
+     * @SWG\Get(
      *   path="auth-pregister",
-     *   tags={"pregister"},
+     *   tags={"oauth"},
      *   summary="注册之前，用于获取tagid",
      *   description="获取注册页面的接口",
      *   operationId="pregister",
@@ -88,7 +87,7 @@ class authApi extends baseApi {
     /**
      * @SWG\Post(
      *   path="auth-changPassword",
-     *   tags={"changPassword"},
+     *   tags={"oauth"},
      *   summary="更改用户登录密码",
      *   description="更改用户登录密码",
      *   operationId="changPassword",
@@ -105,14 +104,74 @@ class authApi extends baseApi {
         $uid = $this->request->post('uid');
         $oldPassword = $this->request->post('oldPassword');
         $newPassword = $this->request->post('newPassword');
-        return $this->tool->changPassword($uid, $oldPassword, $newPassword);
+        $identy = $this->tool->identityPassword($uid, $oldPassword);
+        if(!$identy){
+            return 10008;
+        }
+        return $this->tool->changPassword($uid, $newPassword);
     }
 
-    private function checkParam ($params = []) {
-        foreach ($params as $param){
-            if(is_null($this->request->post($param))){
-                return 10001;//缺少参数
-            }
+    /**
+     * @SWG\Post(
+     *   path="auth-resetPassword",
+     *   tags={"oauth"},
+     *   summary="找回用户登录密码",
+     *   description="找回用户登录密码",
+     *   operationId="resetPassword",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="phone", in="formData", description="手机号", required=true, type="string"),
+     *     @SWG\Parameter(name="code", in="formData", description="验证码", required=true, type="string"),
+     *     @SWG\Parameter(name="newPassword", in="formData", description="新密码", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function resetPassword() {
+        $this->checkParam(['phone', 'code', 'newPassword']);
+        $phone = $this->request->post('phone');
+        $code = $this->request->post('code');
+        $newPassword = $this->request->post('newPassword');
+        //验证验证码是否正确
+        $serverCode = $this->request->session('reset.'.$phone);
+        if(!$serverCode || $serverCode != $code){
+            return 10010; //验证码错误
         }
+        //验证手机号是否存在,存在则返回用户
+        $user = $this->tool->checkHadPhoneReturnUser($phone);
+        if(!$user){
+            return 10009; //该手机没有绑定任何用户
+        }
+        return $this->tool->changPassword($user['uid'], $newPassword);
+    }
+
+    /**
+     * @SWG\Post(
+     *   path="auth-blind",
+     *   tags={"oauth"},
+     *   summary="绑定手机号",
+     *   description="绑定手机号",
+     *   operationId="blind",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Parameter(name="phone", in="formData", description="手机号", required=true, type="string"),
+     *     @SWG\Parameter(name="code", in="formData", description="验证码", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function blind() {
+        $this->checkParam(['uid', 'phone', 'code']);
+        $uid = $this->request->post('uid');
+        $phone = $this->request->post('phone');
+        $code = $this->request->post('code');
+        $serverCode = $this->request->session('blind.'.$phone);
+        if(!$serverCode || $serverCode != $code){
+            return 10010; //验证码错误
+        }
+        $user = $this->tool->getUserProfile(['mobile'=>$phone]);
+        if($user){
+            return 10011; //该手机号已被绑定其他账号
+        }
+        return (bool) $this->tool->updateUserProfile($uid, ['mobile'=>$phone]);
     }
 }

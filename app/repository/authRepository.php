@@ -1,19 +1,15 @@
 <?php
-require_once MODEL.'mdbModel.php';
+require_once 'baseRepository.php';
 
-class authRepository extends mdbModel {
-    public function __construct() {
-        parent::__construct('ucenter_member');
-    }
+class authRepository extends baseRepository {
 
     public function verifyIdentity($username, $password) {
-        $table = $this->table('ucenter_members');
-        $ideUsername = $table->where(['username' => $username])->find();
-        if(!$ideUsername){
+        $user = $this->getUserByUsername($username);
+        if(!$user){
             return 10002; //用户名不存在
         }
-        $salt = $ideUsername['salt'];
-        if(md5(md5($password).$salt) !== $ideUsername['password']){
+        $identy = $this->identityPassword($user['uid'], $password);
+        if(!$identy){
             return 10003; //密码错误
         }
         return true;
@@ -75,32 +71,34 @@ class authRepository extends mdbModel {
         return $this->table('common_tag')->where('status', 3)->select();
     }
 
-    public function changPassword($uid, $oldPass, $newPass) {
-        $user = $this->table('ucenter_members')->where('uid', $uid)->find();
-        if(!$user){
+    public function changPassword($uid, $newPass) {
+        $salt = $this->randNum();
+        $newPass = md5(md5($newPass).$salt);
+        $res = $this->table('ucenter_members')->where('uid', $uid)->update(['password'=>$newPass, 'salt'=>$salt]);
+        if(!$res){
             return false;
         }
-        if(md5(md5($oldPass).$user['salt']) !== $user['password']){
-            return 10008; //密码错误
-        }
-        $newPass = md5(md5($newPass).$user['salt']);
-        $res = $this->table('ucenter_members')->where('uid', $uid)->update(['password'=>$newPass]);
-        if(!$res){
-            return 10007;
-        }
-        return $this->table('common_member')->where('uid', $uid)->update(['password'=>$newPass]);
+        return (bool) $this->table('common_member')->where('uid', $uid)->update(['password'=>$newPass]);
     }
 
-    private function table($table){
-        return parent::model($table);
+    public function getUserByUsername($username, $from = 'ucenter_members') {
+        return $this->table($from)->where('username', $username)->find();
     }
 
-    private function randNum ($size = 6) {
-        $result = '';
-        $randString = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
-        for($i = 0; $i < $size; $i++){
-            $result .= $randString{rand(0, strlen($randString))};
-        }
-        return $result;
+    public function identityPassword($uid, $password) {
+        $user = $this->table('ucenter_members')->where('uid', $uid)->find();
+        return (md5(md5($password).$user['salt']) == $user['password']);
+    }
+
+    public function checkHadPhoneReturnUser($phone) {
+        return $this->table('common_member_profile')->where('mobile', $phone)->find();
+    }
+
+    public function updateUserProfile($uid, $newdata = []) {
+        return $this->table('common_member_profile')->where('uid', $uid)->update($newdata);
+    }
+
+    public function getUserProfile($where = []) {
+        return $this->table('common_member_profile')->where($where)->find();
     }
 }

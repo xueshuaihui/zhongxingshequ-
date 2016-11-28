@@ -293,7 +293,24 @@ class table_forum_forum extends discuz_table
 		if($getcount) {
 			return DB::result_first("SELECT count(*) FROM ".DB::table($this->_table)." f $useindex WHERE".($fids ? " $fids AND " : '')." f.type='sub' AND f.status=3 $levelsql");
 		}
-		return DB::fetch_all("SELECT $fieldsql FROM ".DB::table($this->_table)." f $useindex LEFT JOIN ".DB::table("forum_forumfield")." ff ON ff.fid=f.fid WHERE".($fids ? " $fids AND " : '')." f.type='sub' AND f.status=3 $levelsql $orderby $limitsql");
+		
+		global $_G;
+		if ($_G['setting']['grouppowerpluginidisopen'] && $_G['adminid'] != 1) {
+		    //获取当前用户的用户标签
+		    $tag_list = C::t('common_tagitem')->select(0, $_G['uid'], 'uid');
+		    $tag_ids = array();
+		    foreach ($tag_list as $tag) {
+		        $tag_ids[] = $tag['tagid'];
+		    }
+		    
+		    $fieldsql = 'distinct f.fid, '.$fieldsql;
+		    $where_str = " and (".(count($tag_ids) ? "ct.tagid in ('".implode(',', $tag_ids)."') or" : "")." ct.tagid IS NULL)";
+		    $list = DB::fetch_all("SELECT $fieldsql FROM ".DB::table($this->_table)." f $useindex LEFT JOIN ".DB::table("forum_forumfield")." ff ON ff.fid=f.fid LEFT JOIN ".DB::table("common_tagitem")." ct ON ff.fid=ct.itemid and ct.idtype='groupid' WHERE".($fids ? " $fids AND " : '')." f.type='sub' AND f.status=3 $levelsql $where_str $orderby $limitsql");
+		    
+		    return $list;
+		} else {
+		    return DB::fetch_all("SELECT $fieldsql FROM ".DB::table($this->_table)." f $useindex LEFT JOIN ".DB::table("forum_forumfield")." ff ON ff.fid=f.fid WHERE".($fids ? " $fids AND " : '')." f.type='sub' AND f.status=3 $levelsql $orderby $limitsql");
+		}
 	}
 
 	function fetch_table_struct($tablename, $result = 'FIELD') {
