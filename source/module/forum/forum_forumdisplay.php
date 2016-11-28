@@ -34,6 +34,35 @@ if ($mod == 'new_index') {
     $_G['fid'] = $yy_fids[0];
     $_GET['fid'] = $yy_fids[0];
     $_G['forum']['fid'] = $yy_fids[0];
+} else {
+    //热门圈子
+    require_once libfile('function/group');
+    $topgrouplist = grouplist('activity', array('f.commoncredits', 'ff.membernum', 'ff.icon'), 10);
+    //推荐圈子
+    $setting = &$_G['setting'];
+    $group_recommend = $setting['group_recommend'] ? dunserialize($setting['group_recommend']) : '';
+    //=============================圈子加强功能==================
+    //获取当前用户的用户标签
+    $user_tag_list = C::t('common_tagitem')->select(0, $_G['uid'], 'uid');
+    $user_tag_ids = array();
+    foreach ($user_tag_list as $user_tag) {
+        $user_tag_ids[] = $user_tag['tagid'];
+    }
+    if ($_G['setting']['grouppowerpluginidisopen'] && $_G['adminid'] != 1) {
+        foreach ($group_recommend as &$group) {
+            $group_tag_list = C::t('common_tagitem')->select(0, $group['fid'], 'groupid');
+            $group_tag_ids = array();
+            foreach ($group_tag_list as $group_tag) {
+                $group_tag_ids[] = $group_tag['tagid'];
+            }
+    
+            if (empty(array_intersect($group_tag_ids, $user_tag_ids))) {
+                unset($group);
+            }
+        }
+    
+    }
+    //=============================圈子加强功能====================
 }
 //===============================================yy-end==============================================
 
