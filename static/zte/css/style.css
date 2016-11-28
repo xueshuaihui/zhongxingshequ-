@@ -21,7 +21,7 @@
 .xsh_user_logobox{width: 40px;height: 40px;border-radius: 50%;overflow: hidden;float: left;}
 .xsh_user_logobox>img{width: 100%;height: 100%;border-radius: 50%;}
 .xsh_user_namebox{width: 100px;float: left;font-size: 16px;line-height: 40px;margin-left: 10px;position: relative;}
-.xsh_xiala{width: 17px;height: 11px;position: absolute;right: 0;top: 14px;}
+.xsh_xiala{width: 17px;height: 11px;position: absolute;right: 0;top: 15px;}
 .xsh_xiala>img{width: 100%;}
 .xsh_user_namebox:hover{cursor: pointer;}
 .xsh_user_data{width: 250px;height: auto;position: absolute;left: -130px;top: 40px;background: #ffffff;padding: 20px 15px;z-index: 999;border: 2px solid #5597ED;display: none;border-radius: 10px;}
@@ -128,7 +128,7 @@
 .xsh_expert_textarea>textarea{border: none;font-size: 12px;width: 100%;}
 .xsh_expert_form_submit{font-size: 22px;color: #ffffff;background: #5597ED;position: relative;left: 80%;width: 130px;height: 50px;text-align: center;line-height: 50px;border-radius: 10px;display: block;margin-top: 20px;}
 .xsh_input_submit{width: 130px;height: 50px;background: none;border: none;}
-.xsh_close{width: 20px;height: 20px;position: absolute;top: 20px;right: 30px;background: url("/static/zte/images/close.jpg") no-repeat center;background-size: 100% 100%; cursor: pointer;}
+.xsh_close{width: 20px;height: 20px;position: absolute;top: 20px;right: 30px;background: url("/static/zte/images/close.jpg") no-repeat center;background-size: 100% 100%;}
 /*积分兑换*/
 .xsh_integral{font-size: 14px;line-height: 35px;text-align: center;color: #666666;}
 .xsh_header_more{position: absolute;right: 10px;top: 0;}
@@ -186,3 +186,23 @@
 .morecircle_mask{width: 100%;height: 100%;background: rgba(80,80,80,0.7);position: fixed;top: 0;left: 0;z-index: 99;display: none;}
 .morecircle_box{width: 960px;max-height: 500px;overflow: hidden;border-radius: 10px;background: #ffffff;padding: 30px 20px;border: 2px solid #5597ED;position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);-webkit-transform: translate(-50%,-50%);-o-transform: translate(-50%,-50%);-ms-transform: translate(-50%,-50%);-mso-transform: translate(-50%,-50%);-moz-transform: translate(-50%,-50%);}
 .morecircle{width: 108%;height: auto;max-height: 500px;overflow: auto;overflow-y: auto;overflow-x: hidden;}
+/*帖子详情*/
+.xsh_details_circlebox{width: 90%;height: auto;margin: auto;}
+.xsh_details_circlebox>.xsh_circle_logobox{width: 100%;margin: 0;}
+.xsh_details_circlebox>.xsh_circle_logobox{height: 100px;margin-bottom: 30px;}
+.xsh_details_circlebox>.xsh_circle_logobox>.xsh_circle_logo{width: 70px;height: 70px;}
+.xsh_details_circlebox>.xsh_circle_logobox>.xsh_circle_card{width: auto;max-width: 450px;overflow: hidden;}
+.xsh_details_circlebox>.xsh_circle_logobox>.xsh_circle_card>.xsh_circle_name{height: 30%;}
+.xsh_details_circlebox>.xsh_circle_logobox>.xsh_circle_card>.xsh_circle_data{height: 35%;line-height: normal;}
+.xsh_details_circlebox>.xsh_circle_logobox>.xsh_circle_card>.xsh_circle_data>.xsh_circle_num{width: auto;height: 100%;font-size: 14px;color: #999999}
+.xsh_details_circlebtn{float: right;}
+.xsh_details_circlebtn>a>.xsh_details_circlebtnbox{width: 80px;height: 30px;background: #5597ED;color: #ffffff;font-size: 14px;line-height: 30px;text-align: center;}
+.xsh_details_circle_quit{text-align: center;margin-top: 20px;}
+.xsh_details_circle_quit>a{color: #5597ED;}
+.xsh_detcir_theme_box{}
+.xsh_detcir_theme{font-size: 16px;}
+.xsh_detcir_theme>span,.xsh_detcir_theme>ul{float: left;}
+.xsh_detcir_theme>span{font-weight: 900;margin-right: 10px;}
+.xsh_detcir_theme>ul>a{float: left;margin-right: 15px;}
+.xsh_detcir_theme_btnbox{float: right;margin-top: -5px;}
+.xsh_detcir_theme_btnbox>a>span{display: block;padding: 5px 10px;float: left;background: #5597ED;color: #ffffff;margin-right: 5px;}
