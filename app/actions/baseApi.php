@@ -18,4 +18,17 @@ class baseApi {
     public function __construct() {
         $this->request = new request();
     }
+    protected function checkParam ($params, $method = 'post') {
+        if(is_array($params)){
+            foreach ($params as $param){
+                if(is_null($this->request->$method($param))){
+                    return 10001;//缺少参数
+                }
+            }
+        }elseif(is_string($params)){
+            if(is_null($this->request->$method($params))){
+                return 10001;//缺少参数
+            }
+        }
+    }
 }
