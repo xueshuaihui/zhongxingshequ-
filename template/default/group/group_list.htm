@@ -90,6 +90,12 @@
 									<a href="" class="xsh_user_logo">
 										<img src="http://img.dahe.cn/qf/2016/11/20/1941MZCD59.jpg" alt="">
 									</a>
+									<div class="xsh_user_groupdata">
+										<p><span class="xsh_user_group_title">用户名：</span><span>用户名</span></p>
+										<p><span class="xsh_user_group_title">积分：</span><span>4234324</span></p>
+										<p><span class="xsh_user_group_title">主题：</span><span>4234324</span></p>
+										<p><span class="xsh_user_group_title">回复：</span><span>4234324</span></p>
+									</div>
 								</td>
 								<!--{if $_G['forum']['ismoderator']}-->
 								<td class="o">
@@ -204,16 +210,14 @@
 	</div>
 </div>
 {if helper_access::check_module('group')}
-<div class="bm bw0 pgs cl">
+<div class="bm bw0 pgs cl xsh_pages">
 	$multipage
 	<!--<span {if $_G[setting][visitedforums]}id="visitedforums" onmouseover="$('visitedforums').id = 'visitedforumstmp';this.id = 'visitedforums';showMenu({'ctrlid':this.id})"{/if} class="pgb y"><a href="forum.php?mod=group&fid=$_G[fid]">{lang return_index}</a></span>
 	<a href="javascript:;" id="newspecialtmp" onmouseover="$('newspecial').id = 'newspecialtmp';this.id = 'newspecial';showMenu({'ctrlid':this.id})" onclick="showWindow('newthread', 'forum.php?mod=post&action=newthread&fid=$_G[fid]')" title="{lang send_posts}"><img src="{IMGDIR}/pn_post.png" alt="{lang send_posts}" /></a>-->
 	<!--{hook/forumdisplay_postbutton_bottom}-->
 </div>
 
-{if $_G['setting']['fastpost']}
-	{template forum/forumdisplay_fastpost}
-{/if}
+
 
 <!--{if $_G['group']['allowpost'] && ($_G['group']['allowposttrade'] || $_G['group']['allowpostpoll'] || $_G['group']['allowpostreward'] || $_G['group']['allowpostactivity'] || $_G['group']['allowpostdebate'] || $_G['setting']['threadplugins'] || $_G['forum']['threadsorts'])}-->
 	<ul class="p_pop" id="newspecial_menu" style="display: none">
@@ -233,3 +237,5 @@
 	</ul>
 <!--{/if}-->
 <!--{/if}-->
+<script src="/static/zte/js/jquery-1.11.3.min.js"></script>
+<script src="/static/zte/js/group.js"></script>
