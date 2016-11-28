@@ -1,0 +1,330 @@
+<!--{template common/header}-->
+
+    <style>
+        .xsh_con_left{background: none;padding: 0;}
+        .xsh_page_box>ul>a>li{width: 30px;height: 30px;text-align: center;line-height: 30px;font-size: 16px;border: 1px solid #5597ED;border-radius: 5px;float: left;margin-right: 2px;}
+    	.xsh_page_box>ul>a>.xsh_pages_hot{border-color: #ffffff;}
+
+    </style>
+    
+    
+<div class="xsh_box">
+    <div class="xsh_box">
+    <!--con-->
+    <div class="xsh_content_box">
+        <div class="xsh_con_left">
+            <div class="xsh_tab xsh_circle_tabbox">
+                <!--我加入的圈子-->
+                <div class="xsh_circle_box">
+                    <div class="xsh_circle_header">
+                        <ul>
+                        	<!--{if !empty($grouplist_join)}-->
+                            <li><span class="xsh_circle_hot" xid="join">我加入的圈子</span></li>
+                            <!--{/if}-->
+                            <!--{if !empty($grouplist_manage)}-->
+                            <li><span xid="manage" {if empty($grouplist_join)}class="xsh_circle_hot"{/if}>我管理的圈子</span></li>
+                            <!--{/if}-->
+                         	<!--{if !empty($grouplist_all)}-->
+                            <li><span xid="all" {if empty($grouplist_manage) && empty($grouplist_join)}class="xsh_circle_hot"{/if}>全部圈子</span></li>
+                            <!--{/if}-->
+                        </ul>
+                    </div>
+                    <!--{if !empty($grouplist_join)}-->
+                    <div class="xsh_circle_content xsh_circle_tabcon xsh_circle_tabconnow">
+                        <ul>
+                            <!--圈子-->
+                            <!--{loop $grouplist_join $group}-->
+                            <li>
+                                <div class="xsh_circle_logobox">
+                                    <div class="xsh_circle_logo">
+                                        <a href="">
+                                            <img src="$group['icon']" alt="加载不成功">
+                                        </a>
+                                    </div>
+                                    <div class="xsh_circle_card">
+                                        <div class="xsh_circle_name"><a href="forum.php?mod=forumdisplay&action=list&fid=$group[fid]">$group['name']</a></div>
+                                        <div class="xsh_circle_data">
+                                            <div class="xsh_circle_num">成员:<span>$group['membernum']</span></div>
+                                            <div class="xsh_circle_cardnum">帖子:<span>$group['posts']</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+						<!--{/loop}-->
+                        </ul>
+                    </div>
+                    <!--{/if}-->
+                    <!--{if !empty($grouplist_manage)}-->
+                    <div class="xsh_circle_content xsh_circle_tabcon {if empty($grouplist_join)}xsh_circle_tabconnow{/if}">
+                        <ul>
+                            <!--圈子-->
+                            <!--{loop $grouplist_manage $group}-->
+                            <li>
+                                <div class="xsh_circle_logobox">
+                                    <div class="xsh_circle_logo">
+                                        <a href="">
+                                            <img src="$group['icon']" alt="加载不成功">
+                                        </a>
+                                    </div>
+                                    <div class="xsh_circle_card">
+                                        <div class="xsh_circle_name"><a href="forum.php?mod=forumdisplay&action=list&fid=$group[fid]">$group['name']</a></div>
+                                        <div class="xsh_circle_data">
+                                            <div class="xsh_circle_num">成员:<span>$group['membernum']</span></div>
+                                            <div class="xsh_circle_cardnum">帖子:<span>$group['posts']</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--{/loop}-->
+                        </ul>
+                    </div>
+                    <!--{/if}-->
+                    <!--{if !empty($grouplist_all)}-->
+                    <div class="xsh_circle_content xsh_circle_tabcon {if empty($grouplist_manage) && empty($grouplist_join)}xsh_circle_tabconnow{/if}">
+                        <ul>
+                            <!--圈子-->
+                            <!--{loop $grouplist_all $group}-->
+                            <li>
+                                <div class="xsh_circle_logobox">
+                                    <div class="xsh_circle_logo">
+                                        <a href="">
+                                            <img src="$group['icon']" alt="加载不成功">
+                                        </a>
+                                    </div>
+                                    <div class="xsh_circle_card">
+                                        <div class="xsh_circle_name"><a href="forum.php?mod=forumdisplay&action=list&fid=$group[fid]">$group['name']</a></div>
+                                        <div class="xsh_circle_data">
+                                            <div class="xsh_circle_num">成员:<span>$group['membernum']</span></div>
+                                            <div class="xsh_circle_cardnum">帖子:<span>$group['posts']</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--{/loop}-->
+                        </ul>
+                    </div>
+                    <!--{/if}-->
+               
+                  
+                    
+                </div>
+                
+                <!--more-->
+                <div class="xsh_more">
+                    <a href="javascript:;" onclick="morecircle()"><span>MORE</span></a>
+                </div>
+                
+            </div>
+            
+            <!--更多-->
+            <div class="morecircle_mask">
+                <div class="morecircle_box">
+                    <div class="xsh_close morecircle_close" onclick="closeMask()"></div>
+                    <div class="morecircle">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="xsh_circle_content">
+                <div class="xsh_circle_conbox">
+                    <form action="ztgroup.php" method="GET"  class="xsh_circle_form">
+                        <select name="主题" id="12">
+                            <option value="ztgroup.php{if $_GET['archiveid']}?archiveid={$_GET['archiveid']}{/if}" >{lang all}{lang forum_threads}</option>
+							<option value="ztgroup.php?filter=specialtype&specialtype=poll$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['specialtype'] == 'poll'}selected=selected{/if}>{lang thread_poll}</option>
+							<option value="ztgroup.php?filter=specialtype&specialtype=trade$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['specialtype'] == 'trade'}selected=selected{/if}>{lang thread_trade}</option>
+							<option value="ztgroup.php?filter=specialtype&specialtype=reward$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['specialtype'] == 'reward'}selected=selected{/if}>{lang thread_reward}</option>
+							<option value="ztgroup.php?filter=specialtype&specialtype=activity$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['specialtype'] == 'activity'}selected=selected{/if}>{lang thread_activity}</option>
+							<option value="ztgroup.php?filter=specialtype&specialtype=debate$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['specialtype'] == 'debate'}selected=selected{/if}>{lang thread_debate}</option>
+		
+                        </select>
+                        <select name="排序" id="32">
+                        <option value="ztgroup.php?filter=author&orderby=dateline$forumdisplayadd[author]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['orderby'] == 'dateline'}selected='selected'{/if}>{lang list_post_time}</option>
+				        <option value="ztgroup.php?filter=reply&orderby=replies$forumdisplayadd[reply]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['orderby'] == 'replies'}selected='selected'{/if}>{lang replies}</option>
+				        <option value="ztgroup.php?filter=reply&orderby=views$forumdisplayadd[view]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['orderby'] == 'views'}selected='selected'selected='selected'{/if}>{lang views}</option>
+                        </select>
+                    </form>
+                    <!--list-->
+                    <div class="xsh_circle_list">
+                        <ul>
+                        	<!--{if $_G['forum_threadcount']}-->
+                        	<!--{loop $_G['forum_threadlist'] $key $thread}-->
+                            <li>
+                                <div class="xsh_cirlis_logo">
+                                    <a href="">
+                                        <img src="http://img.dahe.cn/qf/2016/11/20/1941MZCD59.jpg" alt="加载不成功">
+                                    </a>
+                                </div>
+                                <div class="xsh_cirlis_name">
+                                	<!--{if $thread[folder] == 'lock'}-->
+										<img src="{IMGDIR}/folder_lock.gif" />
+									<!--{elseif $thread['special'] == 1}-->
+										<img src="{IMGDIR}/pollsmall.gif" alt="{lang thread_poll}" />
+									<!--{elseif $thread['special'] == 2}-->
+										<img src="{IMGDIR}/tradesmall.gif" alt="{lang thread_trade}" />
+									<!--{elseif $thread['special'] == 3}-->
+										<img src="{IMGDIR}/rewardsmall.gif" alt="{lang thread_reward}" />
+									<!--{elseif $thread['special'] == 4}-->
+										<img src="{IMGDIR}/activitysmall.gif" alt="{lang thread_activity}" />
+									<!--{elseif $thread['special'] == 5}-->
+										<img src="{IMGDIR}/debatesmall.gif" alt="{lang thread_debate}" />
+									<!--{elseif in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
+										<img src="{IMGDIR}/pin_$thread[displayorder].gif" alt="$_G[setting][threadsticky][3-$thread[displayorder]]" />
+									<!--{else}-->
+										<img src="{IMGDIR}/folder_$thread[folder].gif" />
+									<!--{/if}-->
+                                    <h3 class="xsh_cirlis_cirname"><a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"$thread[highlight] class="xst">$thread[subject]</a></h3>
+                                    
+                                    <!--{if $thread['readperm']}--> - [{lang readperm} <span class="xw1">$thread[readperm]</span>]<!--{/if}-->
+									<!--{if $thread['price'] > 0}-->
+										<!--{if $thread['special'] == '3'}-->
+										- <span style="color: #C60">[{lang thread_reward}<span class="xw1">$thread[price]</span> {$_G[setting][extcredits][$_G['setting']['creditstransextra'][2]][unit]}{$_G[setting][extcredits][$_G['setting']['creditstransextra'][2]][title]}]</span>
+										<!--{else}-->
+										- [{lang price} <span class="xw1">$thread[price]</span> {$_G[setting][extcredits][$_G['setting']['creditstransextra'][1]][unit]}{$_G[setting][extcredits][$_G['setting']['creditstransextra'][1]][title]}]
+										<!--{/if}-->
+									<!--{elseif $thread['special'] == '3' && $thread['price'] < 0}-->
+										- <span style="color: #269F11">[{lang reward_solved}]</span>
+									<!--{/if}-->
+									<!--{if $thread['attachment'] == 2}-->
+										<img src="{STATICURL}image/filetype/image_s.gif" alt="{lang attach_img}" align="absmiddle" />
+									<!--{elseif $thread['attachment'] == 1}-->
+										<img src="{STATICURL}image/filetype/common.gif" alt="{lang attachment}" align="absmiddle" />
+									<!--{/if}-->
+									<!--{if $thread['displayorder'] == 0}-->
+										<!--{if $thread[recommendicon]}-->
+											<img src="{IMGDIR}/recommend_$thread[recommendicon].gif" align="absmiddle" alt="recommend" title="{lang thread_recommend} $thread[recommends]" />
+										<!--{/if}-->
+										<!--{if $thread[heatlevel]}-->
+											<img src="{IMGDIR}/hot_$thread[heatlevel].gif" align="absmiddle" alt="heatlevel" title="$thread[heatlevel] {lang heats}" />
+										<!--{/if}-->
+										<!--{if $thread['digest'] > 0}-->
+											<img src="{IMGDIR}/digest_$thread[digest].gif" align="absmiddle" alt="digest" title="{lang thread_digest} $thread[digest]" />
+										<!--{/if}-->
+										<!--{if $thread['rate'] > 0}-->
+											<img src="{IMGDIR}/agree.gif" align="absmiddle" alt="agree" title="{lang rate_credit_add}" />
+										<!--{/if}-->
+									<!--{/if}-->
+									<!--{if $thread[multipage]}-->
+										<span class="tps">$thread[multipage]</span>
+									<!--{/if}-->
+                                    
+                                    <p><span>
+                                    	<!--{if $thread['authorid'] && $thread['author']}-->
+										<a href="home.php?mod=space&uid=$thread[authorid]">$thread[author]</a><!--{if !empty($verify[$thread['authorid']])}-->$verify[$thread[authorid]]<!--{/if}-->
+									<!--{else}-->
+										<!--{if $_G['forum']['ismoderator']}-->
+											<a href="home.php?mod=space&uid=$thread[authorid]">{lang anonymous}</a>
+										<!--{else}-->
+											{lang anonymous}
+										<!--{/if}-->
+									<!--{/if}-->
+                                    	
+                                    </span> | <span>
+                                    	$thread[dateline]
+                                    </span> | <span>核心网资料社区</span> </p>
+                                </div>
+                                <div class="xsh_cirlis_data">
+                                    <span class="liuyanl">$thread[allreplies]</span>
+                                    <span class="liulanl">$thread[views]</span>
+                                </div>
+                            </li>
+                            <!--{/loop}-->
+                            <!--{else}-->
+								<p class="emp">{lang forum_nothreads}</p>
+							<!--{/if}-->	
+                            
+                            
+                        </ul>
+                    </div>
+                    <!--页码-->
+                    <div class="xsh_page_box">
+                        <ul>
+                            {$page_str}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="xsh_con_right">
+            <div class="xsh_interaction">
+                <a href="" target="">
+                    <div class="xsh_inter_cir_btn">
+                        <span class="xsh_create_post">我要发帖</span>
+                    </div>
+                </a>
+                <a href="forum.php?mod=group&action=create">
+                    <div class="xsh_inter_cir_btn">
+                        <span class="xsh_create_circle">创建圈子</span>
+                    </div>
+                </a>
+            </div>
+            <!--热门圈子-->
+            <div class="xsh_interaction">
+                <div class="xsh_intera_header xsh_con_right_header">
+                    <h3>热门圈子</h3>
+                    <div class="xsh_header_more"></div>
+                </div>
+                <div class="xsh_circle_hitlis">
+                    <ul>
+                        <!--圈子-->
+                        <!--{loop $topgrouplist $fid $group}-->
+                        <li>
+                            <div class="xsh_circle_logobox">
+                                <div class="xsh_circle_logo">
+                                    <a href="">
+                                        <img src="$group[icon]" alt="加载不成功">
+                                    </a>
+                                </div>
+                                <div class="xsh_circle_card">
+                                    <div class="xsh_circle_name"><a href="forum.php?mod=forumdisplay&action=list&fid=$group[fid]">$group[name]</a></div>
+                                    <div class="xsh_circle_data">
+                                        <div class="xsh_circle_num">成员:<span>$group[membernum]</span></div>
+                                        <div class="xsh_circle_cardnum">帖子:<span>$group[posts]</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!--{/loop}-->
+                        
+                    </ul>
+                </div>
+            </div>
+            
+            <!--推荐圈子-->
+            <div class="xsh_interaction">
+                <div class="xsh_intera_header xsh_con_right_header">
+                    <h3>推荐圈子</h3>
+                    <div class="xsh_header_more"></div>
+                </div>
+                <div class="xsh_circle_hitlis">
+                    <ul>
+                        <!--圈子-->
+                        <!--{loop $group_recommend $fid $group}-->
+                        <li>
+                            <div class="xsh_circle_logobox">
+                                <div class="xsh_circle_logo">
+                                    <a href="">
+                                        <img src="$group[icon]" alt="加载不成功">
+                                    </a>
+                                </div>
+                                <div class="xsh_circle_card">
+                                    <div class="xsh_circle_name"><a href="forum.php?mod=forumdisplay&action=list&fid=$group[fid]">$group[name]</a></div>
+                                    <div class="xsh_circle_data">
+                                        <div class="xsh_circle_num">成员:<span>$group[membernum]</span></div>
+                                        <div class="xsh_circle_cardnum">帖子:<span>$group[posts]</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!--{/loop}-->
+                        
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+</div>
+<script src="/static/zte/js/jquery-1.11.3.min.js"></script>
+<script src="{$_G[setting][jspath]}../zte/js/circle.js"></script>
+<!--{template common/footer}-->
