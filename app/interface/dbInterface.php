@@ -11,7 +11,7 @@ interface dbInterface
 
     public function find($fields);
 
-    public function fields($fields = []);
+    public function fields($fields);
 
     public function field($field = '');
 
@@ -22,4 +22,6 @@ interface dbInterface
     public function order($order);
 
     public function where($k, $v = null);
+
+    public function whereOr($k, $v = null);
 }

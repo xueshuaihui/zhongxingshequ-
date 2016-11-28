@@ -4,7 +4,6 @@ require_once 'baseApi.php';
 require_once RESPOSITORY.'authRepository.php';
 
 class authApi extends baseApi {
-    protected $ucenter;
     protected $tool;
     public function __construct() {
         parent::__construct();
@@ -13,7 +12,7 @@ class authApi extends baseApi {
     /**
      * @SWG\Post(
      *   path="auth-login",
-     *   tags={"login"},
+     *   tags={"oauth"},
      *   summary="登录",
      *   description="用户登录,登录成功后将返回数据为到期的时间戳，否则将会提示错误，并返回错误代码",
      *   operationId="login",
@@ -39,7 +38,7 @@ class authApi extends baseApi {
     /**
      * @SWG\Post(
      *   path="auth-register",
-     *   tags={"register"},
+     *   tags={"oauth"},
      *   summary="注册",
      *   description="用户注册功能, 此接口前，请先获取注册页面的接口",
      *   operationId="register",
@@ -72,7 +71,7 @@ class authApi extends baseApi {
     /**
      * @SWG\Post(
      *   path="auth-pregister",
-     *   tags={"pregister"},
+     *   tags={"oauth"},
      *   summary="注册之前，用于获取tagid",
      *   description="获取注册页面的接口",
      *   operationId="pregister",
@@ -88,7 +87,7 @@ class authApi extends baseApi {
     /**
      * @SWG\Post(
      *   path="auth-changPassword",
-     *   tags={"changPassword"},
+     *   tags={"oauth"},
      *   summary="更改用户登录密码",
      *   description="更改用户登录密码",
      *   operationId="changPassword",
@@ -106,13 +105,5 @@ class authApi extends baseApi {
         $oldPassword = $this->request->post('oldPassword');
         $newPassword = $this->request->post('newPassword');
         return $this->tool->changPassword($uid, $oldPassword, $newPassword);
-    }
-
-    private function checkParam ($params = []) {
-        foreach ($params as $param){
-            if(is_null($this->request->post($param))){
-                return 10001;//缺少参数
-            }
-        }
     }
 }

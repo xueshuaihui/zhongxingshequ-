@@ -5,11 +5,13 @@ use discuz\inter\dbInterface;
 
 class mdbModel extends baseModel implements dbInterface {
     private $table;
-    private $field = '';
-    private $limit = '';
-    private $order = '';
-    private $where = '';
-    private $sql = '';
+    private $field;
+    private $limit;
+    private $order;
+    private $where;
+    private $whereOr;
+    private $sql;
+    private $join;
     private $prefix = 'zx_';
     private static $models = [];
     public function __construct($table) {
@@ -38,14 +40,23 @@ class mdbModel extends baseModel implements dbInterface {
 
     public function find($fields, $sql = false) {
         $this->fields($fields);
-        $field = $this->field === '' ? '*' : $this->field;
+        $field = $this->field == '' ? '*' : trim($this->field, ',');
         $this->sql = 'SELECT '.$field.
-            ' FROM '.$this->prefix.$this->table. ' WHERE 1 '.$this->where;
-        if($this->order != ''){
+            ' FROM '.$this->prefix.$this->table;
+        if($this->join){
+            $this->sql .= $this->join;
+        }
+        if($this->where){
+            $this->sql .= ' WHERE 1 '.$this->where;
+        }
+        if($this->whereOr){
+            $this->sql .= $this->whereOr;
+        }
+        if($this->order){
             $this->sql .= ' ORDER BY \''.$this->order.'\'';
         }
-        if($this->limit != ''){
-            $this->sql .=  'LIMIT '.$this->limit;
+        if($this->limit){
+            $this->sql .=  ' LIMIT '.$this->limit;
         }
         if($sql){
             return $this->sql;
@@ -61,15 +72,18 @@ class mdbModel extends baseModel implements dbInterface {
         return DB::fetch_all($this->sql);
     }
 
-    public function fields($fields = []) {
-        foreach ($fields as $field){
+    public function fields($fields) {
+        if(is_string($fields)){
+            $fields = explode(',', $fields);
+        }
+        foreach ($fields as $k=>$field){
             $this->field($field);
         }
         return $this;
     }
 
     public function field($field = '') {
-        $this->field .= '`'.$field.'`' . ',';
+        $this->field .= '`'.trim($field).'`' . ',';
         return $this;
     }
 
@@ -91,6 +105,36 @@ class mdbModel extends baseModel implements dbInterface {
                 $this->where .= ' AND '.$key.' = \''.$value.'\'';
             }
         }
+        return $this;
+    }
+
+    public function in ($k, $v) {
+        $range = '';
+        foreach ($v as $item){
+            $range .= '\''.$item.'\',';
+        }
+        $this->where = ' AND '.$k.' IN ('.trim($range, ',').')';
+        return $this;
+    }
+
+    public function whereOr ($k, $v = null) {
+        if(is_string($k)){
+            $this->whereOr = ' OR '.$k.' = \''.$v.'\'';
+        }elseif(is_array($k)){
+            foreach ($k as $key=>$value){
+                $this->whereOr .= ' OR '.$k.' = \''.$v.'\'';
+            }
+        }
+        return $this;
+    }
+
+    public function ass ($name) {
+        $this->table .= ' AS '.$name;
+        return $this;
+    }
+
+    public function join($sql) {
+        $this->join .= $sql;
         return $this;
     }
 }

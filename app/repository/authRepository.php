@@ -1,10 +1,7 @@
 <?php
-require_once MODEL.'mdbModel.php';
+require_once 'baseRepository.php';
 
-class authRepository extends mdbModel {
-    public function __construct() {
-        parent::__construct('ucenter_member');
-    }
+class authRepository extends baseRepository {
 
     public function verifyIdentity($username, $password) {
         $table = $this->table('ucenter_members');
@@ -89,18 +86,5 @@ class authRepository extends mdbModel {
             return 10007;
         }
         return $this->table('common_member')->where('uid', $uid)->update(['password'=>$newPass]);
-    }
-
-    private function table($table){
-        return parent::model($table);
-    }
-
-    private function randNum ($size = 6) {
-        $result = '';
-        $randString = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
-        for($i = 0; $i < $size; $i++){
-            $result .= $randString{rand(0, strlen($randString))};
-        }
-        return $result;
     }
 }
