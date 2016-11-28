@@ -13,7 +13,7 @@ class indexApi extends baseApi {
     /**
      * @SWG\Get(
      *   path="index-banner",
-     *   tags={"index"},
+     *   tags={"首页相关"},
      *   summary="轮播图",
      *   description="获取轮播图",
      *   operationId="banner",
@@ -29,7 +29,7 @@ class indexApi extends baseApi {
     /**
      * @SWG\Get(
      *   path="index-hdzl",
-     *   tags={"index"},
+     *   tags={"首页相关"},
      *   summary="获取互动专栏信息",
      *   description="获取互动专栏信息",
      *   operationId="hdzl",
@@ -45,7 +45,7 @@ class indexApi extends baseApi {
     /**
      * @SWG\Post(
      *   path="index-quiz",
-     *   tags={"index"},
+     *   tags={"首页相关"},
      *   summary="获取互动专栏【子版块】信息",
      *   description="获取互动专栏【子版块】信息",
      *   operationId="quiz",
@@ -64,7 +64,7 @@ class indexApi extends baseApi {
     /**
      * @SWG\Get(
      *   path="index-tabs",
-     *   tags={"index"},
+     *   tags={"首页相关"},
      *   summary="获取信息流分类信息",
      *   description="获取信息流分类信息",
      *   operationId="tabs",
@@ -80,7 +80,7 @@ class indexApi extends baseApi {
     /**
      * @SWG\Post(
      *   path="index-information",
-     *   tags={"index"},
+     *   tags={"首页相关"},
      *   summary="获取信息流内容",
      *   description="获取信息流内容，需传入【板块ID，和页码ID】",
      *   operationId="information",
