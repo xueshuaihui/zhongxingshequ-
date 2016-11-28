@@ -89,7 +89,10 @@
 				<h2>{lang group_hot_topics_today}</h2>
 			</div>-->
 			<div class="bm_c">
-				<a href="javascript:;" id="newspecial" onmouseover="$('newspecial').id = 'newspecialtmp';this.id = 'newspecial';showMenu({'ctrlid':this.id})" onclick="showWindow('newthread', 'forum.php?mod=post&action=newthread&fid=$_G[fid]')" title="{lang send_posts}"><img src="{IMGDIR}/pn_post.png" alt="{lang send_posts}" /></a>
+				<div class="xsh_fatie">
+					<a href="javascript:;" onclick="showWindow('newthread', 'forum.php?mod=post&action=newthread&fid=$_G[fid]')"><img src="/static/zte/images/u843.png" alt=""><span>我要发帖</span></a>
+				</div>
+				<!--<a href="javascript:;" id="newspecial" onmouseover="$('newspecial').id = 'newspecialtmp';this.id = 'newspecial';showMenu({'ctrlid':this.id})" onclick="showWindow('newthread', 'forum.php?mod=post&action=newthread&fid=$_G[fid]')" title="{lang send_posts}"><img src="{IMGDIR}/pn_post.png" alt="{lang send_posts}" /></a>-->
 				<!--<ul class="xl xl1">-->
 					<!--&lt;!&ndash;{loop $groupcache['replies']['data'] $tid $thread}&ndash;&gt;-->
 						<!--<li><a href="forum.php?mod=viewthread&tid=$tid">$thread[subject]</a></li>-->
