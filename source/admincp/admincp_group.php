@@ -1002,10 +1002,6 @@ EOT;
 	    $select_str .='<option value="'.$tag["tagid"].'">'.$tag["tagname"].'</option>';
 	}
 	$select_str .= '</select>';
-	$select_str_all = sprintf($select_str, $group[fid]);
-	if (!$_G['setting']['grouppowerpluginidisopen']) {
-	    $select_str_all = '';
-	}
 	//======================yy================================
 
 	loadcache('grouptype');
@@ -1022,7 +1018,7 @@ EOT;
 			empty($_G['cache']['grouptype']['first'][$group[fup]]) ? $_G['cache']['grouptype']['second'][$group[fup]]['name'] : $_G['cache']['grouptype']['first'][$group[fup]]['name'],
 			"<a href=\"home.php?mod=space&uid=$group[founderuid]\" target=\"_blank\">$group[foundername]</a>",
 			dgmdate($group['dateline'])
-		, $select_str_all), TRUE);
+		, $_G['setting']['grouppowerpluginidisopen'] ? sprintf($select_str, $group[fid]):""), TRUE);
 		$groups .=showtablerow('', array('','colspan="4"'), array('',cplang('group_mod_description').'&nbsp;:&nbsp;'.$group['description']), TRUE);
 	}
 	shownav('group', 'nav_group_mod');
