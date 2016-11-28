@@ -104,6 +104,44 @@ class authApi extends baseApi {
         $uid = $this->request->post('uid');
         $oldPassword = $this->request->post('oldPassword');
         $newPassword = $this->request->post('newPassword');
-        return $this->tool->changPassword($uid, $oldPassword, $newPassword);
+        $identy = $this->tool->identityPassword($uid, $oldPassword);
+        if(!$identy){
+            return 10008;
+        }
+        return $this->tool->changPassword($uid, $newPassword);
+    }
+
+    /**
+     * @SWG\Post(
+     *   path="auth-resetPassword",
+     *   tags={"oauth"},
+     *   summary="找回用户登录密码",
+     *   description="找回用户登录密码",
+     *   operationId="resetPassword",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="phone", in="formData", description="手机号", required=true, type="string"),
+     *     @SWG\Parameter(name="code", in="formData", description="验证码", required=true, type="string"),
+     *     @SWG\Parameter(name="newPassword", in="formData", description="新密码", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function resetPassword() {
+        $this->request->setSession(['reset'=>['15100273203'=>'123456']]);
+        $this->checkParam(['phone', 'code', 'newPassword']);
+        $phone = $this->request->post('phone');
+        $code = $this->request->post('code');
+        $newPassword = $this->request->post('newPassword');
+        //验证验证码是否正确
+        $serverCode = $this->request->session('reset.'.$phone);
+        if(!$serverCode || $serverCode !== $code){
+            return 10010; //验证码错误
+        }
+        //验证手机号是否存在,存在则返回用户
+        $user = $this->tool->checkHadPhoneReturnUser($phone);
+        if(!$user){
+            return 10009; //该手机没有绑定任何用户
+        }
+        return $this->tool->changPassword($user['uid'], $newPassword);
     }
 }

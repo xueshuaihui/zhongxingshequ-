@@ -28,6 +28,8 @@ class response implements responseInterface{
         10006 =>  '邮箱重复',
         10007 =>  '参数错误',
         10008 =>  '用户密码错误',
+        10009 =>  '该手机号并没有绑定用户哦',
+        10010 =>  '验证码不正确',
     ];
     public function __construct($data = '') {
         if(is_bool($data) && $data){
