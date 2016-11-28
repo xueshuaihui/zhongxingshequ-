@@ -1,27 +1,33 @@
+var jq = jQuery.noConflict();
 /*圈子tab*/
-var circle_header = $(".xsh_circle_header");
+var circle_header = jq(".xsh_circle_header");
 var tabheader = circle_header.find("ul>li>span");
-var circle_tabcon = $(".xsh_circle_tabcon");
-var xsh_more = $(".xsh_more");
+var circle_tabcon = jq(".xsh_circle_tabcon");
+var xsh_more = jq(".xsh_more");
 var  grouptype = "join";
+if(circle_tabcon.eq(0).find("ul>li").length<4){
+    xsh_more.css({display:"none"})
+}else{
+    xsh_more.css({display:"block"})
+}
 tabheader.each(function(index,obj){
-    $(this).on("click",function(){
+    jq(this).on("click",function(){
         tabheader.removeClass("xsh_circle_hot");
-        $(this).addClass("xsh_circle_hot");
+        jq(this).addClass("xsh_circle_hot");
         circle_tabcon.removeClass("xsh_circle_tabconnow").eq(index).addClass("xsh_circle_tabconnow");
         if(circle_tabcon.eq(index).find("ul>li").length<4){
             xsh_more.css({display:"none"})
         }else{
             xsh_more.css({display:"block"})
         }
-        grouptype = $(this).attr("xid");
+        grouptype = jq(this).attr("xid");
     })
 })
 /*显示更多*/
-var morecircle_mask = $(".morecircle_mask");
-var circlebox = $(".morecircle");
+var morecircle_mask = jq(".morecircle_mask");
+var circlebox = jq(".morecircle");
 function morecircle(){
-    $.ajax({
+    jq.ajax({
         url:"/ztgroup.php",
         type:"post",
         data:{action:"group_list",grouptype:grouptype},
@@ -44,23 +50,23 @@ function morecircle(){
     })
 }
 /*close mask*/
-var morecircleMask = $(".morecircle_mask");
+var morecircleMask = jq(".morecircle_mask");
 function closeMask(){
     circlebox.html("");
     morecircleMask.css({display:"none"});
 }
 /*名片*/
-var cirlis_logo = $(".xsh_cirlis_logo");
+var cirlis_logo = jq(".xsh_cirlis_logo");
 cirlis_logo.each(function(){
-    var circle_cad = $(this).children(".xsh_circle_cad");
-    $(this).hover(function(){
+    var circle_cad = jq(this).children(".xsh_circle_cad");
+    jq(this).hover(function(){
         circle_cad.css({display:"block"});
     },function(){
         circle_cad.css({display:"none"});
     })
 })
 /**/
-var circle_form = $(".xsh_circle_form");
+var circle_form = jq(".xsh_circle_form");
 circle_form.find("select").change(function(){
-    window.location.href = $(this).val();
+    window.location.href = jq(this).val();
 })

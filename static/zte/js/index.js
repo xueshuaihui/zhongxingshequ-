@@ -1,5 +1,4 @@
 var jq = jQuery.noConflict();
-
 var conleft = jq(".xsh_con_left");
 /*轮播图框*/
 var carousel = jq(".xsh_carousel");
@@ -18,7 +17,7 @@ var car_radbox = jq(".xsh_car_radbox");
 if( max_carnum > 1){
     car_button.css({display:"block"});
     car_radbox.css({display:'block'});
-    var t = setInterval(car_move,5000);
+    var t = setInterval(car_move,2000);
     jq(".xsh_carousel").hover(function(){
         carstiop();
     },function(){
@@ -28,12 +27,12 @@ if( max_carnum > 1){
 var car_num = 0;
 function car_move(){
     /*图片轮播*/
-    carimg.eq(car_num).fadeOut(200,"linear");
+    carimg.eq(car_num).fadeOut(200,"linear",function(){});
     car_num++;
     if(car_num>=max_carnum){
         car_num=0;
     }
-    carimg.eq(car_num).fadeIn(200,"linear");
+    carimg.eq(car_num).fadeIn(200,"linear",function(){});
     /*标识符轮播*/
     carradiu_move();
 }
@@ -54,24 +53,24 @@ function carstart(){
 car_buttonl.on("click",function(){
     carstiop();
     /*图片上翻*/
-    carimg.eq(car_num).fadeOut(200,"linear");
+    carimg.eq(car_num).fadeOut(200,"linear",function(){});
     car_num--;
     if(car_num < 0){
         car_num=max_carnum-1;
     }
-    carimg.eq(car_num).fadeIn(200,"linear");
+    carimg.eq(car_num).fadeIn(200,"linear",function(){});
     /*标识符上翻*/
     carradiu_move();
 })
 car_buttonr.on("click",function(){
     carstiop();
     /*图片下翻*/
-    carimg.eq(car_num).fadeOut(200,"linear");
+    carimg.eq(car_num).fadeOut(200,"linear",function(){});
     car_num++;
     if(car_num>=max_carnum){
         car_num=0;
     }
-    carimg.eq(car_num).fadeIn(200,"linear");
+    carimg.eq(car_num).fadeIn(200,"linear",function(){});
     /*标识符下翻*/
     carradiu_move();
 })
@@ -80,9 +79,9 @@ car_radius.each(function(index,obj){
     jq(this).on("click",function(){
         carstiop();
         /*图片轮播*/
-        carimg.eq(car_num).fadeOut(200,"linear");
+        carimg.eq(car_num).fadeOut(200,"linear",function(){});
         car_num = index;
-        carimg.eq(car_num).fadeIn(200,"linear");
+        carimg.eq(car_num).fadeIn(200,"linear",function(){});
         /*标识符轮播*/
         carradiu_move();
     })
@@ -96,21 +95,20 @@ var expertTextarea = jq(".xsh_expert_textarea");
 var expertForm = jq(".xsh_expert_form");
 var expertFormSubmit = jq(".xsh_expert_form_submit");
 function expertInteraction(hid){
+    var hid=hid;
     jq.ajax({
-        url:"ztindex.php?api=1&thread="+hid,
-        type:"get",
+        url:"",
+        type:"post",
+        data:{hid:hid},
         success:function(result){
-            result = JSON.parse(result);
             //result={code:10000,data:{header:"无线",experts:[{id:13,name:"路由器/专家:dfjkg"},{id:13,name:"路由器/专家:dfjkg"},{id:13,name:"路由器/专家:dfjkg"}]}}
-            if(result.state == 1){
+            if(result.code == 10000){
                 var header = result.data.header;
-                jq(".xsh_expert_box #title").val("测试一下");
                 expertFormHeader.children("h3").text(header);
-                expertForm.children("form").action = "forum.php?mod=post&amp;infloat=yes&amp;action=newthread&amp;fid=38&amp;extra=&amp;topicsubmit=yes&amp;jet=rmbplus";
                 var data = result.data.experts;
                 var str = "";
                 for(var i in data){
-                    str+='<label><input name="experts" type="radio" value="'+(data[i].fid)+'" />'+(data[i].name)+'</label>';
+                    str+='<label><input name="experts" type="radio" value="'+(data[i].id)+'" />'+(data[i].name)+'</label>';
                 }
                 expertRadio.html(str);
                 expertBox.css({display:"block"});
@@ -130,8 +128,7 @@ function formsubmit(){
         type:"post",
         data:{id:id,text:text},
         success:function(result){
-            result = JSON.parse(result);
-            if(result.state==1){
+            if(result==10000){
                 /*成功*/
                 closeform();
                 alert("发送成功！")
@@ -170,15 +167,14 @@ expert_name.each(function(index,obj){
 /*tab*/
 var tab_title = jq(".xsh_tab_title");
 var tab_content = jq(".xsh_tab_con");
-var tabid = tab_title.eq(0).attr("id");
-var box = tab_content.eq(0).children("ul");
+var tabid =tabid = tab_title.eq(0).attr("id"),box = tab_content.eq(0).children("ul");
 tab_title.each(function(index,obj){
     jq(this).on("click",function(){
         tab_title.removeClass("xsh_tab_title_hot");
         tabid = jq(this).addClass("xsh_tab_title_hot").attr("id");
         tab_content.removeClass("xsh_tab_now").eq(index).addClass("xsh_tab_now");
         box = tab_content.eq(index).children("ul");
-        if(!box.html()){
+        if(!box.children()){
             ajaxtext(box,tabid,1);
         }
     })
@@ -195,17 +191,16 @@ function ajaxtext(box,tab,page){
     * */
     jq.ajax({
         url:"ztindex.php?api=1&t="+tab+"&p="+page,
-        type:"get",
+        type:"post",
         success:function(result){
-            result = JSON.parse(result);
-            if(result.state == 1){
+            if(result.code == 10000){
+            // {code:100000,data:[{img:"http://img.huafans.cn/data/attachment/portal/201611/18/155603xcqn2hwg6cxbnnji.jpg",href:"www.baidu.com",theme:"图片提示",title:"文章标题",syn:"帖子简介",time:"发帖时间",num:"点击量"}]}
                 var data = result.data;
                 var str='';
-                for(var i in data['data']){
-                    str = '<li class="xsh_tab_conbox"><div class="xsh_tab_img"><a href="forum.php?mod=viewthread&tid='+(data['data'][i].tid)+'" target="'+target+'"><img src="'+(data['data'][i].image)+'" alt="加载不成功" title="'+(data['data'][i].subject)+'"></a></div><div class="xsh_tab_writing"><div class="xsh_tab_contitle"><a href="forum.php?mod=viewthread&tid='+(data['data'][i].tid)+'" target="'+target+'"><p>'+(data['data'][i].subject)+'</p></a></div><div class="xsh_tab_concise"><p>'+(data['data'][i].message)+'<span class="xsh_tab_more"><a href="forum.php?mod=viewthread&tid='+(data['data'][i].tid)+'" target="'+target+'">全文<img src="/static/zte/images/u76.png" alt=""></a></span></p></div><div class="xsh_tab_time"><span>'+(data['data'][i].dateline)+'</span><span class="liulanl">'+(data['data'][i].views)+'</span></div></div></li>' + str;
+                for(var i in data){
+                    str+='<li class="xsh_tab_conbox"><div class="xsh_tab_img"><a href="'+(data[i].href)+'" target="_blank"><img src="'+(data[i].img)+'" alt="加载不成功" title="'+(data[i].theme)+'"></a></div><div class="xsh_tab_writing"><div class="xsh_tab_contitle"><a href="'+(data[i].href)+'" target="_blank"><p>'+(data[i].title)+'</p></a></div><div class="xsh_tab_concise"><p>'+(data[i].syn)+'<span class="xsh_tab_more"><a href="'+(data[i].href)+'">全文<img src="/static/zte/images/u76.png" alt=""></a></span></p></div><div class="xsh_tab_time"><span>'+(data[i].time)+'</span><span class="liulanl">'+(data[i].num)+'</span></div></div></li>';
                 }
-                box.html(str);
-                jq(".xsh_page_box ul").html(data['pagnate']);
+               box.html(str);
             }else{
                 alert("网络错误！");
                 return;
