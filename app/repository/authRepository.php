@@ -93,4 +93,12 @@ class authRepository extends baseRepository {
     public function checkHadPhoneReturnUser($phone) {
         return $this->table('common_member_profile')->where('mobile', $phone)->find();
     }
+
+    public function updateUserProfile($uid, $newdata = []) {
+        return $this->table('common_member_profile')->where('uid', $uid)->update($newdata);
+    }
+
+    public function getUserProfile($where = []) {
+        return $this->table('common_member_profile')->where($where)->find();
+    }
 }
