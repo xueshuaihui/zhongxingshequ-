@@ -12,7 +12,7 @@ class authApi extends baseApi {
     /**
      * @SWG\Post(
      *   path="auth-login",
-     *   tags={"oauth"},
+     *   tags={"用户相关"},
      *   summary="登录",
      *   description="用户登录,登录成功后将返回数据为到期的时间戳，否则将会提示错误，并返回错误代码",
      *   operationId="login",
@@ -38,7 +38,7 @@ class authApi extends baseApi {
     /**
      * @SWG\Post(
      *   path="auth-register",
-     *   tags={"oauth"},
+     *   tags={"用户相关"},
      *   summary="注册",
      *   description="用户注册功能, 此接口前，请先获取注册页面的接口",
      *   operationId="register",
@@ -71,7 +71,7 @@ class authApi extends baseApi {
     /**
      * @SWG\Get(
      *   path="auth-pregister",
-     *   tags={"oauth"},
+     *   tags={"用户相关"},
      *   summary="注册之前，用于获取tagid",
      *   description="获取注册页面的接口",
      *   operationId="pregister",
@@ -87,7 +87,7 @@ class authApi extends baseApi {
     /**
      * @SWG\Post(
      *   path="auth-changPassword",
-     *   tags={"oauth"},
+     *   tags={"用户相关"},
      *   summary="更改用户登录密码",
      *   description="更改用户登录密码",
      *   operationId="changPassword",
@@ -114,7 +114,7 @@ class authApi extends baseApi {
     /**
      * @SWG\Post(
      *   path="auth-resetPassword",
-     *   tags={"oauth"},
+     *   tags={"用户相关"},
      *   summary="找回用户登录密码",
      *   description="找回用户登录密码",
      *   operationId="resetPassword",
@@ -147,7 +147,7 @@ class authApi extends baseApi {
     /**
      * @SWG\Post(
      *   path="auth-blind",
-     *   tags={"oauth"},
+     *   tags={"用户相关"},
      *   summary="绑定手机号",
      *   description="绑定手机号",
      *   operationId="blind",

@@ -30,7 +30,7 @@ class response implements responseInterface{
         10008 =>  '用户密码错误',
         10009 =>  '该手机号并没有绑定用户哦',
         10010 =>  '验证码不正确',
-        10011 =>  '该手机号已被绑定其他账号',
+        10011 =>  '该手机号已被绑定账号',
     ];
     public function __construct($data = '') {
         if(is_bool($data) && $data){
