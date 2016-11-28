@@ -33,31 +33,24 @@ class response implements responseInterface{
         10011 =>  '该手机号已被绑定账号',
     ];
     public function __construct($data = '') {
-        if(is_bool($data) && $data){
+        if(is_bool($data)){
+            $res = $data?self::SUCCESS:self::FAIL;
             self::$data = [
-                'state' => self::SUCCESS,
-                'result'=> self::$msg[self::SUCCESS]
+                'state' => $res,
+                'msg'   => self::$msg[$res],
+                'result'=> null
             ];
-        }elseif(is_array($data) && isset($data[1]) && is_numeric($data[1])) {
-            self::$data = [
-                'state' => $data[0],
-                'result'  => $data[1]
-            ];
-        }elseif(is_bool($data)){
-            $data = $data ? self::SUCCESS : self::FAIL;
+        }elseif(array_key_exists($data, self::$msg)){
             self::$data = [
                 'state' => $data,
-                'result'  => self::$msg[$data]
-            ];
-        }elseif(isset(self::$msg[$data])){
-            self::$data = [
-                'state' => $data,
-                'result'  => self::$msg[$data]
+                'msg'   => self::$msg[$data],
+                'result'=> null
             ];
         }else{
             self::$data = [
                 'state' => self::SUCCESS,
-                'result'  => $data
+                'msg'   => self::$msg[self::SUCCESS],
+                'result'=> $data
             ];
         }
     }
