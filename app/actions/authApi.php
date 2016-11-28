@@ -69,7 +69,7 @@ class authApi extends baseApi {
     }
 
     /**
-     * @SWG\Post(
+     * @SWG\Get(
      *   path="auth-pregister",
      *   tags={"oauth"},
      *   summary="注册之前，用于获取tagid",
@@ -104,6 +104,74 @@ class authApi extends baseApi {
         $uid = $this->request->post('uid');
         $oldPassword = $this->request->post('oldPassword');
         $newPassword = $this->request->post('newPassword');
-        return $this->tool->changPassword($uid, $oldPassword, $newPassword);
+        $identy = $this->tool->identityPassword($uid, $oldPassword);
+        if(!$identy){
+            return 10008;
+        }
+        return $this->tool->changPassword($uid, $newPassword);
+    }
+
+    /**
+     * @SWG\Post(
+     *   path="auth-resetPassword",
+     *   tags={"oauth"},
+     *   summary="找回用户登录密码",
+     *   description="找回用户登录密码",
+     *   operationId="resetPassword",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="phone", in="formData", description="手机号", required=true, type="string"),
+     *     @SWG\Parameter(name="code", in="formData", description="验证码", required=true, type="string"),
+     *     @SWG\Parameter(name="newPassword", in="formData", description="新密码", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function resetPassword() {
+        $this->checkParam(['phone', 'code', 'newPassword']);
+        $phone = $this->request->post('phone');
+        $code = $this->request->post('code');
+        $newPassword = $this->request->post('newPassword');
+        //验证验证码是否正确
+        $serverCode = $this->request->session('reset.'.$phone);
+        if(!$serverCode || $serverCode != $code){
+            return 10010; //验证码错误
+        }
+        //验证手机号是否存在,存在则返回用户
+        $user = $this->tool->checkHadPhoneReturnUser($phone);
+        if(!$user){
+            return 10009; //该手机没有绑定任何用户
+        }
+        return $this->tool->changPassword($user['uid'], $newPassword);
+    }
+
+    /**
+     * @SWG\Post(
+     *   path="auth-blind",
+     *   tags={"oauth"},
+     *   summary="绑定手机号",
+     *   description="绑定手机号",
+     *   operationId="blind",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Parameter(name="phone", in="formData", description="手机号", required=true, type="string"),
+     *     @SWG\Parameter(name="code", in="formData", description="验证码", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function blind() {
+        $this->checkParam(['uid', 'phone', 'code']);
+        $uid = $this->request->post('uid');
+        $phone = $this->request->post('phone');
+        $code = $this->request->post('code');
+        $serverCode = $this->request->session('blind.'.$phone);
+        if(!$serverCode || $serverCode != $code){
+            return 10010; //验证码错误
+        }
+        $user = $this->tool->getUserProfile(['mobile'=>$phone]);
+        if($user){
+            return 10011; //该手机号已被绑定其他账号
+        }
+        return (bool) $this->tool->updateUserProfile($uid, ['mobile'=>$phone]);
     }
 }

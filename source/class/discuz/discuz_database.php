@@ -73,7 +73,7 @@ class discuz_database {
 		} elseif (is_array($condition)) {
 			$where = self::implode($condition, ' AND ');
 		} else {
-            if(strpos('AND', $condition)){
+            if(strstr($condition, 'AND')){
                 $where = '1 '.$condition;
             }else{
                 $where = $condition;
