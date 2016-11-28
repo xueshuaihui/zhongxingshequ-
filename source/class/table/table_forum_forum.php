@@ -303,7 +303,7 @@ class table_forum_forum extends discuz_table
 		        $tag_ids[] = $tag['tagid'];
 		    }
 		    
-		    $fieldsql .= ', ct.*';
+		    $fieldsql = 'distinct f.fid, '.$fieldsql;
 		    $where_str = " and (".(count($tag_ids) ? "ct.tagid in ('".implode(',', $tag_ids)."') or" : "")." ct.tagid IS NULL)";
 		    $list = DB::fetch_all("SELECT $fieldsql FROM ".DB::table($this->_table)." f $useindex LEFT JOIN ".DB::table("forum_forumfield")." ff ON ff.fid=f.fid LEFT JOIN ".DB::table("common_tagitem")." ct ON ff.fid=ct.itemid and ct.idtype='groupid' WHERE".($fids ? " $fids AND " : '')." f.type='sub' AND f.status=3 $levelsql $where_str $orderby $limitsql");
 		    
