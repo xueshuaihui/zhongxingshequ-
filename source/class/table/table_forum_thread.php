@@ -520,7 +520,21 @@ class table_forum_thread extends discuz_table
 				}
 			}
 		}
-		$data = DB::fetch_all("SELECT * FROM ".DB::table($this->get_table_name($tableid))." $forceindex".$this->search_condition($conditions)." $ordersql ".DB::limit($start, $limit));
+		global $_G;
+		if ($_G['setting']['grouppowerpluginidisopen'] && $_G['adminid'] != 1) {
+		    //获取当前用户的用户标签
+		    $tag_list = C::t('common_tagitem')->select(0, $_G['uid'], 'uid');
+		    $tag_ids = array();
+		    foreach ($tag_list as $tag) {
+		        $tag_ids[] = $tag['tagid'];
+		    }
+		    
+		    $where_str = " AND (".(count($tag_ids) ? "ct.tagid in ('".implode(',', $tag_ids)."') or" : "")." ct.tagid IS NULL)";
+		    $data = DB::fetch_all("SELECT distinct ft.tid, ft.* FROM ".DB::table($this->get_table_name($tableid))." ft $forceindex LEFT JOIN ".DB::table("common_tagitem")." ct ON ft.tid=ct.itemid and ct.idtype='threadid'".$this->search_condition($conditions)." $where_str $ordersql ".DB::limit($start, $limit));
+		    
+		} else {
+		    $data = DB::fetch_all("SELECT * FROM ".DB::table($this->get_table_name($tableid))." $forceindex".$this->search_condition($conditions)." $ordersql ".DB::limit($start, $limit));
+		}		
 		if(!defined('IN_MOBILE') && $firstpage && !empty($tlkey) && ($ttl = getglobal('setting/memory/forum_thread_forumdisplay')) !== null) {
 			$this->store_cache($tlkey, $data, $ttl, 'forumdisplay_');
 		}

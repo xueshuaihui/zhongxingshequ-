@@ -1,0 +1,51 @@
+body{background:  rgba(242, 242, 242, 1);}
+#wp,#ct{width: 960px;margin: auto;}
+.ct2 .mn{width: 680px;background: #ffffff;border-radius: 10px;}
+.mn{padding: 0 10px;}
+.ct2 .sd{width: 246px;margin-right: 0;}
+.bm_h,.tl .th{background: #ffffff;}
+.bm,.pgb{border: none;}
+.xsh_syn{width: 80%;position: relative;}
+.xsh_signout_btn{width: 20%;position: absolute;top: -100%;right: -15%;}
+.fa_ivt,.ptm{background-image: none;padding: 10px 0;border-radius: 5px;background: #5597ED;color: #ffffff;width: 100%;display: block;text-align: center;}
+.fa_ivt>.xi2{color: #ffffff;}
+.pn{color: #ffffff;background: none;border: none;box-shadow: none;-webkit-box-shadow:none;}
+.ptn{text-align: center;margin-top: 10px;}
+.xsh_circle_img{margin-right: 3px;transform: translateY(5px);-webkit-transform: translateY(5px);-moz-transform: translateY(5px);-o-transform: translateY(5px);   -ms-transform: translateY(5px);}
+.mbm,.pgb{display: none;}
+.ttp .xsh_hlyqx{float: right;}
+.ttp .xsh_hlyqx>a{background: #5597ED;color: #ffffff;}
+.ttp a{border: none;}
+.bm_c,.bm{overflow: hidden;border-radius: 10px;}
+.m{border-radius: 5px;overflow: hidden;}
+.m>img{border-radius: 5px;overflow: hidden;}
+.o .pn{color: #000000 !important;}
+.xsh_circle_form>select{margin: 10px 15px 0 0!important;}
+#pgt{display: none;}
+.xsh_user_logo{width: 60px;height: 60px;overflow: hidden;border-radius: 50%;display: block;margin: 15px 0;}
+.xsh_user_logo>img{width: 100%;height: 100%;border-radius: 50%;}
+.tl .icn{width: 70px;}
+.mtm{color: #333333!important;}
+/**/
+.xsh_user_datas{color: #CCCCCC;margin-top: 10px;}
+.xsh_user_datas>span{margin-right: 5px;}
+.xsh_user_datas>span>a{color: #CCCCCC;}
+.xsh_user_datas>span>a:hover{cursor: pointer;}
+.xst{font-size: 16px;}
+.tl th{width: 470px;}
+.liulanl{background: url("/static/zte/images/liulannum_03.jpg") no-repeat left;background-size: 16px;padding-left: 18px;}
+.liuyanl{background: url("/static/zte/images/liuyannum_03.jpg") no-repeat left;background-size: 16px;padding-left: 18px;}
+.liulanl,.liuyanl{margin-right: 5px;}
+.pg{width: 90%;}
+/*快速发帖按钮*/
+.pnpost .pn{    vertical-align: middle;
+    overflow: hidden;
+    margin-right: 3px;
+    padding: 0;
+    height: 23px;
+    border: 1px solid #999;
+    background: #E5E5E5 url(http://localhost/static/image/common/pn.png) repeat-x 0 0;
+    cursor: pointer;
+    -moz-box-shadow: 0 1px 0 #E5E5E5;
+    -webkit-box-shadow: 0 1px 0 #E5E5E5;
+    box-shadow: 0 1px 0 #E5E5E5;color: #333333;}
