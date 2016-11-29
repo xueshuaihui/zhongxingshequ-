@@ -46,7 +46,9 @@ $lang = array (
   'medals_please_input' => '请选择需要操作的勋章',
   'forums_formulaperm_error' => '权限表达式无效',
   'medals_succeed' => '编辑勋章成功 ',
-  'members_no_find_deluser' => '抱歉，没有搜索到需要删除的用户',
+    'members_no_find_deluser' => '抱歉，没有搜索到需要删除的用户',
+    'members_no_find_updateuser' => '抱歉，请选择需要修改的用户',
+    'tags_no_find_updateuser' => '抱歉，请选择用户的所属标签',
   'members_delete_succeed' => '符合条件的 {numdeleted} 个用户被成功删除',
   'members_nonexistence' => '请先输入您要进行操作的用户名',
   'members_edit_nonexistence' => '指定用户不存在',
@@ -592,7 +594,8 @@ $lang = array (
 
   'usertag_delete_succeed' => '删除标签成功',
   'usertag_merge_succeed' => '标签合并成功',
-  'usertag_add_succeed' => '成功为用户添加标签',
+    'usertag_add_succeed' => '成功为用户添加标签',
+    'usertag_update_succeed' => '成功为用户修改标签',
   'usertag_add_tag_succeed' => '成功添加标签',
   'usertag_add_error' => '添加失败，用户或标签错误，请重新填写',
 

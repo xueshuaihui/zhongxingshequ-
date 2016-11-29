@@ -71,7 +71,6 @@ if($operation == 'search') {
 EOF;
 		}
 	} else {
-
 		$membernum = countmembers($search_condition, $urladd);
 
 		$members = '';
@@ -101,10 +100,17 @@ EOF;
 					}
 					$lockshow = $member['status'] == '-1' ? '<em class="lightnum">['.cplang('lock').']</em>' : '';
 					$freezeshow = $member['freeze'] ? '<em class="lightnum">['.cplang('freeze').']</em>' : '';
-					$members .= showtablerow('', array('class="td25"', '', 'title="'.implode("\n", $memberextcredits).'"'), array(
+                    $tag_list = C::t('common_tagitem')->select(0, $member[uid], 'uid');
+                    $tags = '';
+                    foreach ($tag_list as $tag) {
+                        $theTag = C::t('common_tag')->fetch_info($tag['tagid']);
+                        $tags .= $theTag['tagname'].'<br/>';
+                    }
+                    $members .= showtablerow('', array('class="td25"', '', 'title="'.implode("\n", $memberextcredits).'"'), array(
 						"<input type=\"checkbox\" name=\"uidarray[]\" value=\"$member[uid]\"".($member['adminid'] == 1 ? 'disabled' : '')." class=\"checkbox\">",
 						($_G['setting']['connect']['allow'] && $member['conisbind'] ? '<img class="vmiddle" src="static/image/common/connect_qq.gif" /> ' : '')."<a href=\"home.php?mod=space&uid=$member[uid]\" target=\"_blank\">$member[username]</a>",
-						$member['credits'],
+                        $tags,
+                        $member['credits'],
 						$member['posts'],
 						$usergroups[$member['adminid']]['grouptitle'],
 						$usergroups[$member['groupid']]['grouptitle'].$lockshow.$freezeshow,
@@ -143,10 +149,17 @@ EOF;
 		showtableheader(cplang('members_search_result', array('membernum' => $membernum)).'<a href="'.ADMINSCRIPT.'?action=members&operation=search" class="act lightlink normal">'.cplang('research').'</a>&nbsp;&nbsp;&nbsp;<a href='.ADMINSCRIPT.'?action=members&operation=export'.$condition_str.'>'.$lang['members_search_export'].'</a>');
 
 		if($membernum) {
-			showsubtitle(array('', 'username', 'credits', 'posts', 'admingroup', 'usergroup', ''));
-			echo $members;
+            $_G['lang']['admincp_menu']['usertag'] = '用户标签';
+            showsubtitle(array('', 'username', 'usertag', 'credits', 'posts', 'admingroup', 'usergroup', ''));
+            echo $members;
 			$condition_str = str_replace('&tablename=master', '', $condition_str);
-			showsubmit('deletesubmit', cplang('delete'), ($tmpsearch_condition ? '<input type="checkbox" name="chkall" onclick="checkAll(\'prefix\', this.form, \'uidarray\');if(this.checked){$(\'deleteallinput\').style.display=\'\';}else{$(\'deleteall\').checked = false;$(\'deleteallinput\').style.display=\'none\';}" class="checkbox">'.cplang('select_all') : ''), ' &nbsp;&nbsp;&nbsp;<span id="deleteallinput" style="display:none"><input id="deleteall" type="checkbox" name="deleteall" class="checkbox">'.cplang('members_search_deleteall', array('membernum' => $membernum)).'</span>', $multipage);
+            $selects = '';
+            foreach (C::t('common_tag')->fetch_all_by_status(3) as $allTags) {
+                $selects .= '<input type="checkbox" name="newtags[]" value="'.$allTags['tagid'].'">'.$allTags['tagname'].'<br/>';
+            }
+            showtablerow('', array('style="width:100px; height:25px; line-height:25px;"', 'class="td25" colspan="3"'), array($selects, '<input name="chkall" id="chkall" type="checkbox" class="checkbox" onclick="checkAll(\'prefix\', this.form, \'uidarray\', \'chkall\')" /><label for="chkall">'.cplang('select_all').'</label>'));
+            showsubmit('submit', 'submit', '', '', $multipage);
+            showsubmit('deletesubmit', cplang('delete'), ($tmpsearch_condition ? '<input type="checkbox" name="chkall" onclick="checkAll(\'prefix\', this.form, \'uidarray\');if(this.checked){$(\'deleteallinput\').style.display=\'\';}else{$(\'deleteall\').checked = false;$(\'deleteallinput\').style.display=\'none\';}" class="checkbox">'.cplang('select_all') : ''), ' &nbsp;&nbsp;&nbsp;<span id="deleteallinput" style="display:none"><input id="deleteall" type="checkbox" name="deleteall" class="checkbox">'.cplang('members_search_deleteall', array('membernum' => $membernum)).'</span>', $multipage);
 		}
 		showtablefooter();
 		showformfooter();
@@ -329,8 +342,21 @@ EOF;
 
 		showsearchform('clean');
 
-	} else {
-
+	} elseif(submitcheck('submit', 1)){
+        if(!$_POST['uidarray']){
+            cpmsg('members_no_find_updateuser', '', 'error');
+        }
+        if(!$_POST['newtags']){
+            cpmsg('tags_no_find_updateuser', '', 'error');
+        }
+        foreach ($_POST['uidarray'] as $uids){
+            C::t('common_tagitem')->delete(0, $uids, 'uid');
+            foreach ($_POST['newtags'] as $tagids){
+                C::t('common_tagitem')->replace($tagids, $uids, 'uid');
+            }
+        }
+        cpmsg('usertag_update_succeed', '', 'succeed');
+    } elseif(submitcheck('deletesubmit', 1)) {
 		if((!$tmpsearch_condition && empty($_GET['uidarray'])) || (submitcheck('deletesubmit', 1) && empty($_GET['uidarray']))) {
 			cpmsg('members_no_find_deluser', '', 'error');
 		}
