@@ -486,13 +486,20 @@
 	<!--{/if}-->
 	<!--{eval $postcount++;}-->
 	<!--{/loop}-->
-
-
 	<div id="postlistreply" class="pl"><div id="post_new" class="viewthread_table" style="display: none"></div></div>
 	<!--{if $_G['blockedpids']}-->
 		<div id='hiddenpoststip'><a href='javascript:display_blocked_post();'>{lang other_reply_hide}</a></div>
 		<div id="hiddenposts"></div>
 	<!--{/if}-->
+
+
+<div class="xsh_reply">
+	<a href="javascript:;"  onclick="showWindow('reply', 'forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]')">
+		<div class="logobox"><img src="http://i0.hdslb.com/bfs/archive/83f59f4fffd3cd61ba74bdc3979525b83c20b57f.jpg" alt=""></div>
+		<div class="xsh_replytext">#点这里快速回复#</div>
+	</a>
+</div>
+
 </div>
 
 <!--{if $modmenu['thread']}-->
@@ -526,15 +533,13 @@ $_G['forum_tagscript']
 		<a id="newspecialtmp" onmouseover="$('newspecial').id = 'newspecialtmp';this.id = 'newspecial';showMenu({'ctrlid':this.id})"{if !$_G['forum']['allowspecialonly'] && empty($_G['forum']['picstyle']) && !$_G['forum']['threadsorts']['required']} onclick="showWindow('newthread', 'forum.php?mod=post&action=newthread&fid=$_G[fid]')"{else} onclick="location.href='forum.php?mod=post&action=newthread&fid=$_G[fid]';return false;"{/if} href="javascript:;" title="{lang send_posts}"><img src="{IMGDIR}/pn_post.png" alt="{lang send_posts}" /></a>
 	<!--{/if}-->
 	<!--{if $allowpostreply && !$_G['forum_thread']['archiveid']}-->
-		<a id="post_replytmp" onclick="showWindow('reply', 'forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]')" href="javascript:;" title="{lang reply}"><img src="{IMGDIR}/pn_reply.png" alt="{lang reply}" /></a>
+		<!--<a id="post_replytmp" onclick="showWindow('reply', 'forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]')" href="javascript:;" title="{lang reply}"><img src="{IMGDIR}/pn_reply.png" alt="{lang reply}" /></a>-->
 	<!--{/if}-->
 </div>
 
 <!--{hook/viewthread_middle}-->
 <!--[diy=diyfastposttop]--><div id="diyfastposttop" class="area"></div><!--[/diy]-->
-<!--{if $fastpost}-->
-	<!--{subtemplate forum/viewthread_fastpost}-->
-<!--{/if}-->
+
 
 <!--{hook/viewthread_bottom}-->
 
