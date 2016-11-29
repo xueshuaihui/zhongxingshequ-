@@ -1,7 +1,7 @@
 <?php
 
 function pageFormat($url, $count, $cur = 1) {
-    if($count < 1){
+    if($count < 2){
         return '';
     }
     $result = '';
