@@ -6,6 +6,7 @@ body{background: rgba(242, 242, 242, 1);}
 .xsh_pls{position: absolute;right: -270px;;top:130px;background: #ffffff;width: 250px;border-radius: 10px;border: none;padding: 20px 0;}
 .xsh_position{top: 0;height: 75px;padding: 20px;width: 210px;}
 .xsh_circle_message{float: left;}
+.xsh_circle_message>p{margin-bottom: 5px;}
 .xsh_circle_name{font-size: 16px;color: #000000;font-weight: 600;line-height: 25px;}
 .integral,.member{font-size: 12px;color: #CCCCCC;}
 .liulanl{background: url("/static/zte/images/liulannum_03.jpg") no-repeat left;background-size: 16px;padding-left: 18px;}
@@ -47,4 +48,10 @@ tr,.xsh_plc{position: relative;}
 .logobox{width: 60px;height: 60px;overflow: hidden;border-radius: 50%;float: left;}
 .logobox>img{width: 100%;height: 100%;border-radius: 50%;}
 .xsh_replytext{float: left;width: 480px;height: 100%;line-height: 60px;margin-left: 10px;border-top: 1px solid #CCCCCC;border-bottom: 1px solid #CCCCCC;color: #CCCCCC;}
+/**/
+.xsh_plc{position: relative;}
+.xsh_pi{position: absolute;left: 15px;top: -38px;width: 80%;color: #CCCCCC;}
+.vwthd{padding-right: 30px!important;;}
+.xsh_ptn{height: 30px;line-height: 30px;}
+.xsh_pct{width: 100%;margin-left: 0;margin-top: 30px;}
 
