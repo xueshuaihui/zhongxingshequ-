@@ -994,16 +994,6 @@ EOT;
 		}
 		cpmsg('group_mod_succeed', 'action=group&operation=mod', 'succeed');
 	}
-	
-	//======================yy================================
-	$user_tag_list = C::t('common_tag')->fetch_all_by_status(3, '', 0, 1000);
-	$select_str = '<select name="user_tag[%s][]" multiple = "multiple">';
-	foreach ($user_tag_list as $tag) {
-	    $select_str .='<option value="'.$tag["tagid"].'">'.$tag["tagname"].'</option>';
-	}
-	$select_str .= '</select>';
-	//======================yy================================
-
 	loadcache('grouptype');
 	$perpage = 50;
 	$page = intval($_GET['page']) ? intval($_GET['page']) : 1;
@@ -1011,14 +1001,30 @@ EOT;
 	$count = C::t('forum_forum')->validate_level_num();
 	$multipage = multi($count, $perpage, $page, ADMINSCRIPT."?action=group&operation=mod&submit=yes");
 	$query = C::t('forum_forum')->fetch_all_validate($startlimit, $startlimit+$perpage);
-	foreach($query as $group) {
+    $user_tag_list = C::t('common_tag')->fetch_all_by_status(3, '', 0, 1000);
+    foreach($query as $group) {
+        //======================yy================================
+        $tag_list = C::t('common_tagitem')->select(0, $group['founderuid'], 'uid');
+        $tag_ids = array();
+        foreach ($tag_list as $tag) {
+            array_push($tag_ids, $tag['tagid']);
+        }
+        $select_str = '';
+        foreach ($user_tag_list as $tag) {
+            if(in_array($tag['tagid'], $tag_ids)){
+                $select_str .= '<input type="checkbox" checked="checked" name="user_tag['.$group['fid'].'][]" value="'.$tag["tagid"].'">'.$tag["tagname"].'<br/>';
+            }else{
+                $select_str .= '<input type="checkbox" name="user_tag['.$group['fid'].'][]" value="'.$tag["tagid"].'">'.$tag["tagname"].'<br/>';
+            }
+        }
+        //======================yy================================
 		$groups .= showtablerow('', array('class="td25"', '', ''), array(
 			"<input type=\"checkbox\" name=\"fidarray[]\" value=\"$group[fid]\" class=\"checkbox\">",
 			"<a href=\"forum.php?mod=forumdisplay&fid=$group[fid]\" target=\"_blank\">$group[name]</a>",
 			empty($_G['cache']['grouptype']['first'][$group[fup]]) ? $_G['cache']['grouptype']['second'][$group[fup]]['name'] : $_G['cache']['grouptype']['first'][$group[fup]]['name'],
 			"<a href=\"home.php?mod=space&uid=$group[founderuid]\" target=\"_blank\">$group[foundername]</a>",
 			dgmdate($group['dateline'])
-		, $_G['setting']['grouppowerpluginidisopen'] ? sprintf($select_str, $group[fid]):""), TRUE);
+		, $_G['setting']['grouppowerpluginidisopen'] ? $select_str :""), TRUE);
 		$groups .=showtablerow('', array('','colspan="4"'), array('',cplang('group_mod_description').'&nbsp;:&nbsp;'.$group['description']), TRUE);
 	}
 	shownav('group', 'nav_group_mod');

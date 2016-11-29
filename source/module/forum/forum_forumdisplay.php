@@ -65,16 +65,18 @@ if ($mod == 'new_index') {
     //=============================圈子加强功能====================
 }
 //===============================================yy-end==============================================
-
-if($_G['forum']['redirect']) {
-	dheader("Location: {$_G[forum][redirect]}");
-} elseif($_G['forum']['type'] == 'group') {
-	dheader("Location: forum.php?gid=$_G[fid]");
-} elseif(empty($_G['forum']['fid'])) {
-	showmessage('forum_nonexistence', NULL);
-} elseif($_G['fid'] == $_G['setting']['followforumid'] && $_G['adminid'] != 1) {
-	dheader("Location: home.php?mod=follow");
+if(!$_G['uid']){
+    dheader("Location: home.php?mod=follow");
 }
+//if($_G['forum']['redirect']) {
+//	dheader("Location: {$_G[forum][redirect]}");
+//} elseif($_G['forum']['type'] == 'group') {
+//	dheader("Location: forum.php?gid=$_G[fid]");
+//} elseif(empty($_G['forum']['fid'])) {
+//	showmessage('forum_nonexistence', NULL);
+//} elseif($_G['fid'] == $_G['setting']['followforumid'] && $_G['adminid'] != 1) {
+//	dheader("Location: home.php?mod=follow");
+//}
 
 $st_t = $_G['uid'].'|'.TIMESTAMP;
 dsetcookie('st_t', $st_t.'|'.md5($st_t.$_G['config']['security']['authkey']));
