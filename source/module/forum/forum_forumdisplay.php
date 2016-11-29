@@ -66,7 +66,7 @@ if ($mod == 'new_index') {
 }
 //===============================================yy-end==============================================
 if(!$_G['uid']){
-    dheader("Location: home.php?mod=follow");
+    showmessage('forum_before_login', NULL);
 }
 //if($_G['forum']['redirect']) {
 //	dheader("Location: {$_G[forum][redirect]}");

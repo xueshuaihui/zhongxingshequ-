@@ -98,6 +98,7 @@ $lang = array (
   'collection_teamworkers_exceed' => '共同维护人数已达上限，不能再邀请或接受其他人参与维护',
   'no_privilege_guest' => '抱歉，游客没有权限进行此操作',
   'forum_nonexistence' => '抱歉，指定的版块不存在',
+    'forum_before_login' => '请先登录，才能浏览此栏目',
   'ranklist_this_status_off' => '此排行功能已关闭',
   'modcp_mod_succeed' => '审核处理完毕',
   'article_not_exist' => '抱歉，指定的文章不存在',
