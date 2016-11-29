@@ -149,7 +149,7 @@ EOF;
 		showtableheader(cplang('members_search_result', array('membernum' => $membernum)).'<a href="'.ADMINSCRIPT.'?action=members&operation=search" class="act lightlink normal">'.cplang('research').'</a>&nbsp;&nbsp;&nbsp;<a href='.ADMINSCRIPT.'?action=members&operation=export'.$condition_str.'>'.$lang['members_search_export'].'</a>');
 
 		if($membernum) {
-            $_G['lang']['admincp_menu']['usertag'] = '用户标签';
+            $_G['lang']['admincp_menu']['usertag'] = $_G['lang']['admincp_menu']['usertag']?:'用户标签';
             showsubtitle(array('', 'username', 'usertag', 'credits', 'posts', 'admingroup', 'usergroup', ''));
             echo $members;
 			$condition_str = str_replace('&tablename=master', '', $condition_str);

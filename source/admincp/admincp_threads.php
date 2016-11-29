@@ -248,12 +248,18 @@ EOT;
 					}
 					if($threadlist) {
 						foreach($threadlist as $thread) {
-							$threads .= showtablerow('', array('class="td25"', '', '', '', 'class="td25"', 'class="td25"'), array(
+                            $tag_list = C::t('common_tagitem')->select(0, $thread['tid'], 'threadid');
+                            $tagName = '';
+                            foreach ($tag_list as $item){
+                                $temp = C::t('common_tag')->fetch_info($item['tagid']);
+                                $tagName .= $temp['tagname'].'<br/>';
+                            }
+                            $threads .= showtablerow('', array('class="td25"', '', '', '', 'class="td25"', 'class="td25"'), array(
 								"<input class=\"checkbox\" type=\"checkbox\" name=\"tidarray[]\" value=\"$thread[tid]\" />",
-								"<a href=\"forum.php?mod=viewthread&tid=$thread[tid]".($thread['displayorder'] != -4 ? '' : '&modthreadkey='.modauthkey($thread['tid']))."\" target=\"_blank\">$thread[subject]</a>".($thread['readperm'] ? " - [$lang[threads_readperm] $thread[readperm]]" : '').($thread['price'] ? " - [$lang[threads_price] $thread[price]]" : ''),
+								"<a href=\"forum.php?mod=viewthread&tid=$thread[tid]".($thread['displayorder'] != -4 ? '' : '&modthreadkey='.modauthkey($thread['tid']))."\" target=\"_blank\">$thread[subject]</a>".($thread['readperm'] ? " - [$lang[threads_readperm] $thread[readperm]]" : '').($thread['price'] ? " - [$lang[threads_price] $thread[price]]" : ''),$tagName,
 							"<a href=\"forum.php?mod=forumdisplay&fid=$thread[fid]\" target=\"_blank\">".(empty($thread['isgroup']) ? $_G['cache']['forums'][$thread[fid]]['name'] : $groupsname[$thread[fid]])."</a>",
 								"<a href=\"home.php?mod=space&uid=$thread[authorid]\" target=\"_blank\">$thread[author]</a>",
-								$thread['replies'],
+                                $thread['replies'],
 								$thread['views'],
 								$thread['lastpost']
 							), TRUE);
@@ -293,7 +299,8 @@ EOT;
 		} else {
 
 			if($_GET['detail']) {
-				showsubtitle(array('', 'subject', 'forum', 'author', 'threads_replies', 'threads_views', 'threads_lastpost'));
+                $_G['lang']['admincp']['faceUserTag'] = $_G['lang']['admincp']['faceUserTag']?:'面向用户标签';
+				showsubtitle(array('', 'subject', 'faceUserTag', 'forum', 'author', 'threads_replies', 'threads_views', 'threads_lastpost'));
 				echo $threads;
 				showtablerow('', array('class="td25" colspan="7"'), array('<input name="chkall" id="chkall" type="checkbox" class="checkbox" onclick="checkAll(\'prefix\', this.form, \'tidarray\', \'chkall\')" /><label for="chkall">'.cplang('select_all').'</label>'));
 				showtablefooter();
@@ -339,7 +346,16 @@ EOT;
 				$lang['threads_delete_attach'],
 				''
 			));
-
+            $checkboxs = C::t('common_tag')->fetch_all_by_status(3);
+            $htmlsForCheckBoxs = '';
+            foreach ($checkboxs as $checkbox){
+                $htmlsForCheckBoxs .= '<input type="checkbox" name="user_tags[]" value="'.$checkbox['tagid'].'">'.$checkbox['tagname'].'&nbsp; &nbsp;';
+            }
+            showtablerow('', array('class="td25"', 'class="td24"', 'class="rowform" style="width:auto;"'), array(
+                '<input class="radio" type="radio" name="optype" value="updateUserTags" onclick="this.form.modsubmit.disabled=false;">',
+                $lang['threads_update_tags'],
+                $htmlsForCheckBoxs
+            ));
 		}
 
 		showsubmit('modsubmit', 'submit', '', '', $multi);
@@ -351,10 +367,16 @@ EOT;
 	}
 
 } else {
-
 	$tidsarray = isset($_GET['tids']) ? explode(',', $_GET['tids']) : $_GET['tidarray'];
 	$tidsadd = 'tid IN ('.dimplode($tidsarray).')';
-	if($optype == 'moveforum') {
+    if($optype == 'updateUserTags'){
+        foreach ($_POST['tidarray'] as $tid){
+            C::t('common_tagitem')->delete(0, $tid, 'threadid');
+            foreach ($_POST['user_tags'] as $tagid){
+                C::t('common_tagitem')->replace($tagid, $tid, 'threadid');
+            }
+        }
+    }elseif($optype == 'moveforum') {
 		if(!C::t('forum_forum')->check_forum_exists($_GET['toforum'])) {
 			cpmsg('threads_move_invalid', '', 'error');
 		}
