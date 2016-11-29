@@ -26,7 +26,7 @@ body{background: rgba(242, 242, 242, 1);}
 .ad .pls,.ad .plc{background: #CCCCCC;height: 1px;}
 .hm{text-align: right;}
 .pi{height: auto;}
-.authi>img{width: 60px;height: 60px;border-radius: 50%;}
+.authi>img{width: 60px;height: 60px;border-radius: 50%;margin-right: 30px;}
 .xsh_favatar{position: absolute;left: 80px;/*top: 0;*/background: #ffffff;border: 1px solid #5597ED;border-radius: 5px;display: none;z-index: 999;}
 tr,.xsh_plc{position: relative;}
 .authi{text-align: left;}
@@ -41,4 +41,10 @@ tr,.xsh_plc{position: relative;}
 .t_fsz{min-height: 25px;}
 #pgt,.pgb{display: none;}
 .pgbtn{width: 700px;}
+.pct{width: 90%;margin-left: 10%;}
+/*回复*/
+.xsh_reply{width: 80%;height: 62px;overflow: hidden;margin: auto;padding: 30px 0;}
+.logobox{width: 60px;height: 60px;overflow: hidden;border-radius: 50%;float: left;}
+.logobox>img{width: 100%;height: 100%;border-radius: 50%;}
+.xsh_replytext{float: left;width: 480px;height: 100%;line-height: 60px;margin-left: 10px;border-top: 1px solid #CCCCCC;border-bottom: 1px solid #CCCCCC;color: #CCCCCC;}
 
