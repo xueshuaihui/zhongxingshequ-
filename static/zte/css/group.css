@@ -13,10 +13,12 @@ body{background:  rgba(242, 242, 242, 1);}
 .ptn{text-align: center;margin-top: 10px;}
 .xsh_circle_img{margin-right: 3px;transform: translateY(5px);-webkit-transform: translateY(5px);-moz-transform: translateY(5px);-o-transform: translateY(5px);   -ms-transform: translateY(5px);}
 .mbm,.pgb{display: none;}
+.ttp{padding: 10px 10px;background: #EEEEEE;border-radius: 0!important;}
+.ttp>li{font-size: 16px;margin-top: 15px;}
 .ttp .xsh_hlyqx{float: right;}
 .ttp .xsh_hlyqx>a{background: #5597ED;color: #ffffff;}
 .ttp a{border: none;}
-.bm_c,.bm{overflow: hidden;border-radius: 10px;}
+.bm_c,.bm,.xsh_interaction{overflow: hidden;border-radius: 10px;}
 .m{border-radius: 5px;overflow: hidden;}
 .m>img{border-radius: 5px;overflow: hidden;}
 .o .pn{color: #000000 !important;}
@@ -37,15 +39,17 @@ body{background:  rgba(242, 242, 242, 1);}
 .liuyanl{background: url("/static/zte/images/liuyannum_03.jpg") no-repeat left;background-size: 16px;padding-left: 18px;}
 .liulanl,.liuyanl{margin-right: 5px;}
 .pg{width: 90%;}
-/*快速发帖按钮*/
-.pnpost .pn{    vertical-align: middle;
-    overflow: hidden;
-    margin-right: 3px;
-    padding: 0;
-    height: 23px;
-    border: 1px solid #999;
-    background: #E5E5E5 url(http://localhost/static/image/common/pn.png) repeat-x 0 0;
-    cursor: pointer;
-    -moz-box-shadow: 0 1px 0 #E5E5E5;
-    -webkit-box-shadow: 0 1px 0 #E5E5E5;
-    box-shadow: 0 1px 0 #E5E5E5;color: #333333;}
+.xsh_pages{margin-bottom: 50px;}
+/*浮层*/
+.bm_c, .bm{overflow: visible;}
+.icn{position: relative;}
+.xsh_user_groupdata{width: 180px;height: auto;padding: 20px 10px;border-radius: 10px;position: absolute;top: 50%;left: 70px;background: #ffffff;border: 2px solid #5597ED;margin: auto;line-height: 30px;font-size: 14px;transform: translateY(-50%);  -webkit-transform: translateY(-50%);  -moz-transform: translateY(-50%); -ms-transform: translateY(-50%);  -o-transform: translateY(-50%);  display: none;}
+.xsh_user_groupdata>p{border-bottom: 1px solid #CCCCCC;overflow: hidden;}
+.xsh_user_groupdata>p>span{display: block;float: left;}
+.xsh_user_group_title{width: 4em;}
+.pg a, .pg strong, .pgb a, .pg label{padding: 0 10px;height: 35px;font-size: 16px;border-radius: 5px;line-height: 35px;}
+/**/
+.bm_c>.xsh_fatie{width: 80%;height: auto;padding: 10px;background: #5597ED;margin: auto;border-radius: 5px;}
+.bm_c>.xsh_fatie>a{display: block;width: 80%;margin: auto;color: #ffffff;font-size: 16px;font-size: 20px;font-weight: 900;}
+.bm_c>.xsh_fatie>a>img{margin-left: 10px;}
+.bm_c>.xsh_fatie>a>span{float: right;margin-top: 10px;}

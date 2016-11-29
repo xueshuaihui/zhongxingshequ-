@@ -161,7 +161,7 @@
 .xsh_circle_content{background: #ffffff;border-radius: 10px;margin-top: 10px;padding-bottom: 50px;}
 .xsh_circle_conbox{width: 90%;margin: auto;}
 .xsh_circle_form{display: block;padding-bottom: 30px;border-bottom: 1px solid #eee;}
-.xsh_circle_form>select{width: 100px;height: 30px;font-size: 18px;margin: 30px 15px 0 0;}
+.xsh_circle_form>select{width: 90px;height: 25px;font-size: 14px;margin: 30px 15px 0 0;}
 .xsh_circle_list{width: 100%;height: auto;}
 .xsh_circle_list>ul>li{width: 100%;height: 50px;border-bottom: 1px solid #eee;/*overflow: hidden;*/padding: 20px 0;}
 .xsh_cirlis_logo{width: 50px;height: 50px;border-radius: 50%;/*overflow: hidden;*/float: left;position: relative;}
@@ -206,3 +206,5 @@
 .xsh_detcir_theme>ul>a{float: left;margin-right: 15px;}
 .xsh_detcir_theme_btnbox{float: right;margin-top: -5px;}
 .xsh_detcir_theme_btnbox>a>span{display: block;padding: 5px 10px;float: left;background: #5597ED;color: #ffffff;margin-right: 5px;}
+/**/
+button[name="loginsubmit"]{background: #5597ED;}
