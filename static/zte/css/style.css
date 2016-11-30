@@ -224,4 +224,4 @@ button[name="loginsubmit"]{background: #5597ED;}
 .xsh_circle_check>ul>a>li .xsh_logobox>img{width: 100%;height: 100%;border-radius: 50%;overflow: hidden;}
 .xsh_circle_check>ul>a>li span{margin-left: 15px;}
 /**/
-.xsh_circle_check_close{top: 0;right: 0;}
+.xsh_circle_check_close{top: 5px;right: 8px;}

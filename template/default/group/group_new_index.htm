@@ -280,34 +280,16 @@
                         <ul>
                             <div class="xsh_close xsh_circle_check_close" onclick="closeform()"></div>
                             <h3>请选择发帖的圈子</h3>
-                            <a href="www.baidu.com">
+                            <!--{loop $grouplist_post $group}-->
+                            <a href="forum.php?mod=post&action=newthread&fid=$group[fid]">
                                 <li>
                                     <div class="xsh_logobox">
-                                        <img src="http://www.halv.com/upload/201609021629389377099.jpg" alt="加载失败"></div>
-                                    <span>双方都把对方</span>
+                                        <img src="$group[icon]" alt="加载失败"></div>
+                                    <span>$group[name]</span>
                                 </li>
                             </a>
-                            <a href="www.baidu.com">
-                                <li>
-                                    <div class="xsh_logobox">
-                                        <img src="http://www.halv.com/upload/201609021629389377099.jpg" alt="加载失败"></div>
-                                    <span>双方都把对方</span>
-                                </li>
-                            </a>
-                            <a href="www.baidu.com">
-                                <li>
-                                    <div class="xsh_logobox">
-                                        <img src="http://www.halv.com/upload/201609021629389377099.jpg" alt="加载失败"></div>
-                                    <span>双方都把对方</span>
-                                </li>
-                            </a>
-                            <a href="www.baidu.com">
-                                <li>
-                                    <div class="xsh_logobox">
-                                        <img src="http://www.halv.com/upload/201609021629389377099.jpg" alt="加载失败"></div>
-                                    <span>双方都把对方</span>
-                                </li>
-                            </a>
+                            <!--{/loop}-->
+                            
                         </ul>
                     </div>
                 <a href="forum.php?mod=group&action=create">
