@@ -153,26 +153,34 @@
                                     <a href="">
                                         <!--{avatar($thread['authorid'], 'small')}-->
                                     </a>
+                                    <div class="xsh_expert_cad xsh_circle_cad">
+                                        <ul>
+                                            <li><h3>用户名:</h3><span>额看来惹额看来惹</span></li>
+                                            <li><h3>用户状态:</h3><span>用户在线</span></li>
+                                            <li><h3>积分：</h3><span>456546546</span></li>
+                                        </ul>
+                                    </div>
                                 </div>
                                 <div class="xsh_cirlis_name">
-                                	<!--{if $thread[folder] == 'lock'}-->
-										<img src="{IMGDIR}/folder_lock.gif" />
-									<!--{elseif $thread['special'] == 1}-->
-										<img src="{IMGDIR}/pollsmall.gif" alt="{lang thread_poll}" />
-									<!--{elseif $thread['special'] == 2}-->
-										<img src="{IMGDIR}/tradesmall.gif" alt="{lang thread_trade}" />
-									<!--{elseif $thread['special'] == 3}-->
-										<img src="{IMGDIR}/rewardsmall.gif" alt="{lang thread_reward}" />
-									<!--{elseif $thread['special'] == 4}-->
-										<img src="{IMGDIR}/activitysmall.gif" alt="{lang thread_activity}" />
-									<!--{elseif $thread['special'] == 5}-->
-										<img src="{IMGDIR}/debatesmall.gif" alt="{lang thread_debate}" />
-									<!--{elseif in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
-										<img src="{IMGDIR}/pin_$thread[displayorder].gif" alt="$_G[setting][threadsticky][3-$thread[displayorder]]" />
-									<!--{else}-->
-										<img src="{IMGDIR}/folder_$thread[folder].gif" />
-									<!--{/if}-->
-                                    <h3 class="xsh_cirlis_cirname"><a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"$thread[highlight] class="xst">$thread[subject]</a></h3>
+                                    <h3 class="xsh_cirlis_cirname"><a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"$thread[highlight] class="xst">$thread[subject]</a>
+                                        <!--{if $thread[folder] == 'lock'}-->
+                                        <img src="{IMGDIR}/folder_lock.gif" />
+                                        <!--{elseif $thread['special'] == 1}-->
+                                        <img src="{IMGDIR}/pollsmall.gif" alt="{lang thread_poll}" />
+                                        <!--{elseif $thread['special'] == 2}-->
+                                        <img src="{IMGDIR}/tradesmall.gif" alt="{lang thread_trade}" />
+                                        <!--{elseif $thread['special'] == 3}-->
+                                        <img src="{IMGDIR}/rewardsmall.gif" alt="{lang thread_reward}" />
+                                        <!--{elseif $thread['special'] == 4}-->
+                                        <img src="{IMGDIR}/activitysmall.gif" alt="{lang thread_activity}" />
+                                        <!--{elseif $thread['special'] == 5}-->
+                                        <img src="{IMGDIR}/debatesmall.gif" alt="{lang thread_debate}" />
+                                        <!--{elseif in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
+                                        <img src="{IMGDIR}/pin_$thread[displayorder].gif" alt="$_G[setting][threadsticky][3-$thread[displayorder]]" />
+                                        <!--{else}-->
+                                        <!--<img src="{IMGDIR}/folder_$thread[folder].gif" />-->
+                                        <!--{/if}-->
+                                    </h3>
                                     
                                     <!--{if $thread['readperm']}--> - [{lang readperm} <span class="xw1">$thread[readperm]</span>]<!--{/if}-->
 									<!--{if $thread['price'] > 0}-->
