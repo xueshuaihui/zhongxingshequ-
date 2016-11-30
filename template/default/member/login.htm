@@ -1,5 +1,9 @@
 <!--{template common/header}-->
-
+<link rel="stylesheet" href="/static/zte/css/reginfo.css">
+<link rel="stylesheet" href="/static/zte/css/logo.css">
+<style>
+    .xsh_yzm th{display: none;}
+</style>
 <!--{eval $loginhash = 'L'.random(4);}-->
 <!--{if empty($_GET['infloat'])}-->
 <div id="ct" class="ptm wp w cl">
@@ -31,9 +35,9 @@
                 <div id="main_messaqge_$loginhash"{if $auth} style="width: auto"{/if}>
                 <div id="layer_login_$loginhash">
                     <h3 class="flb">
-                        <em id="returnmessage_$loginhash">
+                        <!--<em id="returnmessage_$loginhash">-->
                             <!--{if !empty($_GET['infloat'])}--><!--{if !empty($_GET['guestmessage'])}-->{lang login_guestmessage}<!--{elseif $auth}-->{lang profile_renew}<!--{else}-->{lang login_member}<!--{/if}--><!--{/if}-->
-                        </em>
+                        <!--</em>-->
                         <span><!--{if !empty($_GET['infloat']) && !isset($_GET['frommessage'])}--><a href="javascript:;" class="flbc" onclick="hideWindow('$_GET[handlekey]', 0, 1);" title="{lang close}">{lang close}</a><!--{/if}--></span>
                     </h3>
                     <!--{hook/logging_top}-->
@@ -60,30 +64,30 @@
                             <div class="rfm">
                                 <table>
                                     <tr>
-                                        <th>
-                                            <!--{if $this->setting['autoidselect']}--><label for="username_$loginhash">{lang login_id}:</label><!--{else}-->
+                                        <!--<th>
+                                            {if $this->setting['autoidselect']}<label for="username_$loginhash">{lang login_id}:</label>{else}
                                             <span class="login_slct">
 										<select name="loginfield" style="float: left;" width="45" id="loginfield_$loginhash">
 											<option value="username">{lang username}</option>
-                                            <!--{if getglobal('setting/uidlogin')}-->
+                                            &lt;!&ndash;{if getglobal('setting/uidlogin')}&ndash;&gt;
 											<option value="uid">{lang uid}</option>
-                                            <!--{/if}-->
+                                            &lt;!&ndash;{/if}&ndash;&gt;
 											<option value="email">{lang email}</option>
 										</select>
 									</span>
-                                            <!--{/if}-->
-                                        </th>
-                                        <td><input type="text" name="username" id="username_$loginhash" autocomplete="off" size="30" class="px p_fre" tabindex="1" value="$username" /></td>
-                                        <td class="tipcol"><a href="member.php?mod={$_G[setting][regname]}">$_G['setting']['reglinkname']</a></td>
+                                            {/if}
+                                        </th>-->
+                                        <td><input type="text" name="username" id="username_$loginhash" placeholder="{lang username}" autocomplete="off" size="30" class="px p_fre" tabindex="1" value="$username" /></td>
+                                        <!--<td class="tipcol"><a href="member.php?mod={$_G[setting][regname]}">$_G['setting']['reglinkname']</a></td>-->
                                     </tr>
                                 </table>
                             </div>
                             <div class="rfm">
                                 <table>
                                     <tr>
-                                        <th><label for="password3_$loginhash">{lang login_password}:</label></th>
-                                        <td><input type="password" id="password3_$loginhash" name="password" onfocus="clearpwd()" size="30" class="px p_fre" tabindex="1" /></td>
-                                        <td class="tipcol"><a href="javascript:;" onclick="display('layer_login_$loginhash');display('layer_lostpw_$loginhash');" title="{lang getpassword}">{lang getpassword}</a></td>
+                                        <!--<th><label for="password3_$loginhash">{lang login_password}:</label></th>-->
+                                        <td><input type="password" id="password3_$loginhash" placeholder="{lang login_password}:" name="password" onfocus="clearpwd()" size="30" class="px p_fre" tabindex="1" /></td>
+                                        <!--<td class="tipcol"><a href="javascript:;" onclick="display('layer_login_$loginhash');display('layer_lostpw_$loginhash');" title="{lang getpassword}">{lang getpassword}</a></td>-->
                                     </tr>
                                 </table>
                             </div>
@@ -93,8 +97,10 @@
                             <div class="rfm">
                                 <table>
                                     <tr>
-                                        <th>{lang security_q}:</th>
-                                        <td><select id="loginquestionid_$loginhash" width="213" name="questionid"{if !$questionexist} onchange="if($('loginquestionid_$loginhash').value > 0) {$('loginanswer_row_$loginhash').style.display='';} else {$('loginanswer_row_$loginhash').style.display='none';}"<!--{/if}-->>
+                                        <!--<th>{lang security_q}: </th>-->
+                                        <td>
+                                            <span class="xsh_select_title">{lang security_q}</span>
+                                            <select id="loginquestionid_$loginhash" width="213" name="questionid"{if !$questionexist} onchange="if($('loginquestionid_$loginhash').value > 0) {$('loginanswer_row_$loginhash').style.display='';} else {$('loginanswer_row_$loginhash').style.display='none';}"<!--{/if}-->>
                                             <option value="0"><!--{if $questionexist}-->{lang security_question_0}<!--{else}-->{lang security_question}<!--{/if}--></option>
                                             <option value="1">{lang security_question_1}</option>
                                             <option value="2">{lang security_question_2}</option>
@@ -110,7 +116,7 @@
                             <div class="rfm" id="loginanswer_row_$loginhash" {if !$questionexist} style="display:none"{/if}>
                             <table>
                                 <tr>
-                                    <th>{lang security_a}:</th>
+                                    <!--<th>{lang security_a}:</th>-->
                                     <td><input type="text" name="answer" id="loginanswer_$loginhash" autocomplete="off" size="30" class="px p_fre" tabindex="1" /></td>
                                 </tr>
                             </table>
@@ -118,7 +124,7 @@
                         <!--{/if}-->
 
                         <!--{if $seccodecheck}-->
-                        <!--{block sectpl}--><div class="rfm"><table><tr><th><sec>: </th><td><sec><br /><sec></td></tr></table></div><!--{/block}-->
+                        <!--{block sectpl}--><div class="rfm xsh_yzm"><table><tr><th><sec>: </th><td><sec><br /><sec><a href="javascript:;" onclick="updateseccode();doane(event);" class="xsh_reload"><img src="/static/zte/images/reload.png" alt=""></a></td></tr></table></div><!--{/block}-->
                         <!--{subtemplate common/seccheck}-->
                         <!--{/if}-->
 
@@ -127,7 +133,7 @@
                         <div class="rfm {if !empty($_GET['infloat'])} bw0{/if}">
                             <table>
                                 <tr>
-                                    <th></th>
+                                    <!--<th></th>-->
                                     <td><label for="cookietime_$loginhash"><input type="checkbox" class="pc" name="cookietime" id="cookietime_$loginhash" tabindex="1" value="2592000" $cookietimecheck />{lang login_permanent}</label></td>
                                 </tr>
                             </table>
@@ -136,7 +142,7 @@
                         <div class="rfm mbw bw0">
                             <table width="100%">
                                 <tr>
-                                    <th>&nbsp;</th>
+                                   <!-- <th>&nbsp;</th>-->
                                     <td>
                                         <button class="pn pnc" type="submit" name="loginsubmit" value="true" tabindex="1"><strong>{lang login}</strong></button>
                                     </td>
@@ -145,8 +151,16 @@
                                         <!--{if !$this->setting['bbclosed'] && empty($_GET['infloat'])}--><a href="javascript:;" onclick="ajaxget('member.php?mod=clearcookies&formhash={FORMHASH}', 'returnmessage_$loginhash', 'returnmessage_$loginhash');return false;" title="{lang login_clearcookies}" class="y">{lang login_clearcookies}</a><!--{/if}-->
                                     </td>
                                 </tr>
+                                <tr class="xsh_btn">
+
+                                </tr>
                             </table>
                         </div>
+                        <div  class="rfm mbw bw0">
+                            <span class="xsh_btnL"><a href="member.php?mod={$_G[setting][regname]}" >$_G['setting']['reglinkname']</a></span>
+                            <span class="xsh_btnR"><a href="javascript:;"  onclick="display('layer_login_$loginhash');display('layer_lostpw_$loginhash');" title="{lang getpassword}">{lang getpassword}</a></span>
+                        </div>
+
 
                         <!--{if !empty($_G['setting']['pluginhooks']['logging_method'])}-->
                         <div class="rfm bw0 {if empty($_GET['infloat'])} mbw{/if}">

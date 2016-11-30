@@ -1,0 +1,16 @@
+.xsh_reginfo_title{text-align: center;font-size: 28px;margin-bottom: 20px;}
+.rfm{border: none;}
+.rfm input{font-size: 16px;}
+.rfm .px{width: 450px;height: 38px;}
+.rfm select{width: 367px;height: 38px;font-size: 16px;margin-left: -4px;margin-top: -1px;}
+.xsh_select_title{border: 1px solid;border-color: #E0E0E0;font-size: 16px;padding: 6px 10px 9px 14px;background: #FFF url(http://localhost/static/image/common/px.png) repeat-x 0 0;}
+.xsh_yzm td .xi2,.xsh_yzm td br{display: none;}
+.xsh_yzm th{color: #ffffff;}
+.xsh_yzm th>span{float: right;margin-top: 20px;}
+.xsh_yzm td span{color: #ffffff;margin-left: -50px;}
+.xsh_yzm td input{width: 300px!important;}
+.px, .pt, .ps, select{border: 1px solid;border-color: #E0E0E0;}
+.xsh_reload{float: right;padding-top: 15px;margin-left: 5px;}
+.xsh_reload>img{width: 20px;}
+/*button*/
+.pnc, a.pnc{width: 460px;height: 45px;font-size: 24px;}

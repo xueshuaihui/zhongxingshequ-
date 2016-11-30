@@ -4,7 +4,7 @@ var circle_header = jq(".xsh_circle_header");
 var tabheader = circle_header.find("ul>li>span");
 var circle_tabcon = jq(".xsh_circle_tabcon");
 var xsh_more = jq(".xsh_more");
-var  grouptype = "join";
+var  grouptype = $(".xsh_circle_hot").attr("xid");
 if(circle_tabcon.eq(0).find("ul>li").length<4){
     xsh_more.css({display:"none"})
 }else{
