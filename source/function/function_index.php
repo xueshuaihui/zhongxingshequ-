@@ -79,8 +79,8 @@ function getHDZL($bkId, $for = 1) {
 }
 
 function getExpertList ($subBk, $order, $limit) {
-    if(!is_array($subBk)) {
-        return exit('error');
+    if(!is_array($subBk) || count($subBk) < 1) {
+        return "";
     }
     $fids = '';
     foreach ($subBk as $bk){
