@@ -169,8 +169,8 @@
 										<img src="{IMGDIR}/debatesmall.gif" alt="{lang thread_debate}" />
 									<!--{elseif in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
 										<img src="{IMGDIR}/pin_$thread[displayorder].gif" alt="$_G[setting][threadsticky][3-$thread[displayorder]]" />
-									<!--{else}-->
-										<img src="{IMGDIR}/folder_$thread[folder].gif" />
+									<!--else-->
+										<!--<img src="{IMGDIR}/folder_$thread[folder].gif" />-->
 									<!--{/if}-->
                                     <h3 class="xsh_cirlis_cirname"><a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"$thread[highlight] class="xst">$thread[subject]</a></h3>
                                     
@@ -270,7 +270,7 @@
                         <li>
                             <div class="xsh_circle_logobox">
                                 <div class="xsh_circle_logo">
-                                    <a href="">
+                                    <a href="forum.php?mod=forumdisplay&action=list&fid=$group[fid]">
                                         <img src="$group[icon]" alt="加载不成功">
                                     </a>
                                 </div>
@@ -302,7 +302,7 @@
                         <li>
                             <div class="xsh_circle_logobox">
                                 <div class="xsh_circle_logo">
-                                    <a href="">
+                                    <a href="forum.php?mod=forumdisplay&action=list&fid=$group[fid]">
                                         <img src="$group[icon]" alt="加载不成功">
                                     </a>
                                 </div>
