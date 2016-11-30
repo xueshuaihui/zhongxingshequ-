@@ -66,6 +66,15 @@ function grouplist($orderby = 'displayorder', $fieldarray = array(), $num = 1, $
 	return $grouplist;
 }
 
+function getGroupNameByTid($fid) {
+    $fid = intval($fid);
+    if(empty($fid)){
+        return '';
+    }
+    $query = C::t('forum_forum')->fetch_info_by_fid($fid);
+    return $query['name'];
+}
+
 function mygrouplist($uid, $orderby = '', $fieldarray = array(), $num = 0, $start = 0, $ismanager = 0, $count = 0) {
 	$uid = intval($uid);
 	if(empty($uid)) {

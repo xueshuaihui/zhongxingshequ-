@@ -147,12 +147,12 @@
 
 	<div class="xsh_pls xsh_position">
 		<div class="xsh_circle_logo">
-			<img src="http://i0.hdslb.com/bfs/archive/83f59f4fffd3cd61ba74bdc3979525b83c20b57f.jpg" alt="加载不成功">
+			<img src="<!--{$icon}-->" alt="加载不成功">
 		</div>
 		<div class="xsh_circle_message">
-			<p class="xsh_circle_name">圈子名称</p>
-			<p><span class="integral">帖子：43543534</span></p>
-			<p><span class="member">成员：4324134</span></p>
+			<p class="xsh_circle_name"><!--{$forum['name']}--></p>
+			<p><span class="integral">帖子数：<!--{$feedpostnum}--></span></p>
+			<p><span class="member">成员数：<!--{$forum['membernum']}--></span></p>
 		</div>
 	</div>
 
@@ -495,7 +495,7 @@
 	<!--{/if}-->
 <div class="xsh_reply">
 	<a href="javascript:;"  onclick="showWindow('reply', 'forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]')">
-		<div class="logobox"><img src="http://i0.hdslb.com/bfs/archive/83f59f4fffd3cd61ba74bdc3979525b83c20b57f.jpg" alt=""></div>
+		<div class="logobox"><!--{avatar($_G['uid'])}--></div>
 		<div class="xsh_replytext">#点这里快速回复#</div>
 	</a>
 </div>

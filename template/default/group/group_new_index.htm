@@ -162,7 +162,24 @@
                                     </div>
                                 </div>
                                 <div class="xsh_cirlis_name">
-                                    <h3 class="xsh_cirlis_cirname"><a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"$thread[highlight] class="xst">$thread[subject]</a>
+                                	<!--{if $thread[folder] == 'lock'}-->
+										<img src="{IMGDIR}/folder_lock.gif" />
+									<!--{elseif $thread['special'] == 1}-->
+										<img src="{IMGDIR}/pollsmall.gif" alt="{lang thread_poll}" />
+									<!--{elseif $thread['special'] == 2}-->
+										<img src="{IMGDIR}/tradesmall.gif" alt="{lang thread_trade}" />
+									<!--{elseif $thread['special'] == 3}-->
+										<img src="{IMGDIR}/rewardsmall.gif" alt="{lang thread_reward}" />
+									<!--{elseif $thread['special'] == 4}-->
+										<img src="{IMGDIR}/activitysmall.gif" alt="{lang thread_activity}" />
+									<!--{elseif $thread['special'] == 5}-->
+										<img src="{IMGDIR}/debatesmall.gif" alt="{lang thread_debate}" />
+									<!--{elseif in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
+										<img src="{IMGDIR}/pin_$thread[displayorder].gif" alt="$_G[setting][threadsticky][3-$thread[displayorder]]" />
+									<!--else-->
+										<!--<img src="{IMGDIR}/folder_$thread[folder].gif" />-->
+									<!--{/if}-->
+                                    <h3 class="xsh_cirlis_cirname"><a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"$thread[highlight] class="xst">$thread[subject]</a></h3>
                                         <!--{if $thread[folder] == 'lock'}-->
                                         <img src="{IMGDIR}/folder_lock.gif" />
                                         <!--{elseif $thread['special'] == 1}-->
@@ -181,7 +198,7 @@
                                         <!--<img src="{IMGDIR}/folder_$thread[folder].gif" />-->
                                         <!--{/if}-->
                                     </h3>
-                                    
+
                                     <!--{if $thread['readperm']}--> - [{lang readperm} <span class="xw1">$thread[readperm]</span>]<!--{/if}-->
 									<!--{if $thread['price'] > 0}-->
 										<!--{if $thread['special'] == '3'}-->
@@ -228,7 +245,7 @@
                                     	
                                     </span> | <span>
                                     	$thread[dateline]
-                                    </span> | <span>核心网资料社区</span> </p>
+                                    </span> | <span><!--{eval echo getGroupNameByTid($thread['fid']) }--></span> </p>
                                 </div>
                                 <div class="xsh_cirlis_data">
                                     <span class="liuyanl">$thread[allreplies]</span>
@@ -312,7 +329,7 @@
                         <li>
                             <div class="xsh_circle_logobox">
                                 <div class="xsh_circle_logo">
-                                    <a href="">
+                                    <a href="forum.php?mod=forumdisplay&action=list&fid=$group[fid]">
                                         <img src="$group[icon]" alt="加载不成功">
                                     </a>
                                 </div>
@@ -344,7 +361,7 @@
                         <li>
                             <div class="xsh_circle_logobox">
                                 <div class="xsh_circle_logo">
-                                    <a href="">
+                                    <a href="forum.php?mod=forumdisplay&action=list&fid=$group[fid]">
                                         <img src="$group[icon]" alt="加载不成功">
                                     </a>
                                 </div>

@@ -1,5 +1,4 @@
 <?php
-
 //我加入的圈子、管理的圈子、全部圈子
 require_once libfile('function/group');
 
@@ -85,8 +84,8 @@ if ($_G['setting']['grouppowerpluginidisopen'] && $_G['adminid'] != 1) {
         foreach ($group_tag_list as $group_tag) {
             $group_tag_ids[] = $group_tag['tagid'];
         }
-        
-        if (empty(array_intersect($group_tag_ids, $user_tag_ids))) {
+
+        if ($group_tag_ids && $user_tag_ids && !count(array_intersect($group_tag_ids, $user_tag_ids))) {
             unset($group);
         }
     }

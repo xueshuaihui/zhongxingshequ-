@@ -12,12 +12,13 @@ if(!defined('IN_DISCUZ')) {
 }
 
 require_once libfile('function/forumlist');
+require_once libfile('function/group');
 require_once libfile('function/discuzcode');
 require_once libfile('function/post');
 
 $thread = & $_G['forum_thread'];
 $forum = & $_G['forum'];
-
+$icon = get_groupimg($forum['icon'], 'icon');
 if(!empty($_GET['checkrush']) && preg_match('/[^0-9_]/', $_GET['checkrush'])) {
 	$_GET['checkrush'] = '';
 }
