@@ -55,7 +55,7 @@ if ($mod == 'new_index') {
                 $group_tag_ids[] = $group_tag['tagid'];
             }
     
-            if (empty(array_intersect($group_tag_ids, $user_tag_ids))) {
+            if ($group_tag_ids && $user_tag_ids && !count(array_intersect($group_tag_ids, $user_tag_ids))) {
                 unset($group);
             }
         }
