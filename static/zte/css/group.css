@@ -54,3 +54,4 @@ body{background:  rgba(242, 242, 242, 1);}
 .bm_c>.xsh_fatie>a>img{margin-left: 10px;}
 .bm_c>.xsh_fatie>a>span{float: right;margin-top: 10px;}
 button{background: #5597ED!important;color: #ffffff!important;}
+.xsh_bmlist{overflow: hidden;}

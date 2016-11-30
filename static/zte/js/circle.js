@@ -70,3 +70,12 @@ var circle_form = jq(".xsh_circle_form");
 circle_form.find("select").change(function(){
     window.location.href = jq(this).val();
 })
+/**/
+var circleCheckClose = jq(".xsh_circle_check_close");
+var circleCheck = jq(".xsh_circle_check");
+circleCheckClose.click(function(){
+    circleCheck.css({display:"none"});
+})
+function circleCheckxian(){
+    circleCheck.css({display:"block"});
+}
