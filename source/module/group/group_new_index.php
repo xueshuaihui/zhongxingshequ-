@@ -84,7 +84,7 @@ if ($_G['setting']['grouppowerpluginidisopen'] && $_G['adminid'] != 1) {
         foreach ($group_tag_list as $group_tag) {
             $group_tag_ids[] = $group_tag['tagid'];
         }
-        
+
         if ($group_tag_ids && $user_tag_ids && !count(array_intersect($group_tag_ids, $user_tag_ids))) {
             unset($group);
         }
