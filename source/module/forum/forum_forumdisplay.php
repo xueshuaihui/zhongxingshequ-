@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(11);
 /**
  *      [Discuz!] (C)2001-2099 Comsenz Inc.
  *      This is NOT a freeware, use is subject to license terms
@@ -65,9 +65,9 @@ if ($mod == 'new_index') {
     //=============================圈子加强功能====================
 }
 //===============================================yy-end==============================================
-//if(!$_G['uid']){
-//    showmessage('forum_before_login', NULL);
-//}
+if(!$_G['uid']){
+    showmessage('forum_before_login', NULL);
+}
 //if($_G['forum']['redirect']) {
 //	dheader("Location: {$_G[forum][redirect]}");
 //} elseif($_G['forum']['type'] == 'group') {
