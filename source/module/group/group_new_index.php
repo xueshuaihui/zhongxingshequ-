@@ -14,13 +14,14 @@ $num = mygrouplist($_G['uid'], 'lastupdate', array('f.name', 'ff.icon'), 0, 0, $
 $grouplist_manage = mygrouplist($_G['uid'], 'lastupdate', array(), 10000, 0, $ismanager);
 
 //发帖圈子列表
-if (count($grouplist_join) && !count($grouplist_manage)) {
+if (count($grouplist_join) && !($grouplist_manage)) {
     $grouplist_post = $grouplist_join;
-} elseif (count($grouplist_manage) && !count($grouplist_join)) {
+} elseif (count($grouplist_manage) && !($grouplist_join)) {
     $grouplist_post = $grouplist_manage;
 } else {
     $grouplist_post = array_merge($grouplist_join, $grouplist_manage);
 }
+
 
 //全部圈子列表
 $ismanager = 0;
