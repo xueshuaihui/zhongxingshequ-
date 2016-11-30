@@ -162,24 +162,7 @@
                                     </div>
                                 </div>
                                 <div class="xsh_cirlis_name">
-                                	<!--{if $thread[folder] == 'lock'}-->
-										<img src="{IMGDIR}/folder_lock.gif" />
-									<!--{elseif $thread['special'] == 1}-->
-										<img src="{IMGDIR}/pollsmall.gif" alt="{lang thread_poll}" />
-									<!--{elseif $thread['special'] == 2}-->
-										<img src="{IMGDIR}/tradesmall.gif" alt="{lang thread_trade}" />
-									<!--{elseif $thread['special'] == 3}-->
-										<img src="{IMGDIR}/rewardsmall.gif" alt="{lang thread_reward}" />
-									<!--{elseif $thread['special'] == 4}-->
-										<img src="{IMGDIR}/activitysmall.gif" alt="{lang thread_activity}" />
-									<!--{elseif $thread['special'] == 5}-->
-										<img src="{IMGDIR}/debatesmall.gif" alt="{lang thread_debate}" />
-									<!--{elseif in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
-										<img src="{IMGDIR}/pin_$thread[displayorder].gif" alt="$_G[setting][threadsticky][3-$thread[displayorder]]" />
-									<!--else-->
-										<!--<img src="{IMGDIR}/folder_$thread[folder].gif" />-->
-									<!--{/if}-->
-                                    <h3 class="xsh_cirlis_cirname"><a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"$thread[highlight] class="xst">$thread[subject]</a></h3>
+                                    <h3 class="xsh_cirlis_cirname"><a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"$thread[highlight] class="xst">$thread[subject]</a>
                                         <!--{if $thread[folder] == 'lock'}-->
                                         <img src="{IMGDIR}/folder_lock.gif" />
                                         <!--{elseif $thread['special'] == 1}-->
@@ -271,11 +254,31 @@
         </div>
         <div class="xsh_con_right">
             <div class="xsh_interaction">
-                <a href="" target="">
+                <a href="javascript:;" target="" onclick="circleCheckxian()">
                     <div class="xsh_inter_cir_btn">
                         <span class="xsh_create_post">我要发帖</span>
                     </div>
                 </a>
+                    <div class="xsh_circle_check">
+                        <ul>
+                            <div class="xsh_close xsh_circle_check_close" onclick="closeform()"></div>
+                            <h3>请选择发帖的圈子</h3>
+                            {if $grouplist_post}
+                            <!--{loop $grouplist_post $group}-->
+                            <a href="forum.php?mod=post&action=newthread&fid=$group[fid]">
+                                <li>
+                                    <div class="xsh_logobox">
+                                        <img src="$group[icon]" alt="加载失败"></div>
+                                    <span>$group[name]</span>
+                                </li>
+                            </a>
+                            <!--{/loop}-->
+                            {else}
+                            	<h5 style="text-align:center;">没有可选择的圈子</h5>
+                            {/if}
+                            
+                        </ul>
+                    </div>
                 <a href="forum.php?mod=group&action=create">
                     <div class="xsh_inter_cir_btn">
                         <span class="xsh_create_circle">创建圈子</span>

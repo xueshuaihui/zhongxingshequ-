@@ -167,7 +167,7 @@
 .xsh_cirlis_logo{width: 50px;height: 50px;border-radius: 50%;/*overflow: hidden;*/float: left;position: relative;}
 .xsh_cirlis_logo>a>img{width: 100%;height: 100%;border-radius: 50%;}
 .xsh_cirlis_name{width: auto;height: 100%;line-height: 25px;float: left;margin-left: 15px;}
-.xsh_cirlis_cirname{font-size: 18px;height: 50%;}
+.xsh_cirlis_cirname{font-size: 16px;height: 50%;font-weight: 500;}
 .xsh_cirlis_name>p,.xsh_cirlis_name>p>span>a{color: #CCCCCC;font-size: 12px;}
 .xsh_cirlis_data{float: right;line-height: 50px;}
 .xsh_inter_cir_btn{background: #5597ED;border-radius: 10px;margin: 20px;padding: 10px;text-align: center;}
@@ -208,3 +208,20 @@
 .xsh_detcir_theme_btnbox>a>span{display: block;padding: 5px 10px;float: left;background: #5597ED;color: #ffffff;margin-right: 5px;}
 /**/
 button[name="loginsubmit"]{background: #5597ED;}
+/**/
+.xsh_circle_check{position: fixed;background: rgba(255,255,255,0.8);width: 100%;height: 100%;top: 0;left: 0;z-index: 999;display: none;}
+.xsh_circle_check>ul{width: 280px;height: auto;display: block;max-height:400px;border: 2px solid #5597ED;border-radius: 5px;position: absolute;top: 50%;left: 50%;padding: 0 15px;background: #ffffff;line-height: 60px;overflow: auto;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transliform: translate(-50%,-50%);
+    -ms-transliform: translate(-50%,-50%);
+    -o-transliform: translate(-50%,-50%);
+    transliform: translate(-50%,-50%);}
+.xsh_circle_check>ul h3{text-align: center;font-size: 16px;padding: 5px 0;}
+.xsh_circle_check>ul>a{display: block;}
+.xsh_circle_check>ul>a:hover{background: #EEEEEE;}
+.xsh_circle_check>ul>a>li{padding: 10px 5px;font-size: 16px;height: 60px;overflow: hidden;border-top: 1px solid #CCCCCC;}
+.xsh_circle_check>ul>a>li .xsh_logobox{width: 60px;height: 60px;border-radius: 50%;overflow: hidden;position: relative;float: left;}
+.xsh_circle_check>ul>a>li .xsh_logobox>img{width: 100%;height: 100%;border-radius: 50%;overflow: hidden;}
+.xsh_circle_check>ul>a>li span{margin-left: 15px;}
+/**/
+.xsh_circle_check_close{top: 5px;right: 8px;}
