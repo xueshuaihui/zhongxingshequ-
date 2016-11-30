@@ -3779,7 +3779,9 @@ function uploadFile ($file, $basePath) {
 	}
 	if($file['type'] == 'image/jpg') {
 		$ext = '.jpg';
-	} elseif ($file['type'] == 'image/png') {
+	}elseif($file['type'] == 'image/jpeg'){
+        $ext = '.jpeg';
+    } elseif ($file['type'] == 'image/png') {
 		$ext = '.png';
 	} else {
 		echo $file['type'];
