@@ -180,7 +180,6 @@
 										<!--<img src="{IMGDIR}/folder_$thread[folder].gif" />-->
 									<!--{/if}-->
                                     <h3 class="xsh_cirlis_cirname"><a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"$thread[highlight] class="xst">$thread[subject]</a></h3>
-                                    <h3 class="xsh_cirlis_cirname"><a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"$thread[highlight] class="xst">$thread[subject]</a>
                                         <!--{if $thread[folder] == 'lock'}-->
                                         <img src="{IMGDIR}/folder_lock.gif" />
                                         <!--{elseif $thread['special'] == 1}-->
@@ -246,7 +245,7 @@
                                     	
                                     </span> | <span>
                                     	$thread[dateline]
-                                    </span> | <span>核心网资料社区</span> </p>
+                                    </span> | <span><!--{eval echo getGroupNameByTid($thread['fid']) }--></span> </p>
                                 </div>
                                 <div class="xsh_cirlis_data">
                                     <span class="liuyanl">$thread[allreplies]</span>
