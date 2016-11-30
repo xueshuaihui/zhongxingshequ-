@@ -17,6 +17,9 @@ if(isset($isApi) && $isApi){
         $pagnate = getPagnate($threadTypeId, $pageId, $_G['setting']['index_list_count']);
         apiReturn(1, '获取成功', ['data'=>$infoFlow, 'pagnate'=>$pagnate]);
     } elseif ($get == 'thread') {
+        if(!isset($_G['uid']) || !$_G['uid']){
+            apiReturn(2, 'no auth');
+        }
         $header = getHDZL($param['tid'], 1);
         $data = getHDZL($param['tid'], 2);
         apiReturn(1, '获取成功', ['header'=>$header, 'experts'=>$data]);

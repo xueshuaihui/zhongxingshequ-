@@ -11,7 +11,7 @@ function dd($d){
 function apiReturn($r, $d = 'ok', $data = null) {
     echo json_encode(
         array(
-            'state' => $r?1:0,
+            'state' => $r?$r:0,
             'description' => $d,
             'data' => $data
         )
