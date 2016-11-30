@@ -90,7 +90,9 @@ function getExpertList ($subBk, $order, $limit) {
             $fids .= $item['fid'].',';
         }
     }
-
+    if($fids == ''){
+        return '';
+    }
     $expertInfo = C::t('forum_forumfield')->get_all_username_by_fid(trim($fids, ','));
     $expertName = [];
     foreach ($expertInfo as $k=>$username) {
