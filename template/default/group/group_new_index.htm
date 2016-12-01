@@ -263,6 +263,7 @@
                         <ul>
                             <div class="xsh_close xsh_circle_check_close" onclick="closeform()"></div>
                             <h3>请选择发帖的圈子</h3>
+                            {if $grouplist_post}
                             <!--{loop $grouplist_post $group}-->
                             <a href="forum.php?mod=post&action=newthread&fid=$group[fid]">
                                 <li>
@@ -272,6 +273,9 @@
                                 </li>
                             </a>
                             <!--{/loop}-->
+                            {else}
+                            	<h5 style="text-align:center;">没有可选择的圈子</h5>
+                            {/if}
                             
                         </ul>
                     </div>

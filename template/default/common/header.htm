@@ -40,10 +40,10 @@
     </div>
 </div>
 <div class="xsh_navbox">
-    <div class="xsh_nav">
+    <div class="xsh_nav"><a href="index.php">
         <div class="xsh_nav_logo">
             <img src="{$_G[setting][jspath]}../zte/images/u4.png" alt="">
-        </div>
+        </div></a>
         <!--{eval $mnid = getcurrentnav();}-->
         <div class="xsh_nav_navtext">
             <ul>
@@ -90,7 +90,7 @@
         </div>
         <!--{else}-->
         <div class="login">
-            <a href="member.php?mod=logging&action=login&referer={echo rawurlencode($dreferer)}" onclick="showWindow('login', this.href);return false;"><span>登录</span></a>
+            <a id="index_login" href="member.php?mod=logging&action=login&referer={echo rawurlencode($dreferer)}" onclick="showWindow('login', this.href);return false;"><span>登录</span></a>
             <!--<a href="javascript:;" onclick="$('#forLogin').submit()"><span>登录</span></a>-->
             <span class="login_span"></span>
             <a href="member.php?mod={$_G[setting][regname]}" target="_blank"><span>注册</span></a>

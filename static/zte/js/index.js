@@ -113,6 +113,8 @@ function expertInteraction(hid){
                 }
                 expertRadio.html(str);
                 expertBox.css({display:"block"});
+            }else if(result.state == 2){
+                jq("#index_login").click();
             }else{
                 alert("请求失败稍后再试！")
             }
