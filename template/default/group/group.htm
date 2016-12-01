@@ -17,79 +17,38 @@
 		<div class="mn">
 			<!--[diy=diycontenttop]--><div id="diycontenttop" class="area"></div><!--[/diy]-->
 			<!--{if $action != 'create'}-->
-				<!--{if $_G['forum']['banner']}-->
-					<div id="gh">
-						<img src="$_G[forum][banner]" alt="" />
-						<div class="bm bmw bw0">
-							<div class="bm_h bw0 cl">
-								<h1 class="xs2">$_G[forum][name]</h1>
-							</div>
-							<div class="bm_c">
-								<!--{if $_G['forum']['description']}--><div class="pbn">$_G['forum']['description']</div><!--{/if}-->
-								<div>
-									<a href="home.php?mod=spacecp&ac=favorite&type=group&id={$_G[forum][fid]}&handlekey=sharealbumhk_{$_G[forum][fid]}&formhash={FORMHASH}" id="a_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" title="{lang favorite}" class="fa_fav">{lang favorite}</a><span class="pipe">|</span><!--{if $_G[setting][rssstatus] && !$_GET['archiveid']}--><a href="forum.php?mod=rss&fid=$_G[fid]&auth=$rssauth" target="_blank" title="RSS" class="fa_rss">RSS</a><!--{/if}--><!--{if $status == 'isgroupuser' && helper_access::check_module('group')}--><span class="pipe">|</span><a href="javascript:;" onclick="showWindow('invite','misc.php?mod=invite&action=group&id=$_G[fid]')" class="fa_ivt"><strong class="xi2">{lang my_buddylist_invite}</strong></a><!--{/if}-->
-									<span class="pipe">|</span><!--{if $_G['current_grouplevel']['icon']}--><img src="$_G[current_grouplevel][icon]" title="{lang group_level}: $_G[current_grouplevel][leveltitle]" class="vm"> <!--{/if}-->{lang credits}: $_G[forum][commoncredits]<span class="pipe">|</span>{lang group_moderator_title}: <!--{eval $i = 1;}--><!--{loop $groupmanagers $manage}--><!--{if $i <= 0}-->, <!--{/if}--><!--{eval $i--;}--><a href="home.php?mod=space&uid=$manage[uid]" target="_blank" class="xi2">$manage[username]</a><!--{/loop}-->
-								</div>
-								<!--{if $status != 2 && $status != 3 && $status != 5}-->
-									<!--{if helper_access::check_module('group') && $status != 'isgroupuser'}-->
-									<div class="ptm pbn">
-										<button type="button" class="pn" onclick="location.href='forum.php?mod=group&action=join&fid=$_G[fid]'"><em>{lang group_join_group}</em></button>
-									</div>
-									<!--{/if}-->
-									<!--{if CURMODULE == 'group'}--><!--{hook/group_navlink}--><!--{else}--><!--{hook/forumdisplay_navlink}--><!--{/if}-->
-								<!--{/if}-->
-
-								<!--{if $action == 'index' && ($status == 2 || $status == 3 || $status == 5)}-->
-									<p class="mtm">
-										{lang group_join_type}:
-										<!--{if $_G['forum']['jointype'] == 1}-->
-											<strong>{lang group_join_type_invite}</strong>
-										<!--{elseif $_G['forum']['jointype'] == 2}-->
-											<strong>{lang group_join_type_moderate}</strong>
-										<!--{else}-->
-											<strong>{lang group_join_type_free}</strong>
-										<!--{/if}-->
-										{lang group_perm_visit}: <strong><!--{if $_G['forum']['gviewperm'] == 0}-->{lang group_perm_member_only}<!--{else}-->{lang group_perm_all_user}<!--{/if}--></strong>
-									</p>
-									<p class="mtm xi1">
-									<!--{if $status == 3 || $status == 5}-->
-										{lang group_has_joined}
-									<!--{elseif helper_access::check_module('group')}-->
-										<button type="button" class="pn" onclick="location.href='forum.php?mod=group&action=join&fid=$_G[fid]'"><em>{lang group_join_group}</em></button>
-									<!--{/if}-->
-									</p>
-								<!--{/if}-->
-							</div>
-						</div>
-					</div>
-				<!--{else}-->
 					<div class="bm">
 						<div class="bm_c xld xlda cl">
 							<dl>
 								<dd class="m"><img src="$_G[forum][icon]" alt="$_G[forum][name]" width="48" height="48" /></dd>
 								<dt>$_G[forum][name]</dt>
-								<!--{if $_G[forum][description]}--><dd  class="xsh_syn">$_G[forum][description]
-								                                       <div class="xsh_signout_btn">
-																		   <a href="javascript:;" onclick="showWindow('invite','misc.php?mod=invite&action=group&id=$_G[fid]')" class="fa_ivt"><strong class="xi2">{lang my_buddylist_invite}</strong></a>
-																		   <!--{if $status == 'isgroupuser'}--><p class="ptn"><a onclick="showDialog('{lang group_exit_confirm}', 'confirm', '', function(){location.href='forum.php?mod=group&action=out&fid=$_G[fid]'})" href="javascript:;" class="xi2">{lang group_exit}</a><p><!--{/if}-->
-																		   <!--{if $status != 2 && $status != 3 && $status != 5}-->
-																		   <!--{if helper_access::check_module('group') && $status != 'isgroupuser'}-->
-																		   <div class="ptm pbm">
-																			   <button type="button" class="pn" onclick="location.href='forum.php?mod=group&action=join&fid=$_G[fid]'"><em>{lang group_join_group}</em></button>
-																		   </div>
-																		   <!--{/if}-->
-																		   <!--{if CURMODULE == 'group'}--><!--{hook/group_navlink}--><!--{else}--><!--{hook/forumdisplay_navlink}--><!--{/if}-->
-																		   <!--{/if}-->
-																	   </div>
-																	</dd><!--{/if}-->
+								<!--{if $_G[forum][description]}-->
+                                <dd  class="xsh_syn">$_G[forum][description]
+                                   <div class="xsh_signout_btn">
+                                       <!--{if $status == 'isgroupuser' && helper_access::check_module('group')}-->
+                                       <a href="javascript:;" onclick="showWindow('invite','misc.php?mod=invite&action=group&id=$_G[fid]')" class="fa_ivt">
+                                           <strong class="xi2">{lang my_buddylist_invite}</strong>
+                                       </a>
+                                       <p class="ptn"><a onclick="showDialog('{lang group_exit_confirm}', 'confirm', '', function(){location.href='forum.php?mod=group&action=out&fid=$_G[fid]'})" href="javascript:;" class="xi2">{lang group_exit}</a><p>
+                                       <!--{/if}-->
+                                       <!--{if $status != 2 && $status != 3 && $status != 5}-->
+                                       <!--{if helper_access::check_module('group') && $status != 'isgroupuser'}-->
+                                       <div class="ptm pbm">
+                                           <button type="button" class="pn" onclick="location.href='forum.php?mod=group&action=join&fid=$_G[fid]'"><em>{lang group_join_group}</em></button>
+                                       </div>
+                                       <!--{/if}-->
+                                       <!--{if CURMODULE == 'group'}--><!--{hook/group_navlink}--><!--{else}--><!--{hook/forumdisplay_navlink}--><!--{/if}-->
+                                       <!--{/if}-->
+                                   </div>
+                                </dd>
+                                <!--{/if}-->
 								<dd class="cl">
-									<span class="y">
-										<!--<a href="home.php?mod=spacecp&ac=favorite&type=group&id={$_G[forum][fid]}&handlekey=sharealbumhk_{$_G[forum][fid]}&formhash={FORMHASH}" id="a_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" title="{lang favorite}" class="fa_fav">{lang favorite}</a><span class="pipe">|</span>-->
-										<!--{if $_G[setting][rssstatus] && !$_GET['archiveid']}--><!--<a href="forum.php?mod=rss&fid=$_G[fid]&auth=$rssauth" target="_blank" title="RSS" class="fa_rss">RSS</a>--><!--{/if}-->
-										<!--{if $status == 'isgroupuser' && helper_access::check_module('group')}--><!--<span class="pipe">|</span>-->
-										<!--{/if}--></span>
 									<!--{if $_G['current_grouplevel']['icon']}--><img src="$_G[current_grouplevel][icon]" title="{lang group_level}: $_G[current_grouplevel][leveltitle]" class="vm"> <!--{/if}-->
-									<img src="/static/zte/images/u1249.png" alt="加载不成功" class="xsh_circle_img">{lang group_moderator_title}: <!--{eval $i = 1;}--><!--{loop $groupmanagers $manage}--><!--{if $i <= 0}-->, <!--{/if}--><!--{eval $i--;}--><a href="home.php?mod=space&uid=$manage[uid]" target="_blank" class="xi2">$manage[username]</a> <!--{/loop}--><span class="pipe">|</span><img src="/static/zte/images/u1245.png" alt="加载不成功" class="xsh_circle_img">{lang credits}: $_G[forum][commoncredits] <span class="pipe">|</span><img src="/static/zte/images/u1251.png" alt="加载不成功" class="xsh_circle_img">成员: 1564654324
+									<img src="/static/zte/images/u1249.png" alt="加载不成功" class="xsh_circle_img">
+                                    {lang group_moderator_title}:
+                                    <!--{eval $i = 1;}-->
+                                    <!--{loop $groupmanagers $manage}-->
+                                    <!--{if $i <= 0}-->, <!--{/if}--><!--{eval $i--;}--><a href="home.php?mod=space&uid=$manage[uid]" target="_blank" class="xi2">$manage[username]</a> <!--{/loop}--><span class="pipe">|</span><img src="/static/zte/images/u1245.png" alt="加载不成功" class="xsh_circle_img">{lang credits}: $_G[forum][commoncredits] <span class="pipe">|</span><img src="/static/zte/images/u1251.png" alt="加载不成功" class="xsh_circle_img">成员: 1564654324
 								</dd>
 								<!--{if $action == 'index' && ($status == 2 || $status == 3 || $status == 5)}-->
 								<dd>
@@ -115,7 +74,6 @@
 
 						</div>
 					</div>
-				<!--{/if}-->
 				<!--[diy=diycontentmiddle]--><div id="diycontentmiddle" class="area"></div><!--[/diy]-->
 				<!--{if CURMODULE == 'group'}--><!--{hook/group_top}--><!--{else}--><!--{hook/forumdisplay_top}--><!--{/if}-->
 				<!--{if $status != 2 && $status != 3}-->
