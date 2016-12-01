@@ -1,7 +1,7 @@
 .xsh_hot{color: #5597ED;}
 .xue_header{background: #5597ED;color: #DADADA;line-height: 36px;border: 0;width: 100%;min-width: 100%;height: 36px;}
 .xue_header_margin{width: 960px;height: 100%;margin: auto;}
-.xsh_header_search{float: left;}
+.xsh_header_search{float: left;margin-top: 5px;}
 .xsh_form{padding: 5px;}
 .search{float: left;height: 19px;padding: 2px 5px;width: 160px;border: 1px solid #ABABAB;border-radius: 5px 0 0 5px;}
 .searchsubmit{float: left;font-size: 0;text-indent: -9999px;width: 28px;height: 25px;background: url("/static/zte/images/seach_01.png") no-repeat 0 0;border: 0;}
