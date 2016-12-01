@@ -214,7 +214,7 @@ $postshowavatars = !($_G['setting']['bannedmessages'] & 2 && ($post['memberstatu
 					<img class="authicn vm" id="authicon$post[pid]" src="{IMGDIR}/ico_lz.png" />
 				<!--{else}-->
 					<!--{if !$post['anonymous'] && $_G['cache']['groupicon'][$post['groupid']]}-->
-						<img class="authicn vm" id="authicon$post[pid]" src="$_G['cache']['groupicon'][$post['groupid']]" />
+						<img class="authicn vm" id="authicon$post[pid]" src="{avatar($post['authorid'], 'small', 1)}" />
 					<!--{else}-->
 						<img class="authicn vm" id="authicon$post[pid]" src="$_G['cache']['groupicon'][0]" />
 					<!--{/if}-->
@@ -226,7 +226,7 @@ $postshowavatars = !($_G['setting']['bannedmessages'] & 2 && ($post['memberstatu
 					<!--{/if}-->
 					<!--{if !$_G['setting']['authoronleft']}--><a href="home.php?mod=space&uid=$post[authorid]" target="_blank" class="xi2">$post[author]</a>$authorverifys<!--{/if}-->
 					<!--{if $close_leftinfo}--><!--{/if}-->
-					<em id="authorposton$post[pid]">用户名</em>
+					<em id="authorposton$post[pid]">{$post['username']}</em>
 					<em id="authorposton$post[pid]">{lang poston} $post[dateline]</em>
 					<!--{if $post['status'] & 8}-->
 						<span class="xg1"><!--{if $_G['setting']['mobile']['mobilecomefrom']}-->{$_G['setting']['mobile']['mobilecomefrom']}<!--{else}-->{lang from_mobile}<!--{/if}--></span>
