@@ -6,7 +6,7 @@ body{background:  rgba(242, 242, 242, 1);}
 .bm_h,.tl .th{background: #ffffff;}
 .bm,.pgb{border: none;}
 .xsh_syn{width: 80%;position: relative;}
-.xsh_signout_btn{width: 20%;position: absolute;top: -100%;right: -25%;}
+.xsh_signout_btn{width: 20%;position: absolute;top: 10px;right: 0;}
 .fa_ivt,.ptm{background-image: none;padding: 10px 0;border-radius: 5px;background: #5597ED;color: #ffffff;width: 100%;display: block;text-align: center;}
 .fa_ivt>.xi2{color: #ffffff;}
 .pn{color: #ffffff;background: none;border: none;box-shadow: none;-webkit-box-shadow:none;}
@@ -41,7 +41,7 @@ body{background:  rgba(242, 242, 242, 1);}
 .pg{width: 90%;}
 .xsh_pages{margin-bottom: 50px;}
 /*浮层*/
-.bm_c, .bm{overflow: visible;}
+.bm_c, .bm{overflow: visible;position: relative;}
 .icn{position: relative;}
 .xsh_user_groupdata{width: 180px;height: auto;padding: 20px 10px;border-radius: 10px;position: absolute;top: 50%;left: 70px;background: #ffffff;border: 2px solid #5597ED;margin: auto;line-height: 30px;font-size: 14px;transform: translateY(-50%);  -webkit-transform: translateY(-50%);  -moz-transform: translateY(-50%); -ms-transform: translateY(-50%);  -o-transform: translateY(-50%);  display: none;}
 .xsh_user_groupdata>p{border-bottom: 1px solid #CCCCCC;overflow: hidden;}
