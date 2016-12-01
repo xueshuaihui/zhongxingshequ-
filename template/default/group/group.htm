@@ -23,25 +23,24 @@
 								<dd class="m"><img src="$_G[forum][icon]" alt="$_G[forum][name]" width="48" height="48" /></dd>
 								<dt>$_G[forum][name]</dt>
 								<!--{if $_G[forum][description]}-->
-                                <dd  class="xsh_syn">$_G[forum][description]
-                                   <div class="xsh_signout_btn">
-                                       <!--{if $status == 'isgroupuser' && helper_access::check_module('group')}-->
-                                       <a href="javascript:;" onclick="showWindow('invite','misc.php?mod=invite&action=group&id=$_G[fid]')" class="fa_ivt">
-                                           <strong class="xi2">{lang my_buddylist_invite}</strong>
-                                       </a>
-                                       <p class="ptn"><a onclick="showDialog('{lang group_exit_confirm}', 'confirm', '', function(){location.href='forum.php?mod=group&action=out&fid=$_G[fid]'})" href="javascript:;" class="xi2">{lang group_exit}</a><p>
-                                       <!--{/if}-->
-                                       <!--{if $status != 2 && $status != 3 && $status != 5}-->
-                                       <!--{if helper_access::check_module('group') && $status != 'isgroupuser'}-->
-                                       <div class="ptm pbm">
-                                           <button type="button" class="pn" onclick="location.href='forum.php?mod=group&action=join&fid=$_G[fid]'"><em>{lang group_join_group}</em></button>
-                                       </div>
-                                       <!--{/if}-->
-                                       <!--{if CURMODULE == 'group'}--><!--{hook/group_navlink}--><!--{else}--><!--{hook/forumdisplay_navlink}--><!--{/if}-->
-                                       <!--{/if}-->
-                                   </div>
-                                </dd>
+                                <dd  class="xsh_syn">$_G[forum][description]</dd>
                                 <!--{/if}-->
+								<div class="xsh_signout_btn">
+									<!--{if $status == 'isgroupuser' && helper_access::check_module('group')}-->
+									<a href="javascript:;" onclick="showWindow('invite','misc.php?mod=invite&action=group&id=$_G[fid]')" class="fa_ivt">
+										<strong class="xi2">{lang my_buddylist_invite}</strong>
+									</a>
+									<p class="ptn"><a onclick="showDialog('{lang group_exit_confirm}', 'confirm', '', function(){location.href='forum.php?mod=group&action=out&fid=$_G[fid]'})" href="javascript:;" class="xi2">{lang group_exit}</a><p>
+									<!--{/if}-->
+									<!--{if $status != 2 && $status != 3 && $status != 5}-->
+									<!--{if helper_access::check_module('group') && $status != 'isgroupuser'}-->
+									<div class="ptm pbm">
+										<button type="button" class="pn" onclick="location.href='forum.php?mod=group&action=join&fid=$_G[fid]'"><em>{lang group_join_group}</em></button>
+									</div>
+									<!--{/if}-->
+									<!--{if CURMODULE == 'group'}--><!--{hook/group_navlink}--><!--{else}--><!--{hook/forumdisplay_navlink}--><!--{/if}-->
+									<!--{/if}-->
+								</div>
 								<dd class="cl">
 									<!--{if $_G['current_grouplevel']['icon']}--><img src="$_G[current_grouplevel][icon]" title="{lang group_level}: $_G[current_grouplevel][leveltitle]" class="vm"> <!--{/if}-->
 									<img src="/static/zte/images/u1249.png" alt="加载不成功" class="xsh_circle_img">
