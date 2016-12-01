@@ -101,4 +101,12 @@ class authRepository extends baseRepository {
     public function getUserProfile($where = []) {
         return $this->table('common_member_profile')->where($where)->find();
     }
+
+    public function getAllUserProfile($key, $value) {
+        return $this->table('common_member')
+                    ->ass('c')
+                    ->join(' LEFT JOIN zx_common_member_profile AS p ON c.uid = p.uid')
+                    ->where('c.'.$key, $value)
+                    ->find();
+    }
 }
