@@ -79,7 +79,7 @@
 .xsh_page_box>ul{margin-left: 50px;}
 .xsh_page_box>ul>li{width: 30px;height: 30px;text-align: center;line-height: 30px;font-size: 16px;border: 1px solid #5597ED;border-radius: 5px;float: left;margin-right: 2px;}
 .xsh_page_box>ul>.xsh_pages_hot{border-color: #ffffff;}
-.xsh_page_box>ul>li:hover{cursor: pointer;}
+.xsh_page_box>ul>li:hover{cursor: pointer;background-color: #EEEEEE;border: 1px solid #EEEEEE;}
 .xsh_pages_Previous{background: url("/static/zte/images/u98.png") no-repeat center;}
 .xsh_pages_next{background: url("/static/zte/images/u99.png") no-repeat center;}
 /*互动专栏*/
@@ -87,6 +87,7 @@
 .xsh_intera_header,.xsh_intera_content>ul>a>li{height: 50px;line-height: 50px;padding-left: 15px;}
 .xsh_intera_header{font-size: 18px;font-weight: 900;}
 .xsh_intera_content>ul>a>li{border: 1px solid #eee;;width: 107px;float: left;border-left: 1px solid rgba(255,255,255,0);margin-right: -1px;margin-bottom: -1px;}
+.xsh_intera_content>ul>a>li:hover{background: #EEEEEE;}
 .xsh_intera_logo,.xsh_intera_text{float: left;display: block;line-height: 50px;font-size: 14px;}
 .xsh_intera_logo{width: 25px;height: 25px;margin-right: 10px;margin-top: 8px;}
 .xsh_intera_logo>img{width: 100%;height: 100%;}
