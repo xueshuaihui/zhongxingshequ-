@@ -235,3 +235,9 @@ function addfriend2(){
         })
     }
 }
+/*二维码下滑*/
+jq(".xsh_ewmbigbox").hover(function(){
+    jq(this).children(".xsh_ewmbox").css({display:"block"});
+},function(){
+    jq(this).children(".xsh_ewmbox").css({display:"none"});
+})
