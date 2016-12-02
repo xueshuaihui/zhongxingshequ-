@@ -260,11 +260,27 @@
                         <span class="xsh_create_post">我要发帖</span>
                     </div>
                 </a>
-                    <div class="xsh_circle_check">
+                    <div class="xsh_circle_check" <!--{if count($grouplist_join) < 1}-->style="display:block;"<!--{/if}-->>
                         <ul>
                             <div class="xsh_close xsh_circle_check_close" onclick="closeform()"></div>
+                            <!--{if count($grouplist_join) < 1}-->
+                            <h3>您还未加入任何圈子，选一个吧</h3>
+                            <!--{if $group_recommend}-->
+                            <!--{loop $group_recommend $fid $group}-->
+                            <a href="forum.php?mod=forumdisplay&action=list&fid=$group[fid]">
+                                <li>
+                                    <div class="xsh_logobox">
+                                        <img src="$group[icon]" alt="加载失败"></div>
+                                    <span>$group[name]</span>
+                                </li>
+                            </a>
+                            <!--{/loop}-->
+                            <!--{else}-->
+                            <h5 style="text-align:center;">没有可选择的圈子</h5>
+                            <!--{/if}-->
+                            <!--{else}-->
                             <h3>请选择发帖的圈子</h3>
-                            {if $grouplist_post}
+                            <!--{if $grouplist_post}-->
                             <!--{loop $grouplist_post $group}-->
                             <a href="forum.php?mod=post&action=newthread&fid=$group[fid]">
                                 <li>
@@ -274,10 +290,10 @@
                                 </li>
                             </a>
                             <!--{/loop}-->
-                            {else}
-                            	<h5 style="text-align:center;">没有可选择的圈子</h5>
-                            {/if}
-                            
+                            <!--{else}-->
+                            <h5 style="text-align:center;">没有可选择的圈子</h5>
+                            <!--{/if}-->
+                            <!--{/if}-->
                         </ul>
                     </div>
                 <a href="forum.php?mod=group&action=create">

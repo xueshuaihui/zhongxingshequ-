@@ -78,9 +78,9 @@ if(in_array($action, array('out', 'viewmember', 'manage', 'index', 'memberlist')
 	}
 	if($action != 'index') {
 		if($status == 2) {
-			showmessage('forum_group_noallowed', "forum.php?mod=group&fid=$_G[fid]");
+			showmessage('forum_group_noallowed', "forum.php?mod=forumdisplay&action=list&fid=$_G[fid]");
 		} elseif($status == 3) {
-			showmessage('forum_group_moderated', "forum.php?mod=group&fid=$_G[fid]");
+			showmessage('forum_group_moderated', "forum.php?mod=forumdisplay&action=list&fid=$_G[fid]");
 		}
 	}
 }
@@ -227,7 +227,7 @@ if($action == 'index') {
 		}
 	}
 	if($groupuser['uid']) {
-		showmessage('group_has_joined', "forum.php?mod=group&fid=$_G[fid]");
+		showmessage('group_has_joined', "forum.php?mod=forumdisplay&action=list&fid=$_G[fid]");
 	} else {
 		$modmember = 4;
 		$showmessage = 'group_join_succeed';
@@ -262,7 +262,7 @@ if($action == 'index') {
 		include_once libfile('function/stat');
 		updatestat('groupjoin');
 		delgroupcache($_G['fid'], array('activityuser', 'newuserlist'));
-		showmessage($showmessage, "forum.php?mod=group&fid=$_G[fid]");
+		showmessage($showmessage, "forum.php?mod=forumdisplay&action=list&fid=$_G[fid]");
 	}
 
 } elseif($action == 'out') {
@@ -519,7 +519,7 @@ if($action == 'index') {
 		if($checkusers) {
 			foreach($checkusers as $uid) {
 				$notification = $checktype == 1 ? 'group_member_check' : 'group_member_check_failed';
-				notification_add($uid, 'group', $notification, array('fid' => $_G['fid'], 'groupname' => $_G['forum']['name'], 'url' => $_G['siteurl'].'forum.php?mod=group&fid='.$_G['fid']), 1);
+				notification_add($uid, 'group', $notification, array('fid' => $_G['fid'], 'groupname' => $_G['forum']['name'], 'url' => $_G['siteurl'].'forum.php?mod=forumdisplay&action=list&fid='.$_G['fid']), 1);
 			}
 			if($checktype == 1) {
 				C::t('forum_groupuser')->update_for_user($checkusers, $_G['fid'], null, null, 4);
