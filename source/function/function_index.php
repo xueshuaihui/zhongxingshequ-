@@ -28,12 +28,8 @@ function getInfo($sortId, $pageId, $perpage){
         preg_match_all('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i', $data[$k]['message'], $imgUrl);
         $data[$k]['message'] = preg_replace('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i','',$data[$k]['message']);
         $firstImg = $imgUrl[0][0];
-        if(strlen($data[$k]['message']) > 80) {
-            $data[$k]['message'] = mb_substr($data[$k]['message'],0,80,"utf-8").'...';
-        }
-        if(strlen($data[$k]['subject']) > 25){
-            $data[$k]['subject'] = mb_substr($data[$k]['subject'], 0, 25,"utf-8").'...';
-        }
+        $data[$k]['message'] = cutstr($data[$k]['message'], 200);
+        $data[$k]['subject'] = cutstr($data[$k]['message'], 40);
         if($firstImg) {
             $data[$k]['image'] = $firstImg;
         } elseif($img = C::t('forum_threadimage')->fetch($v['tid'])['attachment']) {
