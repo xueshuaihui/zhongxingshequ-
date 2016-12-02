@@ -1,5 +1,5 @@
 body{background: rgba(242, 242, 242, 1);}
-.wp{width: 960px;text-align: left;}
+.wp{width: 960px;text-align: left;margin: 30px auto;}
 .pls,.bm{background-color: transparent;}
 #postlist{width: 700px;position: relative;}
 .pls .favatar{background: #ffffff;border-radius: 10px;padding: 20px 0;}
