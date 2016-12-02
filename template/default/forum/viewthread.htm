@@ -159,26 +159,11 @@
 	<div id="favatar$post[pid]" class="pls favatar xsh_pls">
 		$post[newpostanchor] $post[lastpostanchor]
 		<!--{if $post['authorid'] && $post['username'] && !$post['anonymous']}-->
-		<!--{if $_G['setting']['authoronleft']}-->
-
-		<!--{/if}-->
 		<div class="p_pop blk bui card_gender_$post['gender']" id="userinfo$post[pid]" style="display: none; {if $_G['setting']['authoronleft']}margin-top: -11px;{/if}">
 			<div class="m z">
 				<div id="userinfo$post[pid]_ma"></div>
-				<!--{hook/viewthread_profileside $postcount}-->
 			</div>
 			<div class="i y">
-				<div>
-					<strong><a href="home.php?mod=space&uid=$post[authorid]" target="_blank" class="xi2"{if $post[groupcolor]} style="color: $post[groupcolor]"{/if}>$post[author]</a></strong>
-					<!--{if $_G['setting']['vtonlinestatus'] && $post['authorid']}-->
-					<!--{if ($_G['setting']['vtonlinestatus'] == 2 && $_G[forum_onlineauthors][$post[authorid]]) || ($_G['setting']['vtonlinestatus'] == 1 && (TIMESTAMP - $post['lastactivity'] <= 10800) && !$post['authorinvisible'])}-->
-					<em>{lang online}</em>
-					<!--{else}-->
-					<em>{lang offline}</em>
-					<!--{/if}-->
-					<!--{/if}-->
-				</div>
-				{eval viewthread_profile_node('top', $post);}
 				<div class="imicn">
 					<!--{if $post['qq'] && !$post['privacy']['profile']['qq']}--><a href="http://wpa.qq.com/msgrd?V=3&Uin=$post[qq]&Site=$_G['setting']['bbname']&Menu=yes&from=discuz" target="_blank" title="QQ"><img src="{IMGDIR}/qq.gif" alt="QQ" /></a><!--{/if}-->
 					<!--{if $post['icq'] && !$post['privacy']['profile']['icq']}--><a href="http://wwp.icq.com/scripts/search.dll?to=$post[icq]" target="_blank" title="ICQ"><img src="{IMGDIR}/icq.gif" alt="ICQ" /></a><!--{/if}-->
@@ -194,37 +179,18 @@
 					<!--{if !empty($_G['setting']['magics']['checkonline']) && $post['authorid'] != $_G['uid']}-->
 					<a href="home.php?mod=magic&mid=checkonline&idtype=user&id={echo rawurlencode($post[author])}" id="a_repent_$post[pid]" class="xi2" onclick="showWindow(this.id, this.href)"><img src="{STATICURL}/image/magic/checkonline.small.gif" alt="" /> $_G['setting']['magics']['checkonline']</a>
 					<!--{/if}-->
-					<!--{hook/viewthread_magic_user $postcount}-->
 					<!--{/if}-->
 				</div>
-				<div id="avatarfeed"><span id="threadsortswait"></span></div>
 			</div>
 		</div>
 		<!--{/if}-->
 		<!--{if $post['authorid'] && $post['username'] && !$post['anonymous']}-->
 		<div>
-			<!--{if !$postshowavatars}-->
-			<div class="avatar">{lang member_avatar_banned}</div>
-			<!--{elseif $post['avatar'] && $showavatars}-->
-			<!--{if $post[mobiletype]}-->
-			<div class="mobile-type mobile-type-$post[mobiletype]">
-				<a></a>
-			</div>
-			<!--{/if}-->
 			<div class="avatar"{if !($_G['setting']['threadguestlite'] && !$_G['uid'])} onmouseover="showauthor(this, 'userinfo$post[pid]')"{/If}><a href="home.php?mod=space&uid=$post[authorid]" class="avtm" target="_blank">$post[avatar]</a></div>
-		<!--{/if}-->
-
-		<div class="pi">
-			<div class="authi"><a href="home.php?mod=space&uid=$post['authorid']" target="_blank" class="xw1"{if $post[groupcolor]} style="color: $post[groupcolor]"{/if}>$post[author]</a>$authorverifys</div>
-		</div>
-
-
-		<!--{hook/viewthread_avatar $postcount}-->
+            <div class="pi">
+                <div class="authi"><a href="home.php?mod=space&uid=$post['authorid']" target="_blank" class="xw1"{if $post[groupcolor]} style="color: $post[groupcolor]"{/if}>$post[author]</a>$authorverifys</div>
+            </div>
 	</div>
-
-
-
-	<!--{hook/viewthread_sidetop $postcount}-->
 	<!--{if !($_G['setting']['threadguestlite'] && !$_G['uid'])}-->
 	{eval viewthread_profile_node('left', $post);}
 	<!--{if $post[authorid] != $_G[uid]}-->

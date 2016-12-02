@@ -35,7 +35,7 @@
 							<option value="forum.php?mod=forumdisplay&action=list&fid={$_G[fid]}&filter=specialtype&specialtype=reward$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['specialtype'] == 'reward'}selected=selected{/if}>{lang thread_reward}</option>
 							<option value="forum.php?mod=forumdisplay&action=list&fid={$_G[fid]}&filter=specialtype&specialtype=activity$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['specialtype'] == 'activity'}selected=selected{/if}>{lang thread_activity}</option>
 							<option value="forum.php?mod=forumdisplay&action=list&fid={$_G[fid]}&filter=specialtype&specialtype=debate$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['specialtype'] == 'debate'}selected=selected{/if}>{lang thread_debate}</option>
-		
+
                         </select>
                         <select name="排序" id="32">
                         <option value="forum.php?mod=forumdisplay&action=list&fid={$_G[fid]}&filter=author&orderby=dateline$forumdisplayadd[author]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}" {if $_GET['orderby'] == 'dateline'}selected='selected'{/if}>{lang list_post_time}</option>
@@ -87,14 +87,14 @@
 										<!--<img src="{IMGDIR}/folder_$thread[folder].gif" />-->
 									<!--&lt;!&ndash;{/if}&ndash;&gt;-->
 
-									<a href="" class="xsh_user_logo">
+									<a href="home.php?mod=space&uid={$thread[authorid]}&do=profile" class="xsh_user_logo">
                                         <!--{avatar($thread[authorid] ,'small')}-->
 									</a>
 									<div class="xsh_user_groupdata">
-										<p><span class="xsh_user_group_title">用户名：</span><span>用户名</span></p>
-										<p><span class="xsh_user_group_title">积分：</span><span>4234324</span></p>
-										<p><span class="xsh_user_group_title">主题：</span><span>4234324</span></p>
-										<p><span class="xsh_user_group_title">回复：</span><span>4234324</span></p>
+										<p><span class="xsh_user_group_title">用户名：</span><span>{$thread[author]}</span></p>
+										<p><span class="xsh_user_group_title">积分：</span><span>{eval echo getuser($thread[author], 'credits')}</span></p>
+										<p><span class="xsh_user_group_title">主题：</span><span>{eval echo getUserProfileCount($thread[authorid], 'threads')}</span></p>
+										<p><span class="xsh_user_group_title">回复：</span><span>{eval echo getUserProfileCount($thread[authorid], 'posts')}</span></p>
 									</div>
 								</td>
 								<!--{if $_G['forum']['ismoderator']}-->

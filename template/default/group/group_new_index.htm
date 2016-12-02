@@ -150,13 +150,14 @@
                         	<!--{loop $_G['forum_threadlist'] $key $thread}-->
                             <li>
                                 <div class="xsh_cirlis_logo">
-                                    <a href="">
+                                    <a href="home.php?mod=space&uid={$thread['authorid']}&do=profile">
                                         <!--{avatar($thread['authorid'], 'small')}-->
                                     </a>
+
                                     <div class="xsh_expert_cad xsh_circle_cad">
                                         <ul>
-                                            <li><h3>用户名:</h3><span>额看来惹额看来惹</span></li>
-                                            <li><h3>用户状态:</h3><span>用户在线</span></li>
+                                            <li><h3>用户名:</h3><span>{$thread['author']}</span></li>
+                                            <li><h3>用户状态:</h3><span>用户离线</span></li>
                                             <li><h3>积分：</h3><span>456546546</span></li>
                                         </ul>
                                     </div>

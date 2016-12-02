@@ -1,21 +1,8 @@
 <!--{template common/header}-->
 <link rel="stylesheet" href="/static/zte/css/group.css">
-	<div id="pt" class="bm cl">
-		<!--<div class="z">-->
-			<!--<a href="./" class="nvhm" title="{lang home}">$_G[setting][bbname]</a><em>&rsaquo;</em><a href="group.php">$_G[setting][navs][3][navname]</a>&lt;!&ndash;{if $groupnav}&ndash;&gt;$groupnav&lt;!&ndash;{elseif $action == 'create'}&ndash;&gt;<em>&rsaquo;</em>{lang group_create}&lt;!&ndash;{/if}&ndash;&gt;-->
-		<!--</div>-->
-	</div>
-
-	<!--{ad/text/wp a_t}-->
-
 	<style id="diy_style" type="text/css"></style>
-	<div class="wp">
-		<!--[diy=diy1]--><div id="diy1" class="area"></div><!--[/diy]-->
-	</div>
-
 	<div id="ct" class="ct2 wp cl">
 		<div class="mn">
-			<!--[diy=diycontenttop]--><div id="diycontenttop" class="area"></div><!--[/diy]-->
 			<!--{if $action != 'create'}-->
 					<div class="bm">
 						<div class="bm_c xld xlda cl">
@@ -48,7 +35,8 @@
                                     {lang group_moderator_title}:
                                     <!--{eval $i = 1;}-->
                                     <!--{loop $groupmanagers $manage}-->
-                                    <!--{if $i <= 0}-->, <!--{/if}--><!--{eval $i--;}--><a href="home.php?mod=space&uid=$manage[uid]" target="_blank" class="xi2">$manage[username]</a> <!--{/loop}--><span class="pipe">|</span><img src="/static/zte/images/u1245.png" alt="加载不成功" class="xsh_circle_img">{lang credits}: $_G[forum][commoncredits] <span class="pipe">|</span><img src="/static/zte/images/u1251.png" alt="加载不成功" class="xsh_circle_img">成员: 1564654324
+                                    <!--{if $i <= 0}-->, <!--{/if}--><!--{eval $i--;}--><a href="home.php?mod=space&uid=$manage[uid]" target="_blank" class="xi2">$manage[username]</a> <!--{/loop}--><span class="pipe">|</span><img src="/static/zte/images/u1245.png" alt="加载不成功" class="xsh_circle_img">{lang credits}: $_G[forum][commoncredits] <span class="pipe">|</span><img src="/static/zte/images/u1251.png" alt="加载不成功" class="xsh_circle_img">
+                                    成员: $_G[forum][membernum]
 								</dd>
 								<!--{if $action == 'index' && ($status == 2 || $status == 3 || $status == 5)}-->
 								<dd>
@@ -74,7 +62,6 @@
 
 						</div>
 					</div>
-				<!--[diy=diycontentmiddle]--><div id="diycontentmiddle" class="area"></div><!--[/diy]-->
 				<!--{if CURMODULE == 'group'}--><!--{hook/group_top}--><!--{else}--><!--{hook/forumdisplay_top}--><!--{/if}-->
 				<!--{if $status != 2 && $status != 3}-->
 				<div class="tb cl{if $action != 'manage'} mbm{/if}">
