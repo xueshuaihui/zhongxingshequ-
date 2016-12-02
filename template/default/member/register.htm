@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/static/zte/css/reginfo.css">
 <script type="text/javascript" src="{$this->setting[jspath]}register.js?{VERHASH}"></script>
 
-<div id="ct" class="ptm wp cl">
+<div id="ct" class="ptm wp cl" style="width: 960px;">
 	<div class="nfl" id="main_succeed" style="display: none">
 		<div class="f_c altw">
 			<div class="alert_right">
@@ -25,19 +25,19 @@
 
 <div class="bm" id="main_message">
 
-	<div class="bm_h bbs" id="main_hnav">
+	<!--<div class="bm_h bbs" id="main_hnav">
 		<span class="y">
-			<!--{hook/register_side_top}-->
-			<!--{if $_GET[action] == 'activation'}-->
+			&lt;!&ndash;{hook/register_side_top}&ndash;&gt;
+			&lt;!&ndash;{if $_GET[action] == 'activation'}&ndash;&gt;
 				{lang login_inactive}
-			<!--{else}-->
+			&lt;!&ndash;{else}&ndash;&gt;
 				<a href="member.php?mod=logging&action=login&referer={echo rawurlencode($dreferer)}" onclick="showWindow('login', this.href);return false;" class="xi2">{lang login_now}</a>
-			<!--{/if}-->
+			&lt;!&ndash;{/if}&ndash;&gt;
 		</span>
 		<h3 id="layer_reginfo_t" class="xs2">
-			<!--{if $_GET[action] != 'activation'}-->$this->setting['reglinkname']<!--{else}-->{lang index_activation}<!--{/if}-->
+			&lt;!&ndash;{if $_GET[action] != 'activation'}&ndash;&gt;$this->setting['reglinkname']&lt;!&ndash;{else}&ndash;&gt;{lang index_activation}&lt;!&ndash;{/if}&ndash;&gt;
 		</h3>
-	</div>
+	</div>-->
 
 	<p id="returnmessage4"></p>
 
@@ -194,11 +194,11 @@
 						</div>
 						<!--{eval $invitecode = 1;}-->
 						<!--{/if}-->
-                    <div class="rfm">
+                    <div class="rfm xsh_gsbqselect_box">
                         <table>
                             <tr>
                                 <th><span class="rq">*</span><!--<label for="user_tag">{lang user_tag}:</label>--></th>
-                                <td>
+                                <td class="xsh_gsbqselect">
 									<label for="user_tag" class="xsh_select_title">公司</label>
                                     <select name="user_tag" autocomplete="off" id="user_tag"  tabindex="1">
                                         <!--<option>请选择您的用户标签</option>-->

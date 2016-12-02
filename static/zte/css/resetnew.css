@@ -1,0 +1,7 @@
+#append_parent {
+    position: static;
+    width: 0;
+    height: 0;
+    background: none;
+    z-index: 0;
+}

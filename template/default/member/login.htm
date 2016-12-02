@@ -94,11 +94,11 @@
                             <!--{/if}-->
 
                             <!--{if empty($_GET['auth']) || $questionexist}-->
-                            <div class="rfm">
+                            <div class="rfm xsh_gsbqselect_box">
                                 <table>
                                     <tr>
                                         <!--<th>{lang security_q}: </th>-->
-                                        <td>
+                                        <td class="xsh_gsbqselect">
                                             <span class="xsh_select_title">{lang security_q}</span>
                                             <select id="loginquestionid_$loginhash" width="213" name="questionid"{if !$questionexist} onchange="if($('loginquestionid_$loginhash').value > 0) {$('loginanswer_row_$loginhash').style.display='';} else {$('loginanswer_row_$loginhash').style.display='none';}"<!--{/if}-->>
                                             <option value="0"><!--{if $questionexist}-->{lang security_question_0}<!--{else}-->{lang security_question}<!--{/if}--></option>

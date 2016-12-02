@@ -1,6 +1,6 @@
 .flb{font-size: 24px;text-align: center;font-weight: 500;}
-.xsh_select_title{border-right: none;padding: 11px 10px 14px 39px!important;}
-.rfm select{width: 367px;height: 48px;}
+.rfm>table>tbody>tr .xsh_gsbqselect{padding: 0;}
+.rfm .xsh_gsbqselect select{width: 365px;height: 48px;border-left: 1px solid #E0E0E0!important;}
 select{border-left: none;}
 .xsh_btnL{float: left;}
 .xsh_btnR{float: right;}
