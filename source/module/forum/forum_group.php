@@ -227,7 +227,7 @@ if($action == 'index') {
 		}
 	}
 	if($groupuser['uid']) {
-		showmessage('group_has_joined', "forum.php?mod=group&fid=$_G[fid]");
+		showmessage('group_has_joined', "forum.php?mod=group&action=list&fid=$_G[fid]");
 	} else {
 		$modmember = 4;
 		$showmessage = 'group_join_succeed';
@@ -262,7 +262,7 @@ if($action == 'index') {
 		include_once libfile('function/stat');
 		updatestat('groupjoin');
 		delgroupcache($_G['fid'], array('activityuser', 'newuserlist'));
-		showmessage($showmessage, "forum.php?mod=group&fid=$_G[fid]");
+		showmessage($showmessage, "forum.php?mod=group&action=list&fid=$_G[fid]");
 	}
 
 } elseif($action == 'out') {
