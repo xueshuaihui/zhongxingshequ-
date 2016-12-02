@@ -2561,7 +2561,20 @@ EOT;
 } else {
 
 	$settingnew = $_GET['settingnew'];
-
+    if($_GET['bannerDel']){
+        $settingDel = [];
+        foreach ($_GET['bannerDel'] as $del) {
+            array_push($settingDel, $del.'title');
+            array_push($settingDel, $del.'jump');
+            array_push($settingDel, $del.'url');
+            $setting['has_banner'] = str_replace($del, '', $setting['has_banner']);
+        }
+        $settingnew['has_banner'] = trim($setting['has_banner'], ',');
+        if(!$setting['has_banner']){
+            C::t('common_setting')->delete('has_banner');
+        }
+        C::t('common_setting')->delete($settingDel);
+    }
 	/*reshared add for banner save*/
 	if($_GET['uploadUrl'] != '' || $_GET['uploadTitle'] != '' || $_GET['uploadJump'] != '' || ($_FILES['uploadUrl'] && $_FILES['uploadUrl']['size'] > 0)) {
 		if(!isset($_GET['uploadTitle']) || $_GET['uploadTitle'] == '') {
@@ -2598,6 +2611,7 @@ EOT;
 			$settingnew[$k.'jump'] = $jump;
 			$settingnew['has_banner'] = $setting['has_banner'] ? ($setting['has_banner'] . ',' . $k) : $k;
 		}
+
 	}
  	/******************************/
 
@@ -3530,6 +3544,9 @@ EOT;
 	if($settings) {
 		C::t('common_setting')->update_batch($settings);
 	}
+	if($settingDel){
+        C::t('common_setting')->delete($settingDel);
+    }
 	if($updatecache) {
 
 		updatecache('setting');

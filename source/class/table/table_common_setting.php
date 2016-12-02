@@ -39,7 +39,9 @@ class table_common_setting extends discuz_table
 	public function update($skey, $svalue){
 		return DB::insert($this->_table, array($this->_pk => $skey, 'svalue' => is_array($svalue) ? serialize($svalue) : $svalue), false, true);
 	}
+    public function deleteSome($skeys){
 
+    }
 	public function update_batch($array) {
 		$settings = array();
 		foreach($array as $key => $value) {

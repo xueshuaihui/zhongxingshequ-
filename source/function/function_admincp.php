@@ -802,13 +802,13 @@ function showsetting($setname, $varname, $value, $type = 'radio', $disabled = ''
     elseif ($type == 'banner') {
         $s .= '图片url：<input type="text" class="txt" name="'.$varname.'"><br/><br/>或本地上传：<br/><br/><input type = "file" name="'.$varname.'">';
     } elseif ($type == 'banner_display') {
-        $s .= '<table><tr><td>ID</td><td>缩略图</td><td>标题</td><td>跳转链接</td></tr>';
+        $s .= '<table><tr><td>ID</td><td>缩略图</td><td>标题</td><td>跳转链接</td><td>删除</td></tr>';
         if($value){
             foreach ($value as $id=>$item) {
-                $s .= '<tr><td>'.$id.'</td><td><img style="width:100px;" src = "'.$item['url'].'"></td><td>'.$item['title'].'</td><td>'.$item['jump'].'</td>';
+                $s .= '<tr><td>'.$id.'</td><td><img style="width:100px;" src = "'.$item['url'].'"></td><td>'.$item['title'].'</td><td>'.$item['jump'].'</td><td><input type="checkbox" name="bannerDel[]" value="'.$id.'">删除</td>';
             }
         }
-        $s .= '</table>';
+        $s .= '</tr></table>';
     }
 	/************************************/
 	else {
