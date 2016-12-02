@@ -22,7 +22,9 @@
                                     <!--{elseif $status == 'wait' && helper_access::check_module('group')}-->
                                         {lang group_has_joined}
                                     <!--{else}-->
+                                    <div class="ptm pbm">
                                         <button type="button" class="pn" onclick="location.href='forum.php?mod=group&action=join&fid=$_G[fid]'"><em>{lang group_join_group}</em></button>
+                                    </div>
                                     <!--{/if}-->
 								</div>
 								<dd class="cl">
