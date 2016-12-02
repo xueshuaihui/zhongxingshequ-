@@ -186,8 +186,8 @@
 		<!--{/if}-->
 		<!--{if $post['authorid'] && $post['username'] && !$post['anonymous']}-->
 		<div>
-			<div class="avatar"{if !($_G['setting']['threadguestlite'] && !$_G['uid'])} onmouseover="showauthor(this, 'userinfo$post[pid]')"{/If}><a href="home.php?mod=space&uid=$post[authorid]" class="avtm" target="_blank">$post[avatar]</a></div>
-            <div class="pi">
+			<div class="avatar"{if !($_G['setting']['threadguestlite'] && !$_G['uid'])} onmouseover="showauthor(this, 'userinfo$post[pid]')"{/If}><a href="home.php?mod=space&uid=$post[authorid]" class="avtm xsh_viewthread_userlogo" target="_blank">$post[avatar]</a></div>
+            <div class="pi xsh_viewthread_username">
                 <div class="authi"><a href="home.php?mod=space&uid=$post['authorid']" target="_blank" class="xw1"{if $post[groupcolor]} style="color: $post[groupcolor]"{/if}>$post[author]</a>$authorverifys</div>
             </div>
 	</div>
