@@ -37,6 +37,15 @@ function groupperm(&$forum, $uid, $action = '', $isgroupuser = '') {
 	if($forum['jointype'] == 2 && (!$forum['gviewperm'] || $action == 'post') && !empty($isgroupuser['uid']) && $isgroupuser['level'] == 0) {
 		return 3;
 	}
+    if(!$isgroupuser){
+        return 'no';
+    }
+	if($isgroupuser['level'] == 0){
+        return 'wait';
+    }
+    if($isgroupuser['level'] > 0){
+        return 'isgroupuser';
+    }
 	if($action == 'post' && !$isgroupuser) {
 		return 4;
 	}
