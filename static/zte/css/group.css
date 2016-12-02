@@ -1,11 +1,11 @@
 body{background:  rgba(242, 242, 242, 1);}
-#wp,#ct{width: 960px;margin: auto;}
+#wp,#ct{width: 960px;margin: 30px auto;}
 .ct2 .mn{width: 680px;background: #ffffff;border-radius: 10px;}
 .mn{padding: 0 10px;}
 .ct2 .sd{width: 246px;margin-right: 0;}
 .bm_h,.tl .th{background: #ffffff;}
 .bm,.pgb{border: none;}
-.xsh_syn{width: 78%;position: relative;}
+.xsh_syn{width: 78%;position: relative;line-height: 16px;}
 .xsh_signout_btn{width: 20%;position: absolute;top: 50%;right: 0;
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
@@ -48,7 +48,7 @@ body{background:  rgba(242, 242, 242, 1);}
 /*浮层*/
 .bm_c, .bm{overflow: visible;position: relative;}
 .icn{position: relative;}
-.xsh_user_groupdata{width: 180px;height: auto;padding: 20px 10px;border-radius: 10px;position: absolute;top: 50%;left: 70px;background: #ffffff;border: 2px solid #5597ED;margin: auto;line-height: 30px;font-size: 14px;transform: translateY(-50%);  -webkit-transform: translateY(-50%);  -moz-transform: translateY(-50%); -ms-transform: translateY(-50%);  -o-transform: translateY(-50%);  display: none;}
+.xsh_user_groupdata{width: 180px;height: auto;padding: 20px 10px;border-radius: 10px;position: absolute;top: 50%;left: 70px;background: #ffffff;border: 1px solid #5597ED;margin: auto;line-height: 30px;font-size: 14px;transform: translateY(-50%);  -webkit-transform: translateY(-50%);  -moz-transform: translateY(-50%); -ms-transform: translateY(-50%);  -o-transform: translateY(-50%);  display: none;}
 .xsh_user_groupdata>p{border-bottom: 1px solid #CCCCCC;overflow: hidden;}
 .xsh_user_groupdata>p>span{display: block;float: left;}
 .xsh_user_group_title{width: 4em;}
