@@ -14,7 +14,7 @@
 .xue_header_margin #scbar_txt{float: left;height: 19px;padding: 2px 5px;width: 160px;border: 1px solid #ABABAB;border-radius: 5px 0 0 5px;}
 .searchsubmit{float: left;font-size: 0;text-indent: -9999px;width: 28px;height: 25px;background: url("/static/zte/images/seach_01.png") no-repeat 0 0;border: 0;}
 .tell{float: right;}
-.xsh_navbox{width: 100%;margin: auto;background: #ffffff;border-bottom: 1px solid #eee;padding: 20px 0;}
+.xsh_navbox{width: 100%;margin: auto;background: #ffffff;border-bottom: 1px solid #eee;padding: 20px 0;box-shadow: 5px 2px 15px #cccccc;}
 .xsh_nav{;width: 960px;height: 100%;margin: auto;/*overflow: hidden;*/display: table;}
 .xsh_nav_logo{max-width: 120px;height: 40px;;overflow: hidden;float: left;margin-right: 30px;}
 .xsh_nav_logo>img{height: 100%;}
