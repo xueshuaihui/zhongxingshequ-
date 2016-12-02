@@ -163,7 +163,7 @@
 .xsh_circle_logo>a>img{width: 100%;height: 100%;border-radius: 10px;}
 .xsh_circle_card{width: 200px;height: 100%;float: left;overflow: hidden;margin-left: 20px;line-height: 30px;}
 .xsh_circle_name,.xsh_circle_data{width: 100%;height: 30px;font-size: 18px;overflow: hidden;}
-.xsh_circle_num,.xsh_circle_cardnum{width: 50%;height: 100%;float: left;font-size: 15px;color: #CCCCCC;}
+.xsh_circle_num,.xsh_circle_cardnum{width: 40%;height: 100%;float: left;font-size: 15px;color: #CCCCCC;}
 /**/
 .xsh_circle_cad{left: 50px;}
 /**/
