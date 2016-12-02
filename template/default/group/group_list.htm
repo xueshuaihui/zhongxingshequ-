@@ -12,8 +12,9 @@
 		<!--{/if}-->
 		<!--{hook/forumdisplay_filter_extra}-->
 		<!--{/if}-->
+        <!--{if $_G['forum']['ismoderator']}-->
 		<li class="xsh_hlyqx" {if $action == 'memberlist' || $action == 'invite'}class="a"{/if}><a href="forum.php?mod=group&action=memberlist&fid=$_G[fid]#groupnav" title="">{lang group_member_list}</a></li>
-		<!--{if $_G['forum']['ismoderator']}--><li  class="xsh_hlyqx" {if $action == 'manage'}class="a"{/if}><a href="forum.php?mod=group&action=manage&fid=$_G[fid]#groupnav">{lang group_admin}</a></li><!--{/if}-->
+		<li  class="xsh_hlyqx" {if $action == 'manage'}class="a"{/if}><a href="forum.php?mod=group&action=manage&fid=$_G[fid]#groupnav">{lang group_admin}</a></li><!--{/if}-->
 		<!--{if CURMODULE == 'group'}--><!--{hook/group_nav_extra}--><!--{else}--><!--{hook/forumdisplay_nav_extra}--><!--{/if}-->
 	</ul>
 <!--<ul id="pgt" class="bm bw0 pgs cl">-->
