@@ -48,7 +48,7 @@ body{background:  rgba(242, 242, 242, 1);}
 /*浮层*/
 .bm_c, .bm{overflow: visible;position: relative;}
 .icn{position: relative;}
-.xsh_user_groupdata{width: 180px;height: auto;padding: 20px 10px;border-radius: 10px;position: absolute;top: 50%;left: 70px;background: #ffffff;border: 2px solid #5597ED;margin: auto;line-height: 30px;font-size: 14px;transform: translateY(-50%);  -webkit-transform: translateY(-50%);  -moz-transform: translateY(-50%); -ms-transform: translateY(-50%);  -o-transform: translateY(-50%);  display: none;}
+.xsh_user_groupdata{width: 180px;height: auto;padding: 20px 10px;border-radius: 10px;position: absolute;top: 50%;left: 70px;background: #ffffff;border: 1px solid #5597ED;margin: auto;line-height: 30px;font-size: 14px;transform: translateY(-50%);  -webkit-transform: translateY(-50%);  -moz-transform: translateY(-50%); -ms-transform: translateY(-50%);  -o-transform: translateY(-50%);  display: none;}
 .xsh_user_groupdata>p{border-bottom: 1px solid #CCCCCC;overflow: hidden;}
 .xsh_user_groupdata>p>span{display: block;float: left;}
 .xsh_user_group_title{width: 4em;}
