@@ -260,12 +260,18 @@
                         <span class="xsh_create_post">我要发帖</span>
                     </div>
                 </a>
-                    <div class="xsh_circle_check">
+                    <div class="xsh_circle_check" <!--{if count($grouplist_join) < 1}-->style="display:block;"<!--{/if}-->>
                         <ul>
                             <div class="xsh_close xsh_circle_check_close" onclick="closeform()"></div>
+                            <!--{if count($grouplist_join) < 1}-->
+                            <h3>您还未加入任何圈子，选一个吧</h3>
+                            {if $grouplist_post}
+                            <!--{loop $group_recommend $fid $group}-->
+                            <!--{else}-->
                             <h3>请选择发帖的圈子</h3>
                             {if $grouplist_post}
                             <!--{loop $grouplist_post $group}-->
+                            <!--{/if}-->
                             <a href="forum.php?mod=post&action=newthread&fid=$group[fid]">
                                 <li>
                                     <div class="xsh_logobox">
