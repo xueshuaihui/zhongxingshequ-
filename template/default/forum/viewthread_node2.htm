@@ -211,12 +211,12 @@ $postshowavatars = !($_G['setting']['bannedmessages'] & 2 && ($post['memberstatu
 				<!--{/if}-->
 				<!--{eval $_self = $thread['author'] && $post['author'] == $thread['author'] && $post['position'] !== '1';}-->
 				<!--{if $_self }-->
-					<img class="authicn vm" id="authicon$post[pid]" src="{IMGDIR}/ico_lz.png" />
+					<img class="authicn vm" id="authicon$post[pid]" src="{avatar($post['authorid'], 'small', 1)}" />
 				<!--{else}-->
 					<!--{if !$post['anonymous'] && $_G['cache']['groupicon'][$post['groupid']]}-->
 						<img class="authicn vm" id="authicon$post[pid]" src="{avatar($post['authorid'], 'small', 1)}" />
 					<!--{else}-->
-						<img class="authicn vm" id="authicon$post[pid]" src="$_G['cache']['groupicon'][0]" />
+						<img class="authicn vm" id="authicon$post[pid]" src="{avatar($post['authorid'], 'small', 1)}" />
 					<!--{/if}-->
 				<!--{/if}-->
 
