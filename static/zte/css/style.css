@@ -46,7 +46,7 @@
 .xhs_car_hot{background: url("/static/zte/images/u434.png")}
 /*主体内容*/
 .xsh_content_box{width: 100%;height: auto;margin-top: 40px;display: block;}
-.xsh_con_left{width: 700px;border-radius: 10px;padding: 30px 0;background: #ffffff;}
+.xsh_con_left{width: 700px;border-radius: 10px;padding: 15px 0 30px 0;background: #ffffff;}
 .xsh_con_right{width: 246px;margin-left: 14px;}
 .xsh_con_right>div{border-radius: 10px;overflow: hidden;margin-bottom: 10px;}
 .xsh_con_left,.xsh_con_right{height: auto;float: left;}
