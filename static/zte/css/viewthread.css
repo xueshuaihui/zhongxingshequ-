@@ -5,8 +5,9 @@ body{background: rgba(242, 242, 242, 1);}
 .pls .favatar{background: #ffffff;border-radius: 10px;padding: 20px 0;}
 .xsh_pls{position: absolute;right: -270px;;top:130px;background: #ffffff;width: 250px;border-radius: 10px;border: none;padding: 20px 0;}
 .xsh_position{top: 0;height: 75px;padding: 20px;width: 210px;}
-.xsh_circle_message{float: left;}
-.xsh_circle_message>p{margin-bottom: 5px;}
+.xsh_circle_message{float: left;width: 140px;overflow: hidden;}
+.xsh_circle_name{height: 20px;}
+.xsh_circle_message>p{margin-bottom: 5px;line-height: 20px;}
 .xsh_circle_name{font-size: 16px;color: #000000;font-weight: 600;line-height: 25px;}
 .integral,.member{font-size: 12px;color: #CCCCCC;}
 .liulanl{background: url("/static/zte/images/liulannum_03.jpg") no-repeat left;background-size: 16px;padding-left: 18px;}

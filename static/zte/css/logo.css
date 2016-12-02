@@ -1,7 +1,9 @@
 .flb{font-size: 24px;text-align: center;font-weight: 500;}
-.xsh_select_title{border-right: none;}
-.rfm select{width: 382px;}
+.xsh_select_title{border-right: none;padding: 11px 10px 14px 39px!important;}
+.rfm select{width: 367px;height: 48px;}
 select{border-left: none;}
 .xsh_btnL{float: left;}
 .xsh_btnR{float: right;}
 .p_fre{width: 460px!important;}
+/**/
+#append_parent{position: fixed;width: 100%;height: 100%;background: rgba(0,0,0,0.5);z-index: 9;}

@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/static/zte/css/reginfo.css">
 <link rel="stylesheet" href="/static/zte/css/logo.css">
 <style>
-    .xsh_yzm th{display: none;}
+    /*.xsh_yzm th{display: none;}*/
 </style>
 <!--{eval $loginhash = 'L'.random(4);}-->
 <!--{if empty($_GET['infloat'])}-->
@@ -128,7 +128,7 @@
                         $sechash = !isset($sechash) ? 'S'.($_G['inajax'] ? 'A' : '').$_G['sid'] : $sechash.random(3);
                         $sectpl = str_replace("'", "\'", $sectpl);
                         }-->
-                        <!--{block sectpl}--><div class="rfm xsh_yzm"><table><tr><th><sec>: </th><td><sec><br /><sec><a href="javascript:;" onclick="jq('.xi2').click()" class="xsh_reload"><img src="/static/zte/images/reload.png" alt=""></a></td></tr></table></div><!--{/block}-->
+                        <!--{block sectpl}--><div class="rfm xsh_yzm"><table><tr><th style="display: none;"><!--<sec>: --></th><td><sec><br /><sec><a href="javascript:;" onclick="jq('.xi2').click()" class="xsh_reload"><img src="/static/zte/images/reload.png" alt=""></a></td></tr></table></div><!--{/block}-->
                         <!--{subtemplate common/seccheck}-->
                         <!--{/if}-->
 

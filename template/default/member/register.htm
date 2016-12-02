@@ -199,9 +199,9 @@
                             <tr>
                                 <th><span class="rq">*</span><!--<label for="user_tag">{lang user_tag}:</label>--></th>
                                 <td>
-									<label for="user_tag" class="xsh_select_title">{lang user_tag}:</label>
+									<label for="user_tag" class="xsh_select_title">公司</label>
                                     <select name="user_tag" autocomplete="off" id="user_tag"  tabindex="1">
-                                        <option>请选择您的用户标签</option>
+                                        <!--<option>请选择您的用户标签</option>-->
                                         <!--{loop $tags $tag}-->
                                         <option value="{$tag['tagid']}">{$tag['tagname']}</option>
                                         <!--{/loop}-->
@@ -244,11 +244,11 @@
 						<th>&nbsp;</th>
 						<td>
 							<span id="reginfo_a_btn">
-								<!--{if $_GET[action] != 'activation'}--><em>&nbsp;</em><!--{/if}-->
-									<button class="pn pnc" id="registerformsubmit" type="submit" name="regsubmit" value="true" tabindex="1"><strong><!--{if $_GET[action] == 'activation'}-->{lang activation}<!--{else}-->{lang submit}<!--{/if}--></strong></button>
+								<!--{if $_GET[action] != 'activation'}--><em><!--&nbsp;--></em><!--{/if}-->
+									<button class="pn pnc" id="registerformsubmit" type="submit" name="regsubmit" value="true" tabindex="1"><strong><!--{if $_GET[action] == 'activation'}-->{lang activation}<!--{else}-->立即注册<!--{/if}--></strong></button>
 								<br>
 								<!--{if $bbrules}-->
-									<input type="checkbox" class="pc" name="agreebbrule" value="$bbrulehash" id="agreebbrule" checked="checked" /> <label for="agreebbrule">{lang agree}<a href="javascript:;" onclick="showBBRule()">{lang rulemessage}</a></label>
+									<input type="checkbox" class="pc" name="agreebbrule" value="$bbrulehash" id="agreebbrule" checked="checked" /> <label for="agreebbrule">{lang agree}<a href="javascript:;" onclick="showBBRule()" style="color: #5597ED;">{lang rulemessage}</a></label>
 								<!--{/if}-->
 							</span>
 						</td>
