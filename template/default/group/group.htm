@@ -49,11 +49,21 @@
 									<!--{/if}-->
 									{lang group_perm_visit}: <strong><!--{if $_G['forum']['gviewperm'] == 0}-->{lang group_perm_member_only}<!--{else}-->{lang group_perm_all_user}<!--{/if}--></strong>
 								</dd>
-								<dd class="xi1">
+
+
+
+
+
+
+								<dd class="xi1 xsh_signout_btn">
 									<!--{if $status == 3 || $status == 5}-->
 										{lang group_has_joined}
 									<!--{elseif helper_access::check_module('group')}-->
+										<!--<button type="button" class="pn" onclick="location.href='forum.php?mod=group&action=join&fid=$_G[fid]'"><em>{lang group_join_group}</em></button>-->
+									<div class="ptm pbm">
 										<button type="button" class="pn" onclick="location.href='forum.php?mod=group&action=join&fid=$_G[fid]'"><em>{lang group_join_group}</em></button>
+									</div>
+
 									<!--{/if}-->
 								</dd>
 								<!--{/if}-->
