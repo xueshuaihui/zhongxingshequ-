@@ -169,7 +169,7 @@ if($_G['forum']['status'] == 3) {
 	} elseif($status == 1) {
 		showmessage('forum_group_status_off');
 	} elseif($status == 2) {
-		showmessage('forum_group_noallowed', 'forum.php?mod=forumdisplay&action=list&fid='.$_G['fid']);
+		showmessage('forum_group_noallowed', 'ztgroup.php');
 	} elseif($status == 3) {
 		showmessage('forum_group_moderated', 'forum.php?mod=forumdisplay&action=list&fid='.$_G['fid']);
 	}
