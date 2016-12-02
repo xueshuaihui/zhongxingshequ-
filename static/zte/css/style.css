@@ -19,7 +19,7 @@
 .xsh_nav_logo{max-width: 120px;height: 40px;;overflow: hidden;float: left;margin-right: 30px;}
 .xsh_nav_logo>img{height: 100%;}
 .xsh_nav_navtext{float: left;max-width: 700px;}
-.xsh_nav_navtext>ul>li{float: left;font-size: 16px;margin: 0 15px;height: 40px;line-height: 40px;}
+.xsh_nav_navtext>ul>li{float: left;font-size: 16px;margin: 0 15px;height: 40px;line-height: 60px;}
 .xsh_nav_navtext>ul>li:hover{cursor: pointer;}
 .nav_hot{color: #5597ED;}
 .login,.xsh_user_box{width: 100px;float: right;height: 40px;line-height: 40px;font-size: 16px;}

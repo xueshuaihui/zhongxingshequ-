@@ -5,7 +5,7 @@ body{background:  rgba(242, 242, 242, 1);}
 .ct2 .sd{width: 246px;margin-right: 0;}
 .bm_h,.tl .th{background: #ffffff;}
 .bm,.pgb{border: none;}
-.xsh_syn{width: 78%;position: relative;}
+.xsh_syn{width: 78%;position: relative;line-height: 16px;}
 .xsh_signout_btn{width: 20%;position: absolute;top: 50%;right: 0;
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
