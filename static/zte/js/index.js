@@ -180,9 +180,9 @@ tab_title.each(function(index,obj){
         tabid = jq(this).addClass("xsh_tab_title_hot").attr("id");
         tab_content.removeClass("xsh_tab_now").eq(index).addClass("xsh_tab_now");
         box = tab_content.eq(index).children("ul");
-        if(!box.html()){
+        //if(!box.html()){
             ajaxtext(box,tabid,1);
-        }
+        //}
     })
 })
 /*点击页码*/
