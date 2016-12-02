@@ -154,7 +154,7 @@
 .xsh_more{position: absolute;bottom: 15px;right: 50px;}
 .xsh_more>a{font-size: 14px;color: #5597ED;}
 .xsh_circle_header{width: 90%;height: auto;font-size: 18px;overflow: hidden;border-bottom: 1px solid #eee;margin: auto;padding: 20px 0;}
-.xsh_circle_header>ul>li{width: 33.3333%;height: 30px;float: left;}
+.xsh_circle_header>ul>li{width: 25%;height: 30px;float: left;}
 .xsh_circle_header>ul>li>span:hover{cursor: pointer;}
 .xsh_circle_header>ul>li>.xsh_circle_hot{border-bottom: 2px solid #5597ED;color: #5597ED;padding-bottom: 10px;}
 .xsh_circle_content>ul{width: 90%;margin: auto;}

@@ -28,7 +28,7 @@ body{background: rgba(242, 242, 242, 1);}
 .ad .pls,.ad .plc{background: #CCCCCC;height: 1px;}
 .hm{text-align: right;}
 .pi{height: auto;}
-.authi>img{width: 60px;height: 60px;border-radius: 50%;margin-right: 30px;}
+.authi>img{width: 60px;height: 60px;border-radius: 50%;margin-right: 10px;}
 .xsh_favatar{position: absolute;left: 80px;/*top: 0;*/background: #ffffff;border: 1px solid #5597ED;border-radius: 5px;display: none;z-index: 999;}
 tr,.xsh_plc{position: relative;}
 .authi{text-align: left;}
