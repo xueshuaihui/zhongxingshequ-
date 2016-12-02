@@ -112,6 +112,7 @@ function expertInteraction(hid){
                     str+='<label><input name="experts" type="radio" value="'+(data[i].fid)+'" />'+(data[i].name)+'</label>';
                 }
                 expertRadio.html(str);
+                expertTextarea.children("textarea").val("");
                 expertBox.css({display:"block"});
             }else if(result.state == 2){
                 jq("#index_login").click();
