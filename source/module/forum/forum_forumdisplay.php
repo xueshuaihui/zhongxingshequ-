@@ -169,9 +169,9 @@ if($_G['forum']['status'] == 3) {
 	} elseif($status == 1) {
 		showmessage('forum_group_status_off');
 	} elseif($status == 2) {
-		showmessage('forum_group_noallowed', 'forum.php?mod=group&fid='.$_G['fid']);
+		showmessage('forum_group_noallowed', 'forum.php?mod=forumdisplay&action=list&fid='.$_G['fid']);
 	} elseif($status == 3) {
-		showmessage('forum_group_moderated', 'forum.php?mod=group&fid='.$_G['fid']);
+		showmessage('forum_group_moderated', 'forum.php?mod=forumdisplay&action=list&fid='.$_G['fid']);
 	}
 	$_G['forum']['icon'] = get_groupimg($_G['forum']['icon'], 'icon');
 	$_G['grouptypeid'] = $_G['forum']['fup'];
