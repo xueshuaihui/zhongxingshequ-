@@ -59,9 +59,21 @@
             </div>
             <div class="xsh_user_namebox">
                 <!--{if $_G[member][newprompt]}-->
-                <span>{$_G[member][username]}<b style="color:red">*</b></span>
+                <span>
+                    <!--{if strlen($_G[member][username]) > 4}-->
+                    <!--{eval echo substr($_G[member][username], 0, 4)}-->...
+                    <!--{else}-->
+                        {$_G[member][username]}
+                    <!--{/if}-->
+                    <b style="color:red">*</b></span>
                 <!--{else}-->
-                <span>{$_G[member][username]}</span>
+                <span>
+                    <!--{if strlen($_G[member][username]) > 4}-->
+                        <!--{eval echo substr($_G[member][username], 0, 4)}-->...
+                    <!--{else}-->
+                        {$_G[member][username]}
+                    <!--{/if}-->
+                </span>
                 <!--{/if}-->
                 <div class="xsh_xiala"><img src="/static/zte/images/u475.png" alt=""></div>
             </div>
