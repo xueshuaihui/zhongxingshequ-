@@ -1062,4 +1062,29 @@ function forumdisplay_verify_author($ids) {
 	}
 	return $verify;
 }
+function getuser($username, $field = null){
+    $user = C::t('common_member')->fetch_by_username($username);
+    if(!$user){
+        showmessage('magics_target_member_nonexistence');
+    }else{
+        if(is_null($field)){
+            return $field;
+        }else{
+            return $user[$field];
+        }
+    }
+}
+
+function getUserProfileCount($uid, $field = null){
+    $data = C::t('common_member_count')->fetch($uid);
+    if(!$data){
+        showmessage('magics_target_member_nonexistence');
+    }else{
+        if(is_null($field)){
+            return $field;
+        }else{
+            return $data[$field];
+        }
+    }
+}
 ?>
