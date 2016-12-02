@@ -60,7 +60,7 @@
             <div class="xsh_user_namebox">
                 <!--{if $_G[member][newprompt]}-->
                 <span>
-                    <!--{if strlen($_G[member][username]) > 4}-->
+                    <!--{if mb_strlen($_G[member][username], 'utf8') > 4}-->
                     <!--{eval echo mb_substr($_G[member][username], 0, 4, 'utf8')}-->...
                     <!--{else}-->
                         {$_G[member][username]}
@@ -68,7 +68,7 @@
                     <b style="color:red">*</b></span>
                 <!--{else}-->
                 <span>
-                    <!--{if strlen($_G[member][username]) > 4}-->
+                    <!--{if mb_strlen($_G[member][username], 'utf8') > 4}-->
                     <!--{eval echo mb_substr($_G[member][username], 0, 4, 'utf8')}-->...
                     <!--{else}-->
                         {$_G[member][username]}
