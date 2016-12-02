@@ -165,13 +165,13 @@ if($_G['forum']['status'] == 3) {
 	require_once libfile('function/group');
 	$status = groupperm($_G['forum'], $_G['uid']);
 	if($status == -1) {
-		showmessage('forum_not_group', 'group.php');
+		showmessage('forum_not_group', 'ztgroup.php');
 	} elseif($status == 1) {
 		showmessage('forum_group_status_off');
 	} elseif($status == 2) {
 		showmessage('forum_group_noallowed', 'ztgroup.php');
 	} elseif($status == 3) {
-		showmessage('forum_group_moderated', 'forum.php?mod=forumdisplay&action=list&fid='.$_G['fid']);
+		showmessage('forum_group_moderated', 'ztgroup.php');
 	}
 	$_G['forum']['icon'] = get_groupimg($_G['forum']['icon'], 'icon');
 	$_G['grouptypeid'] = $_G['forum']['fup'];
