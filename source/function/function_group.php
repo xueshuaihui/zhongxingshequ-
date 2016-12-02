@@ -10,7 +10,9 @@
 if(!defined('IN_DISCUZ')) {
 	exit('Access Denied');
 }
-
+if(!$_G['setting']['navs'][3]['navname']){
+    $_G['setting']['navs'][3]['navname'] = '圈子';
+}
 function delgroupcache($fid, $cachearray) {
 	C::t('forum_groupfield')->delete_by_type($cachearray, $fid);
 }
