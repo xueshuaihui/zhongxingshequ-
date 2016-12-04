@@ -33,7 +33,7 @@ class indexRepository extends baseRepository {
                 $result[$k]['name'] = $bk['name'];
             }
         }
-        return array_values($result);
+        return $result;
     }
 
     public function getTabs() {

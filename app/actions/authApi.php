@@ -31,7 +31,7 @@ class authApi extends baseApi {
         $res = $this->tool->verifyIdentity($username, $password);
         if(is_bool($res) && $res){
             $profile = $this->tool->getAllUserProfile('username', $username);
-            return [strtotime('+7 day'), $profile];
+            return array('expire'=>strtotime('+7 day'), 'profile'=>$profile);
         }
         return $res;
     }

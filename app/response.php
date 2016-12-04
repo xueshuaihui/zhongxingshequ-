@@ -64,7 +64,7 @@ class response implements responseInterface{
 
     public function send () {
         header("Content-type: application/json");
-        echo json_encode(self::$data, true);
+        echo json_encode(self::$data);
     }
 
 }
