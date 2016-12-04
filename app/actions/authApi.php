@@ -133,8 +133,8 @@ class authApi extends baseApi {
         $code = $this->request->post('code');
         $newPassword = $this->request->post('newPassword');
         //验证验证码是否正确
-        $serverCode = $this->request->session('reset.'.$phone);
-        if(!$serverCode || $serverCode != $code){
+        $check = $this->request->checkCode('reset.'.$phone, $code);
+        if(!$check){
             return 10010; //验证码错误
         }
         //验证手机号是否存在,存在则返回用户
@@ -165,8 +165,8 @@ class authApi extends baseApi {
         $uid = $this->request->post('uid');
         $phone = $this->request->post('phone');
         $code = $this->request->post('code');
-        $serverCode = $this->request->session('blind.'.$phone);
-        if(!$serverCode || $serverCode != $code){
+        $check = $this->request->checkCode('blind.'.$phone, $code);
+        if(!$check){
             return 10010; //验证码错误
         }
         $user = $this->tool->getUserProfile(['mobile'=>$phone]);

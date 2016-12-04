@@ -22,14 +22,18 @@ class indexRepository extends baseRepository {
             $setting = $this->table('common_setting')->where(['skey'=>'index_hdzl'])->find();
             $bkId = $setting['svalue'];
         }
-        $bks = $this->table('forum_forum')->where('fup', $bkId)->whereOr('fid', $bkId)->select('fid, name');
+        $bks = $this->table('forum_forum')->ass('f')->join(' LEFT JOIN zx_forum_forumfield AS o ON f.fid = o.fid')->where('f.fup', $bkId)->whereOr('f.fid', $bkId)->select();
+        $result = [];
         foreach ($bks as $k=>$bk){
             if($bk['fid'] == $bkId){
-                $bks['title'] = $bk['name'];
-                unset($bks[$k]);
+                $result['title'] = $bk['name'];
+            }else{
+                $result[$k]['fid'] = $bk['fid'];
+                $result[$k]['icon'] = strpos($bk['icon'], 'http') === false ? BASEURL.__.'data'.__.'attachment'.__.'group'.__.$bk['icon'] : $bk['icon'];
+                $result[$k]['name'] = $bk['name'];
             }
         }
-        return $bks;
+        return array_values($result);
     }
 
     public function getTabs() {
@@ -63,7 +67,7 @@ class indexRepository extends baseRepository {
             return $imgUrl[0][0];
         }else{
             $attachment = $this->table('forum_threadimage')->where('tid', $tid)->find();
-            return $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].DIRECTORY_SEPARATOR.($attachment ? 'data'.DIRECTORY_SEPARATOR.'attachment'.DIRECTORY_SEPARATOR.'forum'.DIRECTORY_SEPARATOR.$attachment['attachment'] : 'static'.DIRECTORY_SEPARATOR.'zte'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'default.jpg');
+            return $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].__.($attachment ? 'data'.__.'attachment'.__.'forum'.__.$attachment['attachment'] : 'static'.__.'zte'.__.'images'.__.'default.jpg');
         }
     }
 

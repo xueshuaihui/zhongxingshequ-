@@ -1,5 +1,6 @@
 <?php
 require_once 'baseApi.php';
+require_once LIB.'smsClass.php';
 require_once RESPOSITORY.'codeRepository.php';
 
 class codeApi extends baseApi {
@@ -29,9 +30,17 @@ class codeApi extends baseApi {
         if(!$had){
             return 10009; //手机谁都没绑定
         }
-        $code = $this->tool->getRand();
-        $this->request->setSession(['reset'=>[$phone=>$code]]);
-        return $code;
+        $codeObj = new smsClass();
+        $sendCode = $codeObj->Token($phone);
+        $this->request->setCode([
+            'reset'=>[
+                $sendCode['mobile']=>[
+                    'token'=>$sendCode['token'],
+                    'expire'=>$sendCode['expire']
+                ]
+            ]
+        ]);
+        return $sendCode['token'];
     }
 
     /**
@@ -54,8 +63,16 @@ class codeApi extends baseApi {
         if($had){
             return 10011; //该手机号已被绑定账号
         }
-        $code = $this->tool->getRand();
-        $this->request->setSession(['reset'=>[$phone=>$code]]);
-        return $code;
+        $codeObj = new smsClass();
+        $sendCode = $codeObj->Token($phone);
+        $this->request->setCode([
+            'blind'=>[
+                $sendCode['mobile']=>[
+                    'token'=>$sendCode['token'],
+                    'expire'=>$sendCode['expire']
+                ]
+            ]
+        ]);
+        return $sendCode['token'];
     }
 }
