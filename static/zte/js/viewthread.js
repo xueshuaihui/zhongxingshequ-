@@ -6,3 +6,6 @@ jq(".authicn").hover(function(){
 },function(){
     jq(this).parents(".plc").children(".xsh_favatar").css({display:"none"});
 })
+function glclose(){
+    jq("#mdly").css({display:'none'});
+}
