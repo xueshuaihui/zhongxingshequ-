@@ -30,7 +30,7 @@ class indexRepository extends baseRepository {
                 $result['title'] = $bk['name'];
             }else{
                 $bkDatas[$k]['fid'] = $bk['fid'];
-                $bkDatas[$k]['icon'] = strpos($bk['icon'], 'http') === false ? BASEURL.__.'data'.__.'attachment'.__.'group'.__.$bk['icon'] : $bk['icon'];
+                $bkDatas[$k]['icon'] = strpos($bk['icon'], 'http') === false ? BASEURL.__.'data'.__.'attachment'.__.'common'.__.$bk['icon'] : $bk['icon'];
                 $bkDatas[$k]['name'] = $bk['name'];
             }
         }
