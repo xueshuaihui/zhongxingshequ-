@@ -24,15 +24,17 @@ class indexRepository extends baseRepository {
         }
         $bks = $this->table('forum_forum')->ass('f')->join(' LEFT JOIN zx_forum_forumfield AS o ON f.fid = o.fid')->where('f.fup', $bkId)->whereOr('f.fid', $bkId)->select();
         $result = [];
+        $bkDatas = [];
         foreach ($bks as $k=>$bk){
             if($bk['fid'] == $bkId){
                 $result['title'] = $bk['name'];
             }else{
-                $result[$k]['fid'] = $bk['fid'];
-                $result[$k]['icon'] = strpos($bk['icon'], 'http') === false ? BASEURL.__.'data'.__.'attachment'.__.'group'.__.$bk['icon'] : $bk['icon'];
-                $result[$k]['name'] = $bk['name'];
+                $bkDatas[$k]['fid'] = $bk['fid'];
+                $bkDatas[$k]['icon'] = strpos($bk['icon'], 'http') === false ? BASEURL.__.'data'.__.'attachment'.__.'group'.__.$bk['icon'] : $bk['icon'];
+                $bkDatas[$k]['name'] = $bk['name'];
             }
         }
+        $result['bks'] = array_values($bkDatas);
         return $result;
     }
 
