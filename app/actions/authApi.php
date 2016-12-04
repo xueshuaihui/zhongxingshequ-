@@ -32,7 +32,7 @@ class authApi extends baseApi {
         if(is_bool($res) && $res){
             $profile = $this->tool->getAllUserProfile('username', $username);
             if(!$profile['uid']){
-                dd($profile);
+                return '此用户信息异常，请换个用户吧，test:123456亲测可用';
             }
             return array('expire'=>strtotime('+7 day'), 'profile'=>$profile);
         }
