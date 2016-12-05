@@ -7,7 +7,7 @@ use discuz\request;
  *     host="zte.rmbplus.com/app.php?action=",
  *     basePath="/",
  *     @SWG\Info(
- *         version="不确定",
+ *         version="确定了，1.1",
  *         title="这是中心API，你没搞错吧",
  *         description="访问本域名是显示文档，访问swagger.php?re=1则刷新",
  *     ),
