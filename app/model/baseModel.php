@@ -8,7 +8,6 @@ class baseModel {
     }
 
     private function loadcore() {
-        global $_G;
         require_once ROOT.'source/class/class_core.php';
         $discuz = C::app();
         $discuz->init_cron = false;

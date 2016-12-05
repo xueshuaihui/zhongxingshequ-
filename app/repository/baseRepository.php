@@ -16,4 +16,16 @@ class baseRepository {
         }
         return $result;
     }
+
+    public function getUserByUid($uid, $form = 'common_member') {
+        return $this->table($form)->where('uid', $uid)->find();
+    }
+
+    public function getUserProfile($where = []) {
+        return $this->table('common_member_profile')->where($where)->find();
+    }
+
+    public function getUserByUsername($username, $from = 'ucenter_members') {
+        return $this->table($from)->where('username', $username)->find();
+    }
 }

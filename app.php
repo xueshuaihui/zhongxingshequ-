@@ -1,5 +1,6 @@
 <?php
 session_start();
+define('IN_APP', 1);
 define('__', DIRECTORY_SEPARATOR);
 define('ROOT', dirname(__FILE__).__);
 define('API', ROOT.'app'.__);

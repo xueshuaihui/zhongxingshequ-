@@ -57,6 +57,64 @@ class indexRepository extends baseRepository {
         return $valueAble;
     }
 
+    public function pushQuestion($uid, $bkId, $content) {
+        require_once ROOT."source".__.'function'.__.'function_forum.php';
+        $user = $this->getUserByUid($uid);
+        $newthread = array(
+            'fid' => $bkId,
+            'posttableid' => 0,
+            'readperm' => 0,
+            'sortid' => 0,
+            'author' => $user['username'],
+            'authorid' => $uid,
+            'subject' => '专家提问：',
+            'dateline' => getglobal('timestamp'),
+            'lastpost' => getglobal('timestamp'),
+            'lastposter' => $user['username'],
+            'status' => 32
+        );
+        //主题
+        $ztid = $this->table('forum_thread')->store($newthread);
+        $data = array(
+            'fid' => $bkId,
+            'first' => '1',
+            'tid' => $ztid,
+            'author' => $user['username'],
+            'authorid' => $uid,
+            'subject' => '专家提问：',
+            'dateline' => getglobal('timestamp'),
+            'message' => $content,
+            'useip' => getglobal('clientip'),
+            'port' => getglobal('remoteport'),
+        );
+        //帖子
+        $pid = insertpost($data);
+        if($pid){
+            $banzhuIds = $this->table('forum_moderator')->where('fid', $bkId)->select();
+            $this->sendMessageToIds($banzhuIds, $uid, $user['username'], $ztid, $bkId, $pid);
+        }
+        return true;
+    }
+
+    private function sendMessageToIds ($ids, $authorid, $author, $zt, $lt, $tz) {
+        if (is_numeric($ids)) {
+            $ids = array($ids);
+        }
+        foreach ($ids as $id) {
+            if (!is_numeric($id)) {
+                $id = $id['uid'];
+            }
+            notification_add($id, 'post', '<a href="home.php?mod=space&uid=' . $authorid . '">' . $author . '</a> 向您提出了问题 <a href="forum.php?mod=redirect&goto=findpost&tid=' . $zt . '&pid=' . $tz . '" target="_blank" class="lit">点击查看详情</a>', array(
+                'tid' => $zt, //主题ID
+                'subject' => '',//标题
+                'fid' => $lt,//论坛ID
+                'pid' => $tz,//帖子ID
+                'from_id' => $zt,//主题ID
+                'from_idtype' => 'post',
+            ));
+        }
+    }
+
     private function filterMessage ($message) {
         $message = preg_replace('/\[.*?\]/', '', $message);
         $message = preg_replace('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i','',$message);
@@ -74,9 +132,6 @@ class indexRepository extends baseRepository {
     }
 
     private function subString($string, $length){
-        if(strlen($string) > $length){
-            $string = mb_substr($string, 0, $length, "utf-8").'...';
-        }
-        return $string;
+        return cutstr($string, $length);
     }
 }

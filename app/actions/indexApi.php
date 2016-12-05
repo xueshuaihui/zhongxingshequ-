@@ -97,4 +97,27 @@ class indexApi extends baseApi {
         $page = $this->request->post('page');
         return $this->tool->getInfo($typeId, $page);
     }
+
+    /**
+     * @SWG\Post(
+     *   path="index-postQuestion",
+     *   tags={"首页相关"},
+     *   summary="首页向专家提问",
+     *   description="首页向专家提问",
+     *   operationId="postQuestion",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Parameter(name="fid", in="formData", description="最子层板块ID", required=true, type="string"),
+     *     @SWG\Parameter(name="question", in="formData", description="问题内容", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function postQuestion() {
+        $this->checkParam(['uid', 'fid', 'question']);
+        $uid = $this->request->post('uid');
+        $fid = $this->request->post('fid');
+        $question = $this->request->post('question');
+        return $this->tool->pushQuestion($uid, $fid, $question);
+    }
 }

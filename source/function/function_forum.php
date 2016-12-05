@@ -7,7 +7,7 @@
  *      $Id: function_forum.php 33660 2013-07-29 07:51:05Z nemohou $
  */
 
-if(!defined('IN_DISCUZ')) {
+if(!defined('IN_DISCUZ') && !defined('IN_APP')) {
 	exit('Access Denied');
 }
 

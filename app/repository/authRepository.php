@@ -53,6 +53,7 @@ class authRepository extends baseRepository {
             return false;
         }
         $res = $this->table('common_member')->store([
+            'uid' => $res,
             'username'=>$username,
             'password'=>$password,
             'email'=>$email,
@@ -61,6 +62,22 @@ class authRepository extends baseRepository {
             'timeoffset'=>9999,
             'regdate'=>time()
         ]);
+        if(!$res){
+            return false;
+        }
+        $res = $this->table('common_member_profile')->store([
+            'uid' => $res,
+            'bio' => '',
+            'interest' => '',
+            'field1' => '',
+            'field2' => '',
+            'field3' => '',
+            'field4' => '',
+            'field5' => '',
+            'field6' => '',
+            'field7' => '',
+            'field8' => '',
+        ], false);
         if(!$res){
             return false;
         }
@@ -81,10 +98,6 @@ class authRepository extends baseRepository {
         return (bool) $this->table('common_member')->where('uid', $uid)->update(['password'=>$newPass]);
     }
 
-    public function getUserByUsername($username, $from = 'ucenter_members') {
-        return $this->table($from)->where('username', $username)->find();
-    }
-
     public function identityPassword($uid, $password) {
         $user = $this->table('ucenter_members')->where('uid', $uid)->find();
         return (md5(md5($password).$user['salt']) == $user['password']);
@@ -98,15 +111,11 @@ class authRepository extends baseRepository {
         return $this->table('common_member_profile')->where('uid', $uid)->update($newdata);
     }
 
-    public function getUserProfile($where = []) {
-        return $this->table('common_member_profile')->where($where)->find();
-    }
-
     public function getAllUserProfile($key, $value) {
         return $this->table('common_member')
-                    ->ass('c')
-                    ->join(' LEFT JOIN zx_common_member_profile AS p ON c.uid = p.uid')
-                    ->where('c.'.$key, $value)
-                    ->find();
+            ->ass('c')
+            ->join(' LEFT JOIN zx_common_member_profile AS p ON c.uid = p.uid')
+            ->where('c.'.$key, $value)
+            ->find();
     }
 }
