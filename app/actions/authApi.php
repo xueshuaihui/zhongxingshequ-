@@ -1,7 +1,7 @@
 <?php
 
 require_once 'baseApi.php';
-require_once RESPOSITORY.'authRepository.php';
+require_once REPOSITORY.'authRepository.php';
 
 class authApi extends baseApi {
     protected $tool;
@@ -31,6 +31,7 @@ class authApi extends baseApi {
         $res = $this->tool->verifyIdentity($username, $password);
         if(is_bool($res) && $res){
             $profile = $this->tool->getAllUserProfile('username', $username);
+            $profile['avatar'] = $this->tool->getAvatar($profile['uid']);
             if(!$profile['uid']){
                 return '此用户信息异常，请换个用户吧，test:123456亲测可用';
             }

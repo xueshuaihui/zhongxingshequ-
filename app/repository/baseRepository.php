@@ -28,4 +28,8 @@ class baseRepository {
     public function getUserByUsername($username, $from = 'ucenter_members') {
         return $this->table($from)->where('username', $username)->find();
     }
+
+    public function getAvatar($uid, $size = 'small') {
+        return avatar($uid, $size, true);
+    }
 }

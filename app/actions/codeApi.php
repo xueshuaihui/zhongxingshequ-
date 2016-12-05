@@ -1,7 +1,7 @@
 <?php
 require_once 'baseApi.php';
 require_once LIB.'smsClass.php';
-require_once RESPOSITORY.'codeRepository.php';
+require_once REPOSITORY.'codeRepository.php';
 
 class codeApi extends baseApi {
     protected $tool;

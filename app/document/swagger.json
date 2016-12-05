@@ -442,6 +442,50 @@
                     }
                 }
             }
+        },
+        "index-postQuestion": {
+            "post": {
+                "tags": [
+                    "\u9996\u9875\u76f8\u5173"
+                ],
+                "summary": "\u9996\u9875\u5411\u4e13\u5bb6\u63d0\u95ee",
+                "description": "\u9996\u9875\u5411\u4e13\u5bb6\u63d0\u95ee",
+                "operationId": "postQuestion",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "formData",
+                        "description": "\u7528\u6237ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fid",
+                        "in": "formData",
+                        "description": "\u6700\u5b50\u5c42\u677f\u5757ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "question",
+                        "in": "formData",
+                        "description": "\u95ee\u9898\u5185\u5bb9",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
         }
     },
     "definitions": {}

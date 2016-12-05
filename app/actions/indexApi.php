@@ -1,7 +1,7 @@
 <?php
 
 require_once 'baseApi.php';
-require_once RESPOSITORY.'indexRepository.php';
+require_once REPOSITORY.'indexRepository.php';
 
 class indexApi extends baseApi {
     protected $tool;
@@ -120,4 +120,20 @@ class indexApi extends baseApi {
         $question = $this->request->post('question');
         return $this->tool->pushQuestion($uid, $fid, $question);
     }
+
+    /**
+     * @SWG\Post(
+     *   path="index-reply",
+     *   tags={"首页相关"},
+     *   summary="回复帖子",
+     *   description="回复帖子，专家回帖也用这个",
+     *   operationId="reply",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Parameter(name="fid", in="formData", description="最子层板块ID", required=true, type="string"),
+     *     @SWG\Parameter(name="question", in="formData", description="问题内容", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
 }
