@@ -11,7 +11,7 @@ class messageApi extends baseApi {
     }
 
     public function sendPersonMessage() {
-        
+        echo "test webhook";
     }
 
     public function getPublicMessage() {
