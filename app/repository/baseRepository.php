@@ -37,4 +37,13 @@ class baseRepository {
     public function getAvatar($uid, $size = 'small') {
         return avatar($uid, $size, true);
     }
+
+    public function sendMessage($ids, $type, $note, $notevars = array()) {
+        if(is_string($ids) || is_numeric($ids)){
+            $ids = array($ids);
+        }
+        foreach ($ids as $id){
+            notification_add($id, $type, $note, $notevars, $notevars);
+        }
+    }
 }

@@ -60,8 +60,36 @@ class circleApi extends baseApi {
 
     }
 
+    /**
+     * @SWG\Post(
+     *   path="circle-applyJoinCircle",
+     *   tags={"圈子相关"},
+     *   summary="申请加入圈子",
+     *   description="申请加入圈子",
+     *   operationId="applyJoinCircle",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Parameter(name="fid", in="formData", description="群组ID", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
     public function applyJoinCircle() {
-        
+        $this->checkParam(['uid', 'fid']);
+        $uid = $this->request->post('uid');
+        $fid = $this->request->post('fid');
+        $user = $this->tool->getUserByUid($uid);
+        $res = $this->tool->applyJoin($uid, $fid, $user['username']);
+        if($res) {
+            $circleBase = $this->tool->getGroup($fid);
+            $bzIds = $this->tool->getGroupUser($fid, 'uid');
+            foreach ($bzIds as $k=>$ids){
+                $bzIds[$k] = $ids['uid'];
+            }
+            $note = '<a href="home.php?mod=space&uid='.$uid.'">'.$user['username'].'</a> 加入您的 <a href="forum.php?mod=group&fid='.$fid.'" target="_blank">'.$circleBase['name'].'</a> 群组需要审核，请到群组<a href="forum.php?mod=group&action=manage&op=checkuser&fid='.$fid.'" target="_blank">管理后台</a> 进行审核';
+            $this->tool->sendMessage($bzIds, 'group', $note);
+        }
+        return true;
     }
 
     public function circleMove() {

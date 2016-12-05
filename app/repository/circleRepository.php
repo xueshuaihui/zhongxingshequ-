@@ -30,4 +30,28 @@ class circleRepository extends baseRepository {
         }
         return $res;
     }
+
+    public function applyJoin($uid, $fid, $username) {
+        return $this->table('forum_groupuser')->store([
+            'uid' => $uid,
+            'fid' => $fid,
+            'username'=>$username,
+            'level' => 0,
+            'threads' => 0,
+            'replies' => 0,
+            'joindateline' => getglobal('timestamp'),
+            'lastupdate' => 0,
+            'privacy' => 0
+        ],false);
+    }
+
+    public function getGroup($fid) {
+        return $this->table('forum_forum')->where('fid', $fid)->find();
+    }
+
+    public function getGroupUser($fid, $field, $level = 1) {
+        return $this->table('forum_groupuser')
+                    ->where(['fid'=>$fid, 'level'=>$level])
+                    ->select($field);
+    }
 }
