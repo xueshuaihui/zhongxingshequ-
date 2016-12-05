@@ -14,6 +14,7 @@ class mdbModel extends baseModel implements dbInterface {
     private $join;
     private $prefix = 'zx_';
     private static $models = [];
+    private static $baseModel;
     public function __construct($table) {
         parent::__construct();
         $this->table = $table;
@@ -24,6 +25,13 @@ class mdbModel extends baseModel implements dbInterface {
             self::$models[$table] = new mdbModel($table);
         }
         return self::$models[$table];
+    }
+
+    public static function baseModel() {
+        if(!isset(self::$baseModel)){
+            self::$baseModel = new baseModel();
+        }
+        return self::$baseModel;
     }
 
     public function store($data, $returnId = true) {

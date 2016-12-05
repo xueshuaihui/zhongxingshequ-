@@ -2,8 +2,13 @@
 require_once MODEL.'mdbModel.php';
 
 class baseRepository {
-    protected function table($table){
-        return mdbModel::model($table);
+    protected $prefix = 'zx_';
+    protected function table($table = false){
+        if(!$table){
+            return mdbModel::baseModel();
+        }else{
+            return mdbModel::model($table);
+        }
     }
 
     protected function randNum ($size = 6, $type = 2) {

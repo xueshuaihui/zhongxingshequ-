@@ -22,7 +22,7 @@ class indexRepository extends baseRepository {
             $setting = $this->table('common_setting')->where(['skey'=>'index_hdzl'])->find();
             $bkId = $setting['svalue'];
         }
-        $bks = $this->table('forum_forum')->ass('f')->join(' LEFT JOIN zx_forum_forumfield AS o ON f.fid = o.fid')->where('f.fup', $bkId)->whereOr('f.fid', $bkId)->select();
+        $bks = $this->table('forum_forum')->ass('f')->join(' LEFT JOIN '.$this->prefix.'forum_forumfield AS o ON f.fid = o.fid')->where('f.fup', $bkId)->whereOr('f.fid', $bkId)->select();
         $result = [];
         $bkDatas = [];
         foreach ($bks as $k=>$bk){
@@ -44,7 +44,7 @@ class indexRepository extends baseRepository {
 
     public function getInfo($typeId, $page) {
         $count = $this->table('common_setting')->where('skey', 'index_list_count')->find();
-        $datas = $this->table('forum_thread')->ass('zt')->join(' LEFT JOIN zx_forum_post AS tz ON zt.tid = tz.tid')->where(['zt.sortid'=>$typeId, 'tz.first'=>1])->select();
+        $datas = $this->table('forum_thread')->ass('zt')->join(' LEFT JOIN '.$this->prefix.'forum_post AS tz ON zt.tid = tz.tid')->where(['zt.sortid'=>$typeId, 'tz.first'=>1])->select();
         $valueAble = [];
         foreach ($datas as $k=>$data) {
             $valueAble[$k]['title'] = $this->subString($data['subject'], 25);

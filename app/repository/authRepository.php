@@ -114,7 +114,7 @@ class authRepository extends baseRepository {
     public function getAllUserProfile($key, $value) {
         return $this->table('common_member')
             ->ass('c')
-            ->join(' LEFT JOIN zx_common_member_profile AS p ON c.uid = p.uid')
+            ->join(' LEFT JOIN '.$this->prefix.'common_member_profile AS p ON c.uid = p.uid')
             ->where('c.'.$key, $value)
             ->find();
     }
