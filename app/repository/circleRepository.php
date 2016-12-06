@@ -41,12 +41,12 @@ class circleRepository extends baseRepository {
         return $res;
     }
 
-    public function applyJoin($uid, $fid, $username) {
+    public function applyJoin($uid, $fid, $username, $admin = false) {
         return $this->table('forum_groupuser')->store([
             'uid' => $uid,
             'fid' => $fid,
             'username'=>$username,
-            'level' => 0,
+            'level' => $admin?4:0,
             'threads' => 0,
             'replies' => 0,
             'joindateline' => getglobal('timestamp'),
@@ -63,8 +63,12 @@ class circleRepository extends baseRepository {
         return $this->table('forum_groupuser')->where(['fid'=>$fid, 'uid'=>$uid])->delete();
     }
 
-    public function getGroupUser($fid, $field, $level = 1) {
-        if($level || $level === 0){
+    public function getGroupUser($fid, $field, $level = 1, $forceall = false) {
+        if($forceall){
+            return $this->table('forum_groupuser')
+                ->where(['fid'=>$fid])
+                ->select($field);
+        }elseif($level || $level === 0){
             return $this->table('forum_groupuser')
                 ->where(['fid'=>$fid, 'level'=>$level])
                 ->select($field);
@@ -91,5 +95,38 @@ class circleRepository extends baseRepository {
 
     public function updateGroupProfile($fid, $data = []) {
         return $this->table('forum_forumfield')->where('fid', $fid)->update($data);
+    }
+
+    public function ignoreApply($uid, $fid) {
+        $res = $this->table('forum_groupuser')->where(['uid'=>$uid, 'fid'=>$fid])->delete();
+        if($res){
+            update_groupmoderators($fid);
+            return true;
+        }
+        return false;
+    }
+
+    public function getInviteUser($fid, $uid) {
+        return $this->table('forum_groupinvite')
+                    ->ass('i')
+                    ->join(' LEFT JOIN '.$this->prefix.'common_member AS u ON i.inviteuid = u.uid')
+                    ->where(['i.fid'=>$fid, 'i.uid'=>$uid])
+                    ->select('u.uid, u.username');
+    }
+
+    public function inviteUser($uid, $fid, $invites) {
+        foreach ($invites as $invite){
+            $res = $this->table('forum_groupinvite')
+                 ->store([
+                    'fid'=>$fid,
+                    'uid'=>$uid,
+                    'inviteuid'=>$invite,
+                    'dateline' => getglobal('timestamp')
+                ], false);
+            if(!$res){
+                return false;
+            }
+        }
+        return true;
     }
 }

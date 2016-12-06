@@ -71,7 +71,12 @@ class circleApi extends baseApi {
         $uid = $this->request->post('uid');
         $fid = $this->request->post('fid');
         $user = $this->tool->getUserByUid($uid);
-        $res = $this->tool->applyJoin($uid, $fid, $user['username']);
+        if($user['adminid']){
+            //人家可是管理员，直接加入，没话说
+            $res = $this->tool->applyJoin($uid, $fid, $user['username'], true);
+        }else{
+            $res = $this->tool->applyJoin($uid, $fid, $user['username']);
+        }
         if($res) {
             $circleBase = $this->tool->getGroup($fid);
             $bzIds = $this->tool->getGroupUser($fid, 'uid');
@@ -146,12 +151,31 @@ class circleApi extends baseApi {
         return $this->tool->quit($fid, $uid);
     }
 
-    public function createCircle() {
-        
-    }
-
-    public function ignoreMessage() {
-        
+    /**
+     * @SWG\Post(
+     *   path="circle-ignoreApply",
+     *   tags={"圈子相关"},
+     *   summary="拒绝成员申请",
+     *   description="拒绝成员申请",
+     *   operationId="ignoreApply",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="fid", in="formData", description="群组ID", required=true, type="string"),
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function ignoreApply() {
+        $this->checkParam(['uid', 'fid']);
+        $uid = $this->request->post('uid');
+        $fid = $this->request->post('fid');
+        $res = $this->tool->ignoreApply($uid, $fid);
+        if($res){
+            $group = $this->tool->getGroup($fid);
+            $note = '您没有通过 <a href="forum.php?mod=group&fid='.$fid.'" target="_blank">'.$group['name'].'</a> 群组的审核';
+            $this->tool->sendMessage($uid, 'group', $note);
+        }
+        return true;
     }
 
     /**
@@ -271,5 +295,72 @@ class circleApi extends baseApi {
             return $result;
         }
         return false;
+    }
+
+    /**
+     * @SWG\Post(
+     *   path="circle-getFriendsForInvite",
+     *   tags={"圈子相关"},
+     *   summary="获取好友列表",
+     *   description="获取好友列表",
+     *   operationId="getFriendsForInvite",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="fid", in="formData", description="群组ID", required=true, type="string"),
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function getFriendsForInvite() {
+        $this->checkParam(['uid', 'fid']);
+        $uid = $this->request->post('uid');
+        $fid = $this->request->post('fid');
+
+        //先获取全部好友列表吧
+        $friendsList = $this->tool->getFriendList($uid);
+        //获取群组已有成员列表
+        $groupList = $this->tool->getGroupUser($fid, 'uid, username', '', true);
+        //获取已经邀请的列表
+        $inviteList = $this->tool->getInviteUser($fid, $uid);
+        //去除渣渣
+        foreach ($friendsList as $k=>$user){
+            if(in_array($user, $groupList) || in_array($user, $inviteList)){
+                unset($friendsList[$k]);
+            }else{
+                $friendsList[$k]['icon'] = $this->tool->getAvatar($user['uid']);
+            }
+        }
+        return $friendsList;
+    }
+
+    /**
+     * @SWG\Post(
+     *   path="circle-inviteFriend",
+     *   tags={"圈子相关"},
+     *   summary="邀请好友加入圈子",
+     *   description="邀请好友加入圈子",
+     *   operationId="inviteFriend",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="fid", in="formData", description="群组ID", required=true, type="string"),
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Parameter(name="invite_id", in="formData", description="被邀请用户ID eg:1,2,3,4...", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function inviteFriend() {
+        $this->checkParam(['uid', 'fid', 'invite_id']);
+        $uid = $this->request->post('uid');
+        $fid = $this->request->post('fid');
+        $inviteIds = $this->request->post('invite_id');
+        $inviteIds = explode(',', $inviteIds);
+        $res = $this->tool->inviteUser($uid, $fid, $inviteIds);
+        if($res){
+            $user = $this->tool->getUserByUid($uid);
+            $group = $this->tool->getGroup($fid);
+            $note = '<a href="home.php?mod=space&uid='.$uid.'">'.$user['username'].'</a> 邀请您加入 <a href="forum.php?mod=group&fid='.$fid.'" target="_blank">'.$group['name'].'</a> 群组，<a href="forum.php?mod=group&action=join&fid='.$fid.'" target="_blank">点此马上加入</a>';
+            $this->tool->sendMessage($inviteIds, 'group', $note);
+        }
+        return true;
     }
 }

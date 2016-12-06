@@ -91,7 +91,7 @@ class mdbModel extends baseModel implements dbInterface {
     }
 
     public function field($field = '') {
-        $this->field .= '`'.trim($field).'`' . ',';
+        $this->field .= ' '.trim($field).' ,';
         return $this;
     }
 
