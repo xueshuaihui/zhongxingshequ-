@@ -61,10 +61,10 @@ class mdbModel extends baseModel implements dbInterface {
             $this->sql .= $this->whereOr;
         }
         if($this->order){
-            $this->sql .= ' ORDER BY \''.$this->order.'\'';
+            $this->sql .= ' ORDER BY '.$this->order;
         }
         if($this->limit){
-            $this->sql .=  ' LIMIT '.$this->limit;
+            $this->sql .=  ' LIMIT '.trim($this->limit,',');
         }
         if($sql){
             return $this->sql;
