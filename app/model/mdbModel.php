@@ -39,11 +39,11 @@ class mdbModel extends baseModel implements dbInterface {
     }
 
     public function delete() {
-
+        return DB::delete($this->table, '1 '.$this->where.$this->whereOr);
     }
 
     public function update($data) {
-        return DB::update($this->table, $data, $this->where);
+        return DB::update($this->table, $data, '1 '.$this->where.$this->whereOr);
     }
 
     public function find($fields, $sql = false) {

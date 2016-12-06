@@ -35,6 +35,7 @@ class response implements responseInterface{
         10013 =>  '该用户还没有通过审核呢',
         10014 =>  '圈子创建者有误',
         10015 =>  '该用户还不是管理员',
+        10016 =>  '创建者不能退出圈子',
     ];
     public function __construct($data = '') {
         if(is_bool($data)){

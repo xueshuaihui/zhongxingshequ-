@@ -59,8 +59,12 @@ class circleRepository extends baseRepository {
         return $this->table('forum_forum')->where('fid', $fid)->find();
     }
 
+    public function quit($fid, $uid) {
+        return $this->table('forum_groupuser')->where(['fid'=>$fid, 'uid'=>$uid])->delete();
+    }
+
     public function getGroupUser($fid, $field, $level = 1) {
-        if($level){
+        if($level || $level === 0){
             return $this->table('forum_groupuser')
                 ->where(['fid'=>$fid, 'level'=>$level])
                 ->select($field);

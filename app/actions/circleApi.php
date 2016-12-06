@@ -52,14 +52,6 @@ class circleApi extends baseApi {
         return $this->tool->searchCircle($keyword);
     }
 
-    public function inviteFriend() {
-        
-    }
-
-    public function agreeInvite() {
-
-    }
-
     /**
      * @SWG\Post(
      *   path="circle-applyJoinCircle",
@@ -129,8 +121,29 @@ class circleApi extends baseApi {
         return $this->tool->updateGroupProfile($fid, ['founderuid'=>$user['uid'], 'foundername'=>$user['username']]);
     }
 
+    /**
+     * @SWG\Post(
+     *   path="circle-quitCircle",
+     *   tags={"圈子相关"},
+     *   summary="退出圈子",
+     *   description="退出圈子",
+     *   operationId="quitCircle",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="fid", in="formData", description="群组ID", required=true, type="string"),
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
     public function quitCircle() {
-        
+        $this->checkParam(['uid', 'fid']);
+        $fid = $this->request->post('fid');
+        $uid = $this->request->post('uid');
+        $group = $this->tool->getGroupProfile($fid);
+        if($uid == $group['founderuid']){
+            return 10016; //创建者不能退出圈子
+        }
+        return $this->tool->quit($fid, $uid);
     }
 
     public function createCircle() {
@@ -181,14 +194,15 @@ class circleApi extends baseApi {
      *   consumes={"application/json"},
      *   produces={"application/json"},
      *     @SWG\Parameter(name="fid", in="formData", description="群组ID", required=true, type="string"),
-     *     @SWG\Parameter(name="level", in="formData", description="获取的用户属性，0：全部；1：管理员；2：副管理员；3：明星成员；4：普通成员；默认为0", required=false, type="string"),
+     *     @SWG\Parameter(name="level", in="formData", description="获取的用户属性，0：全部；1：管理员；2：副管理员；3：明星成员；4：普通成员；5：待审核成员；默认为0", required=false, type="string"),
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
     public function getGroupUsers() {
         $this->checkParam('fid');
         $fid = $this->request->post('fid');
-        $level = $this->request->post('level') ?: 0;
+        $level = $this->request->post('level') ?: false;
+        $level = $level == 5 ? 0 : $level;
         $users = $this->tool->getGroupUser($fid, 'uid, username', $level);
         foreach ($users as $k=>$user){
             $users[$k]['avatar'] = $this->tool->getAvatar($user['uid']);
@@ -196,26 +210,66 @@ class circleApi extends baseApi {
         return $users;
     }
 
+//    public function getManagePower() {
+//        $this->checkParam(['uid', 'fid']);
+//        $uid = $this->request->post('uid');
+//        $fid = $this->request->post('fid');
+//        $level = $this->tool->getUserFromGroup($uid, $fid);
+//        $levelArr = ['wait', 'manager', 'secManager', 'starts', 'common'];
+//        return $levelArr[$level['level']];
+//    }
+
     /**
      * @SWG\Post(
-     *   path="circle-getManagePower",
+     *   path="circle-getGroupProfile",
      *   tags={"圈子相关"},
-     *   summary="判断用户于圈子的属性",
-     *   description="判断用户于圈子的属性",
-     *   operationId="getManagePower",
+     *   summary="获取圈子详情",
+     *   description="获取圈子详情,relation 为用户身份，0：非成员，1：待审核成员；2：普通成员；3：管理员；4：创建者",
+     *   operationId="getGroupProfile",
      *   consumes={"application/json"},
      *   produces={"application/json"},
-     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
      *     @SWG\Parameter(name="fid", in="formData", description="群组ID", required=true, type="string"),
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
-    public function getManagePower() {
-        $this->checkParam(['uid', 'fid']);
-        $uid = $this->request->post('uid');
+    public function getGroupProfile() {
+        $this->checkParam(['fid', 'uid']);
         $fid = $this->request->post('fid');
-        $level = $this->tool->getUserFromGroup($uid, $fid);
-        $levelArr = ['wait', 'manager', 'secManager', 'starts', 'common'];
-        return $levelArr[$level['level']];
+        $uid = $this->request->post('uid');
+        $profile = $this->tool->getGroupProfile($fid);
+        $result['title'] = $profile['name'];
+        $result['description'] = $profile['description'];
+        //获取用户于群组的关系
+        if($profile['founderuid'] == $uid){
+            $result['relation'] = 4; //为创建者
+            return $result;
+        }
+        //看看有没有加入圈子
+        $groupUser = $this->tool->getUserFromGroup($uid, $fid);
+        if(!$groupUser){
+            $result['relation'] = 0; //没关系
+            return $result;
+        }
+        //看看用户是不是网站管理员
+        $user = $this->tool->getUserProfile(['uid'=>$uid]);
+        if($user['adminid']){
+            $result['relation'] = 3; //管理员
+            return $result;
+        }
+        //看看你的圈子等级
+        if($groupUser['level'] == 1 || $groupUser['level'] == 2){
+            $result['relation'] = 3; //管理员
+            return $result;
+        }
+        if($groupUser['level'] == 3 || $groupUser['level'] == 4){
+            $result['relation'] = 2; //普通成员
+            return $result;
+        }
+        if($groupUser['level'] == 0){
+            $result['relation'] = 1; //待审核成员
+            return $result;
+        }
+        return false;
     }
 }
