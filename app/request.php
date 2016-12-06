@@ -77,6 +77,61 @@ class request implements requestInterface{
         }
     }
 
+    public function setCode($k, $v = null) {
+        $sourceData = '';
+        if(file_exists($path = 'data'.DIRECTORY_SEPARATOR.'code.json')){
+            $sourceData = file_get_contents($path);
+        }
+        $sourceArr = json_decode($sourceData, true);
+        if(is_string($k)){
+            $sourceArr[$k] = $v;
+        }elseif(is_array($k)){
+            foreach ($k as $key=>$value){
+                $sourceArr[$key] = $value;
+            }
+        }
+        $resultData = json_encode($sourceArr);
+        file_put_contents($path, $resultData);
+    }
+
+    public function checkCode($key, $code) {
+        if(!file_exists($path = 'data'.DIRECTORY_SEPARATOR.'code.json')){
+            return false;
+        }
+        $sourceData = file_get_contents($path);
+        $sourceArr = json_decode($sourceData, true);
+        if(strpos($key, '.') === false){
+            if($sourceArr[$key]['code'] == $code && $sourceArr[$key]['expire'] < time()){
+                unset($sourceArr[$key]);
+                $resultData = json_encode($sourceArr);
+                file_put_contents($path, $resultData);
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            $k = explode('.', $key);
+            $return = '';
+            $root = '';
+            foreach ($k as $sub=>$subKey){
+                if($sub == 0){
+                    $root = $subKey;
+                    $return = $sourceArr[$root];
+                }else{
+                    $return = $return[$subKey];
+                }
+            }
+            if($return['token'] == $code && $return['expire'] > time()){
+                unset($sourceArr[$root]);
+                $resultData = json_encode($sourceArr);
+                file_put_contents($path, $resultData);
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+
     public function setSession($k, $v = null) {
         if(is_string($k)){
             $_SESSION[$k] = $v;

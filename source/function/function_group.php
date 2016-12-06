@@ -7,7 +7,7 @@
  *      $Id: function_group.php 32367 2013-01-07 02:30:12Z liulanbo $
  */
 
-if(!defined('IN_DISCUZ')) {
+if(!defined('IN_DISCUZ') && !defined('IN_APP')) {
 	exit('Access Denied');
 }
 if(!$_G['setting']['navs'][3]['navname']){

@@ -1,11 +1,16 @@
 <?php
 session_start();
-define('ROOT', dirname(__FILE__).DIRECTORY_SEPARATOR);
-define('API', ROOT.'app'.DIRECTORY_SEPARATOR);
-define('INTER', API.'interface'.DIRECTORY_SEPARATOR);
-define('MODEL', API.'model'.DIRECTORY_SEPARATOR);
-define('RESPOSITORY', API.'repository'.DIRECTORY_SEPARATOR);
-define('DOCUMENT', API.'document'.DIRECTORY_SEPARATOR);
+define('IN_APP', 1);
+define('__', DIRECTORY_SEPARATOR);
+define('ROOT', dirname(__FILE__).__);
+define('API', ROOT.'app'.__);
+define('INTER', API.'interface'.__);
+define('MODEL', API.'model'.__);
+define('REPOSITORY', API.'repository'.__);
+define('DOCUMENT', API.'document'.__);
+define('LIB', API.'lib'.__);
+$url = $_SERVER['SERVER_PORT'] == 443 ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'];
+define('BASEURL', $url);
 function dd($d){
     var_dump($d); exit;
 }

@@ -22,14 +22,20 @@ class indexRepository extends baseRepository {
             $setting = $this->table('common_setting')->where(['skey'=>'index_hdzl'])->find();
             $bkId = $setting['svalue'];
         }
-        $bks = $this->table('forum_forum')->where('fup', $bkId)->whereOr('fid', $bkId)->select('fid, name');
+        $bks = $this->table('forum_forum')->ass('f')->join(' LEFT JOIN '.$this->prefix.'forum_forumfield AS o ON f.fid = o.fid')->where('f.fup', $bkId)->whereOr('f.fid', $bkId)->select();
+        $result = [];
+        $bkDatas = [];
         foreach ($bks as $k=>$bk){
             if($bk['fid'] == $bkId){
-                $bks['title'] = $bk['name'];
-                unset($bks[$k]);
+                $result['title'] = $bk['name'];
+            }else{
+                $bkDatas[$k]['fid'] = $bk['fid'];
+                $bkDatas[$k]['icon'] = strpos($bk['icon'], 'http') === false ? BASEURL.__.'data'.__.'attachment'.__.'common'.__.$bk['icon'] : $bk['icon'];
+                $bkDatas[$k]['name'] = $bk['name'];
             }
         }
-        return $bks;
+        $result['bks'] = array_values($bkDatas);
+        return $result;
     }
 
     public function getTabs() {
@@ -38,7 +44,7 @@ class indexRepository extends baseRepository {
 
     public function getInfo($typeId, $page) {
         $count = $this->table('common_setting')->where('skey', 'index_list_count')->find();
-        $datas = $this->table('forum_thread')->ass('zt')->join(' LEFT JOIN zx_forum_post AS tz ON zt.tid = tz.tid')->where(['zt.sortid'=>$typeId, 'tz.first'=>1])->select();
+        $datas = $this->table('forum_thread')->ass('zt')->join(' LEFT JOIN '.$this->prefix.'forum_post AS tz ON zt.tid = tz.tid')->where(['zt.sortid'=>$typeId, 'tz.first'=>1])->select();
         $valueAble = [];
         foreach ($datas as $k=>$data) {
             $valueAble[$k]['title'] = $this->subString($data['subject'], 25);
@@ -49,6 +55,64 @@ class indexRepository extends baseRepository {
             $valueAble[$k]['image'] = $this->getFirstImage($data['message'], $data['tid']);
         }
         return $valueAble;
+    }
+
+    public function pushQuestion($uid, $bkId, $content) {
+        require_once ROOT."source".__.'function'.__.'function_forum.php';
+        $user = $this->getUserByUid($uid);
+        $newthread = array(
+            'fid' => $bkId,
+            'posttableid' => 0,
+            'readperm' => 0,
+            'sortid' => 0,
+            'author' => $user['username'],
+            'authorid' => $uid,
+            'subject' => '专家提问：',
+            'dateline' => getglobal('timestamp'),
+            'lastpost' => getglobal('timestamp'),
+            'lastposter' => $user['username'],
+            'status' => 32
+        );
+        //主题
+        $ztid = $this->table('forum_thread')->store($newthread);
+        $data = array(
+            'fid' => $bkId,
+            'first' => '1',
+            'tid' => $ztid,
+            'author' => $user['username'],
+            'authorid' => $uid,
+            'subject' => '专家提问：',
+            'dateline' => getglobal('timestamp'),
+            'message' => $content,
+            'useip' => getglobal('clientip'),
+            'port' => getglobal('remoteport'),
+        );
+        //帖子
+        $pid = insertpost($data);
+        if($pid){
+            $banzhuIds = $this->table('forum_moderator')->where('fid', $bkId)->select();
+            $this->sendMessageToIds($banzhuIds, $uid, $user['username'], $ztid, $bkId, $pid);
+        }
+        return true;
+    }
+
+    private function sendMessageToIds ($ids, $authorid, $author, $zt, $lt, $tz) {
+        if (is_numeric($ids)) {
+            $ids = array($ids);
+        }
+        foreach ($ids as $id) {
+            if (!is_numeric($id)) {
+                $id = $id['uid'];
+            }
+            notification_add($id, 'post', '<a href="home.php?mod=space&uid=' . $authorid . '">' . $author . '</a> 向您提出了问题 <a href="forum.php?mod=redirect&goto=findpost&tid=' . $zt . '&pid=' . $tz . '" target="_blank" class="lit">点击查看详情</a>', array(
+                'tid' => $zt, //主题ID
+                'subject' => '',//标题
+                'fid' => $lt,//论坛ID
+                'pid' => $tz,//帖子ID
+                'from_id' => $zt,//主题ID
+                'from_idtype' => 'post',
+            ));
+        }
     }
 
     private function filterMessage ($message) {
@@ -63,14 +127,11 @@ class indexRepository extends baseRepository {
             return $imgUrl[0][0];
         }else{
             $attachment = $this->table('forum_threadimage')->where('tid', $tid)->find();
-            return $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].DIRECTORY_SEPARATOR.($attachment ? 'data'.DIRECTORY_SEPARATOR.'attachment'.DIRECTORY_SEPARATOR.'forum'.DIRECTORY_SEPARATOR.$attachment['attachment'] : 'static'.DIRECTORY_SEPARATOR.'zte'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'default.jpg');
+            return $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].__.($attachment ? 'data'.__.'attachment'.__.'forum'.__.$attachment['attachment'] : 'static'.__.'zte'.__.'images'.__.'default.jpg');
         }
     }
 
     private function subString($string, $length){
-        if(strlen($string) > $length){
-            $string = mb_substr($string, 0, $length, "utf-8").'...';
-        }
-        return $string;
+        return cutstr($string, $length);
     }
 }

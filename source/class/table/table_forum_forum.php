@@ -83,6 +83,12 @@ class table_forum_forum extends discuz_table
 		}
 		return DB::fetch_all("SELECT fid, type, name, fup FROM ".DB::table($this->_table)." WHERE ".DB::field('fid', $fid, '<>')." AND type<>'sub' AND status<>'3' ORDER BY displayorder");
 	}
+
+    public function fetch_all_by_keyword($keyword) {
+        $keyword = "%{$keyword}%";
+        return DB::fetch_all("SELECT ff.*, f.* FROM %t f LEFT JOIN %t ff ON ff.fid=f.fid WHERE f.name LIKE %s", array($this->_table, 'forum_forumfield', $keyword));
+    }
+
 	public function fetch_all_forum($status = 0) {
 		$statusql = intval($status) ? 'f.'.DB::field('status', $status) : 'f.status<>\'3\'';
 		return DB::fetch_all("SELECT ff.*, f.*, a.uid FROM ".DB::table($this->_table)." f LEFT JOIN ".DB::table('forum_forumfield')." ff ON ff.fid=f.fid LEFT JOIN ".DB::table('forum_access')." a ON a.fid=f.fid AND a.allowview>'0' WHERE $statusql ORDER BY f.type, f.displayorder");

@@ -1,7 +1,7 @@
 <?php
 
 require_once 'baseApi.php';
-require_once RESPOSITORY.'authRepository.php';
+require_once REPOSITORY.'authRepository.php';
 
 class authApi extends baseApi {
     protected $tool;
@@ -31,7 +31,11 @@ class authApi extends baseApi {
         $res = $this->tool->verifyIdentity($username, $password);
         if(is_bool($res) && $res){
             $profile = $this->tool->getAllUserProfile('username', $username);
-            return [strtotime('+7 day'), $profile];
+            $profile['avatar'] = $this->tool->getAvatar($profile['uid']);
+            if(!$profile['uid']){
+                return '此用户信息异常，请换个用户吧，test:123456亲测可用';
+            }
+            return array('expire'=>strtotime('+7 day'), 'profile'=>$profile);
         }
         return $res;
     }
@@ -133,8 +137,8 @@ class authApi extends baseApi {
         $code = $this->request->post('code');
         $newPassword = $this->request->post('newPassword');
         //验证验证码是否正确
-        $serverCode = $this->request->session('reset.'.$phone);
-        if(!$serverCode || $serverCode != $code){
+        $check = $this->request->checkCode('reset.'.$phone, $code);
+        if(!$check){
             return 10010; //验证码错误
         }
         //验证手机号是否存在,存在则返回用户
@@ -165,8 +169,8 @@ class authApi extends baseApi {
         $uid = $this->request->post('uid');
         $phone = $this->request->post('phone');
         $code = $this->request->post('code');
-        $serverCode = $this->request->session('blind.'.$phone);
-        if(!$serverCode || $serverCode != $code){
+        $check = $this->request->checkCode('blind.'.$phone, $code);
+        if(!$check){
             return 10010; //验证码错误
         }
         $user = $this->tool->getUserProfile(['mobile'=>$phone]);
