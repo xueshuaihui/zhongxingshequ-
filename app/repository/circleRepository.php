@@ -18,7 +18,7 @@ class circleRepository extends baseRepository {
             $res[$k]['fid'] = $value['fid'];
             $res[$k]['description'] = $value['description'];
         }
-        return $res;
+        return array_values($res);
     }
 
     public function getGroupProfile($fid) {
