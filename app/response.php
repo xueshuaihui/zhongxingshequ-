@@ -31,6 +31,10 @@ class response implements responseInterface{
         10009 =>  '该手机号并没有绑定用户哦',
         10010 =>  '验证码不正确',
         10011 =>  '该手机号已被绑定账号',
+        10012 =>  '该用户还没有加入圈子哦',
+        10013 =>  '该用户还没有通过审核呢',
+        10014 =>  '圈子创建者有误',
+        10015 =>  '该用户还不是管理员',
     ];
     public function __construct($data = '') {
         if(is_bool($data)){

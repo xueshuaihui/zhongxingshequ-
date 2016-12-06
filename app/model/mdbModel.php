@@ -136,6 +136,13 @@ class mdbModel extends baseModel implements dbInterface {
         return $this;
     }
 
+    public function whereWhere($k, $c = '=', $v = null) {
+        if(is_string($k)){
+            $this->where .= ' AND '.$k.$c.' \''.$v.'\'';
+        }
+        return $this;
+    }
+
     public function ass ($name) {
         $this->table .= ' AS '.$name;
         return $this;

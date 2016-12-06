@@ -92,8 +92,41 @@ class circleApi extends baseApi {
         return true;
     }
 
-    public function circleMove() {
-        
+    /**
+     * @SWG\Post(
+     *   path="circle-changeCircleFounder",
+     *   tags={"圈子相关"},
+     *   summary="转让圈子",
+     *   description="转让圈子",
+     *   operationId="changeCircleFounder",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="old_uid", in="formData", description="原圈主ID", required=true, type="string"),
+     *     @SWG\Parameter(name="new_uid", in="formData", description="新圈主ID", required=true, type="string"),
+     *     @SWG\Parameter(name="fid", in="formData", description="圈子ID", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function changeCircleFounder() {
+        $this->checkParam(['old_uid', 'new_uid', 'fid']);
+        $oldUid = $this->request->post('old_uid');
+        $newUid = $this->request->post('new_uid');
+        $fid = $this->request->post('fid');
+        if($oldUid == $newUid){
+            return 10007; //参数错误
+        }
+        $groupProfile = $this->tool->getGroupProfile($fid);
+        if($groupProfile['founderuid'] != $oldUid){
+            return 10014; //无权限操作
+        }
+        $user = $this->tool->getUserFromGroup($newUid, $fid);
+        if(!$user){
+            return 10012; //新用户未加入圈子
+        }
+        if($user['level'] != 1){
+            return 10015; //该用户还不是管理员
+        }
+        return $this->tool->updateGroupProfile($fid, ['founderuid'=>$user['uid'], 'foundername'=>$user['username']]);
     }
 
     public function quitCircle() {
@@ -108,7 +141,81 @@ class circleApi extends baseApi {
         
     }
 
-    public function getManagePower() {
+    /**
+     * @SWG\Post(
+     *   path="circle-changeUserGroupStatus",
+     *   tags={"圈子相关"},
+     *   summary="更改用户于圈子的身份",
+     *   description="更改用户于圈子的身份，可指定某用户为任何身份,验证通过也是此接口",
+     *   operationId="changeUserGroupStatus",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="fid", in="formData", description="群组ID", required=true, type="string"),
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Parameter(name="wantPower", in="formData", description="目的权限，1：圈主；2：副圈主；3：明星成员；4：普通成员；默认为1", required=false, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function changeUserGroupStatus() {
+        $this->checkParam(['uid', 'fid']);
+        $uid = $this->request->post('uid');
+        $fid = $this->request->post('fid');
+        $wantPower = $this->request->post('wantPower') ?: 1;
+        $user = $this->tool->getUserFromGroup($uid, $fid);
+        if(!$user){
+            return 10012; //该用户还没有加入群组
+        }
+        if($wantPower != 4 && $user['level'] == 0){
+            return 10013; //该用户还没有通过审核
+        }
+        return $this->tool->updateGroupUser($uid, $fid, $wantPower);
+    }
 
+    /**
+     * @SWG\Post(
+     *   path="circle-getGroupUsers",
+     *   tags={"圈子相关"},
+     *   summary="获取圈子成员列表",
+     *   description="获取圈子成员列表",
+     *   operationId="getGroupUsers",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="fid", in="formData", description="群组ID", required=true, type="string"),
+     *     @SWG\Parameter(name="level", in="formData", description="获取的用户属性，0：全部；1：管理员；2：副管理员；3：明星成员；4：普通成员；默认为0", required=false, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function getGroupUsers() {
+        $this->checkParam('fid');
+        $fid = $this->request->post('fid');
+        $level = $this->request->post('level') ?: 0;
+        $users = $this->tool->getGroupUser($fid, 'uid, username', $level);
+        foreach ($users as $k=>$user){
+            $users[$k]['avatar'] = $this->tool->getAvatar($user['uid']);
+        }
+        return $users;
+    }
+
+    /**
+     * @SWG\Post(
+     *   path="circle-getManagePower",
+     *   tags={"圈子相关"},
+     *   summary="判断用户于圈子的属性",
+     *   description="判断用户于圈子的属性",
+     *   operationId="getManagePower",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Parameter(name="fid", in="formData", description="群组ID", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function getManagePower() {
+        $this->checkParam(['uid', 'fid']);
+        $uid = $this->request->post('uid');
+        $fid = $this->request->post('fid');
+        $level = $this->tool->getUserFromGroup($uid, $fid);
+        $levelArr = ['wait', 'manager', 'secManager', 'starts', 'common'];
+        return $levelArr[$level['level']];
     }
 }
