@@ -74,6 +74,7 @@
 .xsh_tab_writing{width: 400px;margin-left: 20px;overflow: hidden;line-height: 30px;}
 .xsh_tab_contitle{font-size: 18px;font-weight: 500;color: #333333;}
 .xsh_tab_concise{color: #666666;font-size: 14px;position: relative;}
+.xsh_tab_concise>p{line-height: 23px;}
 .xsh_tab_more>a{color: #5597ED;}
 .xsh_tab_more>a>img{transform: translateY(2px);-webkit-transform: translateY(2px);margin-left: 3px;}
 .xsh_tab_time{color: #909596;font-size: 12px;}
