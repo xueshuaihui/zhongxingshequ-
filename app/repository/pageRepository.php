@@ -16,7 +16,7 @@ class pageRepository extends baseRepository {
                          ->in('tag.tagid', $tags)
                          ->where(['thread.fid'=>$fid, 'thread.price'=>0, 'thread.readperm'=>0])
                          ->whereWhere('thread.typeid', '!=', 0)
-                         ->order('displayorder desc, lastpost desc')
+                         ->order('thread.displayorder desc, thread.lastpost desc')
                          ->limit($start.' ,'.$count)
                          ->select('thread.tid, type.name, thread.author, thread.authorid, thread.subject, thread.lastpost, thread.digest, thread.highlight, thread.bgcolor');
         }else{
@@ -30,5 +30,32 @@ class pageRepository extends baseRepository {
                                 ->order('thread.displayorder desc, thread.lastpost desc')
                                 ->select('thread.tid, type.name, thread.author, thread.authorid, thread.subject, thread.lastpost, thread.digest, thread.highlight, thread.bgcolor');
         }
+    }
+
+    public function getThread($tid) {
+        return $this->table('forum_thread')->where('tid', $tid)->find('subject, fid, author, authorid, tid, dateline, stamp');
+    }
+
+    public function getTiezi($tid, $fid, $pid = null, $type = 0, $start = 0, $count = 10) {
+        $where = ['tid'=>$tid, 'fid'=>$fid];
+        if(!$pid){
+            $tiezis = $this->table('forum_post')
+                ->where($where)
+                ->order('position asc')
+                ->limit($start.' ,'.$count)
+                ->select();
+        }else{
+            $type = $type?'>=':'>';
+            $tiezis = $this->table('forum_post')
+                ->where($where)
+                ->whereWhere('pid', $type, $pid)
+                ->order('position asc')
+                ->limit($start.' ,'.$count)
+                ->select('pid, fid, tid, author, authorid, subject, message, anonymous');
+        }
+        foreach ($tiezis as $k=>$tiezi){
+            $tiezis[$k]['usericon'] = $this->getAvatar($tiezi['authorid']);
+        }
+        return $tiezis;
     }
 }
