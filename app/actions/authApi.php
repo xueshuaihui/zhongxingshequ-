@@ -53,6 +53,7 @@ class authApi extends baseApi {
      *     @SWG\Parameter(name="password", in="formData", description="密码", required=true, type="string"),
      *     @SWG\Parameter(name="email", in="formData", description="邮箱", required=true, type="string"),
      *     @SWG\Parameter(name="tagid", in="formData", description="公司标签ID", required=true, type="string"),
+     *     @SWG\Parameter(name="code", in="formData", description="邀请码", required=false, type="string"),
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
@@ -62,7 +63,13 @@ class authApi extends baseApi {
         $password = $this->request->post('password');
         $email = $this->request->post('email');
         $tagid = $this->request->post('tagid');
-
+        $code = $this->request->post('code');
+        if($code){
+            $res = $this->tool->checkCode($code, $email);
+            if(!$res){
+                return 10019;
+            }
+        }
         //验证用户名, 邮箱, 标签ID可用性
         $res = $this->tool->checkRepeat($username, $email, $tagid);
         if(is_numeric($res)){

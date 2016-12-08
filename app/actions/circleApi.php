@@ -15,7 +15,7 @@ class circleApi extends baseApi {
      *   path="circle-circleList",
      *   tags={"圈子相关"},
      *   summary="获取圈子列表",
-     *   description="获取圈子列表，type:0 全部圈子； 1 我管理的； 2 我的圈子",
+     *   description="获取圈子列表，type:0 全部圈子； 1 推荐圈子； 2 我的圈子",
      *   operationId="circleList",
      *   consumes={"application/json"},
      *   produces={"application/json"},

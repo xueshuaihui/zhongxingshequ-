@@ -4,12 +4,17 @@ require_once 'baseRepository.php';
 class circleRepository extends baseRepository {
     public function getCircleList($uid, $type, $page) {
         /**
-         * 0:all  1: manage  2: mine
+         * 0:all  1: recommend  2: mine
          */
-        $list = $this->table()->grouplist($uid, $type, $page);
         if($type == 2){
-            $list1 = $this->table()->grouplist($uid, 1, $page);
-            $list = array_merge($list, $list1);
+            $listmine = $this->table()->grouplist($uid, 2, $page);
+            $listmanage = $this->table()->grouplist($uid, 1, $page);
+            $list = array_merge($listmine, $listmanage);
+        }elseif($type == 1){
+            $list = $this->table('common_setting')->where('skey', 'group_recommend')->find();
+            $list = dunserialize($list['svalue']);
+        }else{
+            $list = $this->table()->grouplist($uid, $type, $page);
         }
         $res = [];
         foreach ($list as $k=>$value){
@@ -33,7 +38,7 @@ class circleRepository extends baseRepository {
         $list = $this->table()->searchGroup($keyword);
         $res = [];
         foreach ($list as $k=>$value){
-            $res[$k]['icon'] = BASEURL.__.$value['icon'];
+            $res[$k]['icon'] = BASEURL.__.($value['icon']?:'static/image/common/groupicon.gif');
             $res[$k]['name'] = $value['name'];
             $res[$k]['fid'] = $value['fid'];
             $res[$k]['description'] = $value['description'];
@@ -61,23 +66,6 @@ class circleRepository extends baseRepository {
 
     public function quit($fid, $uid) {
         return $this->table('forum_groupuser')->where(['fid'=>$fid, 'uid'=>$uid])->delete();
-    }
-
-    public function getGroupUser($fid, $field, $level = 1, $forceall = false) {
-        if($forceall){
-            return $this->table('forum_groupuser')
-                ->where(['fid'=>$fid])
-                ->select($field);
-        }elseif($level || $level === 0){
-            return $this->table('forum_groupuser')
-                ->where(['fid'=>$fid, 'level'=>$level])
-                ->select($field);
-        }else{
-            return $this->table('forum_groupuser')
-                ->where('fid', $fid)
-                ->whereWhere('level', '>', 0)
-                ->select($field);
-        }
     }
 
     public function getUserFromGroup($uid, $fid) {

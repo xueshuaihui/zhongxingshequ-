@@ -36,6 +36,21 @@ class pageRepository extends baseRepository {
         return $this->table('forum_thread')->where('tid', $tid)->find('subject, fid, author, authorid, tid, dateline, stamp');
     }
 
+    public function getThreadClass($fid) {
+        return $this->table('forum_threadclass')->where('fid', $fid)->select();
+    }
+
+    public function getGroupTags($fid, $profile = false) {
+        if($profile){
+            return $this->table('common_tagitem')
+                ->ass('it')
+                ->join(' LEFT JOIN '.$this->prefix.'common_tag AS ta ON ta.tagid = it.tagid')
+                ->where(['it.itemid'=>$fid, 'it.idtype'=>'groupid'])
+                ->select('it.tagid, ta.tagname');
+        }
+        return $this->table('common_tagitem')->where(['itemid'=>$fid, 'idtype'=>'groupid'])->select();
+    }
+
     public function getTiezi($tid, $fid, $pid = null, $type = 0, $start = 0, $count = 10) {
         $where = ['tid'=>$tid, 'fid'=>$fid];
         if(!$pid){
@@ -57,5 +72,56 @@ class pageRepository extends baseRepository {
             $tiezis[$k]['usericon'] = $this->getAvatar($tiezi['authorid']);
         }
         return $tiezis;
+    }
+
+    public function saveThread($fid, $uid, $username, $subject, $typeid) {
+        return $this->table('forum_thread')->store([
+            'fid' => $fid,
+            'typeid'=>$typeid,
+            'author' => $username,
+            'authorid'=> $uid,
+            'subject' => $subject,
+            'dateline'=> getglobal('timestamp'),
+            'lastpost'=> getglobal('timestamp'),
+            'lastposter'=>$username,
+            'status' => 32,
+            'isgroup' => 1,
+            'bgcolor' => ''
+        ]);
+    }
+
+    public function saveTiezi($fid, $tid, $uid, $username, $subject, $message, $attachmentCount) {
+        $pid = $this->table('forum_post_tableid')->store(['pid' => null], true);
+        $res = $this->table('forum_post')->store([
+            'pid' => $pid,
+            'fid' => $fid,
+            'tid' => $tid,
+            'first'=> 1,
+            'author'=>$username,
+            'authorid'=>$uid,
+            'subject' => $subject,
+            'message' => $message,
+            'dateline'=> getglobal('timestamp'),
+            'usesig'   => 1,
+            'bbcodeoff'=> -1,
+            'smileyoff' => -1,
+            'attachment' => $attachmentCount,
+            'useip'   => getglobal('clientip'),
+            'port'=>getglobal('remoteport'),
+            'position'=> 1
+        ]);
+        return $res ? $pid : false;
+    }
+
+    public function addToNewThread($tid, $fid) {
+        return $this->table('forum_newthread')->store([
+            'tid' => $tid,
+            'fid' => $fid,
+            'dateline' => getglobal('timestamp')
+        ], false);
+    }
+
+    public function updateThreadData($fid) {
+        return ;
     }
 }

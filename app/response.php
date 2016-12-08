@@ -36,6 +36,9 @@ class response implements responseInterface{
         10014 =>  '圈子创建者有误',
         10015 =>  '该用户还不是管理员',
         10016 =>  '创建者不能退出圈子',
+        10017 =>  '图片只允许jpg,jpeg,png',
+        10018 =>  '图片上传错误',
+        10019 =>  '邀请码不可用',
     ];
     public function __construct($data = '') {
         if(is_bool($data)){
