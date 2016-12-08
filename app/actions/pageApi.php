@@ -63,7 +63,7 @@ class pageApi extends baseApi {
      *   produces={"application/json"},
      *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
      *     @SWG\Parameter(name="fid", in="formData", description="圈子ID", required=true, type="string"),
-     *     @SWG\Parameter(name="class", in="formData", description="分类ID", required=true, type="string"),
+     *     @SWG\Parameter(name="category", in="formData", description="分类ID", required=true, type="string"),
      *     @SWG\Parameter(name="tag", in="formData", description="标签ID s eg:1,2,3", required=true, type="string"),
      *     @SWG\Parameter(name="subject", in="formData", description="标题", required=true, type="string"),
      *     @SWG\Parameter(name="message", in="formData", description="内容", required=true, type="string"),
@@ -76,10 +76,18 @@ class pageApi extends baseApi {
         $this->checkParam(['uid', 'fid']);
         $uid = $this->request->post('uid');
         $fid = $this->request->post('fid');
-        $class = $this->request->post('class');
+        $class = $this->request->post('category');
         $tags = $this->request->post('tag');
         $subject = $this->request->post('subject');
         $message = $this->request->post('message');
+
+        if(!$subject || $subject == ''){
+            return 10020;
+        }
+        if(!$message || $message == ''){
+            return 10021;
+        }
+
         $attachmentCount = 0;
         if($this->request->hasFile()){
             $attachments = $this->request->file();
@@ -87,6 +95,10 @@ class pageApi extends baseApi {
             $attachmentArr = $this->tool->uploadImages($attachments, 'forum');
             if(is_numeric($attachmentArr)){
                 return $attachmentArr;
+            }
+            $attachs = $this->tool->saveAttachmentIndex($attachmentArr, $uid);
+            foreach ($attachs as $attach){
+                $message .= '[attach]'.$attach['aid'].'[/attach]';
             }
         }
 
@@ -106,18 +118,14 @@ class pageApi extends baseApi {
             return false;
         }
         $pid = $this->tool->saveTiezi($fid, $tid, $uid, $user['username'], $subject, $message, $attachmentCount);
-        //上传图片
         if(!$pid){
             return false;
         }
-        //保存到新主题表
-        $res = $this->tool->addToNewThread($tid, $fid);
-        if(!$res){
-            return false;
-        }
+        //添加附件绑定
         if($attachmentCount > 0){
-            $this->tool->saveAttachment($attachmentArr, $pid, $uid, $tid);
+            $this->tool->saveAttachment($attachs, $pid, $tid, $uid);
         }
+        $this->tool->updateThreadData($fid, $tid, $user['username'], $uid, $subject, $user['adminid']);
         return true;
     }
 

@@ -10,6 +10,8 @@ class baseModel {
     private function loadcore() {
         require_once ROOT.'source/class/class_core.php';
         require_once ROOT.'source/function/function_group.php';
+        require_once ROOT.'source/function/function_stat.php';
+        require_once ROOT.'source/function/function_post.php';
         $discuz = C::app();
         $discuz->init_cron = false;
         $discuz->init_session = false;

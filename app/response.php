@@ -39,6 +39,8 @@ class response implements responseInterface{
         10017 =>  '图片只允许jpg,jpeg,png',
         10018 =>  '图片上传错误',
         10019 =>  '邀请码不可用',
+        10020 =>  '帖子标题不能为空',
+        10021 =>  '帖子内容不能为空',
     ];
     public function __construct($data = '') {
         if(is_bool($data)){

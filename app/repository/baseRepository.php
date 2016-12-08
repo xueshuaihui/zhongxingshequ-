@@ -86,17 +86,25 @@ class baseRepository {
         return true;
     }
 
-    public function saveAttachment($attacements, $pid, $uid, $tid) {
+    public function saveAttachmentIndex($attacements, $uid) {
+        foreach ($attacements as $k=>$attacement){
+            $aid = $this->table('forum_attachment')->store([
+                'tid' => 0,
+                'pid' => 0,
+                'uid' => $uid,
+                'tableid' => 0,
+            ], true);
+            $attacements[$k]['aid'] = $aid;
+        }
+        return $attacements;
+    }
+
+    public function saveAttachment($attacements, $pid, $tid, $uid) {
         foreach ($attacements as $attacement){
             $attacheTableId = $tid%10;
-            $aid = $this->table('forum_attachment')->store([
-                'tid' => $tid,
-                'pid' => $pid,
-                'uid' => $uid,
-                'tableid' => $attacheTableId,
-            ], true);
+            $this->table('forum_attachment')->where('aid', $attacement['aid'])->update(['tid'=>$tid, 'pid'=>$pid, 'tableid'=>$attacheTableId]);
             $this->table('forum_attachment_'.$attacheTableId)->store([
-                'aid'=>$aid,
+                'aid'=>$attacement['aid'],
                 'tid'=>$tid,
                 'pid'=>$pid,
                 'uid'=>$uid,
@@ -186,5 +194,9 @@ class baseRepository {
             imagedestroy($img);
         }
         return true;
+    }
+
+    public function updateGroupCredits($fid) {
+        C::t('forum_forum')->update_commoncredits($fid);
     }
 }
