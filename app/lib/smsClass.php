@@ -27,12 +27,12 @@ class smsClass
     private $timestamp;
     public function __construct(){
         //根据项目常用设置
-        $this->appid = "ad62f36e318040f2b3c21f87720deabb";
-        $this->templateId = "28248";
+        $this->appid = "ac3630cc0b5440d893796378b509ec16";
+        $this->templateId = "33760";
         $this->dateLimit = 30;
         //不常用设置
-        $this->accountSid = '0055d0b6a59be29af47aff67e6167bca';
-        $this->token =  'cdb082167f4e1f201e4d3dfe886f8a0a';
+        $this->accountSid = '229b19f8788a226a6b4a1198c35085ab';
+        $this->token =  '91f4327a762984fc940648d6a30f750d';
         $this->timestamp = date("YmdHis") + 7200;
     }
 

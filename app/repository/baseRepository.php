@@ -88,7 +88,7 @@ class baseRepository {
 
     public function saveAttachment($attacements, $pid, $uid, $tid) {
         foreach ($attacements as $attacement){
-            $attacheTableId = $this->randNum(1, 1);
+            $attacheTableId = $tid%10;
             $aid = $this->table('forum_attachment')->store([
                 'tid' => $tid,
                 'pid' => $pid,
@@ -134,7 +134,7 @@ class baseRepository {
             return 10017;
         }
         //直接从缓存中获取，并截取
-        $imgName = uniqid($this->randNum(6), true);
+        $imgName = uniqid($this->randNum(6));
         $afterFix = '.'.$afterFixArr[$image['type']];
         $basePath = ROOT.'data'.__.'attachment'.__.$path.__;
         $filePath = date('Ym', time()).__.date('d', time());
@@ -147,7 +147,7 @@ class baseRepository {
         $width = self::cutImg($fileAttachment, '', '', true);
         self::cutImg($fileAttachment, $fileAttachment.'.s'.$afterFix, 's');
         self::cutImg($fileAttachment, $fileAttachment.'.m'.$afterFix, 'm');
-        return ['filename'=>$image['name'], 'filesize'=>$image['size'], 'attachment'=>$filePath.__.$image['name'], 'width'=>$width];
+        return ['filename'=>$image['name'], 'filesize'=>$image['size'], 'attachment'=>$filePath.__.$imgName.$afterFix, 'width'=>$width];
     }
 
     private static function cutImg($source, $newPath, $type, $getWidth = false){

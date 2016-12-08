@@ -74,7 +74,7 @@ class pageRepository extends baseRepository {
         return $tiezis;
     }
 
-    public function saveThread($fid, $uid, $username, $subject, $typeid) {
+    public function saveThread($fid, $uid, $username, $subject, $typeid, $attachmentCount = 0) {
         return $this->table('forum_thread')->store([
             'fid' => $fid,
             'typeid'=>$typeid,
@@ -85,6 +85,7 @@ class pageRepository extends baseRepository {
             'lastpost'=> getglobal('timestamp'),
             'lastposter'=>$username,
             'status' => 32,
+            'attachment'=>$attachmentCount?2:0,
             'isgroup' => 1,
             'bgcolor' => ''
         ]);
@@ -105,7 +106,7 @@ class pageRepository extends baseRepository {
             'usesig'   => 1,
             'bbcodeoff'=> -1,
             'smileyoff' => -1,
-            'attachment' => $attachmentCount,
+            'attachment' => $attachmentCount?2:0,
             'useip'   => getglobal('clientip'),
             'port'=>getglobal('remoteport'),
             'position'=> 1
