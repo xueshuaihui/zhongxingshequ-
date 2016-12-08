@@ -3,7 +3,7 @@
     "info": {
         "title": "\u8fd9\u662f\u4e2d\u5fc3API\uff0c\u4f60\u6ca1\u641e\u9519\u5427",
         "description": "\u8bbf\u95ee\u672c\u57df\u540d\u662f\u663e\u793a\u6587\u6863\uff0c\u8bbf\u95eeswagger.php?re=1\u5219\u5237\u65b0",
-        "version": "\u4e0d\u786e\u5b9a"
+        "version": "\u786e\u5b9a\u4e86\uff0c1.1"
     },
     "host": "local.discuz.com/app.php?action=",
     "basePath": "/",
@@ -90,6 +90,13 @@
                         "in": "formData",
                         "description": "\u516c\u53f8\u6807\u7b7eID",
                         "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "code",
+                        "in": "formData",
+                        "description": "\u9080\u8bf7\u7801",
+                        "required": false,
                         "type": "string"
                     }
                 ],
@@ -242,6 +249,434 @@
                         "name": "code",
                         "in": "formData",
                         "description": "\u9a8c\u8bc1\u7801",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "circle-circleList": {
+            "post": {
+                "tags": [
+                    "\u5708\u5b50\u76f8\u5173"
+                ],
+                "summary": "\u83b7\u53d6\u5708\u5b50\u5217\u8868",
+                "description": "\u83b7\u53d6\u5708\u5b50\u5217\u8868\uff0ctype:0 \u5168\u90e8\u5708\u5b50\uff1b 1 \u63a8\u8350\u5708\u5b50\uff1b 2 \u6211\u7684\u5708\u5b50",
+                "operationId": "circleList",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "formData",
+                        "description": "\u5f53\u524d\u767b\u5f55\u7528\u6237ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "description": "\u5708\u5b50\u7c7b\u578b",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "formData",
+                        "description": "\u9875\u7801",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "circle-circleSearch": {
+            "post": {
+                "tags": [
+                    "\u5708\u5b50\u76f8\u5173"
+                ],
+                "summary": "\u641c\u7d22\u5708\u5b50",
+                "description": "\u641c\u7d22\u5708\u5b50",
+                "operationId": "circleSearch",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "formData",
+                        "description": "\u5173\u952e\u5b57",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "circle-applyJoinCircle": {
+            "post": {
+                "tags": [
+                    "\u5708\u5b50\u76f8\u5173"
+                ],
+                "summary": "\u7533\u8bf7\u52a0\u5165\u5708\u5b50",
+                "description": "\u7533\u8bf7\u52a0\u5165\u5708\u5b50",
+                "operationId": "applyJoinCircle",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "formData",
+                        "description": "\u7528\u6237ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fid",
+                        "in": "formData",
+                        "description": "\u7fa4\u7ec4ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "circle-changeCircleFounder": {
+            "post": {
+                "tags": [
+                    "\u5708\u5b50\u76f8\u5173"
+                ],
+                "summary": "\u8f6c\u8ba9\u5708\u5b50",
+                "description": "\u8f6c\u8ba9\u5708\u5b50",
+                "operationId": "changeCircleFounder",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "old_uid",
+                        "in": "formData",
+                        "description": "\u539f\u5708\u4e3bID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "new_uid",
+                        "in": "formData",
+                        "description": "\u65b0\u5708\u4e3bID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fid",
+                        "in": "formData",
+                        "description": "\u5708\u5b50ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "circle-quitCircle": {
+            "post": {
+                "tags": [
+                    "\u5708\u5b50\u76f8\u5173"
+                ],
+                "summary": "\u9000\u51fa\u5708\u5b50",
+                "description": "\u9000\u51fa\u5708\u5b50",
+                "operationId": "quitCircle",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "fid",
+                        "in": "formData",
+                        "description": "\u7fa4\u7ec4ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "uid",
+                        "in": "formData",
+                        "description": "\u7528\u6237ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "circle-ignoreApply": {
+            "post": {
+                "tags": [
+                    "\u5708\u5b50\u76f8\u5173"
+                ],
+                "summary": "\u62d2\u7edd\u6210\u5458\u7533\u8bf7",
+                "description": "\u62d2\u7edd\u6210\u5458\u7533\u8bf7",
+                "operationId": "ignoreApply",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "fid",
+                        "in": "formData",
+                        "description": "\u7fa4\u7ec4ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "uid",
+                        "in": "formData",
+                        "description": "\u7528\u6237ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "circle-changeUserGroupStatus": {
+            "post": {
+                "tags": [
+                    "\u5708\u5b50\u76f8\u5173"
+                ],
+                "summary": "\u66f4\u6539\u7528\u6237\u4e8e\u5708\u5b50\u7684\u8eab\u4efd",
+                "description": "\u66f4\u6539\u7528\u6237\u4e8e\u5708\u5b50\u7684\u8eab\u4efd\uff0c\u53ef\u6307\u5b9a\u67d0\u7528\u6237\u4e3a\u4efb\u4f55\u8eab\u4efd,\u9a8c\u8bc1\u901a\u8fc7\u4e5f\u662f\u6b64\u63a5\u53e3",
+                "operationId": "changeUserGroupStatus",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "fid",
+                        "in": "formData",
+                        "description": "\u7fa4\u7ec4ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "uid",
+                        "in": "formData",
+                        "description": "\u7528\u6237ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "wantPower",
+                        "in": "formData",
+                        "description": "\u76ee\u7684\u6743\u9650\uff0c1\uff1a\u5708\u4e3b\uff1b2\uff1a\u526f\u5708\u4e3b\uff1b3\uff1a\u660e\u661f\u6210\u5458\uff1b4\uff1a\u666e\u901a\u6210\u5458\uff1b\u9ed8\u8ba4\u4e3a1",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "circle-getGroupUsers": {
+            "post": {
+                "tags": [
+                    "\u5708\u5b50\u76f8\u5173"
+                ],
+                "summary": "\u83b7\u53d6\u5708\u5b50\u6210\u5458\u5217\u8868",
+                "description": "\u83b7\u53d6\u5708\u5b50\u6210\u5458\u5217\u8868",
+                "operationId": "getGroupUsers",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "fid",
+                        "in": "formData",
+                        "description": "\u7fa4\u7ec4ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "level",
+                        "in": "formData",
+                        "description": "\u83b7\u53d6\u7684\u7528\u6237\u5c5e\u6027\uff0c0\uff1a\u5168\u90e8\uff1b1\uff1a\u7ba1\u7406\u5458\uff1b2\uff1a\u526f\u7ba1\u7406\u5458\uff1b3\uff1a\u660e\u661f\u6210\u5458\uff1b4\uff1a\u666e\u901a\u6210\u5458\uff1b5\uff1a\u5f85\u5ba1\u6838\u6210\u5458\uff1b\u9ed8\u8ba4\u4e3a0",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "circle-getGroupProfile": {
+            "post": {
+                "tags": [
+                    "\u5708\u5b50\u76f8\u5173"
+                ],
+                "summary": "\u83b7\u53d6\u5708\u5b50\u8be6\u60c5",
+                "description": "\u83b7\u53d6\u5708\u5b50\u8be6\u60c5,relation \u4e3a\u7528\u6237\u8eab\u4efd\uff0c0\uff1a\u975e\u6210\u5458\uff0c1\uff1a\u5f85\u5ba1\u6838\u6210\u5458\uff1b2\uff1a\u666e\u901a\u6210\u5458\uff1b3\uff1a\u7ba1\u7406\u5458\uff1b4\uff1a\u521b\u5efa\u8005",
+                "operationId": "getGroupProfile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "fid",
+                        "in": "formData",
+                        "description": "\u7fa4\u7ec4ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "uid",
+                        "in": "formData",
+                        "description": "\u7528\u6237ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "circle-getFriendsForInvite": {
+            "post": {
+                "tags": [
+                    "\u5708\u5b50\u76f8\u5173"
+                ],
+                "summary": "\u83b7\u53d6\u597d\u53cb\u5217\u8868",
+                "description": "\u83b7\u53d6\u597d\u53cb\u5217\u8868",
+                "operationId": "getFriendsForInvite",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "fid",
+                        "in": "formData",
+                        "description": "\u7fa4\u7ec4ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "uid",
+                        "in": "formData",
+                        "description": "\u7528\u6237ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "circle-inviteFriend": {
+            "post": {
+                "tags": [
+                    "\u5708\u5b50\u76f8\u5173"
+                ],
+                "summary": "\u9080\u8bf7\u597d\u53cb\u52a0\u5165\u5708\u5b50",
+                "description": "\u9080\u8bf7\u597d\u53cb\u52a0\u5165\u5708\u5b50",
+                "operationId": "inviteFriend",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "fid",
+                        "in": "formData",
+                        "description": "\u7fa4\u7ec4ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "uid",
+                        "in": "formData",
+                        "description": "\u7528\u6237ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "invite_id",
+                        "in": "formData",
+                        "description": "\u88ab\u9080\u8bf7\u7528\u6237ID eg:1,2,3,4...",
                         "required": true,
                         "type": "string"
                     }
@@ -476,6 +911,247 @@
                         "name": "question",
                         "in": "formData",
                         "description": "\u95ee\u9898\u5185\u5bb9",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "page-wangPost": {
+            "post": {
+                "tags": [
+                    "\u5e16\u5b50\u76f8\u5173"
+                ],
+                "summary": "\u6211\u8981\u53d1\u5e16",
+                "description": "\u6211\u8981\u53d1\u5e16",
+                "operationId": "wangPost",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "formData",
+                        "description": "\u7528\u6237ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fid",
+                        "in": "formData",
+                        "description": "\u5708\u5b50ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "page-postPage": {
+            "post": {
+                "tags": [
+                    "\u5e16\u5b50\u76f8\u5173"
+                ],
+                "summary": "\u53d1\u5e16\u63d0\u4ea4\u63a5\u53e3",
+                "description": "\u53d1\u5e16\u63d0\u4ea4\u63a5\u53e3",
+                "operationId": "postPage",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "formData",
+                        "description": "\u7528\u6237ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fid",
+                        "in": "formData",
+                        "description": "\u5708\u5b50ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "class",
+                        "in": "formData",
+                        "description": "\u5206\u7c7bID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tag",
+                        "in": "formData",
+                        "description": "\u6807\u7b7eID s eg:1,2,3",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "subject",
+                        "in": "formData",
+                        "description": "\u6807\u9898",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "message",
+                        "in": "formData",
+                        "description": "\u5185\u5bb9",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "images0",
+                        "in": "formData",
+                        "description": "\u56fe\u72471",
+                        "required": false,
+                        "type": "file"
+                    },
+                    {
+                        "name": "images1",
+                        "in": "formData",
+                        "description": "\u56fe\u72472",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "page-threadView": {
+            "post": {
+                "tags": [
+                    "\u5e16\u5b50\u76f8\u5173"
+                ],
+                "summary": "\u5e16\u5b50\u5217\u8868-\u83b7\u53d6\u4e3b\u9898",
+                "description": "\u83b7\u53d6\u4e3b\u9898\u8be6\u60c5",
+                "operationId": "threadView",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tid",
+                        "in": "formData",
+                        "description": "\u4e3b\u9898ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "page-tieziList": {
+            "post": {
+                "tags": [
+                    "\u5e16\u5b50\u76f8\u5173"
+                ],
+                "summary": "\u5e16\u5b50\u5217\u8868-\u83b7\u53d6\u5e16\u5b50\u5217\u8868",
+                "description": "\u83b7\u53d6\u5e16\u5b50\u5217\u8868",
+                "operationId": "tieziList",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "tid",
+                        "in": "formData",
+                        "description": "\u4e3b\u9898ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fid",
+                        "in": "formData",
+                        "description": "\u8bba\u575bID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "description": "\u83b7\u53d6\u7c7b\u578b0:\u4e0a\u62c9\uff1b1\uff1a\u5b9a\u4f4d\uff0c\u975e\u4e0b\u62c9\u5237\u65b0\u6216\u521d\u59cb\u8fdb\u5165\u65f6\uff0c\u9700\u8981",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "pid",
+                        "in": "formData",
+                        "description": "\u5e16\u5b50ID\uff0c\u975e\u4e0b\u62c9\u5237\u65b0\u6216\u521d\u59cb\u8fdb\u5165\u65f6\uff0c\u9700\u8981",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "page-threadList": {
+            "post": {
+                "tags": [
+                    "\u5e16\u5b50\u76f8\u5173"
+                ],
+                "summary": "\u5708\u5b50\u8be6\u60c5",
+                "description": "\u5708\u5b50\u8be6\u60c5\uff0c\u4e5f\u5c31\u662f\u4e3b\u9898\u5217\u8868",
+                "operationId": "threadList",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "fid",
+                        "in": "formData",
+                        "description": "\u7fa4\u7ec4ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "uid",
+                        "in": "formData",
+                        "description": "\u7528\u6237ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "formData",
+                        "description": "\u9875\u7801\uff0c0\u8868\u793a\u83b7\u53d6\u5168\u90e8",
                         "required": true,
                         "type": "string"
                     }
