@@ -141,4 +141,22 @@ class request implements requestInterface{
             }
         }
     }
+
+    public function hasFile() {
+        if(isset($_FILES) && count($_FILES) > 0){
+            foreach ($_FILES as $file){
+                if($file['size'] > 0){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public function file($name = null) {
+        if(is_null($name)){
+            return $_FILES;
+        }
+        return $_FILES[$name]['size'] > 0 ? $_FILES[$name] : null;
+    }
 }

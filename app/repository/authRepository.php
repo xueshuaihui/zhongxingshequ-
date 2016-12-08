@@ -118,4 +118,24 @@ class authRepository extends baseRepository {
             ->where('c.'.$key, $value)
             ->find();
     }
+
+    public function checkCode($code, $email) {
+        $item = $this->table('common_invite')->where('code', $code)->find();
+        if(!$item){
+            return false;
+        }
+        if(!$item['status']){
+            return false;
+        }
+        if($item['endtime'] && $item['endtime'] < getglobal('timestamp')){
+            return false;
+        }
+        if($item['email'] && $item['email'] != $email){
+            return false;
+        }
+        if($item['inviteip'] && $item['inviteip'] != getglobal('clentip')){
+            return false;
+        }
+        return true;
+    }
 }

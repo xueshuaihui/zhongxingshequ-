@@ -39,11 +39,11 @@ class mdbModel extends baseModel implements dbInterface {
     }
 
     public function delete() {
-
+        return DB::delete($this->table, '1 '.$this->where.$this->whereOr);
     }
 
     public function update($data) {
-        return DB::update($this->table, $data, $this->where);
+        return DB::update($this->table, $data, '1 '.$this->where.$this->whereOr);
     }
 
     public function find($fields, $sql = false) {
@@ -61,10 +61,10 @@ class mdbModel extends baseModel implements dbInterface {
             $this->sql .= $this->whereOr;
         }
         if($this->order){
-            $this->sql .= ' ORDER BY \''.$this->order.'\'';
+            $this->sql .= ' ORDER BY '.$this->order;
         }
         if($this->limit){
-            $this->sql .=  ' LIMIT '.$this->limit;
+            $this->sql .=  ' LIMIT '.trim($this->limit,',');
         }
         if($sql){
             return $this->sql;
@@ -91,7 +91,7 @@ class mdbModel extends baseModel implements dbInterface {
     }
 
     public function field($field = '') {
-        $this->field .= '`'.trim($field).'`' . ',';
+        $this->field .= ' '.trim($field).' ,';
         return $this;
     }
 
@@ -132,6 +132,13 @@ class mdbModel extends baseModel implements dbInterface {
             foreach ($k as $key=>$value){
                 $this->whereOr .= ' OR '.$k.' = \''.$v.'\'';
             }
+        }
+        return $this;
+    }
+
+    public function whereWhere($k, $c = '=', $v = null) {
+        if(is_string($k)){
+            $this->where .= ' AND '.$k.$c.' \''.$v.'\'';
         }
         return $this;
     }
