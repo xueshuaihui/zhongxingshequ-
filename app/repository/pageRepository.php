@@ -122,7 +122,37 @@ class pageRepository extends baseRepository {
         ], false);
     }
 
-    public function updateThreadData($fid) {
-        return ;
+    public function updateAttachment($aids, $tid, $pid) {
+        $this->table('forum_attachment')->in('aid', $aids)->update(['tid'=>$tid, 'pid'=>$pid]);
+        foreach ($aids as $aid){
+            $index = $this->table('forum_attachment')->where('aid', $aid)->find();
+            $tableid = $index['tableid'];
+            $this->table('forum_attachment_'.$tableid)->where('aid', $aid)->update(['tid'=>$tid, 'pid'=>$pid]);
+        }
+    }
+
+    public function updateThreadData($fid, $tid, $author, $uid, $subject, $admin = false) {
+        //保存用户日志
+        useractionlog($uid, 'tid');
+        //增加圈子积分
+        $this->updateGroupCredits($fid);
+        //更新用户家园信息
+        C::t('common_member_field_home')->update($uid, array('recentnote'=>$this->$subject));
+        //更新趋势
+        updatestat('groupthread');
+        if($admin){
+            updatemoderate('tid', $tid);
+        }
+        updatepostcredits('+',  [$uid], 'post', $fid);
+        C::t('common_member_field_home')->update($uid, array('recentnote'=>$subject));
+        C::t('forum_groupuser')->update_counter_for_user($uid, $fid, 1);
+        $subject = str_replace("\t", ' ', $subject);
+        $lastpost = "$tid\t".$subject."\t".TIMESTAMP."\t$author";
+        C::t('forum_forum')->update($fid, array('lastpost' => $lastpost));
+        C::t('forum_forum')->update_forum_counter($fid, 1, 1, 1);
+        C::t('forum_forumfield')->update($fid, array('lastupdate' => time()));
+        require_once libfile('function/grouplog');
+        updategroupcreditlog($fid, $uid);
+        C::t('forum_sofa')->insert(array('tid' => $tid, 'fid' => $fid));
     }
 }
