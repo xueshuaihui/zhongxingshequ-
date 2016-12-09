@@ -49,7 +49,7 @@ class pageApi extends baseApi {
 
         //获取分类
         $groupClasses = $this->tool->getThreadClass($fid);
-        return ['tags'=>$tags, 'category'=>$groupClasses];
+        return ['status'=>$status, 'tags'=>$tags, 'category'=>$groupClasses];
     }
 
     /**
