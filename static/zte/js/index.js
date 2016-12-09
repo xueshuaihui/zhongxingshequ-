@@ -241,3 +241,4 @@ jq(".xsh_ewmbigbox").hover(function(){
 },function(){
     jq(this).children(".xsh_ewmbox").css({display:"none"});
 })
+/*导航选中状态*/
