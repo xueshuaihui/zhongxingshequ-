@@ -922,6 +922,117 @@
                 }
             }
         },
+        "message-getPublicMessage": {
+            "post": {
+                "tags": [
+                    "\u6d88\u606f\u76f8\u5173"
+                ],
+                "summary": "\u83b7\u53d6\u516c\u544a",
+                "description": "\u83b7\u53d6\u516c\u544a",
+                "operationId": "getPublicMessage",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "formData",
+                        "description": "\u9875\u7801",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "message-getPm": {
+            "post": {
+                "tags": [
+                    "\u6d88\u606f\u76f8\u5173"
+                ],
+                "summary": "\u83b7\u53d6\u79c1\u4fe1",
+                "description": "\u83b7\u53d6\u79c1\u4fe1",
+                "operationId": "getPm",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "formData",
+                        "description": "\u7528\u6237ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "formData",
+                        "description": "\u9875\u7801",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "touid",
+                        "in": "formData",
+                        "description": "\u5bf9\u65b9\u7528\u6237ID\uff0c\u6ca1\u6709\u5c31\u4e0d\u4f20",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
+        "message-getTips": {
+            "post": {
+                "tags": [
+                    "\u6d88\u606f\u76f8\u5173"
+                ],
+                "summary": "\u83b7\u53d6\u6d88\u606f",
+                "description": "\u83b7\u53d6\u6d88\u606f",
+                "operationId": "getTips",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "uid",
+                        "in": "formData",
+                        "description": "\u7528\u6237ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page",
+                        "in": "formData",
+                        "description": "\u9875\u7801",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{'state':{\u7ed3\u679c\u4ee3\u7801},'result':{\u8fd4\u56de\u7ed3\u679c}}"
+                    }
+                }
+            }
+        },
         "page-wangPost": {
             "post": {
                 "tags": [
@@ -989,7 +1100,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "class",
+                        "name": "category",
                         "in": "formData",
                         "description": "\u5206\u7c7bID",
                         "required": true,

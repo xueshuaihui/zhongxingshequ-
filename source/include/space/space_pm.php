@@ -169,8 +169,12 @@ if($_GET['subop'] == 'view') {
 		$newpmarr = uc_pm_checknew($_G['uid'], 1);
 		$newpm = $newpmarr['newpm'];
 	}
+	//***********************************
 	$newpmcount = $newpm + $announcepm;
-	if($_G['member']['newpm']) {
+    //最新消息数量
+    //***********************************
+
+    if($_G['member']['newpm']) {
 		if($newpm && $_G['setting']['cloud_status']) {
 			$msgService = Cloud::loadClass('Cloud_Service_Client_Message');
 			$msgService->setMsgFlag($_G['uid'], $_G['timestamp']);

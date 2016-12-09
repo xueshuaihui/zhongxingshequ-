@@ -7,7 +7,7 @@
 	$Id: client.php 1179 2014-11-03 07:11:25Z hypowang $
 */
 
-if(!defined('UC_API')) {
+if(!defined('UC_API') && !defined('IN_APP')) {
 	exit('Access denied');
 }
 

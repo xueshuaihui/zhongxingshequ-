@@ -22,6 +22,10 @@ class baseRepository {
         return $result;
     }
 
+    public function blank() {
+        return $this->table();
+    }
+
     public function getUserByUid($uid, $form = 'common_member') {
         return $this->table($form)->where('uid', $uid)->find();
     }

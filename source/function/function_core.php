@@ -804,7 +804,7 @@ function block_display($bid) {
 	block_display_batch($bid);
 }
 
-function dimplode($array) {
+function edimplode($array) {
 	if(!empty($array)) {
 		$array = array_map('addslashes', $array);
 		return "'".implode("','", is_array($array) ? $array : array($array))."'";
