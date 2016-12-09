@@ -7,13 +7,23 @@ class messageRepository extends baseRepository {
         return $this->table('forum_announcement')->whereWhere('starttime', '<', time())->whereWhere('endtime', '>', time())->order('displayorder')->limit($start.','.$count)->select('subject, message, starttime');
     }
 
+    public function sendPersonMessage($uid, $touid, $message) {
+        $this->table()->sendPm($uid, $touid, $message);
+    }
+
     public function getTips($uid, $page, $count = 10) {
         $start = ($page - 1)*$count;
-        return $this->table('home_notification')
+        $res = $this->table('home_notification')
                     ->where(['uid'=>$uid, 'new'=>1])
                     ->order('dateline')
                     ->limit($start.','.$count)
                     ->select();
+        $ids = [];
+        foreach ($res as $item){
+            $ids[] = $item['id'];
+        }
+        $this->table('home_notification')->in('id', $ids)->update(['new'=>0]);
+        return $res;
     }
 
     public function getPm($uid, $touid, $page, $count = 10) {

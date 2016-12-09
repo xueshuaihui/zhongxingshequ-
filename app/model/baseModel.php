@@ -34,4 +34,8 @@ class baseModel {
     public function searchGroup($keyword) {
         return C::t('forum_forum')->fetch_all_by_keyword($keyword);
     }
+
+    public function sendPm($uid, $touid, $message) {
+        return sendpm($touid, '', $message, $uid);
+    }
 }
