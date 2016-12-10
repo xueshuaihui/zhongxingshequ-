@@ -12,13 +12,27 @@ class circleRepository extends baseRepository {
             $list = array_merge($listmine, $listmanage);
         }elseif($type == 1){
             $list = $this->table('common_setting')->where('skey', 'group_recommend')->find();
-            $list = dunserialize($list['svalue']);
+            $list = array_values(dunserialize($list['svalue']));
+            $start = ($page - 1)*10;
+            $end = $start+9;
+            foreach ($list as $k=>$v){
+                if($k < $start || $k > $end){
+                    unset($list[$k]);
+                }
+            }
         }else{
             $list = $this->table()->grouplist($uid, $type, $page);
         }
         $res = [];
         foreach ($list as $k=>$value){
             $res[$k]['icon'] = BASEURL.__.$value['icon'];
+            if($type == 2 ){
+                $join = 1;
+            }else{
+                $join = $this->table('forum_groupuser')->where(['uid'=>$uid, 'fid'=>$value['fid']])->find();
+                $join = $join?1:0;
+            }
+            $res[$k]['join'] = $join;
             $res[$k]['name'] = $value['name'];
             $res[$k]['fid'] = $value['fid'];
             $res[$k]['description'] = $value['description'];
