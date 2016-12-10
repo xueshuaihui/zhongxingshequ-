@@ -33,10 +33,9 @@ class messageRepository extends baseRepository {
     public function getPm($uid, $touid, $page, $count = 10) {
         require_once ROOT.'config/config_ucenter.php';
         require_once ROOT.'uc_client/client.php';
-        $start = ($page - 1)*$count;
         $result = [];
         if(!$touid){
-            $list = uc_pm_list($uid, $start, $count, 'inbox', 'privatepm', 200);
+            $list = uc_pm_list($uid, $page, $count, 'inbox', 'privatepm', 200);
             $records = $list['data'];
             foreach ($records as $k=>$record){
                 $result[$k]['touid'] = $record['touid'];
