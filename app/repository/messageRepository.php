@@ -22,9 +22,9 @@ class messageRepository extends baseRepository {
         foreach ($res as $item){
             $ids[] = $item['id'];
         }
-        if(count($ids) > 0){
-            $this->table('home_notification')->in('id', $ids)->update(['new'=>0]);
-        }
+//        if(count($ids) > 0){
+//            $this->table('home_notification')->in('id', $ids)->update(['new'=>0]);
+//        }
         return $res;
     }
 
