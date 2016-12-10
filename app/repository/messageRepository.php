@@ -19,8 +19,10 @@ class messageRepository extends baseRepository {
                     ->limit($start.','.$count)
                     ->select();
         $ids = [];
-        foreach ($res as $item){
+        foreach ($res as $k=>$item){
             $ids[] = $item['id'];
+            $res[$k]['message'] = preg_replace('/\<.*?\>/', '', $item['note']);
+            $res[$k]['message'] = str_replace('&nbsp;', '', $res[$k]['message']);
         }
 //        if(count($ids) > 0){
 //            $this->table('home_notification')->in('id', $ids)->update(['new'=>0]);
