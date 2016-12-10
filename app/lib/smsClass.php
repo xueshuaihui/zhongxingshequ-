@@ -189,8 +189,8 @@ class smsClass
 
         $expire = time()+$this->dateLimit*60;
         //发送验证码
-//        if($this->sendToken($number, $this->templateId, $param)){
-        if(1) {
+        if($this->sendToken($number, $this->templateId, $param)){
+//        if(1) {
             return ['mobile'=>$number, 'token'=>$token, 'expire'=>$expire];
         }else{
             return false;

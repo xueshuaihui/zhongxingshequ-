@@ -33,7 +33,7 @@ class pageRepository extends baseRepository {
     }
 
     public function getThread($tid) {
-        return $this->table('forum_thread')->where('tid', $tid)->find('subject, fid, author, authorid, tid, dateline, stamp');
+        return $this->table('forum_thread')->where('tid', $tid)->find('subject, fid, author, authorid, tid, dateline, stamp, maxposition');
     }
 
     public function getThreadClass($fid) {
@@ -74,7 +74,7 @@ class pageRepository extends baseRepository {
         return $tiezis;
     }
 
-    public function saveThread($fid, $uid, $username, $subject, $typeid, $attachmentCount = 0) {
+    public function saveThread($fid, $uid, $username, $subject, $typeid, $attachmentCount = 0, $maxposition = 1) {
         return $this->table('forum_thread')->store([
             'fid' => $fid,
             'typeid'=>$typeid,
@@ -87,30 +87,53 @@ class pageRepository extends baseRepository {
             'status' => 32,
             'attachment'=>$attachmentCount?2:0,
             'isgroup' => 1,
-            'bgcolor' => ''
+            'bgcolor' => '',
+            'maxposition' => $maxposition
         ]);
     }
 
-    public function saveTiezi($fid, $tid, $uid, $username, $subject, $message, $attachmentCount) {
+    public function saveTiezi($fid, $tid, $uid, $replyPid, $username, $subject, $message, $attachmentCount, $maxposition = 0) {
+        $first = 1;
+        $bbcodeoff = -1;
+        if($replyPid){
+            $replyItem = $this->table('forum_post')->where('pid', $replyPid)->find();
+            $replyMessage = explode(
+'
+', $replyItem['message']);
+            $message = '[quote][size=2][url=forum.php?mod=redirect&goto=findpost&pid='.$replyPid.'&ptid='.$tid.'][color=#999999]'.$username.' 发表于 '.date('Y-m-d H:i:s', time()).'[/color][/url][/size]
+'.cutstr(end($replyMessage), 100).'[/quote]'.$message;
+            $first = 0;
+            $bbcodeoff = 0;
+        }
+        if($maxposition){
+            $first = 0;
+        }
+        $maxposition += 1;
         $pid = $this->table('forum_post_tableid')->store(['pid' => null], true);
         $res = $this->table('forum_post')->store([
             'pid' => $pid,
             'fid' => $fid,
             'tid' => $tid,
-            'first'=> 1,
+            'first'=> $first,
             'author'=>$username,
             'authorid'=>$uid,
             'subject' => $subject,
             'message' => $message,
             'dateline'=> getglobal('timestamp'),
             'usesig'   => 1,
-            'bbcodeoff'=> -1,
+            'bbcodeoff'=> $bbcodeoff,
             'smileyoff' => -1,
             'attachment' => $attachmentCount?2:0,
             'useip'   => getglobal('clientip'),
             'port'=>getglobal('remoteport'),
-            'position'=> 1
+            'position'=> $maxposition
         ]);
+        if(!$res){
+            return false;
+        }
+        if($maxposition > 1){
+            $res = $this->table('forum_thread')->where('tid', $tid)->update(['maxposition'=>$maxposition]);
+        }
         return $res ? $pid : false;
     }
 
@@ -137,13 +160,17 @@ class pageRepository extends baseRepository {
         //增加圈子积分
         $this->updateGroupCredits($fid);
         //更新用户家园信息
-        C::t('common_member_field_home')->update($uid, array('recentnote'=>$this->$subject));
+        C::t('common_member_field_home')->update($uid, array('recentnote'=>$subject));
         //更新趋势
         updatestat('groupthread');
         if($admin){
             updatemoderate('tid', $tid);
         }
-        updatepostcredits('+',  [$uid], 'post', $fid);
+        if($subject != ''){
+            updatepostcredits('+',  [$uid], 'post', $fid);
+        }else{
+            updatepostcredits('+',  [$uid], 'reply', $fid);
+        }
         C::t('common_member_field_home')->update($uid, array('recentnote'=>$subject));
         C::t('forum_groupuser')->update_counter_for_user($uid, $fid, 1);
         $subject = str_replace("\t", ' ', $subject);
@@ -153,6 +180,41 @@ class pageRepository extends baseRepository {
         C::t('forum_forumfield')->update($fid, array('lastupdate' => time()));
         require_once libfile('function/grouplog');
         updategroupcreditlog($fid, $uid);
-        C::t('forum_sofa')->insert(array('tid' => $tid, 'fid' => $fid));
+        if($subject != ''){
+            C::t('forum_sofa')->insert(array('tid' => $tid, 'fid' => $fid));
+        }
+    }
+
+    public function reply($fid, $tid, $uid, $message, $attachmentCount) {
+        $pid = $this->table('forum_post_tableid')->store(['pid' => null], true);
+        $thread = $this->table('forum_thread')->where('tid', $tid)->find();
+        if(!$thread){
+            return false;
+        }
+        $position = $thread['maxposition']+1;
+        $author = $this->getUserByUid($uid);
+        $res = $this->table('forum_post')->store([
+            'pid' => $pid,
+            'fid' => $fid,
+            'tid' => $tid,
+            'author'=>$author['username'],
+            'authorid'=>$uid,
+            'first' => 0,
+            'subject' => '',
+            'message' => $message,
+            'dateline'=> getglobal('timestamp'),
+            'usesig'   => 1,
+            'bbcodeoff'=> -1,
+            'smileyoff' => -1,
+            'attachment' => $attachmentCount?2:0,
+            'useip'   => getglobal('clientip'),
+            'port'=>getglobal('remoteport'),
+            'position'=> $position
+        ]);
+        if(!$res){
+            return false;
+        }
+        $res = $this->table('forum_thread')->where('uid', $uid)->update(['maxposition'=>$position]);
+        return $res ? $pid : false;
     }
 }

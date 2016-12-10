@@ -10,8 +10,27 @@ class messageApi extends baseApi {
         $this->tool = new messageRepository();
     }
 
-    public function sendPersonMessage() {
-        echo "test webhook";
+    /**
+     * @SWG\Post(
+     *   path="message-sendPm",
+     *   tags={"消息相关"},
+     *   summary="发送私信",
+     *   description="发送私信",
+     *   operationId="sendPm",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Parameter(name="touid", in="formData", description="接收用户ID", required=true, type="string"),
+     *     @SWG\Parameter(name="message", in="formData", description="消息", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function sendPm() {
+        $this->checkParam(['uid', 'touid', 'message']);
+        $uid = $this->request->post('uid');
+        $touid = $this->request->post('touid');
+        $message = $this->request->post('message');
+        return $this->tool->sendPersonMessage($uid, $touid, $message);
     }
 
     /**
@@ -56,7 +75,8 @@ class messageApi extends baseApi {
         $this->tool->blank();
         $pmList = $this->tool->getPm($uid, $touid, $page);
         foreach ($pmList as $k=>$value){
-            $pmList[$k]['usericon'] = $this->tool->getAvatar($value['touid']);;
+            $pmList[$k]['me'] = $this->tool->getAvatar($uid);
+            $pmList[$k]['you'] = $this->tool->getAvatar($value['touid']);
         }
         return $pmList;
     }

@@ -203,4 +203,95 @@ class baseRepository {
     public function updateGroupCredits($fid) {
         C::t('forum_forum')->update_commoncredits($fid);
     }
+
+    public function creditHook($uid, $action, $type = 1) {
+        $rule = $this->table('common_credit_rule')->where('action', $action)->find();
+        $history = $this->table('common_credit_rule_log')->where(['uid'=>$uid, 'rid'=>$rule['rid']])->find();
+        $cre = 'extcredits2';
+        $credits = $newRecord = $addRecord = 0;
+        //判断是否过了时间
+        switch ($rule['cycletype']){
+            case '0' ://一生就一次
+                if($history){
+                    return true;
+                }
+                $newRecord = $rule[$cre];
+                break;
+            case '1' ://每天一次
+                if(!$history){
+                    $newRecord = $rule[$cre];
+                }elseif($history['dateline'] < strtotime(date('Ymd', time()).'000000')){//今天零点
+                    $addRecord = $rule[$cre];
+                }else{
+                    return true;
+                }
+                break;
+            case '2' ://整点
+                if(!$history){
+                    $newRecord = $rule[$cre];
+                }elseif($history['dateline'] < strtotime(date('YmdH', time()).'0000')){//当前整点
+                    $addRecord = $rule[$cre];
+                }else{
+                    return true;
+                }
+                break;
+            case '3' ://每分钟
+                if(!$history){
+                    $newRecord = $rule[$cre];
+                }elseif($history['dateline'] < strtotime(date('YmdHi', time()).'00')){//当前整点
+                    $addRecord = $rule[$cre];
+                }else{
+                    return true;
+                }
+            break;
+                break;
+            case '4' ://随便
+                if(!$history){
+                    $newRecord = $rule[$cre];
+                }else{
+                    $addRecord = $rule[$cre];
+                }
+                break;
+            default : return false;
+        }
+        if($newRecord && $type){
+            $log = $this->table('common_credit_rule_log')->store([
+                'uid' => $uid,
+                'rid' => $rule['rid'],
+                'fid' => 0,
+                'total' => $newRecord,
+                'cyclenum' => 1,
+                'starttime' => time(),
+                'dateline' => time()
+            ]);
+            if(!$log){
+                return false;
+            }
+        }elseif($addRecord){
+            if($type) {
+                $increaseData = ['total'=>$rule[$cre]];
+            }else{
+                $increaseData = ['total'=>['-', $rule[$cre]]];
+            }
+            $log = $this->table('common_credit_rule_log')->where(['uid'=>$uid, 'rid'=>$rule['rid']])->increase($increaseData, ['dateline'=>getglobal('timestamp')]);
+            if(!$log){
+                return false;
+            }
+        }
+        if($newRecord){
+            if($type){
+                $credits = ['credits'=>$newRecord];
+            }else{
+                $credits = ['credits'=>['-', $newRecord]];
+            }
+        }
+        if($addRecord){
+            if($type){
+                $credits = ['credits'=>$addRecord];
+            }else{
+                $credits = ['credits'=>['-', $addRecord]];
+            }
+        }
+        return $this->table('common_member')->where('uid', $uid)->increase($credits);
+    }
 }

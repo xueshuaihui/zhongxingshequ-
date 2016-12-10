@@ -35,6 +35,7 @@ class authApi extends baseApi {
             if(!$profile['uid']){
                 return '此用户信息异常，请换个用户吧，test:123456亲测可用';
             }
+            $this->tool->creditHook($profile['uid'], 'daylogin');
             return array('expire'=>strtotime('+7 day'), 'profile'=>$profile);
         }
         return $res;

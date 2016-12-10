@@ -73,6 +73,6 @@ class codeApi extends baseApi {
                 ]
             ]
         ]);
-        return $sendCode['token'];
+        return isset($sendCode['token']);
     }
 }

@@ -202,8 +202,7 @@ class pmcontrol extends base {
 			return array();
 		}
 		$pmnum = $_ENV['pm']->getpmnum($this->user['uid'], $type, $new);
-		$start = $this->page_get_start($page, $pagesize, $pmnum);
-
+		$start = defined('IN_APP')?($page - 1)*$pagesize:$this->page_get_start($page, $pagesize, $pmnum);
  		if($pagesize > 0) {
 	 		$pms = $_ENV['pm']->getpmlist($this->user['uid'], $filter, $start, $pagesize);
 	 		if(is_array($pms) && !empty($pms)) {

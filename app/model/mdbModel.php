@@ -46,6 +46,25 @@ class mdbModel extends baseModel implements dbInterface {
         return DB::update($this->table, $data, '1 '.$this->where.$this->whereOr);
     }
 
+    public function increase($data, $data2 = [], $sql =false) {
+        $temp = '';
+        foreach ($data as $k=>$value){
+            if(is_array($value)){
+                $temp .= '`'.$k.'` = `'.$k.'` '.$value[0].' '.$value[1].',';
+            }else{
+                $temp .= '`'.$k.'` = `'.$k.'` + '.$value.',';
+            }
+        }
+        foreach ($data2 as $k=>$value){
+            $temp .= '`'.$k.'` = '.$value.',';
+        }
+        $this->sql = 'UPDATE '.$this->prefix.$this->table.' SET '.trim($temp, ',').' WHERE 1 '.$this->where.$this->whereOr;
+        if($sql){
+            return $this->sql;
+        }
+        return DB::query($this->sql);
+    }
+
     public function find($fields, $sql = false) {
         $this->fields($fields);
         $field = $this->field == '' ? '*' : trim($this->field, ',');

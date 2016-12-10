@@ -57,34 +57,35 @@ class pageApi extends baseApi {
      *   path="page-postPage",
      *   tags={"帖子相关"},
      *   summary="发帖提交接口",
-     *   description="发帖提交接口",
+     *   description="发帖提交接口-回复帖子接口",
      *   operationId="postPage",
      *   consumes={"application/json"},
      *   produces={"application/json"},
      *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
      *     @SWG\Parameter(name="fid", in="formData", description="圈子ID", required=true, type="string"),
-     *     @SWG\Parameter(name="category", in="formData", description="分类ID", required=true, type="string"),
-     *     @SWG\Parameter(name="tag", in="formData", description="标签ID s eg:1,2,3", required=true, type="string"),
-     *     @SWG\Parameter(name="subject", in="formData", description="标题", required=true, type="string"),
      *     @SWG\Parameter(name="message", in="formData", description="内容", required=true, type="string"),
+     *     @SWG\Parameter(name="tid", in="formData", description="要回复的主题ID", required=false, type="string"),
+     *     @SWG\Parameter(name="pid", in="formData", description="要回复的帖子ID", required=false, type="string"),
+     *     @SWG\Parameter(name="category", in="formData", description="分类ID", required=false, type="string"),
+     *     @SWG\Parameter(name="tag", in="formData", description="标签ID s eg:1,2,3", required=false, type="string"),
+     *     @SWG\Parameter(name="subject", in="formData", description="标题", required=false, type="string"),
      *     @SWG\Parameter(name="images0", in="formData", description="图片1", required=false, type="file"),
      *     @SWG\Parameter(name="images1", in="formData", description="图片2", required=false, type="file"),
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
     public function postPage() {
-        $this->checkParam(['uid', 'fid']);
+        $this->checkParam(['uid', 'fid', 'message']);
         $uid = $this->request->post('uid');
         $fid = $this->request->post('fid');
+        $replyTid = $this->request->post('tid');
+        $replyPid = $this->request->post('pid');
         $class = $this->request->post('category');
         $tags = $this->request->post('tag');
-        $subject = $this->request->post('subject');
+        $subject = $this->request->post('subject')?:'';
         $message = $this->request->post('message');
 
-        if(!$subject || $subject == ''){
-            return 10020;
-        }
-        if(!$message || $message == ''){
+        if((!$message || $message == '')  && $replyPid){
             return 10021;
         }
 
@@ -107,17 +108,28 @@ class pageApi extends baseApi {
         //获取用户
         $user = $this->tool->getUserByUid($uid);
         //保存主题
-        $tid = $this->tool->saveThread($fid, $uid, $user['username'], $subject, $class, $attachmentCount);
-        //添加标签绑定
-        if(!$tid){
+        if($subject && $tags && $class){
+            $tid = $this->tool->saveThread($fid, $uid, $user['username'], $subject, $class, $attachmentCount);
+            //添加标签绑定
+            if(!$tid){
+                return false;
+            }
+            $res = $this->tool->addBlindTag($tid, $tags, 'threadid');
+            //保存帖子
+            if(!$res){
+                return false;
+            }
+            $maxposition = 0;
+        }elseif($replyTid){
+            $thread = $this->tool->getThread($replyTid);
+            $tid = $replyTid;
+            $subject = '';
+            $maxposition = $thread['maxposition'];
+        }else{
             return false;
         }
-        $res = $this->tool->addBlindTag($tid, $tags, 'threadid');
-        //保存帖子
-        if(!$res){
-            return false;
-        }
-        $pid = $this->tool->saveTiezi($fid, $tid, $uid, $user['username'], $subject, $message, $attachmentCount);
+
+        $pid = $this->tool->saveTiezi($fid, $tid, $uid, $replyPid, $user['username'], $subject, $message, $attachmentCount, $maxposition);
         if(!$pid){
             return false;
         }
