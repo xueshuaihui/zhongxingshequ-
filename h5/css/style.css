@@ -2,7 +2,7 @@
 .xsh_notice_conbox{margin-top: 0;}
 .xsh_noticebox>a{display: block;width: 90%;margin: auto;}
 .xsh_notice_text{width: 100%;height: 40px;margin: auto;color: #000000;font-size: 13px;line-height: 20px;font-weight: 600;overflow:hidden;text-overflow:ellipsis;display: -webkit-box;  -webkit-line-clamp: 2;  -webkit-box-orient: vertical;}
-.xsh_notice_time{font-size: 12px; color: #cccccc;text-align: right;height: 23px;}
+.xsh_notice_time{font-size: 12px; color: #9b9b9b;text-align: right;height: 23px;}
 /*提醒*/
 .xsh_remind_name{color: #0085d1;font-size: 14px;margin-bottom: 3px;}
 .xsh_remind_text{font-weight: 400;line-height: 20px;}
@@ -24,11 +24,21 @@
 .xsh_me>.xsh_message_logobox{margin-left: 10px;}
 .xsh_me>.xsh_message_logobox,.xsh_me>.xsh_message_text{float: right;}
 .xsh_message_logobox{width: 40px;height: 40px;border-radius: 5px;overflow: hidden;position: relative;}
-.xsh_message_logobox>img{width: 100%;height: 100%;border-radius: 5px;}
+.xsh_message_logobox img{width: 100%;height: 100%;border-radius: 5px;}
 .xsh_message_text{width: 160px;height: auto;border-radius: 5px;position: relative;font-size: 12px;line-height: 16px;padding: 15px 10px;text-align: justify;}
 .xsh_you>.xsh_message_text{background: #ffffff;}
+.xsh_message_textimg{width: 100%;border-radius: 5px;overflow: hidden;position: relative;}
+.xsh_message_textimg>img{width: 100%;border-radius: 5px;overflow: hidden;}
+.xsh_message_textmaximg{max-width: 100%;max-height: 100%;position: absolute;top: 50%;left: 50%;z-index: 1;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);}
 .xsh_you_trigon{border-top: 5px solid transparent;border-bottom: 5px solid transparent;border-right: 5px solid #ffffff;border-left: 0px solid transparent;position: absolute;top: 15px;left: -5px;}
 .xsh_me>.xsh_message_text{background: #C8E0F0;}
+.xsh_message_text p{word-break: break-word;}
+.xsh_message_text p img{max-width: 160px;}
 .xsh_me_trigon{border-top: 5px solid transparent;border-bottom: 5px solid transparent;border-left: 5px solid #C8E0F0;border-right: 0px solid transparent;position: absolute;top: 15px;right: -5px;}
 .xsh_message_fixed{width: 100%;height: 49px;position: fixed;bottom: 0;left: 0;background: #0085d1;}
 .xsh_message_formbox{width: 90%;margin: auto;height: 100%;}
@@ -36,19 +46,22 @@
 .xsh_message_inputext{width: 80%;height: 30px;border-radius: 5px;border: none;font-size: 14px;}
 .xsh_message_submit{color: #ffffff;font-size: 16px;margin-left: 20px;}
 /*圈子详情*/
-.xsh_search_box{width: 100%;height: 36px;position: fixed;position: relative;}
-.xsh_search_conbox{width: 90%;margin: 12px auto;overflow: hidden;}
-.xsh_search{width: 65%;height: 20px;display: block;float: left;background: #ffffff;padding: 8px 10px;border-radius: 5px;}
+.xsh_search_box{width: 100%;position: fixed;top: 0;left: 0;z-index: 5;background: #f8f8f8;}
+.xsh_search_conbox{width: 90%;margin: 9px auto 8px;overflow: hidden;}
+.xsh_search{width: 65%;height: 24px;display: block;float: left;background: #ffffff;padding: 8px 10px;border-radius: 5px;}
 .xsh_searchimg>img{height: 100%;float: left;margin-right: 5px;}
 #xsh_search{border: none;background: none;display: block;height: 100%;}
 .xsh_post{float: right;width:60px;height: 100%;background: #ffffff;border-radius: 5px;text-align: center;line-height: 36px;padding: 0 5px;}
+.xsh_post>a{color: #4a4a4a;}
 .xsh_text_one{overflow: hidden;white-space: nowrap;text-overflow: ellipsis;font-size: 14px;}
 .xsh_user_logo_radius{border-radius: 50%;}
-.xsh_circle_label{color: #666666;font-size: 14px;max-height: 30px;}
+.xsh_circle_label{color: #7f7f7f;font-size: 14px;max-height: 30px;}
+.xsh_circle_list_box{margin-top: 57px;}
 .xsh_circle_list{line-height: 30px;}
 .xsh_circle_name{display: block;float: left;width: 60px;overflow: hidden;position: relative;margin-right: 10px;font-weight: 600;}
 .xsh_circle_time{font-weight: 500;display: block;float: left;}
 .xsh_hotimg{height: 16px;float: right;margin: 7px 0;}
+.xsh_asynchronous_searchbox{width: 100%;height: 100%;background: #f8f8f8;position: absolute;top: 0;left: 0;z-index: 1;display: none;}
 /*圈子管理*/
 .xsh_management_member{width: 100%;height: 205px;background: #ffffff;text-align: center;border-bottom: 1px solid #eeeeee;}
 .xsh_circlr_member{float: none;margin: auto;}
@@ -68,7 +81,7 @@
 .xsh_circle_information{background: #ffffff;width: 100%;overflow: hidden;margin-top: 10px;line-height: 20px;}
 .xsh_circle_information_box{background: #ffffff;width: 90%;margin: auto;overflow: hidden;}
 .xsh_circle_information_box li,.xsh_circle_information_box>div{width: 100%;padding: 15px 0;position: relative;}
-.xsh_circle_name{border-bottom: 1px solid #eeeeee;}
+.xsh_circle_managebor{border-bottom: 1px solid #eeeeee;}
 .xsh_circle_information_title{font-size: 15px;font-weight: 600;float: left;width: 80%;}
 .xsh_circle_information_con{float: right;font-size: 13px;color: #666666;font-weight: 400;height: 20px;position: absolute;right: 0;top: 50%;;
     -webkit-transform: translateY(-50%);
