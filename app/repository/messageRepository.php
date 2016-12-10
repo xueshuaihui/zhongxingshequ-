@@ -46,7 +46,7 @@ class messageRepository extends baseRepository {
                 $result[$k]['isnew'] = $record['isnew'];
             }
         }else{
-            $list = uc_pm_view($uid, 0, $touid, 5, $start, $count, 0, 0);
+            $list = uc_pm_view($uid, 0, $touid, 5, $page, $count, 0, 0);
             foreach ($list as $k=>$record){
                 $result[$k]['touid'] = $record['authorid'];
                 $result[$k]['message'] = $record['message'];
