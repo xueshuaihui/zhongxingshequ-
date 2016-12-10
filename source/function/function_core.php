@@ -824,6 +824,14 @@ function libfile($libname, $folder = '') {
 	return preg_match('/^[\w\d\/_]+$/i', $path) ? realpath(DISCUZ_ROOT.$path.'.php') : false;
 }
 
+function dimplode($array) {
+    if(!empty($array)) {
+        return "'".implode("','", is_array($array) ? $array : array($array))."'";
+    } else {
+        return '';
+    }
+}
+
 function dstrlen($str) {
 	if(strtolower(CHARSET) != 'utf-8') {
 		return strlen($str);
