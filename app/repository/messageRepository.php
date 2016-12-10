@@ -8,7 +8,7 @@ class messageRepository extends baseRepository {
     }
 
     public function sendPersonMessage($uid, $touid, $message) {
-        $this->table()->sendPm($uid, $touid, $message);
+        return $this->table()->sendPm($uid, $touid, $message);
     }
 
     public function getTips($uid, $page, $count = 10) {
@@ -22,7 +22,9 @@ class messageRepository extends baseRepository {
         foreach ($res as $item){
             $ids[] = $item['id'];
         }
-        $this->table('home_notification')->in('id', $ids)->update(['new'=>0]);
+        if(count($ids) > 0){
+            $this->table('home_notification')->in('id', $ids)->update(['new'=>0]);
+        }
         return $res;
     }
 
