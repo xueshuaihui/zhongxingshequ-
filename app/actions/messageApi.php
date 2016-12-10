@@ -75,7 +75,8 @@ class messageApi extends baseApi {
         $this->tool->blank();
         $pmList = $this->tool->getPm($uid, $touid, $page);
         foreach ($pmList as $k=>$value){
-            $pmList[$k]['usericon'] = $this->tool->getAvatar($value['touid']);
+            $pmList[$k]['me'] = $this->tool->getAvatar($uid);
+            $pmList[$k]['you'] = $this->tool->getAvatar($value['touid']);
         }
         return $pmList;
     }
