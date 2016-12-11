@@ -25,8 +25,8 @@ $(function(){
         $.ajax({
             url:"http://zte.rmbplus.com/app.php?action=message-getPm",
             data:{uid:Number(hrefdada.uid),page:Number(page),touid:Number(hrefdada.touid)},
+            type:"post",
             success:function(result){
-                console.log(result);
                 var data = JSON.parse(result);
                 if(data.state == 10000){
                     var datas = data.result;
@@ -72,6 +72,7 @@ message_submit.on("tap",function(){
         $.ajax({
             url:"http://zte.rmbplus.com/app.php?action=message-sendPm",
             data:{uid:hrefdada.uid,touid:hrefdada.touid,message:val},
+            type:"post",
             success:function(result){
                 var data = JSON.parse(result);
                 if(data.state == 10000){
