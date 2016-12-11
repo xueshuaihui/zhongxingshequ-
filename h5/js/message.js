@@ -24,7 +24,7 @@ $(function(){
     function getdata(page){
         $.ajax({
             url:"http://zte.rmbplus.com/app.php?action=message-getPm",
-            data:{uid:hrefdada.uid,page:page,touid:hrefdada.touid},
+            data:{uid:Number(hrefdada.uid),page:Number(page),touid:Number(hrefdada.touid)},
             success:function(result){
                 var data = JSON.parse(result);
                 if(data.state == 10000){
