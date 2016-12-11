@@ -26,6 +26,7 @@ $(function(){
             url:"http://zte.rmbplus.com/app.php?action=message-getPm",
             data:{uid:Number(hrefdada.uid),page:Number(page),touid:Number(hrefdada.touid)},
             success:function(result){
+                console.log(result);
                 var data = JSON.parse(result);
                 if(data.state == 10000){
                     var datas = data.result;
