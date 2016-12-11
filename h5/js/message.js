@@ -23,7 +23,7 @@ $(function(){
             url:"http://zte.rmbplus.com/app.php?action=message-getPm",
             data:{uid:hrefdada.uid,page:page,touid:hrefdada.touid},
             success:function(result){
-                var data = JSON.parse(result);
+                var data = eval(result);
                 if(data.state == 10000){
                     var datas = data.result;
                     var str = '';
@@ -68,7 +68,7 @@ message_submit.on("tap",function(){
             url:"http://zte.rmbplus.com/app.php?action=message-sendPm",
             data:{uid:hrefdada.uid,touid:hrefdada.touid,message:val},
             success:function(result){
-                var data = JSON.parse(result);
+                var data = eval(result);
                 if(data.state == 10000){
                     var str = '';
                     str += '<li class="xsh_me"><div class="xsh_message_logobox"><a href="zxbbs://jump/'+(escape())+'" name ="'+(num)+'"><img src="'+(usericon)+'" alt=""></a></div><div class="xsh_message_text"><div class="xsh_you_trigon"></div><p>'+(val)+'</p></div></li>';
