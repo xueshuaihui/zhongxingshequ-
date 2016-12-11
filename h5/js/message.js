@@ -49,12 +49,13 @@ $(function(){
             }
         })
     }
-
-getdata();
+var page = 1;
+getdata(page);
 window.onscroll = function(){
     var top = $(window).scrollTop();
     if(top <= 100){
-        getdata();
+        page++;
+        getdata(page);
         window.location.href = "#new";
     }
 }
