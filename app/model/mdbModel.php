@@ -35,15 +35,21 @@ class mdbModel extends baseModel implements dbInterface {
     }
 
     public function store($data, $returnId = true) {
-        return DB::insert($this->table, $data, $returnId);
+        $do = DB::insert($this->table, $data, $returnId);
+        self::refresh();
+        return $do;
     }
 
     public function delete() {
-        return DB::delete($this->table, '1 '.$this->where.$this->whereOr);
+        $do = DB::delete($this->table, '1 '.$this->where.$this->whereOr);
+        self::refresh();
+        return $do;
     }
 
     public function update($data) {
-        return DB::update($this->table, $data, '1 '.$this->where.$this->whereOr);
+        $do = DB::update($this->table, $data, '1 '.$this->where.$this->whereOr);
+        self::refresh();
+        return $do;
     }
 
     public function increase($data, $data2 = [], $sql =false) {
@@ -62,7 +68,9 @@ class mdbModel extends baseModel implements dbInterface {
         if($sql){
             return $this->sql;
         }
-        return DB::query($this->sql);
+        $do = DB::query($this->sql);
+        self::refresh();
+        return $do;
     }
 
     public function find($fields, $sql = false) {
@@ -86,17 +94,25 @@ class mdbModel extends baseModel implements dbInterface {
             $this->sql .=  ' LIMIT '.trim($this->limit,',');
         }
         if($sql){
-            return $this->sql;
+            $do = $this->sql;
+            self::refresh();
+            return $do;
         }
-        return DB::fetch_first($this->sql);
+        $do = DB::fetch_first($this->sql);
+        self::refresh();
+        return $do;
     }
 
     public function select($fields, $sql = false) {
-        $this->find($fields, true);
+        $this->sql = $this->find($fields, true);
         if($sql){
-            return $this->sql;
+            $do = $this->sql;
+            self::refresh();
+            return $do;
         }
-        return DB::fetch_all($this->sql);
+        $do = DB::fetch_all($this->sql);
+        self::refresh();
+        return $do;
     }
 
     public function fields($fields) {
@@ -157,7 +173,7 @@ class mdbModel extends baseModel implements dbInterface {
 
     public function whereWhere($k, $c = '=', $v = null) {
         if(is_string($k)){
-            $this->where .= ' AND '.$k.$c.' \''.$v.'\'';
+            $this->where .= ' AND '.$k.' '.$c.' \''.$v.'\'';
         }
         return $this;
     }
@@ -170,5 +186,15 @@ class mdbModel extends baseModel implements dbInterface {
     public function join($sql) {
         $this->join .= $sql;
         return $this;
+    }
+
+    private function refresh() {
+        unset($this->field);
+        unset($this->limit);
+        unset($this->order);
+        unset($this->where);
+        unset($this->whereOr);
+        unset($this->sql);
+        unset($this->join);
     }
 }

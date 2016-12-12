@@ -42,6 +42,13 @@ class baseRepository {
         return avatar($uid, $size, true);
     }
 
+    public function getUserCount($uid) {
+        return $this->table('common_member_count')->where('uid', $uid)->find();
+    }
+
+    public function getUserGroup($groupid) {
+        return $this->table('common_usergroup')->where('groupid', $groupid)->find();
+    }
     public function sendMessage($ids, $type, $note, $notevars = array()) {
         if(is_string($ids) || is_numeric($ids)){
             $ids = array($ids);
@@ -59,20 +66,43 @@ class baseRepository {
                     ->select('u.uid, u.username');
     }
 
-    public function getGroupUser($fid, $field, $level = 1, $forceall = false) {
+    public function getGroupUser($fid, $field, $page, $count, $level = 1, $forceall = false) {
+        $start = ($page-1)*$count;
         if($forceall){
-            return $this->table('forum_groupuser')
-                ->where(['fid'=>$fid])
-                ->select($field);
+            if($page == -1){
+                return $this->table('forum_groupuser')
+                    ->where(['fid'=>$fid])
+                    ->select($field);
+            }else{
+                return $this->table('forum_groupuser')
+                    ->where(['fid'=>$fid])
+                    ->limit($start.','.$count)
+                    ->select($field);
+            }
         }elseif($level || $level === 0){
-            return $this->table('forum_groupuser')
-                ->where(['fid'=>$fid, 'level'=>$level])
-                ->select($field);
+            if($page == -1){
+                return $this->table('forum_groupuser')
+                    ->where(['fid'=>$fid, 'level'=>$level])
+                    ->select($field);
+            }else{
+                return $this->table('forum_groupuser')
+                    ->where(['fid'=>$fid, 'level'=>$level])
+                    ->limit($start.','.$count)
+                    ->select($field);
+            }
         }else{
-            return $this->table('forum_groupuser')
-                ->where('fid', $fid)
-                ->whereWhere('level', '>', 0)
-                ->select($field);
+            if($page == -1){
+                return $this->table('forum_groupuser')
+                    ->where('fid', $fid)
+                    ->whereWhere('level', '>', 0)
+                    ->select($field);
+            }else{
+                return $this->table('forum_groupuser')
+                    ->where('fid', $fid)
+                    ->whereWhere('level', '>', 0)
+                    ->limit($start.','.$count)
+                    ->select($field);
+            }
         }
     }
 
