@@ -9,7 +9,28 @@ use discuz\request;
  *     @SWG\Info(
  *         version="确定了，1.1",
  *         title="页面基础地址：app.php?show=",
- *         description="【1】圈子详情：circle-home [uid,fid] ;  【2】圈子成员：circle-member [fid] ; 【3】会员资料：member-details [uid] ; 【4】私信内容：message-pmc [uid, touid, page]; 【5】私信列表：message-pm [uid, page]; 【6】公告列表：message-pt [page]; 【7】公告详情：message-ptc [mid]; 【8】提醒列表：message-tips [uid,page]; 【9】帖子详情：page-pageList[fid, tid]; 【10】帖子列表[fid, uid, page]; 【11】我的帖子：page-my[uid, page]",
+ *         description="
+页面地址：<br/>
+【1】圈子详情：circle-home [uid,fid] ;  <br/>
+【2】圈子成员：circle-member [fid] ;<br/>
+【3】会员资料：member-details [uid] ;<br/>
+【4】私信内容：message-pmc [uid, touid, page];<br/>
+【5】私信列表：message-pm [uid, page]; <br/>
+【6】公告列表：message-pt [page]; <br/>
+【7】公告详情：message-ptc [mid]; <br/>
+【8】提醒列表：message-tips [uid,page]; <br/>
+【9】帖子详情：page-pageList[fid, tid]; <br/>
+【10】帖子列表[fid, uid, page];<br/>
+【11】我的帖子：page-my[uid, page]; <br/><br/>
+=================================<br/><br/>
+【1】zxbbs://post/new 发帖<br/>
+【2】zxbbs://post/detail 帖子详情<br/>
+【3】zxbbs://user/info  详细资料<br/>
+【4】zxbbs://circle/transfer 转让圈子<br/>
+【5】zxbbs://circle/invite   邀请好友进圈子<br/>
+【6】zxbbs://circle/defriend 删除圈子成员<br/>
+【7】zxbbs://circle/modifyName 编辑圈子名称<br/>
+【8】zxbbs://circle/modifyDesc  编辑圈子简介",
  *     ),
  * )
  */
