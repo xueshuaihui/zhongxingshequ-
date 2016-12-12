@@ -14,5 +14,12 @@ define('BASEURL', $url);
 function dd($d){
     var_dump($d); exit;
 }
+function encodeUrl($url, $add = 1){
+    if($add){
+        $url = BASEURL.__.$url;
+    }
+    $url = str_replace('/', '##', $url);
+    return urlencode($url);
+}
 require_once API.'app.php';
 \discuz\app::run();

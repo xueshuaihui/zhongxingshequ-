@@ -28,7 +28,11 @@ use discuz\request;
 【3】zxbbs://circle/invite   邀请好友进圈子<br/>
 【4】zxbbs://circle/defriend 删除圈子成员<br/>
 【5】zxbbs://circle/modifyName 编辑圈子名称<br/>
-【6】zxbbs://circle/modifyDesc  编辑圈子简介",
+【6】zxbbs://circle/modifyDesc  编辑圈子简介<br/>
+=================================<br/><br/>
+【1】弹窗：zxbbs://alert/content_string<br/>
+【2】跳转：zxbbs://jump/url/xurl为目标url的urlencode字符串，/替换为##
+",
  *     ),
  * )
  */
