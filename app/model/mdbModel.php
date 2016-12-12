@@ -156,7 +156,7 @@ class mdbModel extends baseModel implements dbInterface {
         foreach ($v as $item){
             $range .= '\''.$item.'\',';
         }
-        $this->where = ' AND '.$k.' IN ('.trim($range, ',').')';
+        $this->where .= ' AND '.$k.' IN ('.trim($range, ',').')';
         return $this;
     }
 

@@ -6,25 +6,21 @@ class pageRepository extends baseRepository {
         return $this->table('common_tagitem')->where(['idtype'=>'uid','itemid'=>$uid])->select('tagid');
     }
 
-    public function getPages($fid, $uid, $page, $tags, $count = 10) {
-        $data = $this->table('forum_thread')
-            ->ass('thread')
-            ->join(' LEFT JOIN '.$this->prefix.'common_tagitem AS tag ON tag.itemid = thread.tid AND tag.idtype = \'threadid\'')
-            ->join(' LEFT JOIN '.$this->prefix.'forum_threadclass AS type ON type.typeid = thread.typeid');
+    public function getPages($fid, $uid, $page, $tags, $keyword, $count = 10) {
+        $data = $this->table('forum_thread')->ass('thread')->join(' LEFT JOIN '.$this->prefix.'common_tagitem AS tag ON tag.itemid = thread.tid AND tag.idtype = \'threadid\'')->join(' LEFT JOIN '.$this->prefix.'forum_threadclass AS type ON type.typeid = thread.typeid');
         if($uid){
-            $where = ['thread.authorid'=>$uid, 'thread.price'=>0, 'thread.readperm'=>0];
-            $data = $data->where($where);
-        }elseif($fid){
-            $where = ['thread.fid'=>$fid, 'thread.price'=>0, 'thread.readperm'=>0];
-            $data = $data->in('tag.tagid', $tags)->where($where);
-        }else{
-            return false;
+            $data = $data->where('thread.authorid', $uid);
         }
+        if($fid){
+            $data = $data->where('thread.fid', $fid);
+        }
+        if($keyword){
+            $data = $data->whereWhere('subject', 'LIKE', "%{$keyword}%");
+        }
+        $data = $data->where(['thread.price'=>0, 'thread.readperm'=>0])->in('tag.tagid', $tags)->whereWhere('thread.typeid', '!=', 0)->order('thread.displayorder desc, thread.lastpost desc');
         if($page){
             $start = ($page - 1) * $count;
-            $data = $data->whereWhere('thread.typeid', '!=', 0)->order('thread.displayorder desc, thread.lastpost desc')->limit($start.' ,'.$count);
-        }else{
-            $data = $data->whereWhere('thread.typeid', '!=', 0)->order('thread.displayorder desc, thread.lastpost desc');
+            $data = $data->limit($start.' ,'.$count);
         }
          return $data->select('thread.tid, type.name, thread.author, thread.authorid, thread.subject, thread.lastpost, thread.digest, thread.highlight, thread.bgcolor');
     }
