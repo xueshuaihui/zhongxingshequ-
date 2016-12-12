@@ -67,43 +67,16 @@ class baseRepository {
     }
 
     public function getGroupUser($fid, $field, $page, $count, $level = 1, $forceall = false) {
-        $start = ($page-1)*$count;
-        if($forceall){
-            if($page == -1){
-                return $this->table('forum_groupuser')
-                    ->where(['fid'=>$fid])
-                    ->select($field);
-            }else{
-                return $this->table('forum_groupuser')
-                    ->where(['fid'=>$fid])
-                    ->limit($start.','.$count)
-                    ->select($field);
-            }
-        }elseif($level || $level === 0){
-            if($page == -1){
-                return $this->table('forum_groupuser')
-                    ->where(['fid'=>$fid, 'level'=>$level])
-                    ->select($field);
-            }else{
-                return $this->table('forum_groupuser')
-                    ->where(['fid'=>$fid, 'level'=>$level])
-                    ->limit($start.','.$count)
-                    ->select($field);
-            }
-        }else{
-            if($page == -1){
-                return $this->table('forum_groupuser')
-                    ->where('fid', $fid)
-                    ->whereWhere('level', '>', 0)
-                    ->select($field);
-            }else{
-                return $this->table('forum_groupuser')
-                    ->where('fid', $fid)
-                    ->whereWhere('level', '>', 0)
-                    ->limit($start.','.$count)
-                    ->select($field);
-            }
+        $data = $this->table('forum_groupuser')->where(['fid'=>$fid]);
+        if(!$forceall && $level || $level === 0){
+            $data = $data->where('level', $level);
+        }elseif(!$forceall){
+            $data = $data->whereWhere('level', '>', 0);
         }
+        if($page){
+            $data = $data->limit(($page-1)*$count.','.$count);
+        }
+        return $data->select($field);
     }
 
     public function addBlindTag($id, $tags, $idtype) {
