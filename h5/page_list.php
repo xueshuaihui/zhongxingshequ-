@@ -34,5 +34,5 @@
 <div class="xsh_asynchronous_searchbox"></div>
 </body>
 <script src="/static/h5/js/zepto.min.js"></script>
-<script src="/html/js/circle_of_details.js"></script>
+<script src="/h5/js/circle_of_details.js"></script>
 </html>
