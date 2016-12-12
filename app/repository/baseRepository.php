@@ -69,12 +69,13 @@ class baseRepository {
     public function getGroupUser($fid, $field, $page, $count, $level = 1, $forceall = false) {
         $data = $this->table('forum_groupuser')->where(['fid'=>$fid]);
         if(!$forceall && $level || $level === 0){
-            $data = $data->where('level', $level);
+            $data->where('level', $level);
         }elseif(!$forceall){
-            $data = $data->whereWhere('level', '>', 0);
+            $data->whereWhere('level', '>', 0);
         }
         if($page){
-            $data = $data->limit(($page-1)*$count.','.$count);
+            $start = ($page - 1) * $count;
+            $data->limit($start.','.$count);
         }
         return $data->select($field);
     }

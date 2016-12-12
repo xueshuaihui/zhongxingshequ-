@@ -8,7 +8,7 @@ class circleApp extends circleApi {
         $uid = $this->request->get('uid');
         $users = $this->getGroupUsers($fid, null, 1, 6);
         $profile = $this->getGroupProfile($fid, $uid);
-        $wait = $this->getGroupUsers($fid, 5, -1, 6);
+        $wait = $this->getGroupUsers($fid, 5, false, 1);
         require_once ROOT.'h5'.__.'circle_home.php';
     }
 
