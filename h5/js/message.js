@@ -52,6 +52,7 @@ $(function(){
     }
 var page = 1;
 getdata(page);
+window.location.href = "#new";
 window.onscroll = function(){
     var top = $(window).scrollTop();
     if(top <= 100){
@@ -80,6 +81,7 @@ message_submit.on("tap",function(){
                     str += '<li class="xsh_me"><div class="xsh_message_logobox"><a href="zxbbs://jump/'+(escape())+'" name ="'+(num)+'"><img src="'+(usericon)+'" alt=""></a></div><div class="xsh_message_text"><div class="xsh_you_trigon"></div><p>'+(val)+'</p></div></li>';
                     xsh_foot.before(str);
                     window.location.href = "#"+num;
+                    message_inputext.val("");
                 }else{
                     window.location.href = "zxbbs://alert/"+msg;
                 }
@@ -89,6 +91,4 @@ message_submit.on("tap",function(){
         window.location.href = "zxbbs://alert/请输入内容";
     }
 })
-    /*定位到最下面*/
-    window.location.href = "#xsh_foot";
 })
