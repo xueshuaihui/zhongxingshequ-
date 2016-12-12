@@ -178,10 +178,10 @@ class pageApi extends baseApi {
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
-    public function tieziList() {
+    public function tieziList($sTid = null, $sFid = null) {
         $this->checkParam(['tid','fid', 'modnewposts']);
-        $tid = $this->request->post('tid');
-        $fid = $this->request->post('fid');
+        $tid = $sTid?:$this->request->post('tid');
+        $fid = $sFid?:$this->request->post('fid');
         $type = $this->request->post('type');
         $pid = $this->request->post('pid');
         $pages = $this->tool->getTiezi($tid, $fid, $pid, $type);
@@ -197,17 +197,17 @@ class pageApi extends baseApi {
      *   operationId="threadList",
      *   consumes={"application/json"},
      *   produces={"application/json"},
-     *     @SWG\Parameter(name="fid", in="formData", description="群组ID", required=true, type="string"),
+     *     @SWG\Parameter(name="fid", in="formData", description="群组ID,获取我的主题的时候不用", required=false, type="string"),
      *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
      *     @SWG\Parameter(name="page", in="formData", description="页码，0表示获取全部", required=true, type="string"),
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
-    public function threadList() {
-        $this->checkParam(['uid', 'fid', 'page']);
-        $uid = $this->request->post('uid');
-        $fid = $this->request->post('fid');
-        $page = $this->request->post('page');
+    public function threadList($sUid = null, $sFid = null, $sPage = null) {
+        $this->checkParam(['uid', 'page']);
+        $uid = $sUid ?: $this->request->post('uid');
+        $fid = $sFid ?: $this->request->post('fid');
+        $page = $sPage ?: $this->request->post('page');
 
         //获取用户标签
         $userTags = $this->tool->getUserTags($uid);
@@ -218,7 +218,58 @@ class pageApi extends baseApi {
             return '用户无标签';
         }
         //根据用户标签获取帖子
-        $pagesData = $this->tool->getPages($fid, $page, $userTags);
+        $pagesData = $this->tool->getPages($fid, $uid, $page, $userTags, null);
+        $colorArr = ['black', 'red', 'orange', 'brown', 'green', 'lightblue', 'blue', 'blueviolet', 'pink'];
+        foreach ($pagesData as $k=>$value){
+            $pagesData[$k]['icon'] = $this->tool->getAvatar($value['authorid']);
+            if(strlen($value['highlight']) == 2){
+                $highlightStyle = substr($value['highlight'], 0, 1);
+                $highlightColor = substr($value['highlight'], -1);
+            }else{
+                $highlightStyle = 0;
+                $highlightColor = $value['highlight'];
+            }
+            $highlightStyle = decbin($highlightStyle);
+            $pagesData[$k]['B'] = $highlightStyle{2}?:'0';
+            $pagesData[$k]['I'] = $highlightStyle{1}?:'0';
+            $pagesData[$k]['U'] = $highlightStyle{0}?:'0';
+            $pagesData[$k]['color'] = $colorArr[$highlightColor];
+            unset($pagesData[$k]['highlight']);
+        }
+        return $pagesData;
+    }
+
+    /**
+     * @SWG\Post(
+     *   path="page-threadSearch",
+     *   tags={"帖子相关"},
+     *   summary="主题搜索",
+     *   description="主题搜索",
+     *   operationId="threadSearch",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="fid", in="formData", description="群组ID", required=true, type="string"),
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Parameter(name="keyword", in="formData", description="关键字", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function threadSearch() {
+        $this->checkParam(['keyword', 'fid', 'uid']);
+        $keyword = $this->request->post('keyword');
+        $fid = $this->request->post('fid');
+        $uid = $this->request->post('uid');
+
+        //获取用户标签
+        $userTags = $this->tool->getUserTags($uid);
+        foreach ($userTags as $k=>$userTag){
+            $userTags[$k] = $userTag['tagid'];
+        }
+        if(!$userTags){
+            return '用户无标签';
+        }
+        //根据用户标签获取帖子
+        $pagesData = $this->tool->getPages($fid, $uid, null, $userTags, $keyword);
         $colorArr = ['black', 'red', 'orange', 'brown', 'green', 'lightblue', 'blue', 'blueviolet', 'pink'];
         foreach ($pagesData as $k=>$value){
             $pagesData[$k]['icon'] = $this->tool->getAvatar($value['authorid']);

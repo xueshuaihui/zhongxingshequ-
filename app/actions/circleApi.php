@@ -79,7 +79,7 @@ class circleApi extends baseApi {
         }
         if($res) {
             $circleBase = $this->tool->getGroup($fid);
-            $bzIds = $this->tool->getGroupUser($fid, 'uid');
+            $bzIds = $this->tool->getGroupUser($fid, 'uid', -1, 0);
             foreach ($bzIds as $k=>$ids){
                 $bzIds[$k] = $ids['uid'];
             }
@@ -219,17 +219,22 @@ class circleApi extends baseApi {
      *   produces={"application/json"},
      *     @SWG\Parameter(name="fid", in="formData", description="群组ID", required=true, type="string"),
      *     @SWG\Parameter(name="level", in="formData", description="获取的用户属性，0：全部；1：管理员；2：副管理员；3：明星成员；4：普通成员；5：待审核成员；默认为0", required=false, type="string"),
+     *     @SWG\Parameter(name="page", in="formData", description="页码", required=true, type="string"),
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
-    public function getGroupUsers() {
-        $this->checkParam('fid');
-        $fid = $this->request->post('fid');
-        $level = $this->request->post('level') ?: false;
+    public function getGroupUsers($sFid = null, $sLevel = null, $sPage = null, $sCount = null) {
+        $this->checkParam(['fid', 'page']);
+        $fid = $sFid ?: $this->request->post('fid');
+        $level = $sLevel ?: $this->request->post('level') ?: false;
+        $page = $sPage ?: $this->request->post('page');
+        $count = $sCount ?: 10;
         $level = $level == 5 ? 0 : $level;
-        $users = $this->tool->getGroupUser($fid, 'uid, username', $level);
+        $users = $this->tool->getGroupUser($fid, 'uid, username', $page, $count, $level);
         foreach ($users as $k=>$user){
             $users[$k]['avatar'] = $this->tool->getAvatar($user['uid']);
+            $userProfile = $this->tool->getUserProfile(['uid'=>$user['uid']]);
+            $users[$k]['bio'] = $userProfile['bio'];
         }
         return $users;
     }
@@ -257,10 +262,10 @@ class circleApi extends baseApi {
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
-    public function getGroupProfile() {
+    public function getGroupProfile($sFid = null, $sUid = null) {
         $this->checkParam(['fid', 'uid']);
-        $fid = $this->request->post('fid');
-        $uid = $this->request->post('uid');
+        $fid = $sFid ?: $this->request->post('fid');
+        $uid = $sUid ?: $this->request->post('uid');
         $profile = $this->tool->getGroupProfile($fid);
         $result['title'] = $profile['name'];
         $result['description'] = $profile['description'];
@@ -275,12 +280,12 @@ class circleApi extends baseApi {
             $result['relation'] = 0; //没关系
             return $result;
         }
-        //看看用户是不是网站管理员
-        $user = $this->tool->getUserProfile(['uid'=>$uid]);
-        if($user['adminid']){
-            $result['relation'] = 3; //管理员
-            return $result;
-        }
+//        //看看用户是不是网站管理员
+//        $user = $this->tool->getUserProfile(['uid'=>$uid]);
+//        if($user['adminid']){
+//            $result['relation'] = 3; //管理员
+//            return $result;
+//        }
         //看看你的圈子等级
         if($groupUser['level'] == 1 || $groupUser['level'] == 2){
             $result['relation'] = 3; //管理员

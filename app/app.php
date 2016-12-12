@@ -6,6 +6,7 @@ class app {
     protected static $response;
     protected static $action;
     protected static $method;
+    protected static $path;
 
     public function __construct($classes = ['request', 'response']) {
         foreach ($classes as $class){
@@ -15,8 +16,15 @@ class app {
         $this->init();
         $a = new self::$action;
         $m = self::$method;
-        $r = self::$response = response::getResponse($a->$m());
-        return $r->send();
+        if(self::$path == 'App'){
+            define('SHOW', 1);
+            return $a->$m();
+        }elseif(self::$path == 'Api'){
+            $r = self::$response = response::getResponse($a->$m());
+            return $r->send();
+        }else{
+            return false;
+        }
     }
 
     public static function run() {
@@ -28,13 +36,19 @@ class app {
 
     private function init () {
         ini_set('date.timezone','Asia/Shanghai');
-        $param = self::$request->get('action');
+        if(self::$request->get('show')){
+            self::$path = 'App';
+            $param = self::$request->get('show');
+        }else{
+            self::$path = 'Api';
+            $param = self::$request->get('action');
+        }
         if(is_null($param)) {
             exit('error no action');
         }
         $param = explode('-', $param);
-        self::$action = $param[0].'Api';
+        self::$action = $param[0].self::$path;
         self::$method = $param[1];
-        require_once API.'actions'.DIRECTORY_SEPARATOR.$param[0].'Api.php';
+        require_once API.'actions'.DIRECTORY_SEPARATOR.$param[0].self::$path.'.php';
     }
 }

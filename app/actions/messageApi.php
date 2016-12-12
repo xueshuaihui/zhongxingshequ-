@@ -42,14 +42,15 @@ class messageApi extends baseApi {
      *   operationId="getPublicMessage",
      *   consumes={"application/json"},
      *   produces={"application/json"},
-     *     @SWG\Parameter(name="page", in="formData", description="页码", required=true, type="string"),
+     *     @SWG\Parameter(name="mid", in="formData", description="某条公告ID", required=false, type="string"),
+     *     @SWG\Parameter(name="page", in="formData", description="页码", required=false, type="string"),
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
-    public function getPublicMessage() {
-        $this->checkParam('page');
-        $page = $this->request->post('page');
-        return $this->tool->getPublic($page);
+    public function getPublicMessage($sMid = null, $sPage = null) {
+        $mid = $sMid?:$this->request->post('mid');
+        $page = $sPage?:$this->request->post('page');
+        return $this->tool->getPublic($mid, $page);
     }
 
     /**
@@ -67,11 +68,11 @@ class messageApi extends baseApi {
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
-    public function getPm() {
+    public function getPm($sUid = null, $sPage = null, $sTouid = null) {
         $this->checkParam(['uid', 'touid', 'page']);
-        $uid = $this->request->post('uid');
-        $touid = $this->request->post('touid')?:0;
-        $page = $this->request->post('page');
+        $uid = $sUid?:$this->request->post('uid');
+        $touid = $sTouid?:$this->request->post('touid')?:0;
+        $page = $sPage?:$this->request->post('page');
         $this->tool->blank();
         $pmList = $this->tool->getPm($uid, $touid, $page);
         foreach ($pmList as $k=>$value){
@@ -95,10 +96,10 @@ class messageApi extends baseApi {
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
-    public function getTips() {
+    public function getTips($sUid = null, $sPage = null) {
         $this->checkParam(['uid', 'page']);
-        $uid = $this->request->post('uid');
-        $page = $this->request->post('page');
+        $uid = $sUid?:$this->request->post('uid');
+        $page = $sPage?:$this->request->post('page');
         return $this->tool->getTips($uid, $page);
     }
 }

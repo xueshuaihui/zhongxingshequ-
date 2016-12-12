@@ -2,9 +2,14 @@
 require_once 'baseRepository.php';
 
 class messageRepository extends baseRepository {
-    public function getPublic($page, $count = 10) {
-        $start = ($page - 1)*$count;
-        return $this->table('forum_announcement')->whereWhere('starttime', '<', time())->whereWhere('endtime', '>', time())->order('displayorder')->limit($start.','.$count)->select('subject, message, starttime');
+    public function getPublic($mid, $page, $count = 10) {
+        if($mid){
+            return $this->table('forum_announcement')->where('id', $mid)->find();
+        }elseif($page){
+            $start = ($page - 1)*$count;
+            return $this->table('forum_announcement')->whereWhere('starttime', '<', time())->whereWhere('endtime', '>', time())->order('displayorder')->limit($start.','.$count)->select('id, subject, message, starttime');
+        }
+        return false;
     }
 
     public function sendPersonMessage($uid, $touid, $message) {
@@ -51,6 +56,7 @@ class messageRepository extends baseRepository {
                 $result[$k]['touid'] = $record['authorid'];
                 $result[$k]['message'] = $record['message'];
                 $result[$k]['author'] = $record['author'];
+                $result[$k]['dateline'] = $record['dateline'];
                 $result[$k]['position'] = ($record['authorid'] == $uid) ? 'r' : 'l';
             }
         }

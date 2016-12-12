@@ -4,29 +4,29 @@
     <meta charset="UTF-8">
     <title>详情资料</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" href="/h5/css/reset.css">
-    <link rel="stylesheet" href="/h5/css/style.css">
+    <link rel="stylesheet" href="../static/h5/css/reset.css">
+    <link rel="stylesheet" href="../static/h5/css/style.css">
 </head>
 <body>
 <div class="xsh_circle_information">
     <ul class="xsh_circle_information_box">
         <li class="xsh_circle_name xsh_private_letter_box xsh_information_name">
             <div class="xsh_user_logo">
-                <img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt="" class="xsh_user_logo">
+                <img src="<? echo $avatar; ?>" alt="" class="xsh_user_logo">
             </div>
-            <h3 class="xsh_circle_apply_name xsh_text_one">机会并不</h3>
+            <h3 class="xsh_circle_apply_name xsh_text_one"><? echo $userProfile['username'];?></h3>
             <div>
-                <p class="xsh_text_one xsh_circle_apply_syn xsh_user_information"><span>个性签名：</span>到了尽快发给的空间裂缝哪里看见但是可能的附近开房</p>
+                <p class="xsh_text_one xsh_circle_apply_syn xsh_user_information"><span>个性签名：</span><? echo $userProfile['bio'] ?:'<b style="color:#ccc">这个人很懒，什么都没写</b>';?></p>
             </div>
         </li>
     </ul>
 </div>
 <div class="xsh_circle_information">
     <ul class="xsh_circle_information_box xsh_information_box">
-        <li><span class="xsh_information_title">用户组:</span><span>新手上路</span></li>
-        <li><span class="xsh_information_title">好友数:</span><span>23423</span></li>
-        <li><span class="xsh_information_title">回帖数:</span><span>234234</span></li>
-        <li><span class="xsh_information_title">主题数:</span><span>4324</span></li>
+        <li><span class="xsh_information_title">用户组:</span><span><? echo $userGroup['grouptitle']; ?></span></li>
+        <li><span class="xsh_information_title">好友数:</span><span><? echo $userCount['friends']; ?></span></li>
+        <li><span class="xsh_information_title">回帖数:</span><span><? echo $userCount['posts']; ?></span></li>
+        <li><span class="xsh_information_title">主题数:</span><span><? echo $userCount['threads']; ?></span></li>
     </ul>
 </div>
 <div class="xsh_circle_manage xsh_information_btn_box">
