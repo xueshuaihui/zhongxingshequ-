@@ -239,15 +239,6 @@ class circleApi extends baseApi {
         return $users;
     }
 
-//    public function getManagePower() {
-//        $this->checkParam(['uid', 'fid']);
-//        $uid = $this->request->post('uid');
-//        $fid = $this->request->post('fid');
-//        $level = $this->tool->getUserFromGroup($uid, $fid);
-//        $levelArr = ['wait', 'manager', 'secManager', 'starts', 'common'];
-//        return $levelArr[$level['level']];
-//    }
-
     /**
      * @SWG\Post(
      *   path="circle-getGroupProfile",
@@ -280,12 +271,6 @@ class circleApi extends baseApi {
             $result['relation'] = 0; //没关系
             return $result;
         }
-//        //看看用户是不是网站管理员
-//        $user = $this->tool->getUserProfile(['uid'=>$uid]);
-//        if($user['adminid']){
-//            $result['relation'] = 3; //管理员
-//            return $result;
-//        }
         //看看你的圈子等级
         if($groupUser['level'] == 1 || $groupUser['level'] == 2){
             $result['relation'] = 3; //管理员
