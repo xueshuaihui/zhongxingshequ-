@@ -8,8 +8,8 @@ use discuz\request;
  *     basePath="/",
  *     @SWG\Info(
  *         version="确定了，1.1",
- *         title="这是中心API，你没搞错吧",
- *         description="访问本域名是显示文档，访问swagger.php?re=1则刷新",
+ *         title="页面基础地址：app.php?show=",
+ *         description="【1】圈子详情：circle-home [uid,fid] ;  【2】圈子成员：circle-member [fid] ; 【3】会员资料：member-details [uid] ; 【4】私信内容：message-pmc [uid, touid, page]; 【5】私信列表：message-pm [uid, page]; 【6】公告列表：message-pt [page]; 【7】公告详情：message-ptc [mid]; 【8】提醒列表：message-tips [uid,page]; 【9】帖子详情：page-pageList[fid, tid]; 【10】帖子列表[fid, uid, page]; 【11】我的帖子：page-my[uid, page]",
  *     ),
  * )
  */
