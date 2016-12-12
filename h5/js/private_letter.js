@@ -1,6 +1,6 @@
 var parent = $("body");
 function getdata(data){
-    var data = JSON.parse(data);
+    var data = data;
     if(Number(data.state) == 10000 ){
         //  {"state": 10000,"msg": "成功","result":[{head:"http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg",name:"中兴通讯回复",text:"中兴通讯中兴通讯中兴通讯中兴通讯",time:"2016-01-25"}]}
         var datas = data.result;
@@ -14,7 +14,7 @@ function getdata(data){
     }
 }
 function reload(data){
-    var data = JSON.parse(data);
+    var data = data;
     if(Number(data.state) == 10000 ){
         //  {"state": 10000,"msg": "成功","result":[{head:"http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg",name:"中兴通讯回复",text:"中兴通讯中兴通讯中兴通讯中兴通讯",time:"2016-01-25"}]}
         var datas = data.result;

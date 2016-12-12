@@ -27,7 +27,7 @@ $(function(){
             data:{uid:Number(hrefdada.uid),page:Number(page),touid:Number(hrefdada.touid)},
             type:"post",
             success:function(result){
-                var data = eval(result);
+                var data = result;
                 if(data.state == 10000){
                     var datas = data.result;
                     var str = '';
@@ -43,7 +43,7 @@ $(function(){
                         str +='</a></div><div class="xsh_message_text"><div class="xsh_you_trigon"></div><p>'+(datas[i].message)+'</p></div></li>';
                     }
                       str += '<a name="new">';
-                    messagebox.insertBefore(str);
+                    messagebox.prepend(str);
                 }else{
                     window.location.href = "zxbbs://alert/"+data.msg;
                 }
@@ -74,7 +74,7 @@ message_submit.on("tap",function(){
             data:{uid:hrefdada.uid,touid:hrefdada.touid,message:val},
             type:"post",
             success:function(result){
-                var data = eval(result);
+                var data = result;
                 if(data.state == 10000){
                     var str = '';
                     str += '<li class="xsh_me"><div class="xsh_message_logobox"><a href="zxbbs://jump/'+(escape())+'" name ="'+(num)+'"><img src="'+(usericon)+'" alt=""></a></div><div class="xsh_message_text"><div class="xsh_you_trigon"></div><p>'+(val)+'</p></div></li>';

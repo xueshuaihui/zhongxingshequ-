@@ -10,7 +10,7 @@ xshsearch.focus(function(){
                 url:"http://zte.rmbplus.com/app.php?action=circle-circleSearch",
                 data:{keyword:val},
                 success:function(results){
-                    var results = Json.parse(results);
+                    var results = results;
                     if(results.state == 10000){
                         var data = results.result;
                         var str = '<div class="xsh_circle_list_box"><ul>';
