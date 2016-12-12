@@ -66,10 +66,14 @@ class baseRepository {
                     ->select('u.uid, u.username');
     }
 
+    public function countGroupUser($fid) {
+        return $this->table('forum_groupuser')->where('fid', $fid)->whereWhere('level', '>', 0)->find('COUNT(*)');
+    }
+
     public function getGroupUser($fid, $field, $page, $count, $level = 1, $forceall = false) {
         $data = $this->table('forum_groupuser')->where(['fid'=>$fid]);
         if(!$forceall && $level || $level === 0){
-            $data->where('level', $level);
+            $data->whereWhere('level', '=', $level);
         }elseif(!$forceall){
             $data->whereWhere('level', '>', 0);
         }
@@ -77,7 +81,7 @@ class baseRepository {
             $start = ($page - 1) * $count;
             $data->limit($start.','.$count);
         }
-        return $data->select($field);
+        return $data->order('joindateline')->select($field);
     }
 
     public function addBlindTag($id, $tags, $idtype) {

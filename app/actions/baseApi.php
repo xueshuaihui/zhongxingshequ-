@@ -24,13 +24,11 @@ use discuz\request;
 【11】我的帖子：page-my[uid, page]; <br/><br/>
 =================================<br/><br/>
 【1】zxbbs://post/new 发帖<br/>
-【2】zxbbs://post/detail 帖子详情<br/>
-【3】zxbbs://user/info  详细资料<br/>
-【4】zxbbs://circle/transfer 转让圈子<br/>
-【5】zxbbs://circle/invite   邀请好友进圈子<br/>
-【6】zxbbs://circle/defriend 删除圈子成员<br/>
-【7】zxbbs://circle/modifyName 编辑圈子名称<br/>
-【8】zxbbs://circle/modifyDesc  编辑圈子简介",
+【2】zxbbs://circle/transfer 转让圈子<br/>
+【3】zxbbs://circle/invite   邀请好友进圈子<br/>
+【4】zxbbs://circle/defriend 删除圈子成员<br/>
+【5】zxbbs://circle/modifyName 编辑圈子名称<br/>
+【6】zxbbs://circle/modifyDesc  编辑圈子简介",
  *     ),
  * )
  */
