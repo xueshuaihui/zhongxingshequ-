@@ -12,7 +12,7 @@
     <ul class="xsh_search_conbox xsh_circlr_member_box">
         <? foreach($users as $user) { ?>
         <li class="xsh_circle_member_list">
-            <a href="javascript:;">
+            <a href="<?echo encodeUrl('app.php?circle-member&uid='.$uid.'&myuid='.$uid)?>">
                 <div class="xsh_user_logo xsh_circlr_member">
                     <img src="<?php echo $user['avatar'] ;?>" alt="" class="xsh_user_logo xsh_circlr_member">
                 </div>
@@ -42,7 +42,7 @@
 </div>
 <div class="xsh_more_member_box">
     <div class="xsh_more_member">
-        <a href="zxbbs://jump/<?echo encodeUrl('app.php?show=circle-member&fid='.$fid)?>" class="xsh_more_member_btn">查看更多圈子成员</a>
+        <a href="<?echo encodeUrl('app.php?show=circle-member&fid='.$fid)?>" class="xsh_more_member_btn">查看更多圈子成员</a>
     </div>
 </div>
 <div class="xsh_circle_information">

@@ -265,13 +265,18 @@ class pageApi extends baseApi {
         $fid = $this->request->post('fid');
         $uid = $this->request->post('uid');
 
-        //获取用户标签
-        $userTags = $this->tool->getUserTags($uid);
-        foreach ($userTags as $k=>$userTag){
-            $userTags[$k] = $userTag['tagid'];
-        }
-        if(!$userTags){
-            return '用户无标签';
+        //获取用户身份
+        $userTags = null;
+        $user = $this->tool->getUserByUid($uid);
+        if(!$user['adminid']){
+            //获取用户标签
+            $userTags = $this->tool->getUserTags($uid);
+            foreach ($userTags as $k=>$userTag){
+                $userTags[$k] = $userTag['tagid'];
+            }
+            if(!$userTags){
+                return '用户无标签';
+            }
         }
         //根据用户标签获取帖子
         $pagesData = $this->tool->getPages($fid, $uid, null, $userTags, $keyword);
