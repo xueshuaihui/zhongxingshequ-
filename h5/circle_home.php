@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>圈子管理</title>
+    <title>圈子管理(<?echo $usersCount[0]?>)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="../static/h5/css/reset.css">
     <link rel="stylesheet" href="../static/h5/css/style.css">
@@ -20,6 +20,7 @@
             </a>
         </li>
         <?}?>
+        <?if($profile['relation'] == 2){?>
         <li class="xsh_circle_member_list">
             <a href="zxbbs://circle/invite">
                 <div class="xsh_user_logo xsh_circlr_member xsh_circlr_member_btn">
@@ -36,11 +37,12 @@
                 <p class="xsh_circle_member_name"></p>
             </a>
         </li>
+        <?}?>
     </ul>
 </div>
 <div class="xsh_more_member_box">
     <div class="xsh_more_member">
-        <a href="" class="xsh_more_member_btn">查看更多圈子成员</a>
+        <a href="zxbbs://jump/<?echo encodeUrl('app.php?show=circle-member&fid='.$fid)?>" class="xsh_more_member_btn">查看更多圈子成员</a>
     </div>
 </div>
 <div class="xsh_circle_information">
@@ -62,6 +64,7 @@
         </a>
     </ul>
 </div>
+<?if($profile['relation'] == 2 && count($wait) > 0){?>
 <div class="xsh_circle_information">
     <ul class="xsh_circle_information_box">
         <div class="xsh_circle_name">
@@ -90,6 +93,7 @@
         <? } ?>
     </ul>
 </div>
+<?}?>
 <div class="xsh_circle_manage">
     <a href="">
         <div class="xsh_circle_manage_operation">

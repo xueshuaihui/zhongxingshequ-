@@ -239,15 +239,6 @@ class circleApi extends baseApi {
         return $users;
     }
 
-//    public function getManagePower() {
-//        $this->checkParam(['uid', 'fid']);
-//        $uid = $this->request->post('uid');
-//        $fid = $this->request->post('fid');
-//        $level = $this->tool->getUserFromGroup($uid, $fid);
-//        $levelArr = ['wait', 'manager', 'secManager', 'starts', 'common'];
-//        return $levelArr[$level['level']];
-//    }
-
     /**
      * @SWG\Post(
      *   path="circle-getGroupProfile",
@@ -280,12 +271,6 @@ class circleApi extends baseApi {
             $result['relation'] = 0; //没关系
             return $result;
         }
-//        //看看用户是不是网站管理员
-//        $user = $this->tool->getUserProfile(['uid'=>$uid]);
-//        if($user['adminid']){
-//            $result['relation'] = 3; //管理员
-//            return $result;
-//        }
         //看看你的圈子等级
         if($groupUser['level'] == 1 || $groupUser['level'] == 2){
             $result['relation'] = 3; //管理员
@@ -311,20 +296,23 @@ class circleApi extends baseApi {
      *   operationId="getFriendsForInvite",
      *   consumes={"application/json"},
      *   produces={"application/json"},
-     *     @SWG\Parameter(name="fid", in="formData", description="群组ID", required=true, type="string"),
+     *     @SWG\Parameter(name="fid", in="formData", description="群组ID,邀请的时候用", required=false, type="string"),
      *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
     public function getFriendsForInvite() {
-        $this->checkParam(['uid', 'fid']);
+        $this->checkParam('uid');
         $uid = $this->request->post('uid');
         $fid = $this->request->post('fid');
 
         //先获取全部好友列表吧
         $friendsList = $this->tool->getFriendList($uid);
+        if(!$fid){
+            return $friendsList;
+        }
         //获取群组已有成员列表
-        $groupList = $this->tool->getGroupUser($fid, 'uid, username', '', true);
+        $groupList = $this->tool->getGroupUser($fid, 'uid, username', null, null, 1, true);
         //获取已经邀请的列表
         $inviteList = $this->tool->getInviteUser($fid, $uid);
         //去除渣渣

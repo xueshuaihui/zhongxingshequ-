@@ -66,44 +66,22 @@ class baseRepository {
                     ->select('u.uid, u.username');
     }
 
+    public function countGroupUser($fid) {
+        return $this->table('forum_groupuser')->where('fid', $fid)->whereWhere('level', '>', 0)->find('COUNT(*)');
+    }
+
     public function getGroupUser($fid, $field, $page, $count, $level = 1, $forceall = false) {
-        $start = ($page-1)*$count;
-        if($forceall){
-            if($page == -1){
-                return $this->table('forum_groupuser')
-                    ->where(['fid'=>$fid])
-                    ->select($field);
-            }else{
-                return $this->table('forum_groupuser')
-                    ->where(['fid'=>$fid])
-                    ->limit($start.','.$count)
-                    ->select($field);
-            }
-        }elseif($level || $level === 0){
-            if($page == -1){
-                return $this->table('forum_groupuser')
-                    ->where(['fid'=>$fid, 'level'=>$level])
-                    ->select($field);
-            }else{
-                return $this->table('forum_groupuser')
-                    ->where(['fid'=>$fid, 'level'=>$level])
-                    ->limit($start.','.$count)
-                    ->select($field);
-            }
-        }else{
-            if($page == -1){
-                return $this->table('forum_groupuser')
-                    ->where('fid', $fid)
-                    ->whereWhere('level', '>', 0)
-                    ->select($field);
-            }else{
-                return $this->table('forum_groupuser')
-                    ->where('fid', $fid)
-                    ->whereWhere('level', '>', 0)
-                    ->limit($start.','.$count)
-                    ->select($field);
-            }
+        $data = $this->table('forum_groupuser')->where(['fid'=>$fid]);
+        if(!$forceall && $level || $level === 0){
+            $data->whereWhere('level', '=', $level);
+        }elseif(!$forceall){
+            $data->whereWhere('level', '>', 0);
         }
+        if($page){
+            $start = ($page - 1) * $count;
+            $data->limit($start.','.$count);
+        }
+        return $data->order('joindateline')->select($field);
     }
 
     public function addBlindTag($id, $tags, $idtype) {
