@@ -21,17 +21,19 @@
         </li>
         <?}?>
         <li class="xsh_circle_member_list">
-            <a href="javascript:;">
+            <a href="zxbbs://circle/invite">
                 <div class="xsh_user_logo xsh_circlr_member xsh_circlr_member_btn">
                     <img src="../static/h5/images/add.png" alt="" class="xsh_user_logo xsh_circlr_member">
                 </div>
+                <p class="xsh_circle_member_name"></p>
             </a>
         </li>
         <li class="xsh_circle_member_list">
-            <a href="javascript:;">
+            <a href="zxbbs://circle/defriend">
                 <div class="xsh_user_logo xsh_circlr_member xsh_circlr_member_btn">
                     <img src="/static/h5/images/jian.png" alt="" class="xsh_user_logo xsh_circlr_member">
                 </div>
+                <p class="xsh_circle_member_name"></p>
             </a>
         </li>
     </ul>
@@ -43,13 +45,13 @@
 </div>
 <div class="xsh_circle_information">
     <ul class="xsh_circle_information_box">
-        <a href="javascript:;">
+        <a href="zxbbs://circle/modifyName">
             <li class="xsh_circle_name">
                 <div class="xsh_circle_information_title"><span>圈子名称</span></div>
                 <div class="xsh_circle_information_con xsh_more_member_btn"><? echo $profile['title']; ?></div>
             </li>
         </a>
-        <a href="javascript:;">
+        <a href="zxbbs://circle/modifyDesc">
             <li class="xsh_circle_name xsh_circle_synopsis">
                 <div class="xsh_circle_information_title">
                     <span>圈子简介</span>
@@ -66,7 +68,7 @@
             <div class="xsh_circle_information_title"><span>新成员申请</span></div>
         </div>
         <? foreach ($wait as $value) {?>
-        <li class="xsh_circle_name xsh_private_letter_box">
+        <li class="xsh_circle_name xsh_private_letter_box" uid="">
             <div class="xsh_user_logo">
                 <img src="<? echo $value['avatar'] ; ?>" alt="" class="xsh_user_logo">
             </div>
