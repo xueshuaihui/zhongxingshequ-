@@ -12,15 +12,15 @@ use discuz\request;
  *         description="
 页面地址：<br/>
 【1】圈子详情：circle-home [uid,fid] ;  <br/>
-【2】圈子成员：circle-member [fid] ;<br/>
+【2】圈子成员：circle-member [fid, uid] ;<br/>
 【3】会员资料：member-details [uid] ;<br/>
 【4】私信内容：message-pmc [uid, touid, page];<br/>
 【5】私信列表：message-pm [uid, page]; <br/>
 【6】公告列表：message-pt [page]; <br/>
 【7】公告详情：message-ptc [mid]; <br/>
 【8】提醒列表：message-tips [uid,page]; <br/>
-【9】帖子详情：page-pageList[fid, tid]; <br/>
-【10】帖子列表[fid, uid, page];<br/>
+【9】帖子详情：page-pageContent[fid, tid, uid]; <br/>
+【10】帖子列表：page-pageList[fid, tid, page, uid];<br/>
 【11】我的帖子：page-my[uid, page]; <br/><br/>
 =================================<br/><br/>
 【1】zxbbs://post/new 发帖<br/>

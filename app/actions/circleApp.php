@@ -14,8 +14,9 @@ class circleApp extends circleApi {
     }
 
     public function member() {
-        $this->checkParam('fid','get',1);
+        $this->checkParam(['fid','uid'],'get',1);
         $fid = $this->request->get('fid');
+        $uid = $this->request->get('uid');
         $users = $this->getGroupUsers($fid);
         require_once ROOT.'h5'.__.'circle_member.php';
     }
