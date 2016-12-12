@@ -31,3 +31,11 @@ xshsearch.focus(function(){
         }
     })
 })
+/**/
+function getdata(result){
+    if(result.state == 10000){
+
+    }else{
+
+    }
+}
