@@ -31,5 +31,6 @@
         <?}?>
     </ul>
 </div>
+<div class="xsh_asynchronous_searchbox"></div>
 </body>
 </html>
