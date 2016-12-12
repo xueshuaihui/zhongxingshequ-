@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>私信</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" href="/static/h5/css/reset.css">
-    <link rel="stylesheet" href="/static/h5/css/style.css">
+    <link rel="stylesheet" href="../static/h5/css/reset.css">
+    <link rel="stylesheet" href="../static/h5/css/style.css">
 </head>
 <body>
 <?foreach ($list as $value){?>
@@ -23,7 +23,7 @@
 </div>
 <?}?>
 </body>
-<script src="/static/h5/js/zepto.min.js"></script>
-<script src="/static/h5/js/reload.js"></script>
-<script src="/static/h5/js/private_letter.js"></script>
+<script src="../static/h5/js/zepto.min.js"></script>
+<script src="../static/h5/js/reload.js"></script>
+<script src="../static/h5/js/private_letter.js"></script>
 </html>

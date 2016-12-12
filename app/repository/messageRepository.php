@@ -56,6 +56,7 @@ class messageRepository extends baseRepository {
                 $result[$k]['touid'] = $record['authorid'];
                 $result[$k]['message'] = $record['message'];
                 $result[$k]['author'] = $record['author'];
+                $result[$k]['dateline'] = $record['dateline'];
                 $result[$k]['position'] = ($record['authorid'] == $uid) ? 'r' : 'l';
             }
         }

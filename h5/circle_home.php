@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>圈子管理</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" href="static/h5/css/reset.css">
-    <link rel="stylesheet" href="static/h5/css/style.css">
+    <link rel="stylesheet" href="../static/h5/css/reset.css">
+    <link rel="stylesheet" href="../static/h5/css/style.css">
 </head>
 <body>
 <div class="xsh_management_member">
@@ -23,7 +23,7 @@
         <li class="xsh_circle_member_list">
             <a href="javascript:;">
                 <div class="xsh_user_logo xsh_circlr_member xsh_circlr_member_btn">
-                    <img src="/static/h5/images/add.png" alt="" class="xsh_user_logo xsh_circlr_member">
+                    <img src="../static/h5/images/add.png" alt="" class="xsh_user_logo xsh_circlr_member">
                 </div>
             </a>
         </li>

@@ -10,6 +10,14 @@ class messageApp extends messageApi   {
         require_once ROOT.'h5'.__.'message_pm_list.php';
     }
 
+    public function pmc() {
+        $this->checkParam(['uid', 'touid', 'page'], 'get', 1);
+        $uid = $this->request->get('uid');
+        $touid = $this->request->get('touid');
+        $page = $this->request->get('page');
+        $lists = $this->getPm($uid, $page, $touid);
+        require_once ROOT.'h5'.__.'message_pm_details.php';
+    }
     public function pt() {
         $this->checkParam('page', 'get', 1);
         $page = $this->request->get('page');
