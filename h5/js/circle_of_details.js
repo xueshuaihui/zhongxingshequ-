@@ -34,6 +34,7 @@ xshsearch.focus(function(){
 /**/
 var circle_list_box = $(".xsh_circle_list_box >ul");
 function getdata(result){
+    var result = JSON.parse(result);
     if(result.state == 10000){
         var data = result.result;
         var str = '';
@@ -47,6 +48,7 @@ function getdata(result){
     }
 }
 function reload(result){
+    var result = JSON.parse(result);
     if(result.state == 10000){
         var data = result.result;
         var str = '';

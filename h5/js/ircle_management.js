@@ -45,3 +45,13 @@ circleinformationbox.on("tap",".xsh_circle_refuse",function(){
         }
     })
 })
+/*退出圈子*/
+function signout(){
+    window.location.href = "zxbbs://alert/确定退出该圈子？/取消/确定";
+}
+function istrue(){
+    $.ajax({
+        url:'http://zte.rmbplus.com/app.php?action=circle-quitCircle',
+        data:{}
+    })
+}
