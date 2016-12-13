@@ -70,6 +70,12 @@ class circleApi extends baseApi {
         $this->checkParam(['uid', 'fid']);
         $uid = $this->request->post('uid');
         $fid = $this->request->post('fid');
+        //查看是否已经加入后申请
+        $has = $this->tool->inGroup($uid, $fid);
+        if($has){
+            return 10022;
+        }
+
         $user = $this->tool->getUserByUid($uid);
         if($user['adminid']){
             //人家可是管理员，直接加入，没话说
@@ -85,6 +91,9 @@ class circleApi extends baseApi {
             }
             $note = '<a href="home.php?mod=space&uid='.$uid.'">'.$user['username'].'</a> 加入您的 <a href="forum.php?mod=group&fid='.$fid.'" target="_blank">'.$circleBase['name'].'</a> 群组需要审核，请到群组<a href="forum.php?mod=group&action=manage&op=checkuser&fid='.$fid.'" target="_blank">管理后台</a> 进行审核';
             $this->tool->sendMessage($bzIds, 'group', $note);
+        }
+        if($user['adminid']){
+            return 10023;
         }
         return true;
     }

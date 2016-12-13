@@ -70,7 +70,7 @@ class baseRepository {
         return $this->table('forum_groupuser')->where('fid', $fid)->whereWhere('level', '>', 0)->find('COUNT(*)');
     }
 
-    public function getGroupUser($fid, $field, $page, $count, $level = 1, $forceall = false) {
+    public function getGroupUser($fid, $field, $page, $count = 10, $level = 1, $forceall = false) {
         $data = $this->table('forum_groupuser')->where(['fid'=>$fid]);
         if(!$forceall && $level || $level === 0){
             $data->whereWhere('level', '=', $level);
@@ -82,6 +82,10 @@ class baseRepository {
             $data->limit($start.','.$count);
         }
         return $data->order('joindateline')->select($field);
+    }
+
+    public function inGroup($uid, $fid) {
+        return (bool)$this->table('forum_groupuser')->where(['uid'=>$uid, 'fid'=>$fid])->find();
     }
 
     public function addBlindTag($id, $tags, $idtype) {
@@ -132,6 +136,7 @@ class baseRepository {
     }
 
     public function uploadImages($images, $path) {
+
         $result = [];
         foreach ($images as $image){
             $res = $this->uploadImage($image, $path);
