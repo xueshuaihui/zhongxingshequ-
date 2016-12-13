@@ -47,23 +47,15 @@ class pageRepository extends baseRepository {
         return $this->table('common_tagitem')->where(['itemid'=>$fid, 'idtype'=>'groupid'])->select();
     }
 
-    public function getTiezi($tid, $fid, $pid = null, $type = 0, $start = 0, $count = 10) {
-        $where = ['tid'=>$tid, 'fid'=>$fid];
-        if(!$pid){
-            $tiezis = $this->table('forum_post')
-                ->where($where)
-                ->order('position asc')
-                ->limit($start.' ,'.$count)
-                ->select();
-        }else{
-            $type = $type?'>=':'>';
-            $tiezis = $this->table('forum_post')
-                ->where($where)
-                ->whereWhere('pid', $type, $pid)
-                ->order('position asc')
-                ->limit($start.' ,'.$count)
-                ->select('pid, fid, tid, author, authorid, subject, message, anonymous');
+    public function getTiezi($tid, $fid, $pid = null, $page = null, $count = 10) {
+        $data = $this->table('forum_post')->where(['tid'=>$tid, 'fid'=>$fid])->order('position asc');
+        if($page){
+            $start = ($page - 1)*$count;
+            $data->limit($start.','.$count);
+        }elseif($pid){
+            $data->whereWhere('pid', '>=', $pid)->limit('0,'.$count);
         }
+        $tiezis = $data->select('pid, fid, tid, author, authorid, subject, message, anonymous');
         foreach ($tiezis as $k=>$tiezi){
             $tiezis[$k]['usericon'] = $this->getAvatar($tiezi['authorid']);
         }

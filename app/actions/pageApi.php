@@ -173,18 +173,18 @@ class pageApi extends baseApi {
      *   produces={"application/json"},
      *     @SWG\Parameter(name="tid", in="formData", description="主题ID", required=true, type="string"),
      *     @SWG\Parameter(name="fid", in="formData", description="论坛ID", required=true, type="string"),
-     *     @SWG\Parameter(name="type", in="formData", description="获取类型0:上拉；1：定位，非下拉刷新或初始进入时，需要", required=false, type="string"),
+     *     @SWG\Parameter(name="page", in="formData", description="页码，与pid不同时", required=false, type="string"),
      *     @SWG\Parameter(name="pid", in="formData", description="帖子ID，非下拉刷新或初始进入时，需要", required=false, type="string"),
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
     public function tieziList($sTid = null, $sFid = null) {
-        $this->checkParam(['tid','fid', 'modnewposts']);
+        $this->checkParam(['tid','fid']);
         $tid = $sTid?:$this->request->post('tid');
         $fid = $sFid?:$this->request->post('fid');
-        $type = $this->request->post('type');
+        $page = $this->request->post('page');
         $pid = $this->request->post('pid');
-        $pages = $this->tool->getTiezi($tid, $fid, $pid, $type);
+        $pages = $this->tool->getTiezi($tid, $fid, $pid, $page);
         return $pages;
     }
 
