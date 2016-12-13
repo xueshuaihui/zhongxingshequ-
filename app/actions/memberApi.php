@@ -12,15 +12,14 @@ class memberApi extends baseApi {
     /**
      * @SWG\Post(
      *   path="member-changeAvatar",
-     *   tags={"用户相关"},
+     *   tags={"用户信息"},
      *   summary="绑定手机号",
      *   description="绑定手机号",
      *   operationId="changeAvatar",
      *   consumes={"application/json"},
      *   produces={"application/json"},
      *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
-     *     @SWG\Parameter(name="phone", in="formData", description="手机号", required=true, type="string"),
-     *     @SWG\Parameter(name="code", in="formData", description="验证码", required=true, type="string"),
+     *     @SWG\Parameter(name="avatar", in="formData", description="图片jpg", required=true, type="file"),
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
