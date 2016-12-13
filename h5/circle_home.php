@@ -53,7 +53,7 @@
                 <div class="xsh_circle_information_con xsh_more_member_btn xsh_revise_text"><? echo $profile['title']; ?></div>
             </li>
         </a>
-        <a hrefs = "a<?if($profile['relation'] > 1) echo 'zxbbs://circle/modifyDesc/'?>" >
+        <a hrefs = "<?if($profile['relation'] > 1) echo 'zxbbs://circle/modifyDesc/'?>" >
             <li class="xsh_circle_name xsh_circle_managebor xsh_circle_synopsis xsh_revise">
                 <div class="xsh_circle_information_title">
                     <span>圈子简介</span>
