@@ -102,7 +102,7 @@
             </div>
         </a>
     <?}elseif($profile['relation'] != 0){ ?>
-        <a href="javascript:;">
+        <a href="javascript:;" class="signout">
             <div class="xsh_circle_manage_operation">
                 <span>退出圈子</span>
             </div>

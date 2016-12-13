@@ -1,3 +1,13 @@
+/*获取圈子fid*/
+var windowhrsf = window.location.href.split("?")[1].split("&");
+var hrefdada = {};
+for(var i in windowhrsf){
+    var arr = windowhrsf[i].split("=");
+    hrefdada[arr[0]] = arr[1];
+}
+var fid = hrefdada.fid;
+var uid = hrefdada.uid;
+/**/
 var xshsearch = $("#xsh_search");
 var asynchronousearchbox = $(".xsh_asynchronous_searchbox");
 xshsearch.focus(function(){
@@ -8,7 +18,8 @@ xshsearch.focus(function(){
             asynchronousearchbox.css({display:"block"});
             $.ajax({
                 url:"http://zte.rmbplus.com/app.php?action=page-threadSearch",
-                data:{keyword:val},
+                data:{keyword:val,fid:fid,uid:uid},
+                type:"post",
                 success:function(results){
                     var results = results;
                     if(results.state == 10000){
