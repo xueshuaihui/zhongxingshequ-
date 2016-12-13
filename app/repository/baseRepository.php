@@ -84,10 +84,6 @@ class baseRepository {
         return $data->order('joindateline')->select($field);
     }
 
-    public function inGroup($uid, $fid) {
-        return (bool)$this->table('forum_groupuser')->where(['uid'=>$uid, 'fid'=>$fid])->find();
-    }
-
     public function addBlindTag($id, $tags, $idtype) {
         foreach ($tags as $tag){
             $res = $this->table('common_tagitem')->store([
