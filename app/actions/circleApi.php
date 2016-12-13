@@ -93,9 +93,10 @@ class circleApi extends baseApi {
             $this->tool->sendMessage($bzIds, 'group', $note);
         }
         if($user['adminid']){
-            return 10023;
+            return '加入成功！';
+        }else{
+            return '请求发送成功，请等待管理员审核';
         }
-        return true;
     }
 
     /**
@@ -364,5 +365,36 @@ class circleApi extends baseApi {
             $this->tool->sendMessage($inviteIds, 'group', $note);
         }
         return true;
+    }
+
+    /**
+     * @SWG\Post(
+     *   path="circle-inviteFriend",
+     *   tags={"圈子相关"},
+     *   summary="修改圈子名称和简介",
+     *   description="修改圈子名称和简介",
+     *   operationId="inviteFriend",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="fid", in="formData", description="群组ID", required=true, type="string"),
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Parameter(name="key", in="formData", description="修改的内容字段name,description", required=true, type="string"),
+     *     @SWG\Parameter(name="value", in="formData", description="内容", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function changeCircleName() {
+        $this->checkParam(['fid', 'uid', 'key', 'value']);
+        $fid = $this->request->post('fid');
+        $uid = $this->request->post('uid');
+        $key = $this->request->post('key');
+        $value = $this->request->post('value');
+        if($key == 'description'){
+            return $this->tool->updateGroupProfile($fid, ['description'=>$value]);
+        }
+        if($key == 'name'){
+            return $this->tool->updateGroup($fid, ['name'=>$value]);
+        }
+        return 10007;
     }
 }
