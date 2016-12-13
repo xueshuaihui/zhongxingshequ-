@@ -185,6 +185,19 @@ class pageApi extends baseApi {
         $page = $this->request->post('page');
         $pid = $this->request->post('pid');
         $pages = $this->tool->getTiezi($tid, $fid, $pid, $page);
+        foreach ($pages as $k=>$page){
+            $pages[$k]['message'] = preg_replace('/\[attach\].*?\[\/attach\]/', '', $pages[$k]['message']);
+            preg_match_all('/\[attach\].*?\[\/attach\]/', $page['message'], $res);
+            $attachId = '';
+            foreach ($res[0] as $re){
+                $attachId[]= trim(preg_replace('/\[.*?\]/', ' ', $re));
+            }
+            if($attachId){
+                $pages[$k]['attach'] = $this->tool->getAttach($attachId);
+            }else{
+                $pages[$k]['attach'] = [];
+            }
+        }
         return $pages;
     }
 

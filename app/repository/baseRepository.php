@@ -42,6 +42,19 @@ class baseRepository {
         return avatar($uid, $size, true);
     }
 
+    public function getAttach($attachId) {
+        $index = $this->table('forum_attachment')->in('aid', $attachId)->select('aid, tableid');
+        foreach ($index as $k=>$value){
+            $a = $this->table('forum_attachment_'.$value['tableid'])->where('aid', $value['aid'])->find('filename, isimage, attachment, remote');
+            if(!$a['remote']){
+                $a['attachment'] = BASEURL.__.'data'.__.'attachment'.__.'forum'.__.$a['attachment'];
+            }
+            unset($a['remote']);
+            $index[$k] = $a;
+        }
+        return $index;
+    }
+
     public function getUserCount($uid) {
         return $this->table('common_member_count')->where('uid', $uid)->find();
     }

@@ -47,13 +47,13 @@
 </div>
 <div class="xsh_circle_information">
     <ul class="xsh_circle_information_box">
-        <a href="zxbbs://circle/modifyName/<? echo $profile['title']; ?>" >
+        <a hrefs="<?if($profile['relation'] > 2) echo 'zxbbs://circle/modifyName/'?>"<? echo $profile['title']; ?>" >
             <li class="xsh_circle_name xsh_circle_managebor">
                 <div class="xsh_circle_information_title"><span>圈子名称</span></div>
                 <div class="xsh_circle_information_con xsh_more_member_btn"><? echo $profile['title']; ?></div>
             </li>
         </a>
-        <a href="zxbbs://circle/modifyDesc/<? echo $profile['description']; ?>" >
+        <a hrefs="<?if($profile['relation'] > 2) echo 'zxbbs://circle/modifyDesc/'?>"<? echo $profile['description']; ?>" >
             <li class="xsh_circle_name xsh_circle_managebor xsh_circle_synopsis">
                 <div class="xsh_circle_information_title">
                     <span>圈子简介</span>
