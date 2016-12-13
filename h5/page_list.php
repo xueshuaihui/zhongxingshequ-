@@ -14,7 +14,7 @@
         <div class="xsh_post"><a href="发帖UEL">我要发帖</a></div>
     </div>
 </div>
-<div>
+<div class="xsh_circle_list_box">
     <ul>
         <?foreach ($list as $item){?>
         <li class="private_letter">
