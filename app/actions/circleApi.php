@@ -369,11 +369,11 @@ class circleApi extends baseApi {
 
     /**
      * @SWG\Post(
-     *   path="circle-inviteFriend",
+     *   path="circle-changeCircleName",
      *   tags={"圈子相关"},
      *   summary="修改圈子名称和简介",
      *   description="修改圈子名称和简介",
-     *   operationId="inviteFriend",
+     *   operationId="changeCircleName",
      *   consumes={"application/json"},
      *   produces={"application/json"},
      *     @SWG\Parameter(name="fid", in="formData", description="群组ID", required=true, type="string"),
@@ -391,7 +391,7 @@ class circleApi extends baseApi {
         $value = $this->request->post('value');
         $user = $this->tool->getUserFromGroup($uid, $fid);
         if(!$user || $user['level'] != 1 || $user['level'] != 2){
-            $userProfile = $this->tool->getUserByUid('uid', $uid);
+            $userProfile = $this->tool->getUserByUid($uid);
             if(!$userProfile['adminid'] && !$user){
                 return 10015;
             }
