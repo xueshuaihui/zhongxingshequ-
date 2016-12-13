@@ -65,7 +65,7 @@
 /*圈子管理*/
 .xsh_management_member{width: 100%;height: 205px;background: #ffffff;text-align: center;border-bottom: 1px solid #eeeeee;}
 .xsh_circlr_member{float: none;margin: auto;}
-.xsh_circlr_member_box{margin: 0 auto;}
+.xsh_circlr_member_box{margin: 0 auto; background: #ffffff;}
 .xsh_circle_member_list{float: left;width: 25%;margin-top: 16px;}
 .xsh_circle_member_name{width: 100%;overflow: hidden;margin-top: 5px;height: 13px;}
 .xsh_circlr_member_btn{border: 1px solid #9b9b9b;position: relative;}
