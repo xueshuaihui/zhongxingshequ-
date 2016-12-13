@@ -50,14 +50,14 @@
         <a hrefs="<?if($profile['relation'] > 2) echo 'zxbbs://circle/modifyName/'?>"<? echo $profile['title']; ?>" >
             <li class="xsh_circle_name xsh_circle_managebor">
                 <div class="xsh_circle_information_title"><span>圈子名称</span></div>
-                <div class="xsh_circle_information_con xsh_more_member_btn"><? echo $profile['title']; ?></div>
+                <div class="xsh_circle_information_con xsh_more_member_btn xsh_revise_text"><? echo $profile['title']; ?></div>
             </li>
         </a>
         <a hrefs="<?if($profile['relation'] > 2) echo 'zxbbs://circle/modifyDesc/'?>"<? echo $profile['description']; ?>" >
             <li class="xsh_circle_name xsh_circle_managebor xsh_circle_synopsis">
                 <div class="xsh_circle_information_title">
                     <span>圈子简介</span>
-                    <p class="xsh_circle_syn"><? echo $profile['description']; ?></p>
+                    <p class="xsh_circle_syn xsh_revise_text"><? echo $profile['description']; ?></p>
                 </div>
                 <div class="xsh_circle_information_con xsh_more_member_btn"> </div>
             </li>
@@ -116,4 +116,7 @@
     <?} ?>
 </div>
 </body>
+<script src="/static/h5/js/zepto.min.js"></script>
+<script src="/h5/js/touch.js"></script>
+<script src="/h5/js/circle_member.js"></script>
 </html>
