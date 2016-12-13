@@ -13,10 +13,9 @@ xshsearch.focus(function(){
                     var results = results;
                     if(results.state == 10000){
                         var data = results.result;
-                        var str = '<div class="xsh_circle_list_box"><ul>';
+                        var str = '<div class="xsh_circle_list_box" style="background: #ffffff"><ul>';
                         for(var i in data){
                             str = strfun(str,data,i);
-                            //str +='<li class="private_letter"><div class="xsh_private_letter_box xsh_circle_list"><a href=""><img src="http://pic.58pic.com/58pic/15/68/85/81c58PICK34_1024.jpg" alt="" class="xsh_user_logo xsh_user_logo_radius"></a><p class="xsh_circle_label">[典型案例] <img src="/h5/images/hot.png" alt="" class="xsh_hotimg"></p><h3 class=" xsh_text_one">典型案例典型案例典型案例典型案例典型案例典型案例典型案例</h3><span class="xsh_circle_name">二级开发和</span><span class="xsh_notice_time xsh_circle_time">2016-08-15 09:25:62</span></div></li>'
                         }
                         str +='</ul></div>';
                         asynchronousearchbox.html(str);
@@ -40,7 +39,6 @@ function getdata(result){
         var str = '';
         for(var i in data){
             str = strfun(str,data,i);
-            //str +='<li class="private_letter"><div class="xsh_private_letter_box xsh_circle_list"><a href=""><img src="http://pic.58pic.com/58pic/15/68/85/81c58PICK34_1024.jpg" alt="" class="xsh_user_logo xsh_user_logo_radius"></a><p class="xsh_circle_label">[典型案例] <img src="/h5/images/hot.png" alt="" class="xsh_hotimg"></p><h3 class=" xsh_text_one">典型案例典型案例典型案例典型案例典型案例典型案例典型案例</h3><span class="xsh_circle_name">二级开发和</span><span class="xsh_notice_time xsh_circle_time">2016-08-15 09:25:62</span></div></li>'
         }
         circle_list_box.append(str);
     }else{
@@ -54,7 +52,6 @@ function reload(result){
         var str = '';
         for(var i in data){
             str = strfun(str,data,i);
-            //str +='<li class="private_letter"><div class="xsh_private_letter_box xsh_circle_list"><a href=""><img src="http://pic.58pic.com/58pic/15/68/85/81c58PICK34_1024.jpg" alt="" class="xsh_user_logo xsh_user_logo_radius"></a><p class="xsh_circle_label">['+(data[i].name)+'] <img src="/h5/images/hot.png" alt="" class="xsh_hotimg"></p><h3 class=" xsh_text_one">'+(data[i].subject)+'</h3><span class="xsh_circle_name">'+(data[i].author)+'</span><span class="xsh_notice_time xsh_circle_time">'+(gettime(data[i].lastpost))+'</span></div></li>'
         }
         circle_list_box.html(str);
     }else{
@@ -67,5 +64,30 @@ function gettime(time){
     return new Date(parseInt(time) * 1000).toLocaleString().replace(/\//g,"-").slice(0,11)+new Date(parseInt(time) * 1000).toTimeString().slice(0,8);
 }
 function strfun(str,data,i){
-    return str +='<li class="private_letter"><div class="xsh_private_letter_box xsh_circle_list"><a href=""><img src="http://pic.58pic.com/58pic/15/68/85/81c58PICK34_1024.jpg" alt="" class="xsh_user_logo xsh_user_logo_radius"></a><p class="xsh_circle_label">['+(data[i].name)+'] <img src="/h5/images/hot.png" alt="" class="xsh_hotimg"></p><h3 class=" xsh_text_one">'+(data[i].subject)+'</h3><span class="xsh_circle_name">'+(data[i].author)+'</span><span class="xsh_notice_time xsh_circle_time">'+(gettime(data[i].lastpost))+'</span></div></li>'
+    str +='<li class="private_letter" tid="'+(data[i].tid)+'"><div class="xsh_private_letter_box xsh_circle_list"><a href="" authorid="'+(data[i].authorid)+'"><img src="'+(data[i].icon)+'" alt="" class="xsh_user_logo xsh_user_logo_radius"></a><p class="xsh_circle_label">['+(data[i].name)+']';
+    switch (data[i].stamp){
+        case "0":str +='<img src="/static/h5/images/jh@2x.png" alt="" class="xsh_hotimg">';break;
+        case "1":str +='<img src="/static/h5/images/rt@2x.png" alt="" class="xsh_hotimg">';break;
+        case "2":str +='<img src="/static/h5/images/mt@2x.png" alt="" class="xsh_hotimg">';break;
+        case "3":str +='<img src="/static/h5/images/yx@2x.png" alt="" class="xsh_hotimg">';break;
+        case "4":str +='<img src="/static/h5/images/zd@2x.png" alt="" class="xsh_hotimg">';break;
+        case "5":str +='<img src="/static/h5/images/tj@2x.png" alt="" class="xsh_hotimg">';break;
+        case "6":str +='<img src="/static/h5/images/yc@2x.png" alt="" class="xsh_hotimg">';break;
+        case "7":str +='<img src="/static/h5/images/bztj@2x.png" alt="" class="xsh_hotimg">';break;
+        case "8":str +='<img src="/static/h5/images/bl@2x.png" alt="" class="xsh_hotimg">';break;
+        case "19":str +='<img src="/static/h5/images/bj@2x.png" alt="" class="xsh_hotimg">';break;
+        default:str +='';break;
+    }
+    str +='</p><p class=" xsh_text_one" style="background: '+(data[i].bgcolor)+';color: '+(data[i].color)+';">';
+    if(data[i].B){
+        str += '<b>'+(data[i].subject)+'</b>';
+    }else if(data[i].I){
+        str += '<i>'+(data[i].subject)+'</i>';
+    }else if(data[i].U){
+        str += '<u>'+(data[i].subject)+'</u>';
+    }else{
+        str += (data[i].subject);
+    }
+    str +='</p><span class="xsh_circle_name">'+(data[i].author)+'</span><span class="xsh_notice_time xsh_circle_time">'+(gettime(data[i].lastpost))+'</span></div></li>';
+    return str;
 }
