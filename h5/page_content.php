@@ -38,15 +38,7 @@
             <div class="xsh_floor_textbox">
                 <p class="xsh_floor_text"><?echo $value['message']?></p>
                 <ul>
-<!--                    <li class="xsh_floor_text_img"><a href=""><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></a></li>-->
-<!--                    <li class="xsh_floor_text_img"><a href=""><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></a></li>-->
-<!--                    <li class="xsh_floor_text_img"><a href=""><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></a></li>-->
-<!--                    <li class="xsh_floor_text_img"><a href=""><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></a></li>-->
-<!--                    <li class="xsh_floor_text_img"><a href=""><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></a></li>-->
-<!--                    <li class="xsh_floor_text_img"><a href=""><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></a></li>-->
-<!--                    <li class="xsh_floor_text_img"><a href=""><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></a></li>-->
-<!--                    <li class="xsh_floor_text_img"><a href=""><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></a></li>-->
-<!--                    <li class="xsh_floor_text_img"><a href=""><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></a></li>-->
+                    <li class="xsh_floor_text_img"><a href=""><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></a></li>
                 </ul>
                 <span class="xsh_floor_text_time"><?echo date('Y-m-d H:i:s', $value['dateline'])?></span>
             </div>
@@ -58,7 +50,7 @@
 <div class="xsh_message_fixed">
     <div class="xsh_message_formbox">
         <form action="">
-            <input type="text" class="xsh_message_inputext">
+            <input type="text" class="xsh_message_inputext" disabled>
             <a href="javascript:;" class="xsh_message_submit">发送</a>
         </form>
     </div>
