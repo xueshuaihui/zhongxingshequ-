@@ -12,7 +12,7 @@
     <ul class="xsh_search_conbox xsh_circlr_member_box">
         <? foreach($users as $user) { ?>
         <li class="xsh_circle_member_list">
-            <a href="<?echo encodeUrl('app.php?circle-member&uid='.$uid.'&myuid='.$uid)?>">
+            <a href="<?echo encodeUrl('app.php?circle-member&uid='.$user['uid'].'&myuid='.$uid)?>">
                 <div class="xsh_user_logo xsh_circlr_member">
                     <img src="<?php echo $user['avatar'] ;?>" alt="" class="xsh_user_logo xsh_circlr_member">
                 </div>
@@ -95,17 +95,25 @@
 </div>
 <?}?>
 <div class="xsh_circle_manage">
-    <a href="">
-        <div class="xsh_circle_manage_operation">
-            <? if($profile['relation'] == 4){
-                echo '<span>转让圈子</span>';
-            }elseif($profile['relation'] != 0){
-                echo '<span>退出圈子</span>';
-            }else{
-                echo '<span>加入圈子</span>';
-            } ?>
-        </div>
-    </a>
+    <? if($profile['relation'] == 4){?>
+        <a href="zxbbs://circle/transfer">
+            <div class="xsh_circle_manage_operation">
+                 <span>转让圈子</span>
+            </div>
+        </a>
+    <?}elseif($profile['relation'] != 0){ ?>
+        <a href="">
+            <div class="xsh_circle_manage_operation">
+                <span>退出圈子</span>
+            </div>
+        </a>
+    <?}else{?>
+        <a href="">
+            <div class="xsh_circle_manage_operation">
+                <span>加入圈子</span>
+            </div>
+        </a>
+    <?} ?>
 </div>
 </body>
 </html>

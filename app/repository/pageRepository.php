@@ -25,7 +25,7 @@ class pageRepository extends baseRepository {
             $start = ($page - 1) * $count;
             $data->limit($start.' ,'.$count);
         }
-         return $data->select('thread.tid, type.name, thread.author, thread.authorid, thread.subject, thread.lastpost, thread.digest, thread.highlight, thread.bgcolor');
+         return $data->select('thread.tid, type.name, thread.author, thread.authorid, thread.subject, thread.lastpost, thread.digest, thread.highlight, thread.bgcolor, thread.stamp');
     }
 
     public function getThread($tid) {
