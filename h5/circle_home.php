@@ -48,13 +48,13 @@
 <div class="xsh_circle_information">
     <ul class="xsh_circle_information_box">
         <a hrefs = "<?if($profile['relation'] > 1) echo 'zxbbs://circle/modifyName/'?>">
-            <li class="xsh_circle_name xsh_circle_managebor">
+            <li class="xsh_circle_name xsh_circle_managebor xsh_revise">
                 <div class="xsh_circle_information_title"><span>圈子名称</span></div>
                 <div class="xsh_circle_information_con xsh_more_member_btn xsh_revise_text"><? echo $profile['title']; ?></div>
             </li>
         </a>
         <a hrefs = "a<?if($profile['relation'] > 1) echo 'zxbbs://circle/modifyDesc/'?>" >
-            <li class="xsh_circle_name xsh_circle_managebor xsh_circle_synopsis">
+            <li class="xsh_circle_name xsh_circle_managebor xsh_circle_synopsis xsh_revise">
                 <div class="xsh_circle_information_title">
                     <span>圈子简介</span>
                     <p class="xsh_circle_syn xsh_revise_text"><? echo $profile['description']; ?></p>
