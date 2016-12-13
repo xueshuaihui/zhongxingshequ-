@@ -70,6 +70,12 @@ class circleApi extends baseApi {
         $this->checkParam(['uid', 'fid']);
         $uid = $this->request->post('uid');
         $fid = $this->request->post('fid');
+        //查看是否已经加入后申请
+        $has = $this->tool->inGroup($uid, $fid);
+        if($has){
+            return 10022;
+        }
+
         $user = $this->tool->getUserByUid($uid);
         if($user['adminid']){
             //人家可是管理员，直接加入，没话说
