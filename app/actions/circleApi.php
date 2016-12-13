@@ -71,7 +71,7 @@ class circleApi extends baseApi {
         $uid = $this->request->post('uid');
         $fid = $this->request->post('fid');
         //查看是否已经加入后申请
-        $has = $this->tool->inGroup($uid, $fid);
+        $has = $this->tool->getUserFromGroup($uid, $fid);
         if($has){
             return 10022;
         }
@@ -389,6 +389,13 @@ class circleApi extends baseApi {
         $uid = $this->request->post('uid');
         $key = $this->request->post('key');
         $value = $this->request->post('value');
+        $user = $this->tool->getUserFromGroup($uid, $fid);
+        if(!$user || $user['level'] != 1 || $user['level'] != 2){
+            $userProfile = $this->tool->getUserByUid('uid', $uid);
+            if(!$userProfile['adminid'] && !$user){
+                return 10015;
+            }
+        }
         if($key == 'description'){
             return $this->tool->updateGroupProfile($fid, ['description'=>$value]);
         }

@@ -99,6 +99,10 @@ class circleRepository extends baseRepository {
         return $this->table('forum_forumfield')->where('fid', $fid)->update($data);
     }
 
+    public function updateGroup($fid, $data = []) {
+        return $this->table('forum_forum')->where('fid', $fid)->update($data);
+    }
+
     public function ignoreApply($uid, $fid) {
         $res = $this->table('forum_groupuser')->where(['uid'=>$uid, 'fid'=>$fid])->delete();
         if($res){
