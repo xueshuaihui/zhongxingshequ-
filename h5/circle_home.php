@@ -48,13 +48,13 @@
 <div class="xsh_circle_information">
     <ul class="xsh_circle_information_box">
         <a href="zxbbs://circle/modifyName">
-            <li class="xsh_circle_name">
+            <li class="xsh_circle_name xsh_circle_managebor">
                 <div class="xsh_circle_information_title"><span>圈子名称</span></div>
                 <div class="xsh_circle_information_con xsh_more_member_btn"><? echo $profile['title']; ?></div>
             </li>
         </a>
         <a href="zxbbs://circle/modifyDesc">
-            <li class="xsh_circle_name xsh_circle_synopsis">
+            <li class="xsh_circle_name xsh_circle_managebor xsh_circle_synopsis">
                 <div class="xsh_circle_information_title">
                     <span>圈子简介</span>
                     <p class="xsh_circle_syn"><? echo $profile['description']; ?></p>
@@ -67,11 +67,11 @@
 <?if($profile['relation'] == 2 && count($wait) > 0){?>
 <div class="xsh_circle_information">
     <ul class="xsh_circle_information_box">
-        <div class="xsh_circle_name">
+        <div class="xsh_circle_name xsh_circle_managebor">
             <div class="xsh_circle_information_title"><span>新成员申请</span></div>
         </div>
         <? foreach ($wait as $value) {?>
-        <li class="xsh_circle_name xsh_private_letter_box" uid="">
+        <li class="xsh_circle_name xsh_circle_managebor xsh_private_letter_box" uid="">
             <div class="xsh_user_logo">
                 <img src="<? echo $value['avatar'] ; ?>" alt="" class="xsh_user_logo">
             </div>
@@ -102,7 +102,7 @@
             </div>
         </a>
     <?}elseif($profile['relation'] != 0){ ?>
-        <a href="">
+        <a href="javascript:;" class="signout">
             <div class="xsh_circle_manage_operation">
                 <span>退出圈子</span>
             </div>

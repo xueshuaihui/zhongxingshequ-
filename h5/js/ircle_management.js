@@ -6,6 +6,7 @@ for(var i in windowhrsf){
     hrefdada[arr[0]] = arr[1];
 }
 var fid = hrefdada.fid;
+var uid = hrefdada.uid;
 /**/
 var circleinformationbox = $(".xsh_circle_information_box .xsh_private_letter_box");
 circleinformationbox.on("tap",".xsh_circle_accept",function(){
@@ -45,3 +46,21 @@ circleinformationbox.on("tap",".xsh_circle_refuse",function(){
         }
     })
 })
+/*退出圈子*/
+$(".signout").on("tap",function(){
+    window.location.href = "zxbbs://alert/确定退出该圈子？/取消/确定";
+})
+function istrue(){
+    $.ajax({
+        url:'http://zte.rmbplus.com/app.php?action=circle-quitCircle',
+        data:{fid:fid,uid:uid},
+        type:"post",
+        success:function(result){
+            if(result.state == 10000){
+                window.location.href = "zxbbs://circle/circleList";
+            }else{
+                window.location.href = "zxbbs://alert/"+result.msg;
+            }
+        }
+    })
+}

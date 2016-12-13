@@ -1,3 +1,13 @@
+/*获取圈子fid*/
+var windowhrsf = window.location.href.split("?")[1].split("&");
+var hrefdada = {};
+for(var i in windowhrsf){
+    var arr = windowhrsf[i].split("=");
+    hrefdada[arr[0]] = arr[1];
+}
+var fid = hrefdada.fid;
+var uid = hrefdada.uid;
+/**/
 var xshsearch = $("#xsh_search");
 var asynchronousearchbox = $(".xsh_asynchronous_searchbox");
 xshsearch.focus(function(){
@@ -7,8 +17,9 @@ xshsearch.focus(function(){
             /*获取数据*/
             asynchronousearchbox.css({display:"block"});
             $.ajax({
-                url:"http://zte.rmbplus.com/app.php?action=circle-circleSearch",
-                data:{keyword:val},
+                url:"http://zte.rmbplus.com/app.php?action=page-threadSearch",
+                data:{keyword:val,fid:fid,uid:uid},
+                type:"post",
                 success:function(results){
                     var results = results;
                     if(results.state == 10000){
@@ -34,6 +45,7 @@ xshsearch.focus(function(){
 /**/
 var circle_list_box = $(".xsh_circle_list_box >ul");
 function getdata(result){
+    var result = JSON.parse(result);
     if(result.state == 10000){
         var data = result.result;
         var str = '';
@@ -47,6 +59,7 @@ function getdata(result){
     }
 }
 function reload(result){
+    var result = JSON.parse(result);
     if(result.state == 10000){
         var data = result.result;
         var str = '';
