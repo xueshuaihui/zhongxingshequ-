@@ -11,7 +11,7 @@ var uid = hrefdada.uid;
 $(".xsh_revise").on("tap",function(){
     var dom = $(this);
     var circle_syn = dom.find(".xsh_revise_text");
-    var href = dom.parent("a").attr("href");
+    var href = dom.parent("a").attr("hrefs");
     var text = circle_syn.html();
     if(href){
         window.location.href = href+"/fid="+fid+"&content="+text;
