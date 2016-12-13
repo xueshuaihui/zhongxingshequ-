@@ -7,7 +7,7 @@ xshsearch.focus(function(){
             /*获取数据*/
             asynchronousearchbox.css({display:"block"});
             $.ajax({
-                url:"http://zte.rmbplus.com/app.php?action=circle-circleSearch",
+                url:"http://zte.rmbplus.com/app.php?action=page-threadSearch",
                 data:{keyword:val},
                 success:function(results){
                     var results = results;
