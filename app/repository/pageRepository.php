@@ -93,7 +93,7 @@ class pageRepository extends baseRepository {
             $first = 0;
             $bbcodeoff = 0;
         }
-        if($maxposition){
+        if(!$maxposition){
             $first = 0;
         }
         $maxposition += 1;
