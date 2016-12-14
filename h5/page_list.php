@@ -22,7 +22,25 @@
                 <a href="">
                     <img src="<?echo $item['icon'];?>" alt="" class="xsh_user_logo xsh_user_logo_radius">
                 </a>
-                <p class="xsh_circle_label">[<?echo $item['name'];?>] <img src="../static/h5/images/hot.png" alt="" class="xsh_hotimg"></p>
+                <p class="xsh_circle_label">[<?echo $item['name'];?>]
+                    <?if($item['stamp'] > -1){
+                        switch ($item['stamp']){
+                            case '0' : $img = 'jh@2x.png';break;
+                            case '1' : $img = 'rt@2x.png';break;
+                            case '2' : $img = 'mt@2x.png';break;
+                            case '3' : $img = 'yx@2x.png';break;
+                            case '4' : $img = 'zd@2x.png';break;
+                            case '5' : $img = 'tj@2x.png';break;
+                            case '6' : $img = 'yc@2x.png';break;
+                            case '7' : $img = 'bztj@2x.png';break;
+                            case '8' : $img = 'bl@2x.png';break;
+                            case '19' : $img = 'bj@2x.png';break;
+                            default : $img = '';break;
+                        }
+                        ?>
+                    <img src="../static/h5/images/<?echo $img?>" alt="" class="xsh_hotimg">
+                    <?}?>
+                </p>
                 <h3 class=" xsh_text_one"><?echo $item['subject']?></h3>
                 <span class="xsh_circle_name"><center><?echo $item['author']?></center></span>
                 <span class="xsh_notice_time xsh_circle_time"><?echo date('Y-m-d H:i:m', $item['lastpost'])?></span>

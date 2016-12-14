@@ -108,7 +108,7 @@ class pageApi extends baseApi {
         //获取用户
         $user = $this->tool->getUserByUid($uid);
         //保存主题
-        if($subject && $tags && $class){
+        if($subject != '' && $tags && $class){
             $tid = $this->tool->saveThread($fid, $uid, $user['username'], $subject, $class, $attachmentCount);
             //添加标签绑定
             if(!$tid){
@@ -137,7 +137,7 @@ class pageApi extends baseApi {
         if($attachmentCount > 0){
             $this->tool->saveAttachment($attachs, $pid, $tid, $uid);
         }
-        $this->tool->updateThreadData($fid, $tid, $user['username'], $uid, $subject, $user['adminid']);
+        $this->tool->updateThreadData($fid, $tid, $user['username'], $uid, $subject, $maxposition, $user['adminid']);
         return true;
     }
 
