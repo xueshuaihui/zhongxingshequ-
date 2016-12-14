@@ -25,23 +25,34 @@
         <p><?echo $result[0]['message']?></p>
     </div>
     <ul class="xsh_postdetails_images">
-<!--        <li><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></li>-->
-<!--        <li><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></li>-->
+        <?if($result[0]['attach']){?>
+        <?foreach ($result[0]['attach'] as $item){ if($item['isimage']){?>
+                <li><img src="<?echo $item['attachment']?>" alt=""></li>
+        <?}}}?>
+        <?if($result[0]['img']){?>
+            <?foreach ($result[0]['img'] as $item){?>
+                <li><img src="<?echo $item?>" alt=""></li>
+            <?}}?>
     </ul>
 </div>
 <div class="xsh_floor_box">
     <ul>
         <?foreach ($result as $k=>$value){ if($k == 0) continue;?>
         <li class="xsh_floor" pid="">
-            <a href=""><img src="<?echo cutstr($value['usericon'], 8)?>" alt="" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a>
+            <a href=""><img src="<?echo $value['usericon']?>" alt="" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a>
             <p><span class="xsh_floor_username"><?echo $value['author']?>：</span><span class="xsh_floor_number"><?echo $k?>楼</span></p>
             <div class="xsh_floor_textbox">
                 <p class="xsh_floor_text"><?echo $value['message']?></p>
                 <ul>
-                <!--  一张图  class="xsh_floor_text_img xsh_floor_text_img_one"-->
-                <!--  二或者四张图  class="xsh_floor_text_img xsh_floor_text_img_two"-->
-                <!-- 其他种情况 class="xsh_floor_text_img " -->
-                    <li class="xsh_floor_text_img"><a href=""><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></a></li>
+                    <?$count = count($value['img']); if($count){?>
+                        <?foreach ($value['img'] as $item){?>
+                        <?if($count == 1){?>
+                            <li class="xsh_floor_text_img xsh_floor_text_img_one"><a href="javascript:;"><img src="<?echo $item?>" alt=""></a></li>
+                        <?}elseif($count ==2 || $count == 4){?>
+                            <li class="xsh_floor_text_img xsh_floor_text_img_two"><a href="javascript:;"><img src="<?echo $item?>" alt=""></a></li>
+                        <?}else{?>
+                            <li class="xsh_floor_text_img"><a href="javascript:;"><img src="<?echo $item?>" alt=""></a></li>
+                        <?}}}?>
                 </ul>
                 <span class="xsh_floor_text_time"><?echo date('Y-m-d H:i:s', $value['dateline'])?></span>
             </div>
