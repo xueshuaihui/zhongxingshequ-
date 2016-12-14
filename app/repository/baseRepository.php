@@ -75,8 +75,9 @@ class baseRepository {
         return $this->table('home_friend')
                     ->ass('f')
                     ->join(' LEFT JOIN '.$this->prefix.'common_member AS u ON f.fuid = u.uid')
+                    ->join(' LEFT JOIN '.$this->prefix.'common_member_profile AS p ON f.fuid = p.uid')
                     ->where('f.uid', $uid)
-                    ->select('u.uid, u.username');
+                    ->select('u.uid, u.username, p.bio');
     }
 
     public function countGroupUser($fid) {
