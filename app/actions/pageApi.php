@@ -187,6 +187,7 @@ class pageApi extends baseApi {
         $pages = $this->tool->getTiezi($tid, $fid, $pid, $page);
         foreach ($pages as $k=>$page){
             $pages[$k]['message'] = preg_replace('/\[attach\].*?\[\/attach\]/', '', $pages[$k]['message']);
+            $pages[$k]['message'] = preg_replace('/\[img.*?\[\/img\]/', '', $pages[$k]['message']);
             preg_match_all('/\[attach\].*?\[\/attach\]/', $page['message'], $res);
             $attachId = '';
             foreach ($res[0] as $re){
@@ -197,6 +198,9 @@ class pageApi extends baseApi {
             }else{
                 $pages[$k]['attach'] = [];
             }
+            //再把图片链接读出来
+            preg_match_all('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i', $page['message'], $imgUrl);
+            $pages[$k]['img'] = $imgUrl[0];
         }
         return $pages;
     }

@@ -42,7 +42,7 @@
 </div>
 <div class="xsh_more_member_box">
     <div class="xsh_more_member">
-        <a href="<?echo encodeUrl('app.php?show=circle-member&fid='.$fid)?>" class="xsh_more_member_btn">查看更多圈子成员</a>
+        <a href="<?echo encodeUrl('app.php?show=circle-member&type=0&uid='.$uid.'&fid='.$fid)?>" class="xsh_more_member_btn">查看更多圈子成员</a>
     </div>
 </div>
 <div class="xsh_circle_information">

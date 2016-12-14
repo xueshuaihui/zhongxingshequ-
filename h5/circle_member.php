@@ -12,7 +12,7 @@
     <ul class="xsh_search_conbox xsh_circlr_member_box">
         <? foreach ($users as $user) {?>
         <li class="xsh_circle_member_list">
-            <a href="<?echo encodeUrl('app.php?circle-member&uid='.$user['uid'].'&myuid='.$uid)?>">
+            <a href="<?if(!$type) echo encodeUrl('app.php?member-details&uid='.$user['uid']);?>" id="<?echo $user['uid']?>" class="xsh_circle_member_one">
                 <div class="xsh_user_logo xsh_circlr_member">
                     <img src="<? echo $user['avatar'] ?>" alt="" class="xsh_user_logo xsh_circlr_member">
                 </div>
@@ -25,5 +25,7 @@
 </body>
 <script src="/static/h5/js/zepto.min.js"></script>
 <script src="/h5/js/touch.js"></script>
+<?if($type){?>
 <script src="/h5/js/circle_member.js"></script>
+<?}?>
 </html>

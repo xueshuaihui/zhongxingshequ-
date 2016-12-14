@@ -55,7 +55,7 @@ class pageRepository extends baseRepository {
         }elseif($pid){
             $data->whereWhere('pid', '>=', $pid)->limit('0,'.$count);
         }
-        $tiezis = $data->select('pid, fid, tid, author, authorid, subject, message, anonymous');
+        $tiezis = $data->select('pid, fid, tid, author, authorid, subject, message, anonymous, dateline');
         foreach ($tiezis as $k=>$tiezi){
             $tiezis[$k]['usericon'] = $this->getAvatar($tiezi['authorid']);
         }
