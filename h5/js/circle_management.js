@@ -8,6 +8,16 @@ for(var i in windowhrsf){
 var fid = hrefdada.fid;
 var uid = hrefdada.uid;
 /**/
+$(".xsh_revise").on("tap",function(){
+    var dom = $(this);
+    var circle_syn = dom.find(".xsh_revise_text");
+    var href = dom.parent("a").attr("hrefs");
+    var text = circle_syn.html();
+    if(href){
+        window.location.href = href+"/fid="+fid+"&content="+text;
+    }
+})
+/**/
 var circleinformationbox = $(".xsh_circle_information_box .xsh_private_letter_box");
 circleinformationbox.on("tap",".xsh_circle_accept",function(){
     var uid = $(this).parents(".xsh_private_letter_box").attr("uid");

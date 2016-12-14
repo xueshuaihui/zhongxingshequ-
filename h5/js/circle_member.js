@@ -7,21 +7,14 @@ for(var i in windowhrsf){
 }
 var fid = hrefdada.fid;
 var uid = hrefdada.uid;
-/**/
-$(".xsh_revise").on("tap",function(){
-    var dom = $(this);
-    var circle_syn = dom.find(".xsh_revise_text");
-    var href = dom.parent("a").attr("hrefs");
-    var text = circle_syn.html();
-    if(href){
-        window.location.href = href+"/fid="+fid+"&content="+text;
-    }
-})
+
 /**/
 var new_uid
 var circle_member_one = $(".xsh_circle_member_one");
 circle_member_one.on("tap",function(){
     new_uid = $(this).attr("new_uid");
+    var name = $(this).children(".xsh_circle_member_name").text();
+    window.location.href =  "zxbbs://alert/确定将圈主转让给'"+(name)+"'/取消/确定";
 })
 function istrue(){
     $.ajax({
