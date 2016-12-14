@@ -119,7 +119,7 @@
 .xsh_postdetails_images>li,.xsh_postdetails_images>li>img{width: 100%;}
 .xsh_floor_box{margin-top: 10px;background: #ffffff;overflow: hidden;position: relative;}
 .xsh_floor_box>ul{width: 100%;margin: auto;padding-bottom: 49px;}
-.xsh_floor{padding: 15px 5%;overflow: hidden;position: relative;border-bottom: 1px solid #9b9b9b;}
+.xsh_floor{padding: 15px 5%;overflow: hidden;position: relative;border-bottom: 1px solid #e1e1e1;}
 .xsh_floor_username{color: #0e71c6;font-size: 15px;font-weight: 500;}
 .xsh_floor_number{color: #9b9b9b;font-size: 13px;float: right;}
 .xsh_floor_textbox{width: 73%;float: left;text-align: justify;margin-top: 10px;font-size: 13px;line-height: 15px;}

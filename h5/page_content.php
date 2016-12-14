@@ -32,7 +32,7 @@
 <div class="xsh_floor_box">
     <ul>
         <?foreach ($result as $k=>$value){ if($k == 0) continue;?>
-        <li class="xsh_floor">
+        <li class="xsh_floor" pid="">
             <a href=""><img src="<?echo $value['usericon']?>" alt="" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a>
             <p><span class="xsh_floor_username"><?echo $value['author']?>：</span><span class="xsh_floor_number"><?echo $k?>楼</span></p>
             <div class="xsh_floor_textbox">
@@ -55,5 +55,41 @@
         </form>
     </div>
 </div>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+<script src="/static/h5/js/zepto.min.js"></script>
+<script src="/h5/js/touch.js"></script>
+<link rel="stylesheet" href="/h5/swipe/photoswipe.css">
+<link rel="stylesheet" href="/h5/swipe/default-skin/default-skin.css">
+<script src="/h5/swipe/photoswipe-ui-default.min.js"></script>
+<script src="/h5/swipe/photoswipe.min.js"></script>
+<script src="/h5/js/page_content.js"></script>
 </html>
