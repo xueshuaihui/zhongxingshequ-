@@ -118,5 +118,5 @@
 </body>
 <script src="/static/h5/js/zepto.min.js"></script>
 <script src="/h5/js/touch.js"></script>
-<script src="/h5/js/circle_member.js"></script>
+<script src="/h5/js/circle_management.js"></script>
 </html>
