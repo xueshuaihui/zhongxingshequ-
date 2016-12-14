@@ -314,6 +314,7 @@ class baseRepository {
                 $credits = ['credits'=>['-', $addRecord]];
             }
         }
-        return $this->table('common_member')->where('uid', $uid)->increase($credits);
+        $res = $this->table('common_member')->where('uid', $uid)->increase($credits);
+        return $res ? $rule[$cre] : false;
     }
 }
