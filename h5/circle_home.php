@@ -96,7 +96,7 @@
 <?}?>
 <div class="xsh_circle_manage">
     <? if($profile['relation'] == 4){?>
-        <a href="zxbbs://circle/transfer">
+        <a href="<?echo encodeUrl('app.php?show=circle-member&type=1&uid='.$uid.'&fid='.$fid)?>">
             <div class="xsh_circle_manage_operation">
                  <span>转让圈子</span>
             </div>
