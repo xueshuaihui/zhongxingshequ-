@@ -49,6 +49,7 @@ if(isset($isApi) && $isApi){
             'subject' => '专家提问：',
             'dateline' => getglobal('timestamp'),
             'message' => $param['content'],
+            'maxposition'=>1,
             'useip' => $_G['clientip']?:getglobal('clientip'),
             'port' => $_G['remoteport']?:getglobal('remoteport'),
         );

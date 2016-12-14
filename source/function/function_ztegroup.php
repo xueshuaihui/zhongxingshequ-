@@ -57,7 +57,14 @@ function bind_page_url($url, $page) {
     
     return $url.$link_char.'page='.$page;
 }
-
+function bigmangetUser($username, $field = null){
+    $user = C::t('common_member')->fetch_by_username($username);
+    if($field){
+        return $user[$field];
+    }else{
+        return $user;
+    }
+}
 
 
 

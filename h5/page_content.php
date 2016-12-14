@@ -15,7 +15,7 @@
     <div class="xsh_private_letter_box xsh_post_user_box">
         <a href="">
             <img src="<?echo $result[0]['usericon']?>" alt="" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo">
-            <p><?echo $result[0]['author']?></p>
+            <p><?echo cutstr($result[0]['author'], 8)?></p>
             <p><?echo date('Y-m-d H:i:s', $result[0]['dateline'])?></p>
         </a>
     </div>
@@ -33,7 +33,7 @@
     <ul>
         <?foreach ($result as $k=>$value){ if($k == 0) continue;?>
         <li class="xsh_floor" pid="">
-            <a href=""><img src="<?echo $value['usericon']?>" alt="" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a>
+            <a href=""><img src="<?echo cutstr($value['usericon'], 8)?>" alt="" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a>
             <p><span class="xsh_floor_username"><?echo $value['author']?>：</span><span class="xsh_floor_number"><?echo $k?>楼</span></p>
             <div class="xsh_floor_textbox">
                 <p class="xsh_floor_text"><?echo $value['message']?></p>
