@@ -86,6 +86,10 @@ class circleRepository extends baseRepository {
         return $this->table('forum_groupuser')->where(['uid'=>$uid, 'fid'=>$fid])->find();
     }
 
+    public function deleteUserFromForum($uid, $fid) {
+        return $this->table('forum_groupuser')->where(['uid'=>$uid, 'fid'=>$fid])->delete();
+    }
+
     public function updateGroupUser($uid, $fid, $power) {
         $update = $this->table('forum_groupuser')->where(['uid'=>$uid, 'fid'=>$fid])->update(['level'=>$power]);
         if($update){

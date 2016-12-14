@@ -407,4 +407,41 @@ class circleApi extends baseApi {
         }
         return 10007;
     }
+
+    /**
+     * @SWG\Post(
+     *   path="circle-deleteUserFromCircle",
+     *   tags={"圈子相关"},
+     *   summary="删除圈子成员",
+     *   description="删除圈子成员",
+     *   operationId="deleteUserFromCircle",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="fid", in="formData", description="群组ID", required=true, type="string"),
+     *     @SWG\Parameter(name="uid_to_del", in="formData", description="将被删除的用户ID", required=true, type="string"),
+     *     @SWG\Parameter(name="uid", in="formData", description="操作的用户ID", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function deleteUserFromCircle() {
+        $this->checkParam(['uid', 'fid']);
+        $uid_to_del = $this->request->post('uid_to_del');
+        $uid = $this->request->post('uid');
+        $fid = $this->request->post('fid');
+        $theUser = $this->tool->getUserFromGroup($uid_to_del, $fid);
+        if(!$theUser){
+            return 10012;
+        }
+        $user = $this->tool->getUserFromGroup($uid, $fid);
+        if(!$user){
+            return 10015;
+        }
+        if(!$user['level'] || $user['level'] > 2){
+            $userInfo = $this->tool->getUserByUid($uid);
+            if(!$userInfo['adminid']){
+                return 10015;
+            }
+        }
+        return $this->tool->deleteUserFromForum($uid, $fid);
+    }
 }
