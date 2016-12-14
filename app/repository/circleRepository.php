@@ -83,7 +83,8 @@ class circleRepository extends baseRepository {
     }
 
     public function getUserFromGroup($uid, $fid) {
-        return $this->table('forum_groupuser')->where(['uid'=>$uid, 'fid'=>$fid])->find();
+        $uid = explode(',', $uid);
+        return $this->table('forum_groupuser')->where('fid', $fid)->in('uid', $uid)->find();
     }
 
     public function deleteUserFromForum($uid, $fid) {
