@@ -137,7 +137,7 @@ class pageApi extends baseApi {
         if($attachmentCount > 0){
             $this->tool->saveAttachment($attachs, $pid, $tid, $uid);
         }
-        $this->tool->updateThreadData($fid, $tid, $user['username'], $uid, $subject, $user['adminid']);
+        $this->tool->updateThreadData($fid, $tid, $user['username'], $uid, $subject, $maxposition, $user['adminid']);
         return true;
     }
 

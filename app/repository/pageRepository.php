@@ -93,7 +93,7 @@ class pageRepository extends baseRepository {
             $first = 0;
             $bbcodeoff = 0;
         }
-        if(!$maxposition){
+        if($maxposition){
             $first = 0;
         }
         $maxposition += 1;
@@ -142,7 +142,9 @@ class pageRepository extends baseRepository {
         }
     }
 
-    public function updateThreadData($fid, $tid, $author, $uid, $subject, $admin = false) {
+    public function updateThreadData($fid, $tid, $author, $uid, $subject, $position, $admin = false) {
+        //更新主题的maxposition
+        $this->table('forum_thread')->where('tid', $tid)->update(['maxposition'=>$position+1]);
         //保存用户日志
         useractionlog($uid, 'tid');
         //增加圈子积分
