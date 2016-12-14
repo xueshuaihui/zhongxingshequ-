@@ -336,7 +336,7 @@ class circleApi extends baseApi {
                 $friendsList[$k]['icon'] = $this->tool->getAvatar($user['uid']);
             }
         }
-        return $friendsList;
+        return array_values($friendsList);
     }
 
     /**
