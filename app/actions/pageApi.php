@@ -108,7 +108,7 @@ class pageApi extends baseApi {
         //获取用户
         $user = $this->tool->getUserByUid($uid);
         //保存主题
-        if($subject && $tags && $class){
+        if($subject != '' && $tags && $class){
             $tid = $this->tool->saveThread($fid, $uid, $user['username'], $subject, $class, $attachmentCount);
             //添加标签绑定
             if(!$tid){
