@@ -38,6 +38,9 @@
             <div class="xsh_floor_textbox">
                 <p class="xsh_floor_text"><?echo $value['message']?></p>
                 <ul>
+                <!--  一张图  class="xsh_floor_text_img xsh_floor_text_img_one"-->
+                <!--  二或者四张图  class="xsh_floor_text_img xsh_floor_text_img_two"-->
+                <!-- 其他种情况 class="xsh_floor_text_img " -->
                     <li class="xsh_floor_text_img"><a href=""><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></a></li>
                 </ul>
                 <span class="xsh_floor_text_time"><?echo date('Y-m-d H:i:s', $value['dateline'])?></span>

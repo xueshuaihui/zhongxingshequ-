@@ -9,34 +9,69 @@ var fid = hrefdada.fid;
 var uid = hrefdada.uid;
 var tid = hrefdada.tid;
 /*对帖子回复*/
-var messagefixed = $(".xsh_message_fixed");
+var messagefixed = $(".xsh_floor_text");
 messagefixed.on("tap",function(){
-    window.location.href = "zxbbs://post/new/uid="+uid+"&fid="+fid+"&tid="+tid;
+    window.location.href = "zxbbs://post/reply/uid="+uid+"&fid="+fid+"&tid="+tid;
 })
 /*对楼层回复*/
 var floortextbox =$(".xsh_floor_textbox");
 floortextbox.on("tap",function(){
     var pid = $(this).parents(".xsh_floor").attr("pid");
-    window.location.href = "zxbbs://post/new/uid="+uid+"&fid="+fid+"&pid="+pid;
+    window.location.href = "zxbbs://post/reply/uid="+uid+"&fid="+fid+"&pid="+pid+"&tid="+tid;
 })
 /*回复的数据*/
 var floorbox = $(".xsh_floor_box>ul");
-function getdata(result){
+function replydata(result){
     var result = JSON.parse(result);
-    if(result.state== 10000){
         /*插入到1楼前*/
-        var str='<li class="xsh_floor" pid="3"><a href=""><img src="http://zte.rmbplus.com/uc_server/avatar.php?uid=1&size=small" alt="" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">头发发给：</span><span class="xsh_floor_number">0楼</span></p><div class="xsh_floor_textbox"><p class="xsh_floor_text">听到好音乐。它所具备的加密功能、超长续航、高清录音以及高清拍摄等等等优质功能，足够令其高效率的协助执法人员完成高效、规范执法的重任</p><ul><li class="xsh_floor_text_img"><a href="javascript:;"><img src="http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg" alt=""></a></li><li class="xsh_floor_text_img"><a href="javascript:;"><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></a></li><li class="xsh_floor_text_img"><a href="javascript:;"><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></a></li></ul><span class="xsh_floor_text_time">2016-15-48</span></div></li>';
-        /*
-        * <li class="xsh_floor" pid="3"><a href=""><img src="http://zte.rmbplus.com/uc_server/avatar.php?uid=1&size=small" alt="" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">头发发给：</span><span class="xsh_floor_number">3楼</span></p><div class="xsh_floor_textbox"><p class="xsh_floor_text">听到好音乐。它所具备的加密功能、超长续航、高清录音以及高清拍摄等等等优质功能，足够令其高效率的协助执法人员完成高效、规范执法的重任</p><ul><li class="xsh_floor_text_img"><a href="javascript:;"><img src="http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg" alt=""></a></li><li class="xsh_floor_text_img"><a href="javascript:;"><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></a></li><li class="xsh_floor_text_img"><a href="javascript:;"><img src="http://i0.sinaimg.cn/gm/j/i/2009-03-17/U1850P115T41D162082F756DT20090317125249.jpg" alt=""></a></li></ul><span class="xsh_floor_text_time"><?echo date('Y-m-d H:i:s', $value['dateline'])?></span></div></li>
-        * */
+        var str='<li class="xsh_floor" pid="'+(result.pid)+'"><a href="" uid="'+(uid)+'"><img src="'+(result.portrait)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(result.name)+'：</span><span class="xsh_floor_number"></span></p><div class="xsh_floor_textbox"><p class="xsh_floor_text">'+(result.text)+'</p><ul>';
+        var length = result.images.length;
+        for (var i in result.images){
+            if(length ==2||length ==4){
+                str +='<li class="xsh_floor_text_img xsh_floor_text_img_two"><a href="javascript:;">';
+            }else if(length == 1){
+                str +='<li class="xsh_floor_text_img xsh_floor_text_img_one"><a href="javascript:;">';
+            }else{
+                str +='<li class="xsh_floor_text_img"><a href="javascript:;">';
+            }
+            str +='<img src="'+(result.images[i])+'" alt=""></a></li>';
+        }
+        str +='</ul><span class="xsh_floor_text_time">'+(result.time)+'</span></div></li>';
         floorbox.prepend(str);
-    }else{
-        window.location.href = "zxbbs://alert/"+result.msg;
-    }
 }
 
-
-
+//        var a = {pid:"3243",name:"头发发给",portrait:"http://zte.rmbplus.com/uc_server/avatar.php?uid=1&size=small" ,text:"听到好音乐。它所具备的加密功能、超长续航、高清录音以及高清拍摄等等等优质功能，足够令其高效率的协助执法人员完成高效、规范执法的重任",time:"2016-15-48",images:["http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg","http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg","http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg","http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg","http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg"]}
+/*上拉加载*/
+function getdata(results){
+    var results = JSON.parse(results);
+    if(results.state == 10000){
+        var data = results.result;
+        for(var i in data){
+            var str='<li class="xsh_floor" pid="'+(data[i].pid)+'"><a href="" uid="'+(data[i].authorid)+'"><img src="'+(data[i].usericon)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(data[i].author)+'：</span><span class="xsh_floor_number"></span></p><div class="xsh_floor_textbox"><p class="xsh_floor_text">'+(data[i].message)+'</p><ul>';
+            var images=[];
+            var att = data[i].attach;
+            for (var j in att){
+                if(att[j].isimage == "1"){
+                    images.push(att[j].attachment);
+                }
+            }
+            var length = images.length;
+            for (var i in images){
+                if(length ==2||length ==4){
+                    str +='<li class="xsh_floor_text_img xsh_floor_text_img_two"><a href="javascript:;">';
+                }else if(length == 1){
+                    str +='<li class="xsh_floor_text_img xsh_floor_text_img_one"><a href="javascript:;">';
+                }else{
+                    str +='<li class="xsh_floor_text_img"><a href="javascript:;">';
+                }
+                str +='<img src="'+(images[i])+'" alt=""></a></li>';
+            }
+            str +='</ul><span class="xsh_floor_text_time">'+(result.time)+'</span></div></li>';
+        }
+    }else{
+        window.location.href = "zxbbs://alert/"+results.msg;
+    }
+}
 /*缩略图预览*/
 var openPhotoSwipe = function(index,arr) {
     var pswpElement = document.querySelectorAll('.pswp')[0];
