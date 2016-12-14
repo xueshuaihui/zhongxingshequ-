@@ -50,4 +50,25 @@ class memberApi extends baseApi {
         $val = $this->request->post('value');
         return $this->tool->updateUserProfile($uid, ['bio'=>$val]);
     }
+
+    /**
+     * @SWG\Post(
+     *   path="member-searchFriend",
+     *   tags={"用户信息"},
+     *   summary="好友搜索",
+     *   description="好友搜索",
+     *   operationId="searchFriend",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Parameter(name="keyword", in="formData", description="关键字", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function searchFriend() {
+        $this->checkParam(['uid', 'keyword']);
+        $uid = $this->request->post('uid');
+        $keyword = $this->request->post('keyword');
+        return $this->tool->searchFriend($uid, $keyword);
+    }
 }
