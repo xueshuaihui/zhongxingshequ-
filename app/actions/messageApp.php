@@ -14,6 +14,7 @@ class messageApp extends messageApi   {
         $this->checkParam(['uid', 'touid'], 'get', 1);
         $uid = $this->request->get('uid');
         $touid = $this->request->get('touid');
+        $this->tool->blank();
         $userIcon = $this->tool->getAvatar($uid);
         require_once ROOT.'h5'.__.'message_pm_details.php';
     }
