@@ -432,6 +432,10 @@ class circleApi extends baseApi {
         if(!$theUser){
             return 10012;
         }
+        $uid_to_del = explode(',', $uid_to_del);
+        if(in_array($uid, $uid_to_del)){
+            return 10024;
+        }
         $user = $this->tool->getUserFromGroup($uid, $fid);
         if(!$user){
             return 10015;
@@ -442,6 +446,6 @@ class circleApi extends baseApi {
                 return 10015;
             }
         }
-        return $this->tool->deleteUserFromForum($uid, $fid);
+        return $this->tool->deleteUserFromForum($uid_to_del, $fid);
     }
 }

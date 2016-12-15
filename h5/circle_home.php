@@ -72,7 +72,7 @@
             <div class="xsh_circle_information_title"><span>新成员申请</span></div>
         </div>
         <? foreach ($wait as $value) {?>
-        <li class="xsh_circle_name xsh_circle_managebor xsh_private_letter_box" uid="">
+        <li class="xsh_circle_name xsh_circle_managebor xsh_private_letter_box" uid="<?echo $value['uid']?>">
             <div class="xsh_user_logo">
                 <img src="<? echo $value['avatar'] ; ?>" alt="" class="xsh_user_logo">
             </div>
@@ -97,7 +97,7 @@
 <?}?>
 <div class="xsh_circle_manage">
     <? if($profile['relation'] == 4){?>
-        <a href="zxbbs://circle/transfer">
+        <a href="<?echo encodeUrl('app.php?show=circle-member&type=1&uid='.$uid.'&fid='.$fid)?>">
             <div class="xsh_circle_manage_operation">
                  <span>转让圈子</span>
             </div>

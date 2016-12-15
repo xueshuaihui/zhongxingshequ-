@@ -16,7 +16,7 @@
                 <div class="xsh_user_logo xsh_circlr_member">
                     <img src="<? echo $user['avatar'] ?>" alt="" class="xsh_user_logo xsh_circlr_member">
                 </div>
-                <p class="xsh_circle_member_name"><? cutstr($user['username'], 8) ?></p>
+                <p class="xsh_circle_member_name"><?echo cutstr($user['username'], 8) ?></p>
             </a>
         </li>
         <? } ?>
