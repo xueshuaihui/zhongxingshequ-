@@ -11,11 +11,11 @@ var uid = hrefdada.uid;
 var xshsearch = $("#xsh_search");
 var asynchronousearchbox = $(".xsh_asynchronous_searchbox");
 xshsearch.focus(function(){
-    $(this).keyup(function(){
+    $(this).on("keyup keydown",function(){
         var val = $(this).val();
         if(val){
             /*获取数据*/
-            asynchronousearchbox.css({display:"block"});
+            asynchronousearchbox.css({display:"block",height:$(".xsh_circle_list_box").height()});
             $.ajax({
                 url:"http://zte.rmbplus.com/app.php?action=page-threadSearch",
                 data:{keyword:val,fid:fid,uid:uid},
