@@ -38,7 +38,10 @@
                             default : $img = '';break;
                         }
                         ?>
-                    <img src="../static/h5/images/<?echo $img?>" alt="" class="xsh_hotimg">
+                        <img src="../static/h5/images/<?echo $img?>" alt="" class="xsh_hotimg">
+                    <?}?>
+                    <?if($item['displayorder']){?>
+                    <img src="../static/h5/images/zd@2x.png" alt="" class="xsh_hotimg">
                     <?}?>
                 </p>
                 <h3 class=" xsh_text_one"><?echo $item['subject']?></h3>
