@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../static/h5/css/style.css">
 </head>
 <body>
-<div class="xsh_search_box">
+<div class="xsh_search_box" id="wrapper">
     <div class="xsh_search_conbox">
         <laber for="xsh_search" class="xsh_search"><a class="xsh_searchimg"><img src="../static/h5/images/search.png" alt=""></a><input type="text" id="xsh_search" placeholder="请输入要查询的关键字"></laber>
         <div class="xsh_post"><a href="zxbbs://post/new/<?echo $fid?>">我要发帖</a></div>
@@ -55,5 +55,6 @@
 <div class="xsh_asynchronous_searchbox"></div>
 </body>
 <script src="/static/h5/js/zepto.min.js"></script>
+<script src="/h5/js/iscroll.js"></script>
 <script src="/h5/js/circle_of_details.js"></script>
 </html>
