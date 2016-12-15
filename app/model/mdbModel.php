@@ -12,6 +12,7 @@ class mdbModel extends baseModel implements dbInterface {
     private $whereOr;
     private $sql;
     private $join;
+    private $as;
     private $prefix = 'zx_';
     private static $models = [];
     private static $baseModel;
@@ -78,6 +79,9 @@ class mdbModel extends baseModel implements dbInterface {
         $field = $this->field == '' ? '*' : trim($this->field, ',');
         $this->sql = 'SELECT '.$field.
             ' FROM '.$this->prefix.$this->table;
+        if($this->as){
+            $this->sql .= $this->as;
+        }
         if($this->join){
             $this->sql .= $this->join;
         }
@@ -179,7 +183,7 @@ class mdbModel extends baseModel implements dbInterface {
     }
 
     public function ass ($name) {
-        $this->table .= ' AS '.$name;
+        $this->as .= ' AS '.$name;
         return $this;
     }
 
@@ -196,6 +200,6 @@ class mdbModel extends baseModel implements dbInterface {
         unset($this->whereOr);
         unset($this->sql);
         unset($this->join);
-        unset($this->table);
+        unset($this->as);
     }
 }
