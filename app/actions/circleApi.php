@@ -337,9 +337,8 @@ class circleApi extends baseApi {
                 if($userFromGroup || $userInvited || $groupProfile['founderuid'] == $user['uid']){
                     unset($friendsList[$k]);
                 }
-            }else{
-                $friendsList[$k]['avatar'] = $this->tool->getAvatar($user['uid']);
             }
+            $friendsList[$k]['avatar'] = $this->tool->getAvatar($user['uid']);
         }
         return array_values($friendsList);
     }
