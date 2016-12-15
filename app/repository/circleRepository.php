@@ -83,12 +83,12 @@ class circleRepository extends baseRepository {
     }
 
     public function getUserFromGroup($uid, $fid) {
-        $uid = explode(',', $uid);
-        return $this->table('forum_groupuser')->where('fid', $fid)->in('uid', $uid)->find();
+        return $this->table('forum_groupuser')->where(['fid'=>$fid, 'uid'=>$uid])->find();
     }
 
     public function deleteUserFromForum($uid, $fid) {
-        return $this->table('forum_groupuser')->where(['uid'=>$uid, 'fid'=>$fid])->delete();
+        $uid = explode(',', $uid);
+        return $this->table('forum_groupuser')->where('fid', $fid)->in('uid', $uid)->delete();
     }
 
     public function updateGroupUser($uid, $fid, $power) {

@@ -445,6 +445,6 @@ class circleApi extends baseApi {
                 return 10015;
             }
         }
-        return $this->tool->deleteUserFromForum($uid, $fid);
+        return $this->tool->deleteUserFromForum($uid_to_del, $fid);
     }
 }
