@@ -272,13 +272,19 @@ class circleApi extends baseApi {
         $result['description'] = $profile['description'];
         //获取用户于群组的关系
         if($profile['founderuid'] == $uid){
-            $result['relation'] = 4; //为创建者
+            $result['relation'] = 5; //为创建者
             return $result;
         }
         //看看有没有加入圈子
         $groupUser = $this->tool->getUserFromGroup($uid, $fid);
         if(!$groupUser){
             $result['relation'] = 0; //没关系
+            return $result;
+        }
+        //查看用户身份
+        $user = $this->tool->getUserByUid($uid);
+        if($user['adminid']){
+            $result['relation'] = 4; //网站管理员没办法
             return $result;
         }
         //看看你的圈子等级
