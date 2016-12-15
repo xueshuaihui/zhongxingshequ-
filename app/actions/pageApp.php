@@ -12,9 +12,10 @@ class pageApp extends pageApi {
     }
 
     public function pageContent() {
-        $this->checkParam(['fid', 'tid'], 'get', 1);
+        $this->checkParam(['fid', 'tid', 'uid'], 'get', 1);
         $tid = $this->request->get('tid');
         $fid = $this->request->get('fid');
+        $uid = $this->request->get('uid');
         $result = $this->tieziList($tid, $fid);
         require_once ROOT.'h5'.__.'page_content.php';
     }

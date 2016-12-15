@@ -19,7 +19,7 @@
         <?foreach ($list as $item){?>
         <li class="private_letter">
             <div class="xsh_private_letter_box xsh_circle_list">
-                <a href="">
+                <a href="<?echo encodeUrl("app.php?show=page-pageContent&fid={$item['fid']}&tid={$item['tid']}&uid={$uid}")?>">
                     <img src="<?echo $item['icon'];?>" alt="" class="xsh_user_logo xsh_user_logo_radius">
                 </a>
                 <p class="xsh_circle_label">[<?echo $item['name'];?>]
