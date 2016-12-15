@@ -3,13 +3,12 @@ var windowhrsf = window.location.href.split("?")[1].split("&");
 var hrefdada = {};
 for(var i in windowhrsf){
     var arr = windowhrsf[i].split("=");
-    if(arr[1].match('#xsh_foot')){
-        arr[1] = arr[1].split("#")[0];
+    if(arr[i].match('#xsh_foot')){
+        arr[i] = arr[i].split("#")[0];
     }
     hrefdada[arr[0]] = arr[1];
 }
 /**/
-$(function(){
     var messagebox = $(".xsh_message_box>ul");
     /*图片预览*/
     messagebox.on("tap",".xsh_message_text p img",function(){
@@ -90,5 +89,4 @@ message_submit.on("tap",function(){
     }else{
         window.location.href = "zxbbs://alert/请输入内容";
     }
-})
 })

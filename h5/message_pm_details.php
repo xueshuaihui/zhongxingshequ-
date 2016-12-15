@@ -10,31 +10,6 @@
 <body>
 <div class="xsh_message_box">
     <ul>
-        <?foreach ($lists as $list){ if($list['position'] == 'l'){?>
-                <li class="xsh_you">
-                    <div class="xsh_message_logobox">
-                        <a href="">
-                            <img src="<?echo $list['you']?>" alt="">
-                        </a>
-                    </div>
-                    <div class="xsh_message_text">
-                        <div class="xsh_you_trigon"></div>
-                        <p><b><?echo $list['message']?></b></p>
-                    </div>
-                </li>
-            <?}else{?>
-                <li class="xsh_me">
-                    <div class="xsh_message_logobox">
-                        <a href="">
-                            <img src="<?echo $list['me']?>" alt="">
-                        </a>
-                    </div>
-                    <div class="xsh_message_text">
-                        <div class="xsh_me_trigon"></div>
-                        <p><b><?echo $list['message']?></b></p>
-                    </div>
-                </li>
-            <?}}?>
         <a name="xsh_foot"></a>
     </ul>
     <div class="xsh_message_fixed">
@@ -47,7 +22,7 @@
     </div>
 </div>
 </body>
-<script src="h5/js/zepto.min.js"></script>
-<script src="h5/js/touch.js"></script>
-<script src="h5/js/message.js"></script>
+<script src="/static/h5/js/zepto.min.js"></script>
+<script src="/h5/js/touch.js"></script>
+<script src="/h5/js/message.js"></script>
 </html>
