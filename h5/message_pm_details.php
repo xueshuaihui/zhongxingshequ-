@@ -10,7 +10,7 @@
 <body>
 <div class="xsh_message_box">
     <ul>
-        <a name="xsh_foot"></a>
+        <a id="<?echo $userIcon?>" name="xsh_foot"></a>
     </ul>
     <div class="xsh_message_fixed">
         <div class="xsh_message_formbox">
