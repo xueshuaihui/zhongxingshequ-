@@ -318,25 +318,11 @@ class circleApi extends baseApi {
 
         //先获取全部好友列表吧
         $friendsList = $this->tool->getFriendList($uid);
-        if($fid){
-            //获取群组已有成员列表
-            $groupList = $this->tool->getGroupUser($fid, 'uid, username', null, null, 1, true);
-            //获取已经邀请的列表
-            $inviteList = $this->tool->getInviteUser($fid, $uid);
-            foreach ($groupList as $grouplistItem) {
-                $tempGroupList[] = $grouplistItem['uid'];
-            }
-            foreach ($inviteList as $invitelistItem) {
-                $tempInviteList[] = $invitelistItem['inviteuid'];
-            }
-        }
         //去除渣渣
         foreach ($friendsList as $k=>$user){
             if($fid){
-                if(in_array($user['uid'], $tempGroupList) || in_array($user, $tempInviteList)){
+                if($this->tool->getUserFromGroup($user['uid'], $fid) || $this->tool->getInvitedUser($fid, $user['uid'])){
                     unset($friendsList[$k]);
-                }else{
-                    $friendsList[$k]['icon'] = $this->tool->getAvatar($user['uid']);
                 }
             }else{
                 $friendsList[$k]['icon'] = $this->tool->getAvatar($user['uid']);
