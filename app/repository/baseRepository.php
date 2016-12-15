@@ -167,6 +167,28 @@ class baseRepository {
         return $result;
     }
 
+    public function uploadAvatar($image, $uid) {
+        //判断错误
+        if($image['error'] > 0){
+            return 10018;
+        }
+        //判断格式
+        if(!in_array($image['type'], ['image/jpg','image/jpeg'])){
+            return 10017;
+        }
+        $uid = sprintf("%09d", $uid);
+        $dir1 = substr($uid, 0, 3);
+        $dir2 = substr($uid, 3, 2);
+        $dir3 = substr($uid, 5, 2);
+        $file1 = 'uc_server/data/avatar/'.$dir1.'/'.$dir2.'/'.$dir3.'/'.substr($uid, -2).'_avatar_big.jpg';
+        $file2 = 'uc_server/data/avatar/'.$dir1.'/'.$dir2.'/'.$dir3.'/'.substr($uid, -2).'_avatar_middle.jpg';
+        $file3 = 'uc_server/data/avatar/'.$dir1.'/'.$dir2.'/'.$dir3.'/'.substr($uid, -2).'_avatar_small.jpg';
+        self::cutAvatar($image['tmp_name'], $file1, 'b');
+        self::cutAvatar($image['tmp_name'], $file2, 'm');
+        self::cutAvatar($image['tmp_name'], $file3, 's');
+        return true;
+    }
+
     private function uploadImage($image, $path){
         $afterFixArr = ['image/jpg'=>'jpg','image/jpeg'=>'jpeg'];
         //判断错误
@@ -181,17 +203,53 @@ class baseRepository {
         $imgName = uniqid($this->randNum(6));
         $afterFix = '.'.$afterFixArr[$image['type']];
         $basePath = ROOT.'data'.__.'attachment'.__.$path.__;
-        $filePath = date('Ym', time()).__.date('d', time());
+        $filePath1 = date('Ym', time());
+        $filePath2 = date('d', time());
+        $filePath = $filePath1.__.$filePath2;
         $sourceImg = $image['tmp_name'];
         $fileAttachment = $basePath.$filePath.__.$imgName.$afterFix;
-        if(!file_exists($basePath.$filePath)){
-            mkdir($basePath.$filePath);
+        if(!file_exists($basePath)){
+            mkdir($basePath);
+        }
+        if(!file_exists($basePath.$filePath1)){
+            mkdir($basePath.$filePath1);
+        }
+        if(!file_exists($basePath.$filePath1.__.$filePath2)){
+            mkdir($basePath.$filePath1.__.$filePath2);
         }
         move_uploaded_file($sourceImg, $fileAttachment);
         $width = self::cutImg($fileAttachment, '', '', true);
         self::cutImg($fileAttachment, $fileAttachment.'.s'.$afterFix, 's');
         self::cutImg($fileAttachment, $fileAttachment.'.m'.$afterFix, 'm');
         return ['filename'=>$image['name'], 'filesize'=>$image['size'], 'attachment'=>$filePath.__.$imgName.$afterFix, 'width'=>$width];
+    }
+
+    private static function cutAvatar($source, $newName, $size = 'b'){
+        list($source_width, $source_height)=getimagesize($source);//获取原图片高度、宽度
+        if($size == 'b'){
+            $dst_w = $dst_h = 200;
+        }elseif($size == 'm'){
+            $dst_w = $dst_h = 120;
+        }else{
+            $dst_w = $dst_h = 48;
+        }
+        if ($source_width < $source_height) {
+            $src_x = 0;//设定载入图片要载入的区域x坐标
+            $src_y = ($source_height - $source_width)/2;//设定载入图片要载入的区域y坐标
+            $src_w = $source_width;//原图要载入的宽度
+            $src_h = $source_width;//原图要载入的高度
+        } else {
+            $src_x = ($source_width - $source_height)/2;//设定载入图片要载入的区域x坐标
+            $src_y = 0;//设定载入图片要载入的区域y坐标
+            $src_w = $source_height;//原图要载入的宽度
+            $src_h = $source_height;//原图要载入的高度
+        }
+        $new=imagecreatetruecolor($dst_w, $dst_h);
+        $img=imagecreatefromjpeg($source);
+        imagecopyresampled($new, $img, 0, 0, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
+        imagejpeg($new, $newName);
+        imagedestroy($new);
+        imagedestroy($img);
     }
 
     private static function cutImg($source, $newPath, $type, $getWidth = false){

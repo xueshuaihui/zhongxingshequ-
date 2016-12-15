@@ -26,8 +26,7 @@ class memberApi extends baseApi {
     public function changeAvatar() {
         $uid = $this->request->post('uid');
         $avatar = $this->request->file('avatar');
-        $url = $this->tool->uploadImages($avatar, 'avatar');
-        return $this->tool->updateUserProfile($uid, ['avatar'=>$url]);
+        return $this->tool->uploadAvatar($avatar, $uid);
     }
 
     /**
@@ -40,15 +39,23 @@ class memberApi extends baseApi {
      *   consumes={"application/json"},
      *   produces={"application/json"},
      *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
-     *     @SWG\Parameter(name="value", in="formData", description="名称", required=true, type="string"),
+     *     @SWG\Parameter(name="key", in="formData", description="名称还是签名name or bio", required=true, type="string"),
+     *     @SWG\Parameter(name="value", in="formData", description="值", required=true, type="string"),
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
     public function changeProfile() {
-        $this->checkParam(['uid', 'value']);
+        $this->checkParam(['uid', 'key', 'value']);
         $uid = $this->request->post('uid');
+        $key = $this->request->post('key');
         $val = $this->request->post('value');
-        return $this->tool->updateUserProfile($uid, ['bio'=>$val]);
+        if($key != 'bio' && $key != 'name'){
+            return 10007;
+        }
+        if($key == 'name'){
+            $key = 'field3';
+        }
+        return $this->tool->updateUserProfile($uid, [$key=>$val]);
     }
 
     /**
