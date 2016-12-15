@@ -98,8 +98,10 @@ class base {
 	}
 
 	function page_get_start($page, $ppp, $totalnum) {
-		$totalpage = ceil($totalnum / $ppp);
-		$page =  max(1, min($totalpage,intval($page)));
+        if(!defined('IN_APP')){
+            $totalpage = ceil($totalnum / $ppp);
+            $page =  max(1, min($totalpage,intval($page)));
+        }
 		return ($page - 1) * $ppp;
 	}
 
