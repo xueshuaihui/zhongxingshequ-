@@ -9,7 +9,7 @@ var fid = hrefdada.fid;
 var uid = hrefdada.uid;
 var tid = hrefdada.tid;
 /*对帖子回复*/
-var messagefixed = $(".xsh_floor_text");
+var messagefixed = $(".xsh_message_fixed");
 messagefixed.on("tap",function(){
     window.location.href = "zxbbs://post/reply/uid="+uid+"&fid="+fid+"&tid="+tid;
 })
@@ -71,6 +71,11 @@ function getdata(results){
     }else{
         window.location.href = "zxbbs://alert/"+results.msg;
     }
+}
+function shangla(){
+    $.ajax({
+        url:"",
+    })
 }
 /*缩略图预览*/
 var openPhotoSwipe = function(index,arr) {
