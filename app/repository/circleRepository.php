@@ -116,12 +116,12 @@ class circleRepository extends baseRepository {
         return false;
     }
 
-    public function getInviteUser($fid, $uid) {
+    public function getInvitedUser($fid, $theUid) {
         return $this->table('forum_groupinvite')
-                    ->ass('i')
-                    ->join(' LEFT JOIN '.$this->prefix.'common_member AS u ON i.inviteuid = u.uid')
-                    ->where(['i.fid'=>$fid, 'i.uid'=>$uid])
-                    ->select('u.uid, u.username');
+            ->ass('i')
+            ->join(' LEFT JOIN '.$this->prefix.'common_member AS u ON i.inviteuid = u.uid')
+            ->where(['i.fid'=>$fid, 'i.inviteuid'=>$theUid])
+            ->find();
     }
 
     public function inviteUser($uid, $fid, $invites) {
