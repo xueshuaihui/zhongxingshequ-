@@ -11,7 +11,7 @@
 <div class="xsh_search_box">
     <div class="xsh_search_conbox">
         <laber for="xsh_search" class="xsh_search"><a class="xsh_searchimg"><img src="../static/h5/images/search.png" alt=""></a><input type="text" id="xsh_search" placeholder="请输入要查询的关键字"></laber>
-        <div class="xsh_post"><a href="zxbbs://post/new">我要发帖</a></div>
+        <div class="xsh_post"><a href="zxbbs://post/new/<?echo $fid?>">我要发帖</a></div>
     </div>
 </div>
 <div class="xsh_circle_list_box">
@@ -38,7 +38,10 @@
                             default : $img = '';break;
                         }
                         ?>
-                    <img src="../static/h5/images/<?echo $img?>" alt="" class="xsh_hotimg">
+                        <img src="../static/h5/images/<?echo $img?>" alt="" class="xsh_hotimg">
+                    <?}?>
+                    <?if($item['displayorder']){?>
+                    <img src="../static/h5/images/zd@2x.png" alt="" class="xsh_hotimg">
                     <?}?>
                 </p>
                 <h3 class=" xsh_text_one"><?echo $item['subject']?></h3>

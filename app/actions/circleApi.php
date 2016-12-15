@@ -28,7 +28,7 @@ class circleApi extends baseApi {
     public function circleList() {
         $this->checkParam(['type', 'page', 'uid']);
         $type = $this->request->post('type');
-        $page = $this->request->post('page');
+        $page = max(1, $this->request->post('page'));
         $uid = $this->request->post('uid');
         return $this->tool->getCircleList($uid, $type, $page);
     }
@@ -241,6 +241,10 @@ class circleApi extends baseApi {
         $count = $sCount ?: 10;
         $level = $level == 5 ? 0 : $level;
         $users = $this->tool->getGroupUser($fid, 'uid, username', $page, $count, $level);
+        if($level !== 0){
+            $groupProfile = $this->tool->getGroupProfile($fid);
+            array_unshift($users, ['uid'=>$groupProfile['founderuid'], 'username'=>$groupProfile['foundername']]);
+        }
         foreach ($users as $k=>$user){
             $users[$k]['avatar'] = $this->tool->getAvatar($user['uid']);
             $userProfile = $this->tool->getUserProfile(['uid'=>$user['uid']]);
@@ -272,13 +276,19 @@ class circleApi extends baseApi {
         $result['description'] = $profile['description'];
         //获取用户于群组的关系
         if($profile['founderuid'] == $uid){
-            $result['relation'] = 4; //为创建者
+            $result['relation'] = 5; //为创建者
             return $result;
         }
         //看看有没有加入圈子
         $groupUser = $this->tool->getUserFromGroup($uid, $fid);
         if(!$groupUser){
             $result['relation'] = 0; //没关系
+            return $result;
+        }
+        //查看用户身份
+        $user = $this->tool->getUserByUid($uid);
+        if($user['adminid']){
+            $result['relation'] = 4; //网站管理员没办法
             return $result;
         }
         //看看你的圈子等级
@@ -321,11 +331,14 @@ class circleApi extends baseApi {
         //去除渣渣
         foreach ($friendsList as $k=>$user){
             if($fid){
-                if($this->tool->getUserFromGroup($user['uid'], $fid) || $this->tool->getInvitedUser($fid, $user['uid'])){
+                $userFromGroup = $this->tool->getUserFromGroup($user['uid'], $fid);
+                $userInvited = $this->tool->getInvitedUser($fid, $user['uid']);
+                $groupProfile = $this->tool->getGroupProfile($fid);
+                if($userFromGroup || $userInvited || $groupProfile['founderuid'] == $user['uid']){
                     unset($friendsList[$k]);
                 }
             }else{
-                $friendsList[$k]['icon'] = $this->tool->getAvatar($user['uid']);
+                $friendsList[$k]['avatar'] = $this->tool->getAvatar($user['uid']);
             }
         }
         return array_values($friendsList);

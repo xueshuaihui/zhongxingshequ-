@@ -7,9 +7,9 @@ class circleRepository extends baseRepository {
          * 0:all  1: recommend  2: mine
          */
         if($type == 2){
-            $listmine = $this->table()->grouplist($uid, 2, $page);
-            $listmanage = $this->table()->grouplist($uid, 1, $page);
-            $list = array_merge($listmine, $listmanage);
+            $listmine = $this->table('forum_groupuser')->ass('g')->join(' LEFT JOIN '.$this->prefix.'forum_forum as f ON g.fid = f.fid')->join(' LEFT JOIN '.$this->prefix.'forum_forumfield as ff ON ff.fid = g.fid')->where('g.uid', $uid)->whereWhere('g.level', '!=', 0)->select('f.*, ff.*');
+            $listcreate = $this->table('forum_forumfield')->ass('ff')->join(' LEFT JOIN '.$this->prefix.'forum_forum as f ON ff.fid = f.fid')->where('ff.founderuid', $uid)->select();
+            $list = array_merge($listmine, $listcreate);
         }elseif($type == 1){
             $list = $this->table('common_setting')->where('skey', 'group_recommend')->find();
             $list = array_values(dunserialize($list['svalue']));
@@ -25,7 +25,11 @@ class circleRepository extends baseRepository {
         }
         $res = [];
         foreach ($list as $k=>$value){
-            $res[$k]['icon'] = BASEURL.__.$value['icon'];
+            if($value['icon'] == ''){
+                $res[$k]['icon'] = BASEURL.__.'static/image/common/groupicon.gif';
+            }else{
+                $res[$k]['icon'] = BASEURL.__.$value['icon'];
+            }
             if($type == 2 ){
                 $join = 1;
             }else{
@@ -130,7 +134,7 @@ class circleRepository extends baseRepository {
                     'uid'=>$uid,
                     'inviteuid'=>$invite,
                     'dateline' => getglobal('timestamp')
-                ], false);
+                ], false, true);
             if(!$res){
                 return false;
             }

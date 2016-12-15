@@ -12,7 +12,7 @@
     <ul class="xsh_search_conbox xsh_circlr_member_box">
         <? foreach($users as $user) { ?>
         <li class="xsh_circle_member_list">
-            <a href="<?echo encodeUrl('app.php?circle-member&uid='.$user['uid'].'&myuid='.$uid)?>">
+            <a href="<?echo encodeUrl('app.php?show=member-details&uid='.$user['uid'].'&myuid='.$uid)?>">
                 <div class="xsh_user_logo xsh_circlr_member">
                     <img src="<?php echo $user['avatar'] ;?>" alt="" class="xsh_user_logo xsh_circlr_member">
                 </div>
@@ -20,7 +20,7 @@
             </a>
         </li>
         <?}?>
-        <?if($profile['relation'] == 2){?>
+        <?if($profile['relation'] > 2){?>
         <li class="xsh_circle_member_list">
             <a href="zxbbs://circle/invite">
                 <div class="xsh_user_logo xsh_circlr_member xsh_circlr_member_btn">
@@ -47,25 +47,29 @@
 </div>
 <div class="xsh_circle_information">
     <ul class="xsh_circle_information_box">
-        <a hrefs = "<?if($profile['relation'] > 1) echo 'zxbbs://circle/modifyName/'?>">
+        <a hrefs = "<?if($profile['relation'] > 2) echo 'zxbbs://circle/modifyName/'?>">
             <li class="xsh_circle_name xsh_circle_managebor xsh_revise">
                 <div class="xsh_circle_information_title"><span>圈子名称</span></div>
                 <div class="xsh_circle_information_con xsh_revise_text" style="margin-right:15px;"><? echo $profile['title']; ?></div>
+                <?if($profile['relation'] > 2){?>
                 <div class="xsh_circle_information_con xsh_more_member_btn xsh_revise_text"></div>
+                <?}?>
             </li>
         </a>
-        <a hrefs = "<?if($profile['relation'] > 1) echo 'zxbbs://circle/modifyDesc/'?>" >
+        <a hrefs = "<?if($profile['relation'] > 2) echo 'zxbbs://circle/modifyDesc/'?>" >
             <li class="xsh_circle_name xsh_circle_managebor xsh_circle_synopsis xsh_revise">
                 <div class="xsh_circle_information_title">
                     <span>圈子简介</span>
                     <p class="xsh_circle_syn xsh_revise_text"><? echo $profile['description']; ?></p>
                 </div>
+                <?if($profile['relation'] > 2){?>
                 <div class="xsh_circle_information_con xsh_more_member_btn"> </div>
+                <?}?>
             </li>
         </a>
     </ul>
 </div>
-<?if($profile['relation'] == 2 && count($wait) > 0){?>
+<?if($profile['relation'] > 2 && count($wait) > 0){?>
 <div class="xsh_circle_information">
     <ul class="xsh_circle_information_box">
         <div class="xsh_circle_name xsh_circle_managebor">
@@ -96,16 +100,22 @@
 </div>
 <?}?>
 <div class="xsh_circle_manage">
-    <? if($profile['relation'] == 4){?>
+    <? if($profile['relation'] == 5){?>
         <a href="<?echo encodeUrl('app.php?show=circle-member&type=1&uid='.$uid.'&fid='.$fid)?>">
             <div class="xsh_circle_manage_operation">
                  <span>转让圈子</span>
             </div>
         </a>
-    <?}elseif($profile['relation'] != 0){ ?>
+    <?}elseif($profile['relation'] > 1){ ?>
         <a href="javascript:;" class="signout">
             <div class="xsh_circle_manage_operation">
                 <span>退出圈子</span>
+            </div>
+        </a>
+    <?}elseif($profile['relation'] == 1){ ?>
+        <a href="javascript:;">
+            <div class="xsh_circle_manage_operation">
+                <span>等待审核</span>
             </div>
         </a>
     <?}else{?>

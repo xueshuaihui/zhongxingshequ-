@@ -23,7 +23,7 @@ use discuz\request;
 【10】帖子列表：page-pageList[fid, tid, page, uid];<br/>
 【11】我的帖子：page-my[uid, page]; <br/><br/>
 =================================<br/><br/>
-【1】zxbbs://post/new 发帖<br/>
+【1】zxbbs://post/new/{fid} 发帖<br/>
 【2】zxbbs://circle/transfer 转让圈子<br/>
 【3】zxbbs://circle/invite   邀请好友进圈子<br/>
 【4】zxbbs://circle/defriend 删除圈子成员<br/>
