@@ -19,7 +19,7 @@ for(var i in windowhrsf){
         $("<image src='"+src+"' class='xsh_message_textmaximg'>").appendTo(mask);
     })
     /*获取聊天信息*/
-    var usericon = '';
+    var usericon = $('a[name=xsh_foot]').attr("id");
     function getdata(page){
         $.ajax({
             url:"http://zte.rmbplus.com/app.php?action=message-getPm",
@@ -90,3 +90,5 @@ message_submit.on("tap",function(){
         window.location.href = "zxbbs://alert/请输入内容";
     }
 })
+
+window.location.href = "#xsh_foot";
