@@ -87,7 +87,6 @@ class circleRepository extends baseRepository {
     }
 
     public function deleteUserFromForum($uid, $fid) {
-        $uid = explode(',', $uid);
         return $this->table('forum_groupuser')->where('fid', $fid)->in('uid', $uid)->delete();
     }
 
