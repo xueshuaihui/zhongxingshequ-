@@ -323,11 +323,17 @@ class circleApi extends baseApi {
             $groupList = $this->tool->getGroupUser($fid, 'uid, username', null, null, 1, true);
             //获取已经邀请的列表
             $inviteList = $this->tool->getInviteUser($fid, $uid);
+            foreach ($groupList as $grouplistItem) {
+                $tempGroupList[] = $grouplistItem['uid'];
+            }
+            foreach ($inviteList as $invitelistItem) {
+                $tempInviteList[] = $invitelistItem['inviteuid'];
+            }
         }
         //去除渣渣
         foreach ($friendsList as $k=>$user){
             if($fid){
-                if(in_array($user, $groupList) || in_array($user, $inviteList)){
+                if(in_array($user['uid'], $tempGroupList) || in_array($user, $tempInviteList)){
                     unset($friendsList[$k]);
                 }else{
                     $friendsList[$k]['icon'] = $this->tool->getAvatar($user['uid']);
