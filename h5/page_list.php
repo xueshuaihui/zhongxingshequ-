@@ -44,7 +44,9 @@
                     <img src="../static/h5/images/zd@2x.png" alt="" class="xsh_hotimg">
                     <?}?>
                 </p>
-                <h3 class=" xsh_text_one"><?echo $item['subject']?></h3>
+                <a href="">
+                    <h3 class=" xsh_text_one"><?echo $item['subject']?></h3>
+                </a>
                 <span class="xsh_circle_name"><center><?echo $item['author']?></center></span>
                 <span class="xsh_notice_time xsh_circle_time"><?echo date('Y-m-d H:i:m', $item['lastpost'])?></span>
             </div>

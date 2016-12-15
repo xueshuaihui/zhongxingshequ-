@@ -15,7 +15,7 @@ xshsearch.focus(function(){
         var val = $(this).val();
         if(val){
             /*获取数据*/
-            asynchronousearchbox.css({display:"block",height:$(".xsh_circle_list_box").height()});
+            asynchronousearchbox.css({display:"block",height:$(".xsh_circle_list_box").height(),marginTop:"57px"});
             $.ajax({
                 url:"http://zte.rmbplus.com/app.php?action=page-threadSearch",
                 data:{keyword:val,fid:fid,uid:uid},
@@ -107,6 +107,6 @@ function strfun(str,data,i){
 /**/
 var myscroll;
 function loaded(){
-    myscroll=new iScroll("wrapper");
+    myscroll=new IScroll("wrapper");
 }
 window.addEventListener("DOMContentLoaded",loaded,false);
