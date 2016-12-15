@@ -241,6 +241,8 @@ class circleApi extends baseApi {
         $count = $sCount ?: 10;
         $level = $level == 5 ? 0 : $level;
         $users = $this->tool->getGroupUser($fid, 'uid, username', $page, $count, $level);
+        $groupProfile = $this->tool->getGroupProfile($fid);
+        $users = array_merge($users, ['uid'=>$groupProfile['founderuid']]);
         foreach ($users as $k=>$user){
             $users[$k]['avatar'] = $this->tool->getAvatar($user['uid']);
             $userProfile = $this->tool->getUserProfile(['uid'=>$user['uid']]);
@@ -327,7 +329,10 @@ class circleApi extends baseApi {
         //去除渣渣
         foreach ($friendsList as $k=>$user){
             if($fid){
-                if($this->tool->getUserFromGroup($user['uid'], $fid) || $this->tool->getInvitedUser($fid, $user['uid'])){
+                $userFromGroup = $this->tool->getUserFromGroup($user['uid'], $fid);
+                $userInvited = $this->tool->getInvitedUser($fid, $user['uid']);
+                $groupProfile = $this->tool->getGroupProfile($fid);
+                if($userFromGroup || $userInvited || $groupProfile['founderuid'] == $user['uid']){
                     unset($friendsList[$k]);
                 }
             }else{
