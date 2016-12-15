@@ -43,6 +43,7 @@ class response implements responseInterface{
         10021 =>  '帖子内容不能为空',
         10022 =>  '该用户已经加入或者申请了',
         10023 =>  '加入成功！',
+        10024 =>  '不能删除自己',
     ];
     public function __construct($data = '') {
         if(is_bool($data)){

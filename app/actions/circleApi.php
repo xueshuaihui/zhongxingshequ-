@@ -434,7 +434,7 @@ class circleApi extends baseApi {
         }
         $uid_to_del = explode(',', $uid_to_del);
         if(in_array($uid, $uid_to_del)){
-            return 10007;
+            return 10024;
         }
         $user = $this->tool->getUserFromGroup($uid, $fid);
         if(!$user){
