@@ -11,11 +11,10 @@ class messageApp extends messageApi   {
     }
 
     public function pmc() {
-        $this->checkParam(['uid', 'touid', 'page'], 'get', 1);
+        $this->checkParam(['uid', 'touid'], 'get', 1);
         $uid = $this->request->get('uid');
         $touid = $this->request->get('touid');
-        $page = $this->request->get('page');
-        $lists = $this->getPm($uid, $page, $touid);
+        $userIcon = $this->tool->getAvatar($uid);
         require_once ROOT.'h5'.__.'message_pm_details.php';
     }
     public function pt() {

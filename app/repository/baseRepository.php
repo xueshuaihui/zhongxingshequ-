@@ -80,6 +80,15 @@ class baseRepository {
                     ->select('u.uid, u.username, p.bio');
     }
 
+    public function isFriend($uid, $theUid) {
+        return $this->table('home_friend')
+            ->ass('f')
+            ->join(' LEFT JOIN '.$this->prefix.'common_member AS u ON f.fuid = u.uid')
+            ->join(' LEFT JOIN '.$this->prefix.'common_member_profile AS p ON f.fuid = p.uid')
+            ->where(['f.uid'=>$uid, 'f.fuid'=>$theUid])
+            ->select('u.uid, u.username, p.bio');
+    }
+
     public function countGroupUser($fid) {
         return $this->table('forum_groupuser')->where('fid', $fid)->whereWhere('level', '>', 0)->find('COUNT(*)');
     }
