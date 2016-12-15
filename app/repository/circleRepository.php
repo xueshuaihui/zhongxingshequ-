@@ -130,7 +130,7 @@ class circleRepository extends baseRepository {
                     'uid'=>$uid,
                     'inviteuid'=>$invite,
                     'dateline' => getglobal('timestamp')
-                ], false);
+                ], false, true);
             if(!$res){
                 return false;
             }

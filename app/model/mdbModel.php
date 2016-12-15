@@ -34,8 +34,8 @@ class mdbModel extends baseModel implements dbInterface {
         return self::$baseModel;
     }
 
-    public function store($data, $returnId = true) {
-        $do = DB::insert($this->table, $data, $returnId);
+    public function store($data, $returnId = true, $replace = false) {
+        $do = DB::insert($this->table, $data, $returnId, $replace);
         self::refresh();
         return $do;
     }
