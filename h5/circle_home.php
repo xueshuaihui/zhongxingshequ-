@@ -12,7 +12,7 @@
     <ul class="xsh_search_conbox xsh_circlr_member_box">
         <? foreach($users as $user) { ?>
         <li class="xsh_circle_member_list">
-            <a href="<?echo encodeUrl('app.php?circle-member&uid='.$user['uid'].'&myuid='.$uid)?>">
+            <a href="<?echo encodeUrl('app.php?member-details&uid='.$user['uid'].'&myuid='.$uid)?>">
                 <div class="xsh_user_logo xsh_circlr_member">
                     <img src="<?php echo $user['avatar'] ;?>" alt="" class="xsh_user_logo xsh_circlr_member">
                 </div>
