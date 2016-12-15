@@ -25,7 +25,7 @@ class circleRepository extends baseRepository {
         }
         $res = [];
         foreach ($list as $k=>$value){
-            $res[$k]['icon'] = BASEURL.__.$value['icon'];
+            $res[$k]['icon'] = BASEURL.__.($value['icon'] != ''?:'static/image/common/groupicon.gif');
             if($type == 2 ){
                 $join = 1;
             }else{
