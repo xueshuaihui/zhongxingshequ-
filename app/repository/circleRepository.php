@@ -9,11 +9,8 @@ class circleRepository extends baseRepository {
         if($type == 2){
             $listmine = $this->table()->grouplist($uid, 2, $page);
             $listmanage = $this->table()->grouplist($uid, 1, $page);
-            $listcreate = $this->table('forum_forumfield')
-                ->as('ff')
-                ->join(' LEFT JOIN '.$this->prefix.'forum_forum as f ON f.fid = ff.fid')
-                ->where('ff.founderid', $uid)->find();
-            $list = array_merge($listmine, $listmanage, [$listcreate]);
+            $listcreate = $this->table('forum_forumfield')->ass('ff')->join(' LEFT JOIN '.$this->prefix.'forum_forum as f ON ff.fid = f.fid')->where('ff.founderuid', $uid)->select();
+            $list = array_merge($listmine, $listmanage, $listcreate);
         }elseif($type == 1){
             $list = $this->table('common_setting')->where('skey', 'group_recommend')->find();
             $list = array_values(dunserialize($list['svalue']));
