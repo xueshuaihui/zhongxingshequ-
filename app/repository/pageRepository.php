@@ -20,7 +20,7 @@ class pageRepository extends baseRepository {
         if($tags){
             $data->in('tag.tagid', $tags);
         }
-        $data->where(['thread.price'=>0, 'thread.readperm'=>0])->whereWhere('thread.typeid', '!=', 0)->order('thread.displayorder desc, thread.lastpost desc');
+        $data->where(['thread.price'=>0, 'thread.readperm'=>0])->whereWhere('thread.typeid', '!=', 0)->order('thread.displayorder asc, thread.lastpost desc');
         if($page){
             $start = ($page - 1) * $count;
             $data->limit($start.' ,'.$count);
