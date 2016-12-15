@@ -196,5 +196,6 @@ class mdbModel extends baseModel implements dbInterface {
         unset($this->whereOr);
         unset($this->sql);
         unset($this->join);
+        unset($this->table);
     }
 }
