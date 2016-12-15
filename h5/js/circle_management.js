@@ -20,7 +20,8 @@ $(".xsh_revise").on("tap",function(){
 /**/
 var circleinformationbox = $(".xsh_circle_information_box .xsh_private_letter_box");
 circleinformationbox.on("tap",".xsh_circle_accept",function(){
-    var uid = $(this).parents(".xsh_private_letter_box").attr("uid");
+    var parent = $(this).parents(".xsh_private_letter_box");
+    var uid = parent.attr("uid");
     /*接受*/
     $.ajax({
         url:"http://zte.rmbplus.com/app.php?action=circle-changeUserGroupStatus",
@@ -30,7 +31,7 @@ circleinformationbox.on("tap",".xsh_circle_accept",function(){
             if(result.state == 10000){
                 /*添加成功*/
                 window.location.href = "zxbbs://alert/"+result.msg;
-                $(this).parents(".xsh_private_letter_box").remove();
+                parent.remove();
             }else{
                 window.location.href = "zxbbs://alert/"+result.msg;
             }
@@ -38,8 +39,8 @@ circleinformationbox.on("tap",".xsh_circle_accept",function(){
     })
 })
 circleinformationbox.on("tap",".xsh_circle_refuse",function(){
-    var uid = $(this).parents(".xsh_private_letter_box").attr("uid");
-    console.log(uid)
+    var parent = $(this).parents(".xsh_private_letter_box");
+    var uid = parent.attr("uid");
     /*拒绝*/
     $.ajax({
         url:"http://zte.rmbplus.com/app.php?action=circle-ignoreApply",
@@ -49,7 +50,7 @@ circleinformationbox.on("tap",".xsh_circle_refuse",function(){
             if(result.state == 10000){
                 /*拒绝成功*/
                 window.location.href = "zxbbs://alert/"+result.msg;
-                $(this).parents(".xsh_private_letter_box").remove();
+                parent.remove();
             }else{
                 window.location.href = "zxbbs://alert/"+result.msg;
             }
