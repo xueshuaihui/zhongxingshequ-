@@ -241,7 +241,7 @@ class circleApi extends baseApi {
         $count = $sCount ?: 10;
         $level = $level == 5 ? 0 : $level;
         $users = $this->tool->getGroupUser($fid, 'uid, username', $page, $count, $level);
-        if($level){
+        if($level != 5){
             $groupProfile = $this->tool->getGroupProfile($fid);
             array_push($users, ['uid'=>$groupProfile['founderuid'], 'username'=>$groupProfile['foundername']]);
         }
