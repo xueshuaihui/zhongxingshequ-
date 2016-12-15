@@ -48,6 +48,7 @@ class indexRepository extends baseRepository {
         $valueAble = [];
         foreach ($datas as $k=>$data) {
             $valueAble[$k]['title'] = $this->subString($data['subject'], 25);
+            $valueAble[$k]['fid'] = $data['fid'];
             $valueAble[$k]['tid'] = $data['tid'];
             $valueAble[$k]['description'] = $this->filterMessage($data['message']);
             $valueAble[$k]['views'] = $data['views'];
