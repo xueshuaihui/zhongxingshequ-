@@ -43,15 +43,15 @@
             <p><span class="xsh_floor_username"><?echo $value['author']?>：</span><span class="xsh_floor_number"><?echo $k?>楼</span></p>
             <div class="xsh_floor_textbox">
                 <p class="xsh_floor_text"><?echo $value['message']?></p>
-                <ul>
-                    <?$count = count($value['img']); if($count){?>
-                        <?foreach ($value['img'] as $item){?>
+                <ul><?$count = count($value['attach']) + count($value['img']);?>
+                    <? if($count){?>
+                        <?foreach (array_merge($value['img'], $value['attach']) as $item){?>
                         <?if($count == 1){?>
-                            <li class="xsh_floor_text_img xsh_floor_text_img_one"><a href="javascript:;"><img src="<?echo $item?>" alt=""></a></li>
+                            <li class="xsh_floor_text_img xsh_floor_text_img_one"><a href="javascript:;"><img src="<?echo $item['attachment']?:$item ?>" alt=""></a></li>
                         <?}elseif($count ==2 || $count == 4){?>
-                            <li class="xsh_floor_text_img xsh_floor_text_img_two"><a href="javascript:;"><img src="<?echo $item?>" alt=""></a></li>
+                            <li class="xsh_floor_text_img xsh_floor_text_img_two"><a href="javascript:;"><img src="<?echo $item['attachment']?:$item ?>" alt=""></a></li>
                         <?}else{?>
-                            <li class="xsh_floor_text_img"><a href="javascript:;"><img src="<?echo $item?>" alt=""></a></li>
+                            <li class="xsh_floor_text_img"><a href="javascript:;"><img src="<?echo $item['attachment']?:$item ?>" alt=""></a></li>
                         <?}}}?>
                 </ul>
                 <span class="xsh_floor_text_time"><?echo date('Y-m-d H:i:s', $value['dateline'])?></span>
