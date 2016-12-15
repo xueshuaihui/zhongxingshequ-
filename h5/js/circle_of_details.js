@@ -107,6 +107,6 @@ function strfun(str,data,i){
 /**/
 var myscroll;
 function loaded(){
-    myscroll=new iScroll("#wrapper");
+    myscroll=new IScroll("wrapper");
 }
 window.addEventListener("DOMContentLoaded",loaded,false);
