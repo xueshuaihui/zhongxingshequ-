@@ -115,7 +115,7 @@ input:-ms-input-placeholder {
 /*资料详情*/
 .xsh_information_name{line-height: 30px;}
 .xsh_information_box{font-size: 14px;padding: 8px 0;}
-.xsh_information_box > li{padding: 8px 0;}
+.xsh_information_box > li{padding: 8px 0;height: 1em;}
 .xsh_user_information{color: #000000;font-weight: 100;}
 .xsh_information_title{width: 4em;display: block;float: left;}
 .xsh_information_btn_box{margin-top: 20px;}

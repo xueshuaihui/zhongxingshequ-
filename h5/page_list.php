@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="../static/h5/css/reset.css">
     <link rel="stylesheet" href="../static/h5/css/style.css">
+    <style>
+    .xsh_circle_list_box{width: 100%;height: 100%;position: fixed;overflow-y: auto;}
+    .xsh_circle_list_box>ul{padding-bottom: 70px;}
+    </style>
 </head>
 <body>
 <div class="xsh_search_box" id="wrapper">
@@ -57,6 +61,5 @@
 <div class="xsh_asynchronous_searchbox"></div>
 </body>
 <script src="/static/h5/js/zepto.min.js"></script>
-<script src="/h5/js/iscroll.js"></script>
 <script src="/h5/js/circle_of_details.js"></script>
 </html>
