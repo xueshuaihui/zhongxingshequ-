@@ -25,7 +25,7 @@ class pageApp extends pageApi {
         $uid = $this->request->get('uid');
         $page = $this->request->get('page');
         $this->tool->blank();
-        $lists = $this->threadList($uid);
+        $lists = $this->threadList($uid, false, $page);
         $avatar = $this->tool->getAvatar($uid);
         $user = $this->tool->getUserByUid($uid);
         require_once ROOT.'h5'.__.'page_my.php';

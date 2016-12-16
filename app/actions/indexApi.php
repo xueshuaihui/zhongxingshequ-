@@ -131,28 +131,15 @@ class indexApi extends baseApi {
      *   consumes={"application/json"},
      *   produces={"application/json"},
      *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
-     *     @SWG\Parameter(name="type", in="formData", description="类型【daylogin 登陆,reply 回复帖子, post 发布帖子】", required=true, type="string"),
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
     public function addCredit() {
-        $this->checkParam(['type', 'uid']);
-        $type = $this->request->post('type');
+        $this->checkParam('uid');
         $uid = $this->request->post('uid');
-        if(!in_array($type, ['daylogin', 'post', 'reply'])){
-            return 10007;
-        }
-        $res =$this->tool->creditHook($uid, $type);
-        if($res === true){
-            return true;
-        }elseif($res){
-            if($type == 'daylogin'){
-                return '每日签到 积分+'.$res;
-            }elseif($type == 'post'){
-                return '成功发帖 积分+'.$res;
-            }elseif($type == 'reply'){
-                return '成功回帖 积分+'.$res;
-            }
+        $res =$this->tool->creditHook($uid, 'daylogin');
+        if($res){
+            return '每日签到 积分+'.$res;
         }
         return false;
     }

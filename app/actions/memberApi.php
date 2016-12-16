@@ -78,4 +78,24 @@ class memberApi extends baseApi {
         $keyword = $this->request->post('keyword');
         return $this->tool->searchFriend($uid, $keyword);
     }
+
+    /**
+     * @SWG\Post(
+     *   path="member-getCredits",
+     *   tags={"用户信息"},
+     *   summary="获取积分",
+     *   description="获取积分",
+     *   operationId="getCredits",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function getCredits() {
+        $this->checkParam('uid');
+        $uid = $this->request->post('uid');
+        $user = $this->tool->getUserByUid($uid);
+        return $user['credits'];
+    }
 }
