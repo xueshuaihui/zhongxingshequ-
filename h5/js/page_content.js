@@ -84,7 +84,7 @@ function shangla(){
         type:"post",
         data:{tid:tid,fid:fid,page:page},
         success:function(result){
-            getdata(results);
+            getdata(result);
         }
     })
 }
@@ -96,7 +96,6 @@ var t3 = $(".xsh_floor_box")
 window.onscroll = function(){
     var height = t1.height()+t2.height()+t3.height();
     var scrolltop = $(window).scrollTop();
-    console.log(Math.abs(height-scheight-scrolltop))
     if(Math.abs(height-scheight-scrolltop) <= 50){
         reloadbox.css({display:"block"});
         /*上拉*/
