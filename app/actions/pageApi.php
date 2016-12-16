@@ -186,15 +186,18 @@ class pageApi extends baseApi {
         $pid = $this->request->post('pid');
         $pages = $this->tool->getTiezi($tid, $fid, $pid, $page);
         foreach ($pages as $k=>$page){
+            $pages[$k]['message'] = preg_replace('/\[quote\].*?\[\/quote\]/', '', $pages[$k]['message']);
             $pages[$k]['message'] = preg_replace('/\[.*?\]/', '', $pages[$k]['message']);
             $pages[$k]['message'] = preg_replace('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i', '', $pages[$k]['message']);
 //            $pages[$k]['message'] = preg_replace('/\[attach\].*?\[\/attach\]/', '', $pages[$k]['message']);
 //            $pages[$k]['message'] = preg_replace('/\[img.*?\[\/img\]/', '', $pages[$k]['message']);
             preg_match_all('/\[attach\].*?\[\/attach\]/', $page['message'], $res);
+            preg_match('/\[quote\].*?\[\/quote\]/', $page['message'], $reply);
             $attachId = '';
             foreach ($res[0] as $re){
                 $attachId[]= trim(preg_replace('/\[.*?\]/', ' ', $re));
             }
+            $pages[$k]['reply'] = $reply[0]?:'';
             if($attachId){
                 $pages[$k]['attach'] = $this->tool->getAttach($attachId);
             }else{
