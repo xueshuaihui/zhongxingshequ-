@@ -202,7 +202,7 @@ class baseRepository {
         }
         //直接从缓存中获取，并截取
         $imgName = uniqid($this->randNum(6));
-        $afterFix = '.'.$after;//$afterFixArr[$image['type']];
+        $afterFix = '.'.$after[count($after)];//$afterFixArr[$image['type']];
         $basePath = ROOT.'data'.__.'attachment'.__.$path.__;
         $filePath1 = date('Ym', time());
         $filePath2 = date('d', time());
