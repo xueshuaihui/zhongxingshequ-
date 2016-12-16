@@ -197,7 +197,7 @@ class baseRepository {
         }
         //判断格式
         $after = explode('.', $image['name']);
-        if(!in_array($after[1], ['jpg','jpeg'])){
+        if(!in_array($after[count($after) - 1], ['jpg','jpeg'])){
             return 10017;
         }
         //直接从缓存中获取，并截取
