@@ -138,6 +138,11 @@ class pageApi extends baseApi {
             $this->tool->saveAttachment($attachs, $pid, $tid, $uid);
         }
         $this->tool->updateThreadData($fid, $tid, $user['username'], $uid, $subject, $maxposition, $user['adminid']);
+        if($attachmentArr){
+            foreach ($attachmentArr as $k=>$item){
+                $attachmentArr[$k] = BASEURL.'data'.__.'attachment'.__.'forum'.__.$item['attachment'];
+            }
+        }
         return ['pid'=>$pid, 'images'=>$attachmentArr?:[]];
     }
 
