@@ -18,6 +18,7 @@ class circleApp extends circleApi {
         $fid = $this->request->get('fid');
         $uid = $this->request->get('uid');
         $type = $this->request->get('type');
+        $profile = $this->getGroupProfile($fid, $uid);
         //type 0: 非转让 1: 转让
         $users = $this->getGroupUsers($fid);
         require_once ROOT.'h5'.__.'circle_member.php';
