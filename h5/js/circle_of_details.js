@@ -5,6 +5,7 @@ for(var i in windowhrsf){
     var arr = windowhrsf[i].split("=");
     hrefdada[arr[0]] = arr[1];
 }
+var http = window.location.href.split('/app')[0];
 var fid = hrefdada.fid;
 var uid = hrefdada.uid;
 /**/
@@ -15,7 +16,7 @@ xshsearch.focus(function(){
         var val = $(this).val();
         if(val){
             /*获取数据*/
-            asynchronousearchbox.css({display:"block",height:$(".xsh_circle_list_box").height(),marginTop:"57px"});
+            asynchronousearchbox.css({display:"block",height:$(".xsh_circle_list_box").height()});
             $.ajax({
                 url:"/app.php?action=page-threadSearch",
                 data:{keyword:val,fid:fid,uid:uid},
@@ -77,8 +78,8 @@ function gettime(time){
     return new Date(parseInt(time) * 1000).toLocaleString().replace(/\//g,"-").slice(0,11)+new Date(parseInt(time) * 1000).toTimeString().slice(0,8);
 }
 function strfun(str,data,i){
-    var details = '/app.php?show=member-details&uid'+data[i].authorid;
-    str +='<li class="private_letter" tid="'+(data[i].tid)+'"><div class="xsh_private_letter_box xsh_circle_list"><a href="'+(escape(details).replace(/\//g,"##"))+'" authorid="'+(data[i].authorid)+'"><img src="'+(data[i].icon)+'" alt="" class="xsh_user_logo xsh_user_logo_radius"></a><p class="xsh_circle_label">['+(data[i].name)+']';
+    var details = http+'/app.php?show=member-details&uid'+data[i].authorid;
+    str +='<li class="private_letter" tid="'+(data[i].tid)+'"><div class="xsh_private_letter_box xsh_circle_list"><a href="zxbbs://jump/'+(escape(details).replace(/\//g,"##"))+'" authorid="'+(data[i].authorid)+'"><img src="'+(data[i].icon)+'" alt="" class="xsh_user_logo xsh_user_logo_radius"></a><p class="xsh_circle_label">['+(data[i].name)+']';
     switch (data[i].stamp){
         case "0":str +='<img src="/static/h5/images/jh@2x.png" alt="" class="xsh_hotimg">';break;
         case "1":str +='<img src="/static/h5/images/rt@2x.png" alt="" class="xsh_hotimg">';break;
@@ -92,8 +93,8 @@ function strfun(str,data,i){
         case "19":str +='<img src="/static/h5/images/bj@2x.png" alt="" class="xsh_hotimg">';break;
         default:str +='';break;
     }
-    var tzxq = '/app.php?show=page-pageContent&fid='+fid+'&tid='+(data[i].tid)+'&uid='+uid;
-    str +='</p><a href="'+(escape(tzxq.replace(/\//g,"##")))+'" ><p class=" xsh_text_one" style="background: '+(data[i].bgcolor)+';color: '+(data[i].color)+';">';
+    var tzxq = http+'/app.php?show=page-pageContent&fid='+fid+'&tid='+(data[i].tid)+'&uid='+uid;
+    str +='</p><a href="zxbbs://jump/'+(escape(tzxq.replace(/\//g,"##")))+'" ><p class=" xsh_text_one" style="background: '+(data[i].bgcolor)+';color: '+(data[i].color)+';">';
     if(data[i].B){
         str += '<b>'+(data[i].subject)+'</b>';
     }else if(data[i].I){

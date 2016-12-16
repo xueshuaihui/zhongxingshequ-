@@ -5,6 +5,7 @@ for(var i in windowhrsf){
     var arr = windowhrsf[i].split("=");
     hrefdada[arr[0]] = arr[1];
 }
+var http = window.location.href.split('/app')[0];
 var fid = hrefdada.fid;
 var uid = hrefdada.uid;
 var tid = hrefdada.tid;
@@ -24,7 +25,8 @@ var floorbox = $(".xsh_floor_box>ul");
 function replydata(result){
     var result = JSON.parse(result);
         /*插入到1楼前*/
-        var str='<li class="xsh_floor" pid="'+(result.pid)+'"><a href="" uid="'+(uid)+'"><img src="'+(result.portrait)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(result.name)+'：</span><span class="xsh_floor_number"></span></p><div class="xsh_floor_textbox"><p class="xsh_floor_text">'+(result.text)+'</p><ul>';
+        var ziliao = http+'/app.php?show=member-details&uid='+uid;
+        var str='<li class="xsh_floor" pid="'+(result.pid)+'"><a href="zxbbs://jump/'+(escape(ziliao.replace(/\//g,"##")))+'" uid="'+(uid)+'"><img src="'+(result.portrait)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(result.name)+'：</span><span class="xsh_floor_number"></span></p><div class="xsh_floor_textbox"><p class="xsh_floor_text">'+(result.text)+'</p><ul>';
         var length = result.images.length;
         for (var i in result.images){
             if(length ==2||length ==4){
@@ -62,8 +64,8 @@ function getdata(results){
     if(results.state == 10000){
         var data = results.result;
         for(var i in data){
-            var ziliao = '/app.php?show=member-details&uid='+data[i].authorid;
-            var str='<li class="xsh_floor" pid="'+(data[i].pid)+'"><a href="'+(escape(ziliao.replace(/\//g,"##")))+'" uid="'+(data[i].authorid)+'"><img src="'+(data[i].usericon)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(data[i].author)+'：</span><span class="xsh_floor_number"></span></p><div class="xsh_floor_textbox"><p class="xsh_floor_text">'+(data[i].message)+'</p><ul>';
+            var ziliao = http+'/app.php?show=member-details&uid='+data[i].authorid;
+            var str='<li class="xsh_floor" pid="'+(data[i].pid)+'"><a href="zxbbs://jump/'+(escape(ziliao.replace(/\//g,"##")))+'" uid="'+(data[i].authorid)+'"><img src="'+(data[i].usericon)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(data[i].author)+'：</span><span class="xsh_floor_number"></span></p><div class="xsh_floor_textbox"><p class="xsh_floor_text">'+(data[i].message)+'</p><ul>';
             var images=[];
             var att = data[i].attach;
             for (var j in att){
