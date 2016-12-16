@@ -36,10 +36,10 @@ function replydata(result){
             }
             str +='<img src="'+(result.images[i])+'" alt=""></a></li>';
         }
-        str +='</ul><span class="xsh_floor_text_time">'+(result.time)+'</span></div></li>';
+
+        str +='</ul><span class="xsh_floor_text_time">'+(new Date(new Date().getTime()).toLocaleString().replace(/\//g,"-").slice(0,11)+new Date(new Date().getTime()).toTimeString().slice(0,8))+'</span></div></li>';
         floorbox.prepend(str);
 }
-
 var scheight = $(window).height();
 var reloadbox = $(".reloadbox");
 var t1 = $(".xsh_postdetails_box");
