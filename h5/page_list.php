@@ -19,7 +19,7 @@
         <?foreach ($list as $item){?>
         <li class="private_letter">
             <div class="xsh_private_letter_box xsh_circle_list">
-                <a href="<?echo encodeUrl("app.php?show=page-pageContent&fid={$item['fid']}&tid={$item['tid']}&uid={$uid}")?>">
+                <a href="<?echo encodeUrl("app.php?show=member-details&uid={$item['authorid']}&myuid={$uid}")?>">
                     <img src="<?echo $item['icon'];?>" alt="" class="xsh_user_logo xsh_user_logo_radius">
                 </a>
                 <p class="xsh_circle_label">[<?echo $item['name'];?>]
@@ -44,7 +44,7 @@
                     <img src="../static/h5/images/zd@2x.png" alt="" class="xsh_hotimg">
                     <?}?>
                 </p>
-                <a href="">
+                <a href="<?echo encodeUrl("app.php?show=page-pageContent&fid={$item['fid']}&tid={$item['tid']}&uid={$uid}")?>">
                     <h3 class=" xsh_text_one"><?echo $item['subject']?></h3>
                 </a>
                 <span class="xsh_circle_name"><center><?echo $item['author']?></center></span>
