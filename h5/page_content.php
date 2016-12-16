@@ -38,7 +38,7 @@
 <div class="xsh_floor_box">
     <ul>
         <?foreach ($result as $k=>$value){ if($k == 0) continue;?>
-        <li class="xsh_floor" pid="">
+        <li class="xsh_floor" pid="<?echo $value['pid']?>">
             <a href=""><img src="<?echo $value['usericon']?>" alt="" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a>
             <p><span class="xsh_floor_username"><?echo $value['author']?>：</span><span class="xsh_floor_number"><?echo $k?>楼</span></p>
             <div class="xsh_floor_textbox">
