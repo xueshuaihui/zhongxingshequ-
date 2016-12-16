@@ -11,12 +11,14 @@ var uid = hrefdada.uid;
 /**/
 var xshsearch = $("#xsh_search");
 var asynchronousearchbox = $(".xsh_asynchronous_searchbox");
+var circle_list_box = $(".xsh_circle_list_box");
 xshsearch.focus(function(){
     $(this).on("keyup keydown",function(){
         var val = $(this).val();
         if(val){
             /*获取数据*/
-            asynchronousearchbox.css({display:"block",height:$(".xsh_circle_list_box").height()});
+            circle_list_box.css({display:"none"});
+            asynchronousearchbox.css({display:"block"});
             $.ajax({
                 url:"/app.php?action=page-threadSearch",
                 data:{keyword:val,fid:fid,uid:uid},
@@ -40,6 +42,7 @@ xshsearch.focus(function(){
         }else{
             asynchronousearchbox.html("");
             asynchronousearchbox.css({display:"none"});
+            circle_list_box.css({display:"block"});
         }
     })
 })
