@@ -17,7 +17,7 @@ xshsearch.focus(function(){
             /*获取数据*/
             asynchronousearchbox.css({display:"block",height:$(".xsh_circle_list_box").height(),marginTop:"57px"});
             $.ajax({
-                url:"http://zte.rmbplus.com/app.php?action=page-threadSearch",
+                url:"/app.php?action=page-threadSearch",
                 data:{keyword:val,fid:fid,uid:uid},
                 type:"post",
                 success:function(results){

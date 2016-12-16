@@ -18,7 +18,7 @@ circle_member_one.on("tap",function(){
 })
 function istrue(){
     $.ajax({
-        url:"http://zte.rmbplus.com/app.php?action=circle-changeCircleFounder",
+        url:"/app.php?action=circle-changeCircleFounder",
         type:'post',
         data:{old_uid:uid,new_uid:new_uid,fid:fid},
         success:function(result){

@@ -23,7 +23,7 @@ $(function(){
     var usericon = '';
     function getdata(page){
         $.ajax({
-            url:"http://zte.rmbplus.com/app.php?action=message-getPm",
+            url:"/app.php?action=message-getPm",
             data:{uid:Number(hrefdada.uid),page:Number(page),touid:Number(hrefdada.touid)},
             type:"post",
             success:function(result){
@@ -71,7 +71,7 @@ message_submit.on("tap",function(){
     var val = message_inputext.val();
     if(val){
         $.ajax({
-            url:"http://zte.rmbplus.com/app.php?action=message-sendPm",
+            url:"/app.php?action=message-sendPm",
             data:{uid:hrefdada.uid,touid:hrefdada.touid,message:val},
             type:"post",
             success:function(result){
