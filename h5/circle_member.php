@@ -20,6 +20,24 @@
             </a>
         </li>
         <? } ?>
+        <?if($profile['relation'] > 2){?>
+            <li class="xsh_circle_member_list">
+                <a href="zxbbs://circle/invite">
+                    <div class="xsh_user_logo xsh_circlr_member xsh_circlr_member_btn">
+                        <img src="../static/h5/images/add.png" alt="" class="xsh_user_logo xsh_circlr_member">
+                    </div>
+                    <p class="xsh_circle_member_name"></p>
+                </a>
+            </li>
+            <li class="xsh_circle_member_list">
+                <a href="zxbbs://circle/defriend">
+                    <div class="xsh_user_logo xsh_circlr_member xsh_circlr_member_btn">
+                        <img src="/static/h5/images/jian.png" alt="" class="xsh_user_logo xsh_circlr_member">
+                    </div>
+                    <p class="xsh_circle_member_name"></p>
+                </a>
+            </li>
+        <?}?>
     </ul>
 </div>
 </body>
