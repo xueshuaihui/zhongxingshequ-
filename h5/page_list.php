@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="../static/h5/css/reset.css">
     <link rel="stylesheet" href="../static/h5/css/style.css">
-    <style>
-    .xsh_circle_list_box{width: 100%;height: 100%;position: fixed;overflow-y: auto;}
-    .xsh_circle_list_box>ul{padding-bottom: 70px;}
-    </style>
 </head>
 <body>
 <div class="xsh_search_box" id="wrapper">
@@ -62,4 +58,13 @@
 </body>
 <script src="/static/h5/js/zepto.min.js"></script>
 <script src="/h5/js/circle_of_details.js"></script>
+<script>
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    if(isiOS){
+        $(".xsh_circle_list_box").css({width:"100%",height:'100%',position:"fixed","overflow-y":"auto"});
+        $(".xsh_circle_list_box>ul").css({'padding-bottom': '70px'});
+    }
+</script>
 </html>
