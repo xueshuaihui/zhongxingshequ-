@@ -207,7 +207,6 @@ function ajaxtext(box,tab,page){
                     str = '<li class="xsh_tab_conbox"><div class="xsh_tab_img"><a href="forum.php?mod=viewthread&tid='+(data['data'][i].tid)+'" target="'+target+'"><img src="'+(data['data'][i].image)+'" alt="加载不成功" title="'+(data['data'][i].subject)+'"></a></div><div class="xsh_tab_writing"><div class="xsh_tab_contitle"><a href="forum.php?mod=viewthread&tid='+(data['data'][i].tid)+'" target="'+target+'"><p>'+(data['data'][i].subject)+'</p></a></div><div class="xsh_tab_concise"><p>'+(data['data'][i].message)+'<span class="xsh_tab_more"><a href="forum.php?mod=viewthread&tid='+(data['data'][i].tid)+'" target="'+target+'">全文<img src="/static/zte/images/u76.png" alt=""></a></span></p></div><div class="xsh_tab_time"><span>'+(data['data'][i].dateline)+'</span><span class="liulanl">'+(data['data'][i].views)+'</span></div></div></li>' + str;
                 }
                 box.html(str);
-                console.log(data['pagnate']);
                 jq(".xsh_page_box ul").html(data['pagnate']);
             }else{
                 alert("网络错误！");
