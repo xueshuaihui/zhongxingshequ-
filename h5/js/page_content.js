@@ -63,7 +63,7 @@ function getdata(results){
         var data = results.result;
         for(var i in data){
             var ziliao = '/app.php?show=member-details&uid='+data[i].authorid;
-            var str='<li class="xsh_floor" pid="'+(data[i].pid)+'"><a href="'+(escape(ziliao))+'" uid="'+(data[i].authorid)+'"><img src="'+(data[i].usericon)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(data[i].author)+'：</span><span class="xsh_floor_number"></span></p><div class="xsh_floor_textbox"><p class="xsh_floor_text">'+(data[i].message)+'</p><ul>';
+            var str='<li class="xsh_floor" pid="'+(data[i].pid)+'"><a href="'+(escape(ziliao.replace(/\//g,"##")))+'" uid="'+(data[i].authorid)+'"><img src="'+(data[i].usericon)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(data[i].author)+'：</span><span class="xsh_floor_number"></span></p><div class="xsh_floor_textbox"><p class="xsh_floor_text">'+(data[i].message)+'</p><ul>';
             var images=[];
             var att = data[i].attach;
             for (var j in att){
