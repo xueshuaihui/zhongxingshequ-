@@ -242,8 +242,18 @@ class circleApi extends baseApi {
         $level = $level == 5 ? 0 : $level;
         $users = $this->tool->getGroupUser($fid, 'uid, username', $page, $count, $level);
         if($level !== 0){
+            $flag = true;
             $groupProfile = $this->tool->getGroupProfile($fid);
-            array_unshift($users, ['uid'=>$groupProfile['founderuid'], 'username'=>$groupProfile['foundername']]);
+            $founderId = $groupProfile['founderuid'];
+            foreach ($users as $k=>$userUid){
+                if($userUid['uid'] == $founderId){
+                    $flag = false;
+                    break;
+                }
+            }
+            if($flag){
+                array_unshift($users, ['uid'=>$founderId, 'username'=>$groupProfile['foundername']]);
+            }
         }
         foreach ($users as $k=>$user){
             $users[$k]['avatar'] = $this->tool->getAvatar($user['uid']);
