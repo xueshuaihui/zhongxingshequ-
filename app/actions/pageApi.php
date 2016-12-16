@@ -138,7 +138,7 @@ class pageApi extends baseApi {
             $this->tool->saveAttachment($attachs, $pid, $tid, $uid);
         }
         $this->tool->updateThreadData($fid, $tid, $user['username'], $uid, $subject, $maxposition, $user['adminid']);
-        return ['pid'=>$pid, 'images'=>$attachmentArr];
+        return ['pid'=>$pid, 'images'=>$attachmentArr?:[]];
     }
 
     /**
