@@ -138,7 +138,12 @@ class pageApi extends baseApi {
             $this->tool->saveAttachment($attachs, $pid, $tid, $uid);
         }
         $this->tool->updateThreadData($fid, $tid, $user['username'], $uid, $subject, $maxposition, $user['adminid']);
-        return $pid;
+        if($attachmentArr){
+            foreach ($attachmentArr as $k=>$item){
+                $attachmentArr[$k] = BASEURL.__.'data'.__.'attachment'.__.'forum'.__.$item['attachment'];
+            }
+        }
+        return ['pid'=>$pid, 'images'=>$attachmentArr?:[]];
     }
 
     /**
@@ -186,18 +191,20 @@ class pageApi extends baseApi {
         $pid = $this->request->post('pid');
         $pages = $this->tool->getTiezi($tid, $fid, $pid, $page);
         foreach ($pages as $k=>$page){
-            $pages[$k]['message'] = preg_replace('/\[quote\].*?\[\/quote\]/', '', $pages[$k]['message']);
+            $pages[$k]['message'] = preg_replace('/\[quote\]([\s\S]*)\[\/quote\]/i', '', $pages[$k]['message']);
             $pages[$k]['message'] = preg_replace('/\[.*?\]/', '', $pages[$k]['message']);
             $pages[$k]['message'] = preg_replace('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i', '', $pages[$k]['message']);
+            $pages[$k]['message'] = trim($pages[$k]['message']);
 //            $pages[$k]['message'] = preg_replace('/\[attach\].*?\[\/attach\]/', '', $pages[$k]['message']);
 //            $pages[$k]['message'] = preg_replace('/\[img.*?\[\/img\]/', '', $pages[$k]['message']);
             preg_match_all('/\[attach\].*?\[\/attach\]/', $page['message'], $res);
-            preg_match('/\[quote\].*?\[\/quote\]/', $page['message'], $reply);
+            preg_match('/\[quote\]([\s\S]*)\[\/quote\]/i', $page['message'], $reply);
+            $replyContent = preg_replace('/\[.*?\]/', '', $reply[0]);
             $attachId = '';
             foreach ($res[0] as $re){
                 $attachId[]= trim(preg_replace('/\[.*?\]/', ' ', $re));
             }
-            $pages[$k]['reply'] = $reply[0]?:'';
+            $pages[$k]['reply'] = $replyContent?:'';
             if($attachId){
                 $pages[$k]['attach'] = $this->tool->getAttach($attachId);
             }else{
