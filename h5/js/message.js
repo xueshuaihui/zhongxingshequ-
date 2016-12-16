@@ -8,6 +8,7 @@ for(var i in windowhrsf){
     }
     hrefdada[arr[0]] = arr[1];
 }
+var http = window.location.href.split('/app')[0];
 /**/
     var messagebox = $(".xsh_message_box>ul");
     /*图片预览*/
@@ -77,7 +78,8 @@ message_submit.on("tap",function(){
                 var data = result;
                 if(data.state == 10000){
                     var str = '';
-                    str += '<li class="xsh_me"><div class="xsh_message_logobox"><a href="zxbbs://jump/'+(escape("app.php?show=member-details&uid='+hrefdada.uid+'"))+'" name ="'+(num)+'"><img src="'+(usericon)+'" alt=""></a></div><div class="xsh_message_text"><div class="xsh_you_trigon"></div><p>'+(val)+'</p></div></li>';
+                    var zlxq = http+"app.php?show=member-details&uid="+hrefdada.uid;
+                    str += '<li class="xsh_me"><div class="xsh_message_logobox"><a href="zxbbs://jump/'+(escape(zlxq))+'" name ="'+(num)+'"><img src="'+(usericon)+'" alt=""></a></div><div class="xsh_message_text"><div class="xsh_you_trigon"></div><p>'+(val)+'</p></div></li>';
                     xsh_foot.before(str);
                     window.location.href = "#"+num;
                     message_inputext.val("");
