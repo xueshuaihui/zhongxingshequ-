@@ -43,7 +43,6 @@ function replydata(result){
 //        var a = {pid:"3243",name:"头发发给",portrait:"http://zte.rmbplus.com/uc_server/avatar.php?uid=1&size=small" ,text:"听到好音乐。它所具备的加密功能、超长续航、高清录音以及高清拍摄等等等优质功能，足够令其高效率的协助执法人员完成高效、规范执法的重任",time:"2016-15-48",images:["http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg","http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg","http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg","http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg","http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg"]}
 /*上拉加载*/
 function getdata(results){
-    var results = JSON.parse(results);
     if(results.state == 10000){
         var data = results.result;
         for(var i in data){
@@ -66,16 +65,44 @@ function getdata(results){
                 }
                 str +='<img src="'+(images[i])+'" alt=""></a></li>';
             }
-            str +='</ul><span class="xsh_floor_text_time">'+(result.time)+'</span></div></li>';
+            str +='</ul><span class="xsh_floor_text_time">'+(gettime(data[i].dateline))+'</span></div></li>';
         }
+        floorbox.append(str);
     }else{
         window.location.href = "zxbbs://alert/"+results.msg;
     }
 }
+function gettime(time){
+    return new Date(parseInt(time) * 1000).toLocaleString().replace(/\//g,"-").slice(0,11)+new Date(parseInt(time) * 1000).toTimeString().slice(0,8);
+}
+var page = 1;
 function shangla(){
+    page++;
     $.ajax({
-        url:"",
+        url:"/app.php?action=page-tieziList",
+        type:"post",
+        data:{tid:tid,fid:fid,page:page},
+        success:function(result){
+            getdata(result);
+        }
     })
+}
+var scheight = $(window).height();
+var reloadbox = $(".reloadbox");
+var t1 = $(".xsh_postdetails_box");
+var t2 = $(".xsh_postdetails_textbox");
+var t3 = $(".xsh_floor_box")
+window.onscroll = function(){
+    var height = t1.height()+t2.height()+t3.height();
+    var scrolltop = $(window).scrollTop();
+    if(Math.abs(height-scheight-scrolltop) <= 50){
+        reloadbox.css({display:"block"});
+        /*上拉*/
+        shangla();
+    }else{
+        reloadbox.css({display:"none"});
+        /*关闭*/
+    }
 }
 /*缩略图预览*/
 var openPhotoSwipe = function(index,arr) {

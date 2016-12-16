@@ -77,7 +77,8 @@ function gettime(time){
     return new Date(parseInt(time) * 1000).toLocaleString().replace(/\//g,"-").slice(0,11)+new Date(parseInt(time) * 1000).toTimeString().slice(0,8);
 }
 function strfun(str,data,i){
-    str +='<li class="private_letter" tid="'+(data[i].tid)+'"><div class="xsh_private_letter_box xsh_circle_list"><a href="" authorid="'+(data[i].authorid)+'"><img src="'+(data[i].icon)+'" alt="" class="xsh_user_logo xsh_user_logo_radius"></a><p class="xsh_circle_label">['+(data[i].name)+']';
+    var details = '/app.php?show=member-details&uid'+data[i].authorid;
+    str +='<li class="private_letter" tid="'+(data[i].tid)+'"><div class="xsh_private_letter_box xsh_circle_list"><a href="'+(escape(details))+'" authorid="'+(data[i].authorid)+'"><img src="'+(data[i].icon)+'" alt="" class="xsh_user_logo xsh_user_logo_radius"></a><p class="xsh_circle_label">['+(data[i].name)+']';
     switch (data[i].stamp){
         case "0":str +='<img src="/static/h5/images/jh@2x.png" alt="" class="xsh_hotimg">';break;
         case "1":str +='<img src="/static/h5/images/rt@2x.png" alt="" class="xsh_hotimg">';break;
@@ -91,7 +92,8 @@ function strfun(str,data,i){
         case "19":str +='<img src="/static/h5/images/bj@2x.png" alt="" class="xsh_hotimg">';break;
         default:str +='';break;
     }
-    str +='</p><p class=" xsh_text_one" style="background: '+(data[i].bgcolor)+';color: '+(data[i].color)+';">';
+    var tzxq = '/app.php?show=page-pageContent&fid='+fid+'&tid='+(data[i].tid)+'&uid='+uid
+    str +='</p><a href="'+(escape(tzxq))+'" ><p class=" xsh_text_one" style="background: '+(data[i].bgcolor)+';color: '+(data[i].color)+';">';
     if(data[i].B){
         str += '<b>'+(data[i].subject)+'</b>';
     }else if(data[i].I){
@@ -101,7 +103,7 @@ function strfun(str,data,i){
     }else{
         str += (data[i].subject);
     }
-    str +='</p><span class="xsh_circle_name">'+(data[i].author)+'</span><span class="xsh_notice_time xsh_circle_time">'+(gettime(data[i].lastpost))+'</span></div></li>';
+    str +='</p></a><span class="xsh_circle_name">'+(data[i].author)+'</span><span class="xsh_notice_time xsh_circle_time">'+(gettime(data[i].lastpost))+'</span></div></li>';
     return str;
 }
 /**/
