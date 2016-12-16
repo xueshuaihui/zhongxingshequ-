@@ -187,6 +187,7 @@ class pageApi extends baseApi {
         $pages = $this->tool->getTiezi($tid, $fid, $pid, $page);
         foreach ($pages as $k=>$page){
             $pages[$k]['message'] = preg_replace('/\[.*?\]/', '', $pages[$k]['message']);
+            $pages[$k]['message'] = preg_replace('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i', '', $pages[$k]['message']);
 //            $pages[$k]['message'] = preg_replace('/\[attach\].*?\[\/attach\]/', '', $pages[$k]['message']);
 //            $pages[$k]['message'] = preg_replace('/\[img.*?\[\/img\]/', '', $pages[$k]['message']);
             preg_match_all('/\[attach\].*?\[\/attach\]/', $page['message'], $res);
@@ -200,8 +201,12 @@ class pageApi extends baseApi {
                 $pages[$k]['attach'] = [];
             }
             //再把图片链接读出来
+            $tempImg = [];
             preg_match_all('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i', $page['message'], $imgUrl);
-            $pages[$k]['img'] = $imgUrl[0];
+            foreach ($imgUrl[0] as $item){
+                $tempImg[] = ['attachment'=>$item, 'isimage'=>1];
+            }
+            $pages[$k]['attach'] = array_merge($pages[$k]['attach'], $tempImg);
         }
         return $pages;
     }
