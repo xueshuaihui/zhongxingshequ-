@@ -78,7 +78,7 @@ function gettime(time){
     return new Date(parseInt(time) * 1000).toLocaleString().replace(/\//g,"-").slice(0,11)+new Date(parseInt(time) * 1000).toTimeString().slice(0,8);
 }
 function strfun(str,data,i){
-    var details = http+'/app.php?show=member-details&uid'+data[i].authorid;
+    var details = http+'/app.php?show=member-details&uid='+data[i].authorid;
     str +='<li class="private_letter" tid="'+(data[i].tid)+'"><div class="xsh_private_letter_box xsh_circle_list"><a href="zxbbs://jump/'+(escape(details).replace(/\//g,"##"))+'" authorid="'+(data[i].authorid)+'"><img src="'+(data[i].icon)+'" alt="" class="xsh_user_logo xsh_user_logo_radius"></a><p class="xsh_circle_label">['+(data[i].name)+']';
     switch (data[i].stamp){
         case "0":str +='<img src="/static/h5/images/jh@2x.png" alt="" class="xsh_hotimg">';break;
