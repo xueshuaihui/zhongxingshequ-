@@ -200,8 +200,12 @@ class pageApi extends baseApi {
                 $pages[$k]['attach'] = [];
             }
             //再把图片链接读出来
+            $tempImg = [];
             preg_match_all('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i', $page['message'], $imgUrl);
-            $pages[$k]['img'] = $imgUrl[0];
+            foreach ($imgUrl[0] as $item){
+                $tempImg[] = ['attachment'=>$item, 'isimage'=>1];
+            }
+            $pages[$k]['attach'] = array_merge($pages[$k]['attach'], $tempImg);
         }
         return $pages;
     }
