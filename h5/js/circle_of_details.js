@@ -106,9 +106,3 @@ function strfun(str,data,i){
     str +='</p></a><span class="xsh_circle_name">'+(data[i].author)+'</span><span class="xsh_notice_time xsh_circle_time">'+(gettime(data[i].lastpost))+'</span></div></li>';
     return str;
 }
-/**/
-var myscroll;
-function loaded(){
-    myscroll=new IScroll("wrapper");
-}
-window.addEventListener("DOMContentLoaded",loaded,false);
