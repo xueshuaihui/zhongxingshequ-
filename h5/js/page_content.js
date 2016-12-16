@@ -43,7 +43,6 @@ function replydata(result){
 //        var a = {pid:"3243",name:"头发发给",portrait:"http://zte.rmbplus.com/uc_server/avatar.php?uid=1&size=small" ,text:"听到好音乐。它所具备的加密功能、超长续航、高清录音以及高清拍摄等等等优质功能，足够令其高效率的协助执法人员完成高效、规范执法的重任",time:"2016-15-48",images:["http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg","http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg","http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg","http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg","http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg"]}
 /*上拉加载*/
 function getdata(results){
-    var results = JSON.parse(results);
     if(results.state == 10000){
         var data = results.result;
         for(var i in data){
