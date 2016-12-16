@@ -91,7 +91,7 @@ function strfun(str,data,i){
         case "19":str +='<img src="/static/h5/images/bj@2x.png" alt="" class="xsh_hotimg">';break;
         default:str +='';break;
     }
-    str +='</p><p class=" xsh_text_one" style="background: '+(data[i].bgcolor)+';color: '+(data[i].color)+';">';
+    str +='</p><a href="" ><p class=" xsh_text_one" style="background: '+(data[i].bgcolor)+';color: '+(data[i].color)+';">';
     if(data[i].B){
         str += '<b>'+(data[i].subject)+'</b>';
     }else if(data[i].I){
@@ -101,7 +101,7 @@ function strfun(str,data,i){
     }else{
         str += (data[i].subject);
     }
-    str +='</p><span class="xsh_circle_name">'+(data[i].author)+'</span><span class="xsh_notice_time xsh_circle_time">'+(gettime(data[i].lastpost))+'</span></div></li>';
+    str +='</p></a><span class="xsh_circle_name">'+(data[i].author)+'</span><span class="xsh_notice_time xsh_circle_time">'+(gettime(data[i].lastpost))+'</span></div></li>';
     return str;
 }
 /**/

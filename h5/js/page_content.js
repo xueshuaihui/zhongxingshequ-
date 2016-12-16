@@ -66,16 +66,45 @@ function getdata(results){
                 }
                 str +='<img src="'+(images[i])+'" alt=""></a></li>';
             }
-            str +='</ul><span class="xsh_floor_text_time">'+(result.time)+'</span></div></li>';
+            str +='</ul><span class="xsh_floor_text_time">'+(gettime(data[i].dateline))+'</span></div></li>';
         }
+        floorbox.append(str);
     }else{
         window.location.href = "zxbbs://alert/"+results.msg;
     }
 }
+function gettime(time){
+    return new Date(parseInt(time) * 1000).toLocaleString().replace(/\//g,"-").slice(0,11)+new Date(parseInt(time) * 1000).toTimeString().slice(0,8);
+}
+var page = 1;
 function shangla(){
+    page++;
     $.ajax({
-        url:"",
+        url:"/app.php?action=page-tieziList",
+        type:"post",
+        data:{tid:tid,fid:fid,page:page},
+        success:function(result){
+            getdata(results);
+        }
     })
+}
+var scheight = $(window).height();
+var reloadbox = $(".reloadbox");
+var t1 = $(".xsh_postdetails_box");
+var t2 = $(".xsh_postdetails_textbox");
+var t3 = $(".xsh_floor_box")
+window.onscroll = function(){
+    var height = t1.height()+t2.height()+t3.height();
+    var scrolltop = $(window).scrollTop();
+    console.log(Math.abs(height-scheight-scrolltop))
+    if(Math.abs(height-scheight-scrolltop) <= 50){
+        reloadbox.css({display:"block"});
+        /*上拉*/
+        shangla();
+    }else{
+        reloadbox.css({display:"none"});
+        /*关闭*/
+    }
 }
 /*缩略图预览*/
 var openPhotoSwipe = function(index,arr) {
