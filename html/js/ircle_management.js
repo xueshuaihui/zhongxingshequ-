@@ -7,7 +7,7 @@ circleinformationbox.on("tap",".xsh_circle_accept",function(){
     console.log(uid)
     /*接受*/
     $.ajax({
-        url:"http://zte.rmbplus.com/app.php?action=circle-changeUserGroupStatus",
+        url:"/app.php?action=circle-changeUserGroupStatus",
         data:{wantPower:4,fid:fid,uid:uid},
         type:"post",
         success:function(result){
@@ -26,7 +26,7 @@ circleinformationbox.on("tap",".xsh_circle_refuse",function(){
     console.log(uid)
     /*拒绝*/
     $.ajax({
-        url:"http://zte.rmbplus.com/app.php?action=circle-ignoreApply",
+        url:"/app.php?action=circle-ignoreApply",
         data:{fid:fid,uid:uid},
         type:"post",
         success:function(result){

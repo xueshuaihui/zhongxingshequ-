@@ -40,13 +40,30 @@ function replydata(result){
         floorbox.prepend(str);
 }
 
-//        var a = {pid:"3243",name:"头发发给",portrait:"http://zte.rmbplus.com/uc_server/avatar.php?uid=1&size=small" ,text:"听到好音乐。它所具备的加密功能、超长续航、高清录音以及高清拍摄等等等优质功能，足够令其高效率的协助执法人员完成高效、规范执法的重任",time:"2016-15-48",images:["http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg","http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg","http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg","http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg","http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1610/31/c6/29213507_1477922959573_800x800.jpg"]}
+var scheight = $(window).height();
+var reloadbox = $(".reloadbox");
+var t1 = $(".xsh_postdetails_box");
+var t2 = $(".xsh_postdetails_textbox");
+var t3 = $(".xsh_floor_box")
+window.onscroll = function(){
+    var height = t1.height()+t2.height()+t3.height();
+    var scrolltop = $(window).scrollTop();
+    if(Math.abs(height-scheight-scrolltop) <= 50){
+        reloadbox.css({display:"block"});
+        /*上拉*/
+        shangla();
+    }else{
+        reloadbox.css({display:"none"});
+        /*关闭*/
+    }
+}
 /*上拉加载*/
 function getdata(results){
     if(results.state == 10000){
         var data = results.result;
         for(var i in data){
-            var str='<li class="xsh_floor" pid="'+(data[i].pid)+'"><a href="" uid="'+(data[i].authorid)+'"><img src="'+(data[i].usericon)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(data[i].author)+'：</span><span class="xsh_floor_number"></span></p><div class="xsh_floor_textbox"><p class="xsh_floor_text">'+(data[i].message)+'</p><ul>';
+            var ziliao = '/app.php?show=member-details&uid='+data[i].authorid;
+            var str='<li class="xsh_floor" pid="'+(data[i].pid)+'"><a href="'+(escape(ziliao))+'" uid="'+(data[i].authorid)+'"><img src="'+(data[i].usericon)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(data[i].author)+'：</span><span class="xsh_floor_number"></span></p><div class="xsh_floor_textbox"><p class="xsh_floor_text">'+(data[i].message)+'</p><ul>';
             var images=[];
             var att = data[i].attach;
             for (var j in att){
@@ -68,7 +85,11 @@ function getdata(results){
             str +='</ul><span class="xsh_floor_text_time">'+(gettime(data[i].dateline))+'</span></div></li>';
         }
         floorbox.append(str);
+        reloadbox.css({display:"none"});
+        /*关闭*/
     }else{
+        reloadbox.css({display:"none"});
+        /*关闭*/
         window.location.href = "zxbbs://alert/"+results.msg;
     }
 }
@@ -87,23 +108,7 @@ function shangla(){
         }
     })
 }
-var scheight = $(window).height();
-var reloadbox = $(".reloadbox");
-var t1 = $(".xsh_postdetails_box");
-var t2 = $(".xsh_postdetails_textbox");
-var t3 = $(".xsh_floor_box")
-window.onscroll = function(){
-    var height = t1.height()+t2.height()+t3.height();
-    var scrolltop = $(window).scrollTop();
-    if(Math.abs(height-scheight-scrolltop) <= 50){
-        reloadbox.css({display:"block"});
-        /*上拉*/
-        shangla();
-    }else{
-        reloadbox.css({display:"none"});
-        /*关闭*/
-    }
-}
+
 /*缩略图预览*/
 var openPhotoSwipe = function(index,arr) {
     var pswpElement = document.querySelectorAll('.pswp')[0];
