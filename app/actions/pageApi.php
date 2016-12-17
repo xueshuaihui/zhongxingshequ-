@@ -247,17 +247,21 @@ class pageApi extends baseApi {
 
         //获取用户身份
         $userTags = null;
-        $user = $this->tool->getUserByUid($uid);
-        if(!$user['adminid']){
-            //获取用户标签
-            $userTags = $this->tool->getUserTags($uid);
-            foreach ($userTags as $k=>$userTag){
-                $userTags[$k] = $userTag['tagid'];
-            }
-            if(!$userTags){
-                return '用户无标签';
+        $setting = $this->tool->getSetting('grouppowerpluginidisopen');
+        if($setting['svalue']){
+            $user = $this->tool->getUserByUid($uid);
+            if(!$user['adminid']){
+                //获取用户标签
+                $userTags = $this->tool->getUserTags($uid);
+                foreach ($userTags as $k=>$userTag){
+                    $userTags[$k] = $userTag['tagid'];
+                }
+//                if(!$userTags){
+//                    return '用户无标签';
+//                }
             }
         }
+
         //根据用户标签获取帖子
         $pagesData = $this->tool->getPages($fid, $uid, $page, $userTags);
         $colorArr = ['black', 'red', 'orange', 'brown', 'green', 'lightblue', 'blue', 'blueviolet', 'pink'];

@@ -33,8 +33,13 @@ class circleRepository extends baseRepository {
             if($type == 2 ){
                 $join = 1;
             }else{
-                $join = $this->table('forum_groupuser')->where(['uid'=>$uid, 'fid'=>$value['fid']])->find();
-                $join = $join?1:0;
+                $forum = $this->table('forum_forumfield')->where('fid', $value['fid'])->find();
+                if($forum['founderuid'] == $uid){
+                    $join = 1;
+                }else{
+                    $join = $this->table('forum_groupuser')->where(['uid'=>$uid, 'fid'=>$value['fid']])->find();
+                    $join = $join?1:0;
+                }
             }
             $res[$k]['join'] = $join;
             $res[$k]['name'] = $value['name'];
