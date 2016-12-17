@@ -30,7 +30,7 @@ if($operation == 'appversion'){
         showformfooter();
     }else{
         $url = $_POST['version_url'];
-        if($_FILES){
+        if($_FILES['version_file']['size'] > 0){
             $url = uploadApk($_FILES['version_file'], $_POST['version_name'], 'data/apk');
         }
         C::t('common_setting')->update_batch([
