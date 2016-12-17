@@ -6,7 +6,7 @@ class pageRepository extends baseRepository {
         return $this->table('common_tagitem')->where(['idtype'=>'uid','itemid'=>$uid])->select('tagid');
     }
 
-    public function getPages($fid, $uid, $page, $tags, $keyword = null, $count = 10) {
+    public function getPages($fid, $uid, $page, $tags = null, $keyword = null, $count = 10) {
         $data = $this->table('forum_thread')->ass('thread')->join(' LEFT JOIN '.$this->prefix.'common_tagitem AS tag ON tag.itemid = thread.tid AND tag.idtype = \'threadid\'')->join(' LEFT JOIN '.$this->prefix.'forum_threadclass AS type ON type.typeid = thread.typeid');
         if($uid){
             $data->where('thread.authorid', $uid);
@@ -89,7 +89,7 @@ class pageRepository extends baseRepository {
         }
         //再把图片链接读出来
         $tempImg = [];
-        preg_match_all('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i', $messageBak, $imgUrl);
+        preg_match_all('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i', $itemBak['message'], $imgUrl);
         foreach ($imgUrl[0] as $img){
             $tempImg[] = ['attachment'=>$img, 'isimage'=>1];
         }

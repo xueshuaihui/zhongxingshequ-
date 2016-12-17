@@ -30,6 +30,14 @@ class baseRepository {
         return $this->table($form)->where('uid', $uid)->find();
     }
 
+    public function getSetting($key = null) {
+        $setting = $this->table('common_setting');
+        if($key){
+            return $setting->where('skey', $key)->find();
+        }else{
+            return $setting->select();
+        }
+    }
     public function getUserProfile($where = []) {
         return $this->table('common_member_profile')->where($where)->find();
     }
