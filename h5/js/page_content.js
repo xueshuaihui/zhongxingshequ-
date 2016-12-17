@@ -22,7 +22,7 @@ floorbox.on("tap",".xsh_floor_text",function(){
     window.location.href = "zxbbs://post/reply/uid="+uid+"&fid="+fid+"&pid="+pid+"&tid="+tid;
 })
 function gettime(time){
-    return new Date(parseInt(time) * 1000).toLocaleString().replace(/\//g,"-").slice(0,11)+new Date(parseInt(time) * 1000).toTimeString().slice(0,8);
+    return new Date(parseInt(time) * 1000).toLocaleDateString().replace(/\//g,"-")+" "+new Date(parseInt(time) * 1000).toTimeString().slice(0,8);
 }
 /*回复的数据*/
 function replydata(result){
