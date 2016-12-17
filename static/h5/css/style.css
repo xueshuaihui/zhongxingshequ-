@@ -95,7 +95,7 @@ input:-ms-input-placeholder {
 .xsh_circle_information_box{background: #ffffff;width: 90%;margin: auto;overflow: hidden;}
 .xsh_circle_information_box li,.xsh_circle_information_box>div{width: 100%;padding: 15px 0;position: relative;}
 .xsh_circle_managebor{border-bottom: 1px solid #eeeeee;}
-.xsh_circle_information_title{font-size: 15px;font-weight: 600;float: left;width: 80%;}
+.xsh_circle_information_title{font-size: 15px;font-weight: 600;float: left;width: 95%;}
 .xsh_circle_information_con{float: right;font-size: 13px;color: #666666;font-weight: 400;height: 20px;position: absolute;right: 0;top: 50%;;
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
@@ -110,7 +110,7 @@ input:-ms-input-placeholder {
 .xsh_circle_apply_btn{float: left;width: 40px;text-align: center;font-size: 14px;color: #ffffff;padding: 5px 3px;border-radius: 5px;margin: 15px 0;}
 .xsh_circle_accept{background: #0086d1;margin-right: 5px;}
 .xsh_circle_refuse{background: #e64340;}
-.xsh_circle_manage{width: 100%;height: 45px;overflow: hidden;position: relative;margin-top: 50px;}
+.xsh_circle_manage{width: 100%;height: 45px;overflow: hidden;position: relative;margin-top: 50px;padding-bottom: 10px;}
 .xsh_circle_manage_operation{width: 90%;height: 100%;margin: auto;background: #e64340;border-radius: 5px;overflow: hidden;position: relative;text-align: center;line-height: 45px;color: #ffffff;font-size: 16px;}
 /*资料详情*/
 .xsh_information_name{line-height: 30px;}

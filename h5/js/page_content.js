@@ -26,9 +26,6 @@ function gettime(time){
 }
 /*回复的数据*/
 function replydata(result){
-    alert(result)
-    alert(typeof result)
-    alert(JSON.parse(result))
         var results = JSON.parse(result);
         /*插入到1楼前*/
         var data = results.result;
