@@ -23,7 +23,7 @@ function istrue(){
         data:{old_uid:uid,new_uid:new_uid,fid:fid},
         success:function(result){
             if(result.state == 10000){
-                var href = window.location.href.split("?")[0]+"?show=page-pageList&fid="+(fid)+"&tid=1&uid="+uid;
+                var href = window.location.href.split("?")[0]+"?show=page-pageList&fid="+(fid)+"&uid="+uid+"&page=1";
                 var url = escape(href.replace(/\//g,"##"));
                 window.location.href = "zxbbs://jump/"+url;
             }else{
