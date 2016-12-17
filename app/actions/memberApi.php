@@ -28,6 +28,7 @@ class memberApi extends baseApi {
         $avatar = $this->request->file('avatar');
         $res = $this->tool->uploadAvatar($avatar, $uid);
         if($res){
+            $this->tool->blank();
             return $this->tool->getAvatar($uid);
         }
         return false;
