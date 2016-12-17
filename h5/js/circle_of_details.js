@@ -76,9 +76,8 @@ function reload(result){
         asynchronousearchbox.text(result.msg);
     }
 }
-
 function gettime(time){
-    return new Date(parseInt(time) * 1000).toLocaleString().replace(/\//g,"-").slice(0,11)+new Date(parseInt(time) * 1000).toTimeString().slice(0,8);
+    return new Date(parseInt(time) * 1000).toLocaleDateString().replace(/\//g,"-")+" "+new Date(parseInt(time) * 1000).toTimeString().slice(0,8);
 }
 function strfun(str,data,i){
     var details = http+'/app.php?show=member-details&uid='+data[i].authorid;
