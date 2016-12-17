@@ -12,7 +12,7 @@ var uid = hrefdada.uid;
 var new_uid
 var circle_member_one = $(".xsh_circle_member_one");
 circle_member_one.on("tap",function(){
-    new_uid = $(this).attr("new_uid");
+    new_uid = $(this).attr("id");
     var name = $(this).children(".xsh_circle_member_name").text();
     window.location.href =  "zxbbs://alert/确定将圈主转让给'"+(name)+"'？/取消/确定";
 })
