@@ -15,32 +15,67 @@ messagefixed.on("tap",function(){
     window.location.href = "zxbbs://post/reply/uid="+uid+"&fid="+fid+"&tid="+tid;
 })
 /*对楼层回复*/
+var floorbox = $(".xsh_floor_box>ul");
 var floortextbox =$(".xsh_floor_textbox");
-floortextbox.on("tap",function(){
+floorbox.on("tap",".xsh_floor_textbox",function(){
     var pid = $(this).parents(".xsh_floor").attr("pid");
     window.location.href = "zxbbs://post/reply/uid="+uid+"&fid="+fid+"&pid="+pid+"&tid="+tid;
 })
+function gettime(time){
+    return new Date(parseInt(time) * 1000).toLocaleString().replace(/\//g,"-").slice(0,11)+new Date(parseInt(time) * 1000).toTimeString().slice(0,8);
+}
 /*回复的数据*/
-var floorbox = $(".xsh_floor_box>ul");
 function replydata(result){
-    var result = JSON.parse(result);
+    var results = JSON.parse(result);
         /*插入到1楼前*/
-        var ziliao = http+'/app.php?show=member-details&uid='+uid;
-        var str='<li class="xsh_floor" pid="'+(result.pid)+'"><a href="zxbbs://jump/'+(escape(ziliao.replace(/\//g,"##")))+'" uid="'+(uid)+'"><img src="'+(result.portrait)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(result.name)+'：</span><span class="xsh_floor_number"></span></p><div class="xsh_floor_textbox"><p class="xsh_floor_text">'+(result.text)+'</p><ul>';
-        var length = result.images.length;
-        for (var i in result.images){
-            if(length ==2||length ==4){
-                str +='<li class="xsh_floor_text_img xsh_floor_text_img_two"><a href="javascript:;">';
-            }else if(length == 1){
-                str +='<li class="xsh_floor_text_img xsh_floor_text_img_one"><a href="javascript:;">';
-            }else{
-                str +='<li class="xsh_floor_text_img"><a href="javascript:;">';
+    if(results.state == 10000){
+        var data = results.result;
+        for(var i in data){
+            var ziliao = http+'/app.php?show=member-details&uid='+data[i].authorid;
+            var str='<li class="xsh_floor" pid="'+(data[i].pid)+'"><a href="zxbbs://jump/'+(escape(ziliao.replace(/\//g,"##")))+'" uid="'+(data[i].authorid)+'"><img src="'+(data[i].usericon)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(data[i].author)+'：</span><span class="xsh_floor_number">'+(Number(data.position)-1)+'</span></p><div class="xsh_floor_textbox"><div class="reply"><p>'+(data[i].reply.split("\n")[0])+'</p><p>'+(data[i].reply.split("/\n")[1])+'</p></div><p class="xsh_floor_text">'+(data[i].message)+'</p><ul>';
+            var images=[];
+            var att = data[i].attach;
+            for (var j in att){
+                if(att[j].isimage == "1"){
+                    images.push(att[j].attachment);
+                }
             }
-            str +='<img src="'+(result.images[i])+'" alt=""></a></li>';
+            var length = images.length;
+            for (var i in images){
+                if(length ==2||length ==4){
+                    str +='<li class="xsh_floor_text_img xsh_floor_text_img_two"><a href="javascript:;">';
+                }else if(length == 1){
+                    str +='<li class="xsh_floor_text_img xsh_floor_text_img_one"><a href="javascript:;">';
+                }else{
+                    str +='<li class="xsh_floor_text_img"><a href="javascript:;">';
+                }
+                str +='<img src="'+(images[i])+'" alt=""></a></li>';
+            }
+            str +='</ul><span class="xsh_floor_text_time">'+(gettime(data[i].dateline))+'</span></div></li>';
         }
-
-        str +='</ul><span class="xsh_floor_text_time">'+(new Date(new Date().getTime()).toLocaleString().replace(/\//g,"-").slice(0,11)+new Date(new Date().getTime()).toTimeString().slice(0,8))+'</span></div></li>';
         floorbox.prepend(str);
+        /*关闭*/
+    }else{
+        window.location.href = "zxbbs://alert/"+results.msg;
+    }
+
+
+        //var ziliao = http+'/app.php?show=member-details&uid='+uid;
+        //var str='<li class="xsh_floor" pid="'+(result.pid)+'"><a href="zxbbs://jump/'+(escape(ziliao.replace(/\//g,"##")))+'" uid="'+(uid)+'"><img src="'+(result.portrait)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(result.name)+'：</span><span class="xsh_floor_number"></span></p><div class="xsh_floor_textbox"><p class="xsh_floor_text">'+(result.text)+'</p><ul>';
+        //var length = result.images.length;
+        //for (var i in result.images){
+        //    if(length ==2||length ==4){
+        //        str +='<li class="xsh_floor_text_img xsh_floor_text_img_two"><a href="javascript:;">';
+        //    }else if(length == 1){
+        //        str +='<li class="xsh_floor_text_img xsh_floor_text_img_one"><a href="javascript:;">';
+        //    }else{
+        //        str +='<li class="xsh_floor_text_img"><a href="javascript:;">';
+        //    }
+        //    str +='<img src="'+(result.images[i])+'" alt=""></a></li>';
+        //}
+        //
+        //str +='</ul><span class="xsh_floor_text_time">'+(new Date(new Date().getTime()).toLocaleString().replace(/\//g,"-").slice(0,11)+new Date(new Date().getTime()).toTimeString().slice(0,8))+'</span></div></li>';
+        //floorbox.prepend(str);
 }
 var scheight = $(window).height();
 var reloadbox = $(".reloadbox");
@@ -65,7 +100,7 @@ function getdata(results){
         var data = results.result;
         for(var i in data){
             var ziliao = http+'/app.php?show=member-details&uid='+data[i].authorid;
-            var str='<li class="xsh_floor" pid="'+(data[i].pid)+'"><a href="zxbbs://jump/'+(escape(ziliao.replace(/\//g,"##")))+'" uid="'+(data[i].authorid)+'"><img src="'+(data[i].usericon)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(data[i].author)+'：</span><span class="xsh_floor_number"></span></p><div class="xsh_floor_textbox"><p class="xsh_floor_text">'+(data[i].message)+'</p><ul>';
+            var str='<li class="xsh_floor" pid="'+(data[i].pid)+'"><a href="zxbbs://jump/'+(escape(ziliao.replace(/\//g,"##")))+'" uid="'+(data[i].authorid)+'"><img src="'+(data[i].usericon)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(data[i].author)+'：</span><span class="xsh_floor_number">'+(Number(data.position)-1)+'</span></p><div class="xsh_floor_textbox"><div class="reply"><p>'+(data[i].reply.split("\n")[0])+'</p><p>'+(data[i].reply.split("/\n")[1])+'</p></div><p class="xsh_floor_text">'+(data[i].message)+'</p><ul>';
             var images=[];
             var att = data[i].attach;
             for (var j in att){
@@ -95,9 +130,6 @@ function getdata(results){
         window.location.href = "zxbbs://alert/"+results.msg;
     }
 }
-function gettime(time){
-    return new Date(parseInt(time) * 1000).toLocaleString().replace(/\//g,"-").slice(0,11)+new Date(parseInt(time) * 1000).toTimeString().slice(0,8);
-}
 var page = 1;
 function shangla(){
     page++;
@@ -125,7 +157,7 @@ var openPhotoSwipe = function(index,arr) {
     var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
     gallery.init();
 };
-$(".xsh_floor .xsh_floor_text_img").on("tap",function(){
+floorbox.on("tap",".xsh_floor .xsh_floor_text_img",function(){
     var index = $(this).index();
     var data = $(this).parent("ul").find(".xsh_floor_text_img");
     var arr = [];
