@@ -173,7 +173,8 @@ class baseRepository {
             return 10018;
         }
         //判断格式
-        if(!in_array($image['type'], ['image/jpg','image/jpeg'])){
+        $after = explode('.', $image['name']);
+        if(!in_array($after[count($after) - 1], ['jpg','jpeg'])){
             return 10017;
         }
         $uid = sprintf("%09d", $uid);

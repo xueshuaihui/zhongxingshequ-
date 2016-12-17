@@ -27,11 +27,12 @@ class memberApi extends baseApi {
         $uid = $this->request->post('uid');
         $avatar = $this->request->file('avatar');
         $res = $this->tool->uploadAvatar($avatar, $uid);
-        if($res){
+        if(is_bool($res) && $res){
             $this->tool->blank();
             return $this->tool->getAvatar($uid);
+        }else{
+            return $res;
         }
-        return false;
     }
 
     /**
