@@ -29,7 +29,7 @@ class memberApi extends baseApi {
         $res = $this->tool->uploadAvatar($avatar, $uid);
         if(is_bool($res) && $res){
             $this->tool->blank();
-            return $this->tool->getAvatar($uid);
+            return $this->tool->getAvatar($uid, 'big');
         }else{
             return $res;
         }
