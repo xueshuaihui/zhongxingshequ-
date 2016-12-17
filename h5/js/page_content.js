@@ -17,7 +17,7 @@ messagefixed.on("tap",function(){
 /*对楼层回复*/
 var floorbox = $(".xsh_floor_box>ul");
 var floortextbox =$(".xsh_floor_textbox");
-floorbox.on("tap",".xsh_floor_textbox",function(){
+floorbox.on("tap",".xsh_floor_text",function(){
     var pid = $(this).parents(".xsh_floor").attr("pid");
     window.location.href = "zxbbs://post/reply/uid="+uid+"&fid="+fid+"&pid="+pid+"&tid="+tid;
 })
