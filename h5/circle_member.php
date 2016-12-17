@@ -12,7 +12,7 @@
     <ul class="xsh_search_conbox xsh_circlr_member_box">
         <? foreach ($users as $user) {?>
         <li class="xsh_circle_member_list">
-            <a href="<?if(!$type) echo encodeUrl('app.php?member-details&uid='.$user['uid']);?>" id="<?echo $user['uid']?>" class="xsh_circle_member_one">
+            <a href="<?if(!$type) echo encodeUrl('app.php?show=member-details&uid='.$user['uid']);?>" id="<?echo $user['uid']?>" class="xsh_circle_member_one">
                 <div class="xsh_user_logo xsh_circlr_member">
                     <img src="<? echo $user['avatar'] ?>" alt="" class="xsh_user_logo xsh_circlr_member">
                 </div>
