@@ -16,7 +16,7 @@ class pageApp extends pageApi {
         $tid = $this->request->get('tid');
         $fid = $this->request->get('fid');
         $uid = $this->request->get('uid');
-        $result = $this->tieziList($tid, $fid);
+        $result = $this->tieziList($tid, $fid, 1);
         require_once ROOT.'h5'.__.'page_content.php';
     }
 
