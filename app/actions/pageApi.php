@@ -185,11 +185,11 @@ class pageApi extends baseApi {
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
-    public function tieziList($sTid = null, $sFid = null) {
+    public function tieziList($sTid = null, $sFid = null, $sPage = null) {
         $this->checkParam(['tid','fid']);
         $tid = $sTid?:$this->request->post('tid');
         $fid = $sFid?:$this->request->post('fid');
-        $page = $this->request->post('page');
+        $page = $sPage?:$this->request->post('page');
         $pid = $this->request->post('pid');
         $pages = $this->tool->getTiezi($tid, $fid, $pid, $page);
         foreach ($pages as $k=>$page){
