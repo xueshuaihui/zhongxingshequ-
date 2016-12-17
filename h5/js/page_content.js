@@ -26,8 +26,8 @@ function gettime(time){
 }
 /*回复的数据*/
 function replydata(result){
-    alert(result);
     var results = JSON.parse(result);
+    alert(result);
         /*插入到1楼前*/
         var data = results.result;
         var str ='';
@@ -37,6 +37,7 @@ function replydata(result){
                 str +='<div class="reply"><p>'+(data.reply.split("\n")[0])+'</p><p>'+(data.reply.split("\n")[1])+'</p></div>';
             }
             str +='<p class="xsh_floor_text">'+(data.message)+'</p><ul>';
+    alert(str);
             var images=[];
             var att = data.attach;
             for (var j in att){
@@ -56,7 +57,6 @@ function replydata(result){
                 str +='<img src="'+(images[i])+'" alt=""></a></li>';
             }
             str +='</ul><span class="xsh_floor_text_time">'+(gettime(data.dateline))+'</span></div></li>';
-    alert(str);
         floorbox.prepend(str);
     window.location.href = "#"+uid;
         /*关闭*/
