@@ -143,4 +143,25 @@ class indexApi extends baseApi {
         }
         return true;
     }
+
+    /**
+     * @SWG\Get(
+     *   path="index-version",
+     *   tags={"首页相关"},
+     *   summary="版本控制",
+     *   description="版本控制",
+     *   operationId="addCredit",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function version() {
+        $setting = $this->tool->getSetting('app_version');
+        if(!$setting){
+            return 10025;
+        }else{
+            return $setting['svalue'];
+        }
+    }
 }
