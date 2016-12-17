@@ -183,6 +183,7 @@ $menu['extended'] = array(
 	array('menu_ec', 'setting_ec'),
     array('menu_misc_link', 'misc_link'),
     array('menu_misc_download', 'misc_download'),
+    array('menu_misc_appversion', 'misc_appversion'),
 	array('memu_focus_topic', 'misc_focus'),
 	array('menu_misc_relatedlink', 'misc_relatedlink'),
 	array('menu_card', 'card')

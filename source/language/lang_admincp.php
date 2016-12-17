@@ -451,6 +451,7 @@ $lang = array
 
     'nav_misc_onlinelist' => '在线列表图标',
     'nav_misc_download' => '下载区二维码',
+    'nav_misc_appversion' => 'APP版本设置',
 	'nav_misc_links' => '友情链接',
 	'nav_misc_relatedlink' => '关联链接',
 	'nav_posting_censor' => '词语过滤',
@@ -2770,7 +2771,12 @@ $lang = array
 	'forums_edit_basic_up_comment' => '本版块的上级版块或分类',
 	'forums_edit_basic_redirect' => '版块转向 URL',
 	'forums_edit_basic_redirect_comment' => '如果设置转向 URL(例如 http://www.discuz.com)，用户点击本分版块将进入转向中设置的 URL。一旦设定将无法进入版块页面，请确认是否需要使用此功能，留空为不设置转向 URL',
-	'forums_edit_basic_icon' => '版块图标',
+    'forums_edit_basic_icon' => '版块图标',
+    'forums_edit_appversion_name' => '版本名称（v1.0.0）',
+    'forums_edit_appversion_code' => '版本代码(整型编号 1)',
+    'forums_edit_appversion_description' => '版本描述',
+    'forums_edit_appversion_file' => '打包文件',
+    'forums_edit_appversion_url' => 'apk文件地址',
 	'forums_edit_basic_icon_width' => '图标宽度 (单位: px)',
 	'forums_edit_basic_banner' => '顶部图片',
 	'forums_edit_basic_basic_icon_comment' => '版块名称和简介左侧的小图标，可填写相对或绝对地址。如使用 Flash 动画，请用逗号隔开 URL，宽度和高度，如“forum.swf,80,40”',
@@ -5021,6 +5027,9 @@ $lang = array
 
     'misc_download' => '首页下载区二维码',
     'misc_download_tips' => '点击图片上传或填写地址url',
+    'misc_appversion'=>'APP版本设置',
+    'misc_appversion_tips'=>'填写版本号，版本名称和版本描述(apk地址和文件不可同时上传，否则保存新上传的地址)',
+
 
 	'misc_relatedlink' => '关联链接',
 	'misc_relatedlink_status' => 'SEO兼容模式',
@@ -6436,6 +6445,7 @@ $lang = array
 
 	'cplog_misc_link' => '友情链接',
     'cplog_misc_download' => '下载区二维码',
+    'cplog_misc_appversion'=>'APP版本设置',
 	'cplog_misc_onlinelist' => '在线列表图标',
 	'cplog_misc_censor' => '词语过滤',
 	'cplog_misc_bbcode' => 'Discuz! 代码',
