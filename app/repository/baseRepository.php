@@ -100,7 +100,7 @@ class baseRepository {
         }elseif(!$forceall){
             $data->whereWhere('level', '>', 0);
         }
-        if($page){
+        if($page && $page != '-1' && $page != -1){
             $start = ($page - 1) * $count;
             $data->limit($start.','.$count);
         }
