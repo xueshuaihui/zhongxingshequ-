@@ -26,6 +26,7 @@ function gettime(time){
 }
 /*回复的数据*/
 function replydata(result){
+    alert(result);
     var results = JSON.parse(result);
         /*插入到1楼前*/
     if(results.state == 10000){
