@@ -30,10 +30,10 @@ function replydata(result){
         /*插入到1楼前*/
     if(results.state == 10000){
         var data = results.result;
+        var str ='';
         for(var i in data){
             var ziliao = http+'/app.php?show=member-details&uid='+uid;
             str +='<li class="xsh_floor" pid="'+(data[i].pid)+'"><a href="zxbbs://jump/'+(escape(ziliao.replace(/\//g,"##")))+'" uid="'+(data[i].authorid)+'"><img src="'+(data[i].usericon)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(data[i].author)+'：</span><span class="xsh_floor_number"></span></p><div class="xsh_floor_textbox">';
-            alert(str)
             if(data[i].reply){
                 str +='<div class="reply"><p>'+(data[i].reply.split("\n")[0])+'</p><p>'+(data[i].reply.split("\n")[1])+'</p></div>';
             }
@@ -58,7 +58,6 @@ function replydata(result){
             }
             str +='</ul><span class="xsh_floor_text_time">'+(gettime(data[i].dateline))+'</span></div></li>';
         }
-        alert(str);
         floorbox.prepend(str);
         /*关闭*/
     }else{
