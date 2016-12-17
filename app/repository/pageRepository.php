@@ -62,6 +62,41 @@ class pageRepository extends baseRepository {
         return $tiezis;
     }
 
+    public function getTheTiezi($tid, $fid, $pid) {
+        $data = $this->table('forum_post')->where(['tid'=>$tid, 'fid'=>$fid, 'pid'=>$pid])->find('pid, fid, tid, position, author, authorid, subject, message, anonymous, dateline');
+        $data['usericon'] = $this->getAvatar($data['authorid']);
+        return $data;
+    }
+
+    public function formatTiezi($item) {
+        $itemBak = $item;
+        $item['message'] = preg_replace('/\[quote\]([\s\S]*)\[\/quote\]/i', '', $item['message']);
+        $item['message'] = preg_replace('/\[.*?\]/', '', $item['message']);
+        $item['message'] = preg_replace('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i', '', $item['message']);
+        $item['message'] = trim($item['message']);
+        preg_match_all('/\[attach\].*?\[\/attach\]/', $itemBak['message'], $res);
+        preg_match('/\[quote\]([\s\S]*)\[\/quote\]/i', $itemBak['message'], $reply);
+        $replyContent = preg_replace('/\[.*?\]/', '', $reply[0]);
+        $attachId = '';
+        foreach ($res[0] as $re){
+            $attachId[]= trim(preg_replace('/\[.*?\]/', ' ', $re));
+        }
+        $item['reply'] = $replyContent?:'';
+        if($attachId){
+            $item['attach'] = $this->getAttach($attachId);
+        }else{
+            $item['attach'] = [];
+        }
+        //再把图片链接读出来
+        $tempImg = [];
+        preg_match_all('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i', $messageBak, $imgUrl);
+        foreach ($imgUrl[0] as $img){
+            $tempImg[] = ['attachment'=>$img, 'isimage'=>1];
+        }
+        $item['attach'] = array_merge($item['attach'], $tempImg);
+        return $item;
+    }
+
     public function saveThread($fid, $uid, $username, $subject, $typeid, $attachmentCount = 0, $maxposition = 1) {
         return $this->table('forum_thread')->store([
             'fid' => $fid,
