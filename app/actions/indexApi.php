@@ -138,7 +138,7 @@ class indexApi extends baseApi {
         $this->checkParam('uid');
         $uid = $this->request->post('uid');
         $res =$this->tool->creditHook($uid, 'daylogin');
-        if(is_numeric($res) || 1){
+        if(is_numeric($res)){
             return '每日签到 积分+'.$res;
         }
         return true;
