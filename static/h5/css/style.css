@@ -110,8 +110,8 @@ input:-ms-input-placeholder {
 .xsh_circle_apply_btn{float: left;width: 40px;text-align: center;font-size: 14px;color: #ffffff;padding: 5px 3px;border-radius: 5px;margin: 15px 0;}
 .xsh_circle_accept{background: #0086d1;margin-right: 5px;}
 .xsh_circle_refuse{background: #e64340;}
-.xsh_circle_manage{width: 100%;height: 45px;overflow: hidden;position: relative;margin-top: 50px;}
-.xsh_circle_manage_operation{width: 80%;height: 100%;margin: auto;background: #e64340;border-radius: 5px;overflow: hidden;position: relative;text-align: center;line-height: 45px;color: #ffffff;font-size: 16px;}
+.xsh_circle_manage{width: 100%;height: 45px;overflow: hidden;position: relative;margin-top: 50px;padding-bottom: 10px;}
+.xsh_circle_manage_operation{width: 90%;height: 100%;margin: auto;background: #e64340;border-radius: 5px;overflow: hidden;position: relative;text-align: center;line-height: 45px;color: #ffffff;font-size: 16px;}
 /*资料详情*/
 .xsh_information_name{line-height: 30px;}
 .xsh_information_box{font-size: 14px;padding: 8px 0;}
