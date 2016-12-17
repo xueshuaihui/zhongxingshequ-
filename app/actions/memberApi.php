@@ -26,7 +26,12 @@ class memberApi extends baseApi {
     public function changeAvatar() {
         $uid = $this->request->post('uid');
         $avatar = $this->request->file('avatar');
-        return $this->tool->uploadAvatar($avatar, $uid);
+        $res = $this->tool->uploadAvatar($avatar, $uid);
+        if($res){
+            $this->tool->blank();
+            return $this->tool->getAvatar($uid);
+        }
+        return false;
     }
 
     /**
