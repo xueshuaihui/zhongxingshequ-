@@ -107,6 +107,10 @@ class mdbModel extends baseModel implements dbInterface {
         return $do;
     }
 
+    public function isNull($field) {
+        $this->where .= ' AND '.$field.' IS NULL';
+        return $this;
+    }
     public function select($fields, $sql = false) {
         $this->sql = $this->find($fields, true);
         if($sql){

@@ -256,12 +256,13 @@ class pageApi extends baseApi {
                 foreach ($userTags as $k=>$userTag){
                     $userTags[$k] = $userTag['tagid'];
                 }
-//                if(!$userTags){
-//                    return '用户无标签';
-//                }
+                if(!$userTags){
+                    $userTags = null;
+                }
+            }else{
+                $userTags = 'admin';
             }
         }
-
         //根据用户标签获取帖子
         $pagesData = $this->tool->getPages($fid, $uid, $page, $userTags);
         $colorArr = ['black', 'red', 'orange', 'brown', 'green', 'lightblue', 'blue', 'blueviolet', 'pink'];

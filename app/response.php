@@ -18,7 +18,7 @@ class response implements responseInterface{
     const SUCCESS = 10000;
     const FAIL = 00000;
     private static $msg = [
-        00000 =>  '失败了，不解释',
+        00000 =>  '服务器错误',
         10000 =>  '成功',
         10001 =>  '缺少参数',
         10002 =>  '用户名不存在',
