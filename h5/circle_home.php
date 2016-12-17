@@ -118,12 +118,6 @@
                 <span>等待审核</span>
             </div>
         </a>
-    <?}else{?>
-        <a href="">
-            <div class="xsh_circle_manage_operation">
-                <span>加入圈子</span>
-            </div>
-        </a>
     <?} ?>
 </div>
 </body>
