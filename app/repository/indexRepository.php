@@ -42,9 +42,13 @@ class indexRepository extends baseRepository {
         return $this->table('forum_threadtype')->fields('typeid, name')->order('displayorder')->select();
     }
 
-    public function getInfo($typeId, $page) {
+    public function getInfo($typeId, $page = 1, $pcount = 10) {
         $count = $this->table('common_setting')->where('skey', 'index_list_count')->find();
-        $datas = $this->table('forum_thread')->ass('zt')->join(' LEFT JOIN '.$this->prefix.'forum_post AS tz ON zt.tid = tz.tid')->where(['zt.sortid'=>$typeId, 'tz.first'=>1])->select();
+        $start = ($page - 1) * $pcount;
+        if($start < 0){
+            $start = 0;
+        }
+        $datas = $this->table('forum_thread')->ass('zt')->join(' LEFT JOIN '.$this->prefix.'forum_post AS tz ON zt.tid = tz.tid')->where(['zt.sortid'=>$typeId, 'tz.first'=>1])->limit($start.','.$pcount)->select();
         $valueAble = [];
         foreach ($datas as $k=>$data) {
             $valueAble[$k]['title'] = $this->subString($data['subject'], 25);
