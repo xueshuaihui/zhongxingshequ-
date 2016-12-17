@@ -17,8 +17,10 @@ class pageRepository extends baseRepository {
         if($keyword){
             $data->whereWhere('subject', 'LIKE', "%{$keyword}%");
         }
-        if($tags){
+        if($tags && $tags != 'admin'){
             $data->in('tag.tagid', $tags);
+        }elseif(is_null($tags)){
+            $data->isNull('tag.tagid');
         }
         $data->where(['thread.price'=>0, 'thread.readperm'=>0])->whereWhere('thread.typeid', '!=', 0)->order('thread.displayorder desc, thread.lastpost desc');
         if($page){
@@ -111,7 +113,7 @@ class pageRepository extends baseRepository {
             'attachment'=>$attachmentCount?2:0,
             'isgroup' => 1,
             'bgcolor' => '',
-            'maxposition' => $maxposition
+            'maxposition' => max($maxposition, 1)
         ]);
     }
 
