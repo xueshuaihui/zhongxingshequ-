@@ -18,6 +18,7 @@ circle_member_one.on("tap",function(){
     window.location.href =  "zxbbs://alert/确定将圈主转让给'"+(name)+"'？/取消/确定";
 })
 function istrue(){
+    alert(new_uid)
     $.ajax({
         url:"/app.php?action=circle-changeCircleFounder",
         type:'post',
