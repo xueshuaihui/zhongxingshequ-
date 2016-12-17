@@ -42,7 +42,7 @@
             <a href="<?echo encodeUrl('app.php?show=member-details&uid='.$value['authorid']);?>"><img src="<?echo $value['usericon']?>" alt="" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a>
             <p><span class="xsh_floor_username"><?echo $value['author']?>：</span><span class="xsh_floor_number"><?echo $k?>楼</span></p>
             <div class="xsh_floor_textbox">
-            <?if($value['reply'] != ''){ $reply = explode('/\n', $value['reply']);?>
+            <?if($value['reply'] != ''){ $reply = explode('\\n', $value['reply']);?>
                 <div class="reply">
                     <p><?echo $reply[0]?></p>
                     <p><?echo $reply[1]?></p>
