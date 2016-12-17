@@ -26,23 +26,25 @@ function gettime(time){
 }
 /*回复的数据*/
 function replydata(result){
-    var results = JSON.parse(result);
+    alert(JSON.parse(result))
+        var results = JSON.parse(result);
         /*插入到1楼前*/
+    alert(results);
         var data = results.result;
-        var str ='';
-            var ziliao = http+'/app.php?show=member-details&uid='+uid;
-            str +='<li class="xsh_floor" pid="'+(data.pid)+'"><a name="'+(uid)+'" href="zxbbs://jump/'+(escape(ziliao.replace(/\//g,"##")))+'" uid="'+(data.authorid)+'"><img src="'+(data.usericon)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(data.author)+'：</span><span class="xsh_floor_number"></span></p><div class="xsh_floor_textbox">';
-            if(data.reply){
-                str +='<div class="reply"><p>'+(data.reply.split("\n")[0])+'</p><p>'+(data.reply.split("\n")[1])+'</p></div>';
-            }
+        var str = '';
+        var ziliao = http+'/app.php?show=member-details&uid='+uid;
+        str +='<li class="xsh_floor" pid="'+(data.pid)+'"><a name="'+(uid)+'" href="zxbbs://jump/'+(escape(ziliao.replace(/\//g,"##")))+'" uid="'+(data.authorid)+'"><img src="'+(data.usericon)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(data.author)+'：</span><span class="xsh_floor_number"></span></p><div class="xsh_floor_textbox">';
+        if(data.reply){
+            str +='<div class="reply"><p>'+(data.reply.split("\n")[0])+'</p><p>'+(data.reply.split("\n")[1])+'</p></div>';
+        }
             str +='<p class="xsh_floor_text">'+(data.message)+'</p><ul>';
-            var images=[];
-            var att = data.attach;
-            for (var j in att){
-                if(att[j].isimage == "1"){
-                    images.push(att[j].attachment);
-                }
+        var images=[];
+        var att = data.attach;
+        for (var j in att){
+            if(att[j].isimage == "1"){
+                 images.push(att[j].attachment);
             }
+        }
             var length = images.length;
             for (var i in images){
                 if(length ==2||length ==4){
@@ -54,8 +56,8 @@ function replydata(result){
                 }
                 str +='<img src="'+(images[i])+'" alt=""></a></li>';
             }
-            str +='</ul><span class="xsh_floor_text_time">'+(gettime(data.dateline))+'</span></div></li>';
-        floorbox.prepend(str);
+     str +='</ul><span class="xsh_floor_text_time">'+(gettime(data.dateline))+'</span></div></li>';
+    floorbox.prepend(str);
     window.location.href = "#"+uid;
         /*关闭*/
 
