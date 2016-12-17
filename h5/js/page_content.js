@@ -26,6 +26,7 @@ function gettime(time){
 }
 /*回复的数据*/
 function replydata(result){
+    alert(result);
     var results = JSON.parse(result);
         /*插入到1楼前*/
         var data = results.result;
@@ -55,6 +56,7 @@ function replydata(result){
                 str +='<img src="'+(images[i])+'" alt=""></a></li>';
             }
             str +='</ul><span class="xsh_floor_text_time">'+(gettime(data.dateline))+'</span></div></li>';
+    alert(str);
         floorbox.prepend(str);
     window.location.href = "#"+uid;
         /*关闭*/
