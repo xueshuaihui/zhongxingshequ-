@@ -26,10 +26,11 @@ function gettime(time){
 }
 /*回复的数据*/
 function replydata(result){
+    alert(result)
+    alert(typeof result)
     alert(JSON.parse(result))
         var results = JSON.parse(result);
         /*插入到1楼前*/
-    alert(results);
         var data = results.result;
         var str = '';
         var ziliao = http+'/app.php?show=member-details&uid='+uid;
@@ -59,25 +60,6 @@ function replydata(result){
      str +='</ul><span class="xsh_floor_text_time">'+(gettime(data.dateline))+'</span></div></li>';
     floorbox.prepend(str);
     window.location.href = "#"+uid;
-        /*关闭*/
-
-
-        //var ziliao = http+'/app.php?show=member-details&uid='+uid;
-        //var str='<li class="xsh_floor" pid="'+(result.pid)+'"><a href="zxbbs://jump/'+(escape(ziliao.replace(/\//g,"##")))+'" uid="'+(uid)+'"><img src="'+(result.portrait)+'" class="xsh_user_logo xsh_user_logo_radius xsh_post_user_logo"></a><p><span class="xsh_floor_username">'+(result.name)+'：</span><span class="xsh_floor_number"></span></p><div class="xsh_floor_textbox"><p class="xsh_floor_text">'+(result.text)+'</p><ul>';
-        //var length = result.images.length;
-        //for (var i in result.images){
-        //    if(length ==2||length ==4){
-        //        str +='<li class="xsh_floor_text_img xsh_floor_text_img_two"><a href="javascript:;">';
-        //    }else if(length == 1){
-        //        str +='<li class="xsh_floor_text_img xsh_floor_text_img_one"><a href="javascript:;">';
-        //    }else{
-        //        str +='<li class="xsh_floor_text_img"><a href="javascript:;">';
-        //    }
-        //    str +='<img src="'+(result.images[i])+'" alt=""></a></li>';
-        //}
-        //
-        //str +='</ul><span class="xsh_floor_text_time">'+(new Date(new Date().getTime()).toLocaleString().replace(/\//g,"-").slice(0,11)+new Date(new Date().getTime()).toTimeString().slice(0,8))+'</span></div></li>';
-        //floorbox.prepend(str);
 }
 var scheight = $(window).height();
 var reloadbox = $(".reloadbox");
