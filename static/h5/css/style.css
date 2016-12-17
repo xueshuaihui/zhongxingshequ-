@@ -149,7 +149,7 @@ input:-ms-input-placeholder {
 }
 .xsh_floor_text_img{width: 65px;height: 65px;overflow: hidden;position: relative;float: left;margin: 2px;font-size: 0;line-height: 0;}
 .xsh_floor_text_img img{width: 65px;height: 65px;}
-.xsh_floor_text_img_one{width: 95%;}
+.xsh_floor_text_img_one{width: 95%;height: auto;}
 .xsh_floor_text_img_one img{width: 100%;height: auto;}
 .xsh_floor_text_img_two{width: 100px;height: 100px;}
 .xsh_floor_text_img_two img{width: 100px;height: 100px;}
