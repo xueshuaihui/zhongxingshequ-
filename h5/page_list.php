@@ -59,16 +59,22 @@
 <script src="/static/h5/js/zepto.min.js"></script>
 <script src="/h5/js/circle_of_details.js"></script>
 <script>
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    if(isiOS){
         var xsh_search = $("#xsh_search");
         xsh_search.on("focusin",function(){
             $(".xsh_search_box").css({position:"absolute",top:$(window).scrollTop(),left:"0"});
-            window.onscroll = function(){
-                xsh_search.blur();
-                $(".xsh_search_box").css({position:"fixed",top:"0",left:"0"});
-            }
         })
-    xsh_search.on("blur",function(){
-        $(".xsh_search_box").css({position:"fixed",top:"0"});
-    })
+        window.onscroll = function(){
+        xsh_search.blur();
+        $(".xsh_search_box").css({position:"fixed",top:"0",left:"0"});
+        }
+        xsh_search.on("blur",function(){
+             $(".xsh_search_box").css({position:"fixed",top:"0",left:"0"});
+        })
+
+    }
 </script>
 </html>
