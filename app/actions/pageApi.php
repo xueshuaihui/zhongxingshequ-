@@ -194,32 +194,6 @@ class pageApi extends baseApi {
         $pages = $this->tool->getTiezi($tid, $fid, $pid, $page);
         foreach ($pages as $k=>$page){
             $pages[$k] = $this->tool->formatTiezi($page);
-//            $pages[$k]['message'] = preg_replace('/\[quote\]([\s\S]*)\[\/quote\]/i', '', $pages[$k]['message']);
-//            $pages[$k]['message'] = preg_replace('/\[.*?\]/', '', $pages[$k]['message']);
-//            $pages[$k]['message'] = preg_replace('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i', '', $pages[$k]['message']);
-//            $pages[$k]['message'] = trim($pages[$k]['message']);
-////            $pages[$k]['message'] = preg_replace('/\[attach\].*?\[\/attach\]/', '', $pages[$k]['message']);
-////            $pages[$k]['message'] = preg_replace('/\[img.*?\[\/img\]/', '', $pages[$k]['message']);
-//            preg_match_all('/\[attach\].*?\[\/attach\]/', $page['message'], $res);
-//            preg_match('/\[quote\]([\s\S]*)\[\/quote\]/i', $page['message'], $reply);
-//            $replyContent = preg_replace('/\[.*?\]/', '', $reply[0]);
-//            $attachId = '';
-//            foreach ($res[0] as $re){
-//                $attachId[]= trim(preg_replace('/\[.*?\]/', ' ', $re));
-//            }
-//            $pages[$k]['reply'] = $replyContent?:'';
-//            if($attachId){
-//                $pages[$k]['attach'] = $this->tool->getAttach($attachId);
-//            }else{
-//                $pages[$k]['attach'] = [];
-//            }
-//            //再把图片链接读出来
-//            $tempImg = [];
-//            preg_match_all('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i', $page['message'], $imgUrl);
-//            foreach ($imgUrl[0] as $item){
-//                $tempImg[] = ['attachment'=>$item, 'isimage'=>1];
-//            }
-//            $pages[$k]['attach'] = array_merge($pages[$k]['attach'], $tempImg);
         }
         return $pages;
     }
@@ -264,7 +238,7 @@ class pageApi extends baseApi {
             }
         }
         //根据用户标签获取帖子
-        $pagesData = $this->tool->getPages($fid, $uid, $page, $userTags);
+        $pagesData = $this->tool->getPages($fid, null, $page, $userTags);
         $colorArr = ['black', 'red', 'orange', 'brown', 'green', 'lightblue', 'blue', 'blueviolet', 'pink'];
         foreach ($pagesData as $k=>$value){
             $pagesData[$k]['icon'] = $this->tool->getAvatar($value['authorid']);
