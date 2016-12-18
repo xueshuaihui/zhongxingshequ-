@@ -89,7 +89,7 @@ class pageRepository extends baseRepository {
         $item['message'] = preg_replace('/\[.*?\]/', '', $item['message']);
         $item['message'] = preg_replace('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i', '', $item['message']);
         $item['message'] = str_replace('
-', '<br/>&nbsp;&nbsp;&nbsp;&nbsp;', $item['message']);
+', '<br/><br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;', $item['message']);
         $item['message'] = trim($item['message']);
         preg_match_all('/\[attach\].*?\[\/attach\]/', $itemBak['message'], $res);
         preg_match('/\[quote\]([\s\S]*)\[\/quote\]/i', $itemBak['message'], $reply);
