@@ -162,9 +162,7 @@ class pageRepository extends baseRepository {
         if(!$res){
             return false;
         }
-        if($maxposition > 1){
-            $res = $this->table('forum_thread')->where('tid', $tid)->update(['maxposition'=>$maxposition]);
-        }
+        $res = $this->table('forum_thread')->where('tid', $tid)->update(['maxposition'=>$maxposition]);
         return $res ? $pid : false;
     }
 
