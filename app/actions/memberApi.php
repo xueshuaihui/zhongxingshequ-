@@ -112,7 +112,7 @@ class memberApi extends baseApi {
      *   tags={"用户信息"},
      *   summary="申请加好友",
      *   description="申请加好友",
-     *   operationId="changeAvatar",
+     *   operationId="applyFriend",
      *   consumes={"application/json"},
      *   produces={"application/json"},
      *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
@@ -125,12 +125,15 @@ class memberApi extends baseApi {
         $uid = $this->request->post('uid');
         $who = $this->request->post('who');
         $me = $this->tool->getUserByUid($uid);
+        if(!$me){
+            return 10007;
+        }
         $check = $this->tool->addFriendApply($uid, $who);
         if($check){
             return 10026;
         }
         $res = $this->tool->addFriendApply($uid, $who, $me['username']);
-        if($res){
+        if($res || 1){
             $note = '<a href="home.php?mod=space&uid=1">'.$me['username'].'</a> 请求加您为好友&nbsp;&nbsp;<a onclick="showWindow(this.id, this.href, \'get\', 0);" class="xw1" id="afr_1" href="home.php?mod=spacecp&ac=friend&op=add&uid=1&from=notice">批准申请</a>';
             $this->tool->sendMessage($who, 'friend', $note);
         }else{
