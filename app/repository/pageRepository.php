@@ -17,7 +17,7 @@ class pageRepository extends baseRepository {
         if($keyword){
             $data->whereWhere('subject', 'LIKE', "%{$keyword}%");
         }
-        if($tags && $tags != 'admin'){
+        if($tags && $tags != 'admin' && count($tags) > 0){
             $tagDatas = $this->table('common_tagitem')->where('idtype', 'threadid')->in('tagid', $tags)->select();
             foreach ($tagDatas as $k=>$tagData) {
                 $tagDatas[$k] = $tagData['itemid'];
