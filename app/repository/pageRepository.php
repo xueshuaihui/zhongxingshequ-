@@ -134,6 +134,11 @@ class pageRepository extends baseRepository {
             $first = 0;
         }
         $maxposition += 1;
+        if($subject == '' || !$subject){
+            $baseposition = 2;
+        }else{
+            $baseposition = 1;
+        }
         $pid = $this->table('forum_post_tableid')->store(['pid' => null], true);
         $res = $this->table('forum_post')->store([
             'pid' => $pid,
@@ -151,7 +156,7 @@ class pageRepository extends baseRepository {
             'attachment' => $attachmentCount?2:0,
             'useip'   => getglobal('clientip'),
             'port'=>getglobal('remoteport'),
-            'position'=> max($maxposition, 1)
+            'position'=> max($maxposition, $baseposition)
         ]);
         if(!$res){
             return false;
