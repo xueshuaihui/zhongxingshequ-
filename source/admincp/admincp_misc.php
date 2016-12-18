@@ -38,6 +38,7 @@ if($operation == 'appversion'){
         $res   = $appObj->open($targetFile);
         $versionName = $appObj->getVersionName();  // 版本名称
         $versionCode = $appObj->getVersionCode();  // 版本代码
+        var_dump($versionCode, $versionName); exit;
         C::t('common_setting')->update_batch([
             'version_name'=>$versionName,
             'version_code'=>$versionCode,
