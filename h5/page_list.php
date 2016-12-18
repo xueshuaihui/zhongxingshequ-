@@ -67,14 +67,19 @@ if(isiOS){
     xsh_search.on("focusin",function(){
         setTimeout(function(){
             $(".xsh_search_box").css({position:"absolute",top:$(window).scrollTop(),left:"0"});
-        },100)
+        },50)
     })
     window.onscroll = function(){
         xsh_search.blur();
-        $(".xsh_search_box").css({position:"fixed",top:"0",left:"0"});
+        setTimeout(function(){
+              $(".xsh_search_box").css({position:"fixed",top:"0",left:"0"});
+        },50)
+
     }
     xsh_search.on("blur",function(){
-        $(".xsh_search_box").css({position:"fixed",top:"0",left:"0"});
+        setTimeout(function(){
+              $(".xsh_search_box").css({position:"fixed",top:"0",left:"0"});
+        },50)
     })
 
 }
