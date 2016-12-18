@@ -10,7 +10,7 @@ class memberApp extends authApi  {
         $avatar = $this->tool->getAvatar($uid);
         $userCount = $this->tool->getUserCount($uid);
         $userGroup = $this->tool->getUserGroup($userProfile['groupid']);
-        if($uid = $myuid){
+        if($uid == $myuid){
             $relation = -1;
         }else{
             $relation = $this->tool->isFriend($myuid, $uid)?1:0;
