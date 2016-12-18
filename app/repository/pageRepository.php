@@ -7,27 +7,40 @@ class pageRepository extends baseRepository {
     }
 
     public function getPages($fid, $uid, $page, $tags = null, $keyword = null, $count = 10) {
-        $data = $this->table('forum_thread')->ass('thread')->join(' LEFT JOIN '.$this->prefix.'common_tagitem AS tag ON tag.itemid = thread.tid AND tag.idtype = \'threadid\'')->join(' LEFT JOIN '.$this->prefix.'forum_threadclass AS type ON type.typeid = thread.typeid');
+        $data = $this->table('forum_thread');
         if($uid){
-            $data->where('thread.authorid', $uid);
+            $data->where('authorid', $uid);
         }
         if($fid){
-            $data->where('thread.fid', $fid);
+            $data->where('fid', $fid);
         }
         if($keyword){
             $data->whereWhere('subject', 'LIKE', "%{$keyword}%");
         }
         if($tags && $tags != 'admin'){
-            $data->in('tag.tagid', $tags);
+            $tagDatas = $this->table('common_tagitem')->where('idtype', 'threadid')->in('tagid', $tags)->select();
+            foreach ($tagDatas as $k=>$tagData) {
+                $tagDatas[$k] = $tagData['itemid'];
+            }
+            $data->in('tid', $tagDatas);
         }elseif(is_null($tags)){
-            $data->isNull('tag.tagid');
+            $tagDatas = $this->table('common_tagitem')->where('idtype', 'threadid')->in('tagid', $tags)->select();
+            foreach ($tagDatas as $k=>$tagData) {
+                $tagDatas[$k] = $tagData['itemid'];
+            }
+            $data->in('tid', $tagDatas, 1);
         }
-        $data->where(['thread.price'=>0, 'thread.readperm'=>0])->whereWhere('thread.typeid', '!=', 0)->order('thread.displayorder desc, thread.lastpost desc');
+        $data->where(['price'=>0, 'readperm'=>0])->whereWhere('typeid', '!=', 0)->order('displayorder desc, lastpost desc');
         if($page){
             $start = ($page - 1) * $count;
             $data->limit($start.' ,'.$count);
         }
-         return $data->select('thread.tid, thread.fid, type.name, thread.author, thread.authorid, thread.subject, thread.lastpost, thread.digest, thread.highlight, thread.bgcolor, thread.stamp, thread.displayorder');
+        $threadDatas = $data->select('tid, fid, author, authorid, subject, lastpost, digest, highlight, bgcolor, stamp, displayorder');
+        foreach ($threadDatas as $k=>$threadData) {
+            $threadClassData = $this->table('forum_threadclass')->where(['fid'=>$fid, 'typeid'=>$threadData['typeid']])->find();
+            $threadDatas[$k] = array_merge($threadDatas[$k], $threadClassData);
+        }
+        return $threadDatas;
     }
 
     public function getThread($tid) {

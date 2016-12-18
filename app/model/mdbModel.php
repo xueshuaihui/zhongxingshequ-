@@ -159,12 +159,16 @@ class mdbModel extends baseModel implements dbInterface {
         return $this;
     }
 
-    public function in ($k, $v) {
+    public function in ($k, $v, $not = false) {
         $range = '';
         foreach ($v as $item){
             $range .= '\''.$item.'\',';
         }
-        $this->where .= ' AND '.$k.' IN ('.trim($range, ',').')';
+        if($not){
+            $this->where .= ' AND '.$k.' NOT IN ('.trim($range, ',').')';
+        }else{
+            $this->where .= ' AND '.$k.' IN ('.trim($range, ',').')';
+        }
         return $this;
     }
 
