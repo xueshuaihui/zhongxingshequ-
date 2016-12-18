@@ -63,6 +63,7 @@
         xsh_search.on("focusin",function(){
             $(".xsh_search_box").css({position:"absolute",top:$(window).scrollTop(),left:"0"});
             window.onscroll = function(){
+                xsh_search.blur();
                 $(".xsh_search_box").css({position:"fixed",top:"0",left:"0"});
             }
         })
