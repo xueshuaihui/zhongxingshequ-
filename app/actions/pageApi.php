@@ -247,7 +247,7 @@ class pageApi extends baseApi {
             }
         }
         //根据用户标签获取帖子
-        $pagesData = $this->tool->getPages($fid, null, $page, $userTags);
+        $pagesData = $this->tool->getPages($fid, $uid, $page, $userTags);
         $colorArr = ['black', 'red', 'orange', 'brown', 'green', 'lightblue', 'blue', 'blueviolet', 'pink'];
         foreach ($pagesData as $k=>$value){
             $pagesData[$k]['icon'] = $this->tool->getAvatar($value['authorid']);
