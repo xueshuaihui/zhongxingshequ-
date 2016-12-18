@@ -33,15 +33,9 @@ if($operation == 'appversion'){
             cpmsg('appversion_apk_error', '', 'error');
         }
         $targetFile = uploadApk($_FILES['version_file'], $_POST['version_name'], 'data/apk');
-        include_once(DISCUZ_ROOT.'./source/class/lib/lib_apk.php');
-        $appObj  = new Apkparser();
-        $res   = $appObj->open($targetFile);
-        $versionName = $appObj->getVersionName();  // 版本名称
-        $versionCode = $appObj->getVersionCode();  // 版本代码
-        var_dump($versionCode, $versionName); exit;
         C::t('common_setting')->update_batch([
-            'version_name'=>$versionName,
-            'version_code'=>$versionCode,
+            'version_name'=>$_POST['version_name'],
+            'version_code'=>$_POST['version_code'],
             'version_description'=>$_POST['version_description'],
             'version_url'=>$targetFile,
         ]);
