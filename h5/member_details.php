@@ -31,12 +31,12 @@
 </div>
 <div class="xsh_circle_manage xsh_information_btn_box">
     <?if($relation == 1){?>
-    <a href="<?echo encodeUrl("app.php?show=message_pmc&uid={$myuid}&touid={$uid}")?>">
+    <a href="<?echo encodeUrl("app.php?show=message-pmc&uid={$myuid}&touid={$uid}")?>">
         <div class="xsh_circle_manage_operation xsh_information_btn"><span>发消息</span></div>
     </a>
     <?}elseif($relation == 0){?>
     <div class="xsh_circle_manage_operation xsh_information_btn xsh_information_min_btn"><span>加为好友</span></div>
-    <a href="<?echo encodeUrl("app.php?show=message_pmc&uid={$myuid}&touid={$uid}")?>">
+    <a href="<?echo encodeUrl("app.php?show=message-pmc&uid={$myuid}&touid={$uid}")?>">
         <div class="xsh_circle_manage_operation xsh_information_btn xsh_information_min_btn"><span>发消息</span></div>
     </a>
     <?}?>
