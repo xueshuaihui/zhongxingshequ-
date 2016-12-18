@@ -31,7 +31,7 @@
 </div>
 <div class="xsh_circle_manage xsh_information_btn_box">
     <?if($relation == 1){?>
-    <a href="<?echo encodeUrl('app.php?show=message_pmc&')?>">
+    <a href="<?echo encodeUrl("app.php?show=message_pmc&uid={$myuid}&touid={$uid}")?>">
         <div class="xsh_circle_manage_operation xsh_information_btn"><span>发消息</span></div>
     </a>
     <?}elseif($relation == 0){?>
