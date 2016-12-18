@@ -35,7 +35,7 @@ class pageRepository extends baseRepository {
             $start = ($page - 1) * $count;
             $data->limit($start.' ,'.$count);
         }
-        $threadDatas = $data->select('tid, fid, author, authorid, subject, lastpost, digest, highlight, bgcolor, stamp, displayorder');
+        $threadDatas = $data->select('tid, fid, typeid, author, authorid, subject, lastpost, digest, highlight, bgcolor, stamp, displayorder');
         foreach ($threadDatas as $k=>$threadData) {
             $threadClassData = $this->table('forum_threadclass')->where(['fid'=>$fid, 'typeid'=>$threadData['typeid']])->find();
             $threadDatas[$k]['name'] = $threadClassData['name'];
