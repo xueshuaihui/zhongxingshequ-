@@ -24,7 +24,7 @@ class pageRepository extends baseRepository {
             }
             $data->in('tid', $tagDatas);
         }elseif(is_null($tags)){
-            $tagDatas = $this->table('common_tagitem')->where('idtype', 'threadid')->in('tagid', $tags)->select();
+            $tagDatas = $this->table('common_tagitem')->where('idtype', 'threadid')->select();
             foreach ($tagDatas as $k=>$tagData) {
                 $tagDatas[$k] = $tagData['itemid'];
             }
