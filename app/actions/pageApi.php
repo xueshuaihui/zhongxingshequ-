@@ -103,9 +103,19 @@ class pageApi extends baseApi {
             }
         }
 
-        $tags = explode(',', $tags);
         //获取用户
         $user = $this->tool->getUserByUid($uid);
+        if(!$tags){
+            $tags = $this->tool->getUserTags($uid);
+            if(!$tags){
+                $tags = $this->tool->getGroupTags($fid);
+            }
+            foreach ($tags as $k=>$tag){
+                $tags[$k] = $tag['tagid'];
+            }
+        }else{
+            $tags = explode(',', $tags);
+        }
         //保存主题
         if($subject != '' && $tags && $class){
             $tid = $this->tool->saveThread($fid, $uid, $user['username'], $subject, $class, $attachmentCount);

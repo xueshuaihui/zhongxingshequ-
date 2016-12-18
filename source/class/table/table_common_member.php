@@ -70,6 +70,10 @@ class table_common_member extends discuz_table_archive
 		return $user;
 	}
 
+    public function fetch_all_exit_admin($count = 10) {
+        return DB::fetch_all('SELECT * FROM %t WHERE adminid = \'0\' ORDER BY credits DESC LIMIT 0, %d', array($this->_table, $count));
+	}
+
 	public function fetch_all_by_username($usernames, $order, $limit, $fetch_archive = 1) {
 		$users = array();
 		if(!empty($usernames)) {

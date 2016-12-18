@@ -75,32 +75,33 @@ function getHDZL($bkId, $for = 1) {
 }
 
 function getExpertList ($subBk, $order, $limit) {
-    if(!is_array($subBk) || count($subBk) < 1) {
-        return "";
-    }
-    $fids = '';
-    foreach ($subBk as $bk){
-        //获取子模块
-        $subsubk = C::t('forum_forum')->fetch_all_by_fup($bk['fid']);
-        foreach ($subsubk as $item){
-            $fids .= $item['fid'].',';
-        }
-    }
-    if($fids == ''){
-        return '';
-    }
-    $expertInfo = C::t('forum_forumfield')->get_all_username_by_fid(trim($fids, ','));
-    $expertName = [];
-    foreach ($expertInfo as $k=>$username) {
-        $name = $username['moderators'];
-        if($name){
-            $temp = explode('	', $name);
-            if(!in_array($temp[0], $expertName)){
-                $expertName[$k] = $temp[0];
-            }
-        }
-    }
-     return C::t('common_member')->fetch_all_by_username($expertName, $order, $limit);
+    return C::t('common_member')->fetch_all_exit_admin($limit);
+//    if(!is_array($subBk) || count($subBk) < 1) {
+//        return "";
+//    }
+//    $fids = '';
+//    foreach ($subBk as $bk){
+//        //获取子模块
+//        $subsubk = C::t('forum_forum')->fetch_all_by_fup($bk['fid']);
+//        foreach ($subsubk as $item){
+//            $fids .= $item['fid'].',';
+//        }
+//    }
+//    if($fids == ''){
+//        return '';
+//    }
+//    $expertInfo = C::t('forum_forumfield')->get_all_username_by_fid(trim($fids, ','));
+//    $expertName = [];
+//    foreach ($expertInfo as $k=>$username) {
+//        $name = $username['moderators'];
+//        if($name){
+//            $temp = explode('	', $name);
+//            if(!in_array($temp[0], $expertName)){
+//                $expertName[$k] = $temp[0];
+//            }
+//        }
+//    }
+//     return C::t('common_member')->fetch_all_by_username($expertName, $order, $limit);
 }
 
 function friendLink () {
