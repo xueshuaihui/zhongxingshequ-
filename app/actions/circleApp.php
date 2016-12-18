@@ -17,6 +17,7 @@ class circleApp extends circleApi {
         $this->checkParam(['fid','uid','type'],'get',1);
         $fid = $this->request->get('fid');
         $uid = $this->request->get('uid');
+        $usersCount = $this->tool->countGroupUser($fid);
         $type = $this->request->get('type');
         $profile = $this->getGroupProfile($fid, $uid);
         //type 0: 非转让 1: 转让

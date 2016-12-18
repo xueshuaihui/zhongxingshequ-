@@ -165,12 +165,13 @@ class circleRepository extends baseRepository {
 
     public function countGroupUser($fid) {
         $baseCount = $this->table('forum_groupuser')->where('fid', $fid)->whereWhere('level', '>', 0)->find('COUNT(*)');
+        $baseCount = array_values($baseCount);
         $group = $this->table('forum_forumfield')->where('fid', $fid)->find();
         $in = $this->getUserFromGroup($group['founderuid'], $fid);
         if($in){
-            return array_values($baseCount);
+            return $baseCount[0];
         }else{
-            return array_values($baseCount)+1;
+            return $baseCount[0]+1;
         }
     }
 }
