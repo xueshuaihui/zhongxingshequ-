@@ -150,7 +150,7 @@ class pageRepository extends baseRepository {
         }
         $replys = $this->table('forum_post')->where(['fid'=>$fid, 'tid'=>$tid])->select();
         $maxposition = count($replys);
-        $maxposition += 1;
+        $maxposition += 2;
         $pid = $this->table('forum_post_tableid')->store(['pid' => null], true);
         $res = $this->table('forum_post')->store([
             'pid' => $pid,
