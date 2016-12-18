@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>圈子管理(<?echo $usersCount[0]?>)</title>
+    <title>圈子管理(<?echo $usersCount?>)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="../static/h5/css/reset.css">
     <link rel="stylesheet" href="../static/h5/css/style.css">

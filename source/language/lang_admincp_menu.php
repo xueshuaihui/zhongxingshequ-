@@ -157,6 +157,7 @@ $lang = array
 
     'menu_misc_link' => '友情链接',
     'menu_misc_download' => '下载区二维码',
+    'menu_misc_appversion'=>'APP版本设置',
 	'menu_misc_relatedlink' => '关联链接',
 	'memu_focus_topic' => '站长推荐',
 	'menu_adv_custom' => '站点广告',

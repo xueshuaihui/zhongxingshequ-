@@ -134,6 +134,12 @@ class pageRepository extends baseRepository {
             $first = 0;
         }
         $maxposition += 1;
+        if($subject == '' || !$subject){
+            $baseposition = 2;
+        }else{
+            $baseposition = 1;
+        }
+        $maxposition = max($maxposition, $baseposition);
         $pid = $this->table('forum_post_tableid')->store(['pid' => null], true);
         $res = $this->table('forum_post')->store([
             'pid' => $pid,
@@ -156,9 +162,7 @@ class pageRepository extends baseRepository {
         if(!$res){
             return false;
         }
-        if($maxposition > 1){
-            $res = $this->table('forum_thread')->where('tid', $tid)->update(['maxposition'=>$maxposition]);
-        }
+        $res = $this->table('forum_thread')->where('tid', $tid)->update(['maxposition'=>$maxposition]);
         return $res ? $pid : false;
     }
 

@@ -363,6 +363,8 @@ $lang = array (
   'onlinelist_succeed' => '在线列表项目更新成功 ',
     'index_download_qrcode_succeed' => '主页下载区二维码更新成功',
     'index_download_qrcode_fail' => '主页下载区二维码更新失败',
+    'index_appversion_succeed' => 'APP版本信息修改成功',
+    'index_appversion_fail' => 'APP版本信息修改失败',
   'forumlinks_succeed' => '友情链接更新成功 ',
   'relatedlink_succeed' => '关联链接更新成功 ',
   'bbcode_not_found' => '标签未找到',
@@ -645,8 +647,10 @@ $lang = array (
     'upload_file_type_error' => '图片格式错误，请选择jpg,png格式的图片',
     'upload_title_no' => '未填写标题',
     'upload_jump_no' => '未填写跳转地址，以http://或https://开头',
-    'upload_banner_no' => '未上传图片，或填写图片url地址'
+    'upload_banner_no' => '未上传图片，或填写图片url地址',
     /*************************************/
+    'appversion_param_error' => '版本信息不全',
+    'appversion_type_error' => '安装包的类型不是apk',
 );
 
 ?>

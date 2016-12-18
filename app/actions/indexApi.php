@@ -157,11 +157,10 @@ class indexApi extends baseApi {
      * )
      */
     public function version() {
-        $setting = $this->tool->getSetting('app_version');
-        if(!$setting){
-            return 10025;
-        }else{
-            return $setting['svalue'];
-        }
+        $name = $this->tool->getSetting('version_name');
+        $code = $this->tool->getSetting('version_code');
+        $desc = $this->tool->getSetting('version_description');
+        $url = $this->tool->getSetting('version_url');
+        return ['name'=>$name['svalue'], 'code'=>$code['svalue'], 'description'=>$desc['svalue'], 'url'=>$url['svalue']];
     }
 }

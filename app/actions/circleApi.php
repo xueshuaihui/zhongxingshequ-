@@ -28,7 +28,7 @@ class circleApi extends baseApi {
     public function circleList() {
         $this->checkParam(['type', 'page', 'uid']);
         $type = $this->request->post('type');
-        $page = max(1, $this->request->post('page'));
+        $page = $this->request->post('page');
         $uid = $this->request->post('uid');
         return $this->tool->getCircleList($uid, $type, $page);
     }

@@ -12,7 +12,37 @@ if(!defined('IN_DISCUZ') || !defined('IN_ADMINCP')) {
 }
 
 cpheader();
-if($operation == 'download') {
+if($operation == 'appversion'){
+    if(!submitcheck('appversionsubmit')) {
+        shownav('extended', 'misc_appversion');
+        showsubmenu('nav_misc_appversion');
+        showtips('misc_appversion_tips');
+        showformheader('misc&operation=appversion&', 'enctype');
+        showtableheader('', 'fixpadding');
+        showsetting('forums_edit_appversion_name', 'version_name', $_G['setting']['version_name'], 'text', '', 0);
+        showsetting('forums_edit_appversion_code', 'version_code', $_G['setting']['version_code'], 'text', '', 0);
+        showsetting('forums_edit_appversion_description', 'version_description', $_G['setting']['version_description'], 'textarea', '', 0);
+        showsetting('forums_edit_appversion_url', 'version_url', $_G['setting']['version_url'], 'text', '', 0);
+        showsetting('forums_edit_appversion_file', 'version_file', '', 'file', '', 0);
+
+        showsubmit('appversionsubmit', 'submit', 'td');
+        showtablefooter();
+        showformfooter();
+    }else{
+        $url = $_POST['version_url'];
+        if($_FILES['version_file']['size'] > 0){
+            $url = uploadApk($_FILES['version_file'], $_POST['version_name'], 'data/apk');
+        }
+        C::t('common_setting')->update_batch([
+            'version_name'=>$_POST['version_name'],
+            'version_code'=>$_POST['version_code'],
+            'version_description'=>$_POST['version_description'],
+            'version_url'=>$url,
+        ]);
+        updatecache();
+        cpmsg('index_appversion_succeed', 'action=misc&operation=appversion', 'succeed');
+    }
+}elseif($operation == 'download') {
     if(!submitcheck('downloadsubmit')) {
         shownav('extended', 'misc_download');
         showsubmenu('nav_misc_download');
@@ -1628,6 +1658,28 @@ EOT;
 	}
 
 }
+
+function uploadApk($file, $name, $basePath) {
+    if($file['error'] > 0) {
+        cpmsg('upload_error', '', 'error');
+    }
+    $type = explode('.', $file['name']);
+    if(strtolower($type[count($type) - 1]) != 'apk') {
+        cpmsg('appversion_type_error', '', 'error');
+    }
+    if(!is_dir($basePath)){
+        mkdir($basePath);
+    }
+    $fileName = $name.time().'.apk';
+    $res = move_uploaded_file($file['tmp_name'], $basePath.DIRECTORY_SEPARATOR.$fileName);
+    if(!$res) {
+        cpmsg('upload_error', '', 'error');
+    }
+    $siteUrl = $_SERVER['HTTP_HOST'].DIRECTORY_SEPARATOR;
+    $url = $siteUrl.$basePath;
+    return $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://' . $url.DIRECTORY_SEPARATOR.$fileName;
+}
+
 function uploadFile ($file, $basePath) {
     if($file['error'] > 0) {
         cpmsg('upload_error', '', 'error');

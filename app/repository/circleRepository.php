@@ -6,14 +6,22 @@ class circleRepository extends baseRepository {
         /**
          * 0:all  1: recommend  2: mine
          */
+        $start = ($page - 1)*10;
         if($type == 2){
-            $listmine = $this->table('forum_groupuser')->ass('g')->join(' LEFT JOIN '.$this->prefix.'forum_forum as f ON g.fid = f.fid')->join(' LEFT JOIN '.$this->prefix.'forum_forumfield as ff ON ff.fid = g.fid')->where('g.uid', $uid)->whereWhere('g.level', '!=', 0)->select('f.*, ff.*');
-            $listcreate = $this->table('forum_forumfield')->ass('ff')->join(' LEFT JOIN '.$this->prefix.'forum_forum as f ON ff.fid = f.fid')->where('ff.founderuid', $uid)->select();
-            $list = array_merge($listmine, $listcreate);
+            $list = $this->table('forum_groupuser')
+                ->ass('g')
+                ->join(' LEFT JOIN '.$this->prefix.'forum_forum as f ON g.fid = f.fid')
+                ->join(' LEFT JOIN '.$this->prefix.'forum_forumfield as ff ON ff.fid = g.fid')
+                ->where(['g.uid'=>$uid, 'f.type'=>'sub', 'f.status'=>3])
+                ->whereOr('ff.founderuid', $uid)
+                ->whereWhere('g.level', '!=', 0);
+            if($page > 0){
+                $list->limit($start.', 10');
+            }
+            $list = $list->select('f.*, ff.*');
         }elseif($type == 1){
             $list = $this->table('common_setting')->where('skey', 'group_recommend')->find();
             $list = array_values(dunserialize($list['svalue']));
-            $start = ($page - 1)*10;
             $end = $start+9;
             foreach ($list as $k=>$v){
                 if($k < $start || $k > $end){
@@ -21,7 +29,15 @@ class circleRepository extends baseRepository {
                 }
             }
         }else{
-            $list = $this->table()->grouplist($uid, $type, $page);
+            $list = $this->table('forum_forum')
+                ->ass('f')
+                ->join(' LEFT JOIN '.$this->prefix.'forum_forumfield AS ff ON ff.fid = f.fid')
+                ->where(['f.type'=>'sub', 'f.status'=>3])
+                ->order('f.lastpost');
+            if($page > 0){
+                $list->limit($start.', 10');
+            }
+            $list = $list->select();
         }
         $res = [];
         foreach ($list as $k=>$value){
@@ -145,5 +161,17 @@ class circleRepository extends baseRepository {
             }
         }
         return true;
+    }
+
+    public function countGroupUser($fid) {
+        $baseCount = $this->table('forum_groupuser')->where('fid', $fid)->whereWhere('level', '>', 0)->find('COUNT(*)');
+        $baseCount = array_values($baseCount);
+        $group = $this->table('forum_forumfield')->where('fid', $fid)->find();
+        $in = $this->getUserFromGroup($group['founderuid'], $fid);
+        if($in){
+            return $baseCount[0];
+        }else{
+            return $baseCount[0]+1;
+        }
     }
 }
