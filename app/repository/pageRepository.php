@@ -151,7 +151,7 @@ class pageRepository extends baseRepository {
             'attachment' => $attachmentCount?2:0,
             'useip'   => getglobal('clientip'),
             'port'=>getglobal('remoteport'),
-            'position'=> $maxposition
+            'position'=> max($maxposition, 1)
         ]);
         if(!$res){
             return false;
