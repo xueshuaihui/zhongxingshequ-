@@ -97,10 +97,6 @@ class baseRepository {
             ->select('u.uid, u.username, p.bio');
     }
 
-    public function countGroupUser($fid) {
-        return $this->table('forum_groupuser')->where('fid', $fid)->whereWhere('level', '>', 0)->find('COUNT(*)');
-    }
-
     public function getGroupUser($fid, $field, $page, $count = 10, $level = 1, $forceall = false) {
         $data = $this->table('forum_groupuser')->where(['fid'=>$fid]);
         if(!$forceall && $level || $level === 0){

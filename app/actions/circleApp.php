@@ -6,8 +6,8 @@ class circleApp extends circleApi {
         $this->checkParam(['fid', 'uid'], 'get', 1);
         $fid = $this->request->get('fid');
         $uid = $this->request->get('uid');
-        $usersCount = array_values($this->tool->countGroupUser($fid));
-        $users = $this->getGroupUsers($fid, null, 1, 6);
+        $usersCount = $this->tool->countGroupUser($fid);
+        $users = $this->getGroupUsers($fid, null, 1, 5);
         $profile = $this->getGroupProfile($fid, $uid);
         $wait = $this->getGroupUsers($fid, 5, false, 1);
         require_once ROOT.'h5'.__.'circle_home.php';
