@@ -32,18 +32,22 @@ if($operation == 'appversion'){
         if(!$_FILES['version_file']['size']){
             cpmsg('appversion_apk_error', '', 'error');
         }
-        $targetFile = uploadApk($_FILES['version_file'], $_POST['version_name'], 'data/apk');
-        include_once(DISCUZ_ROOT.'./source/class/lib/lib_apk.php');
-        $appObj  = new Apkparser();
-        $res   = $appObj->open($targetFile);
-        $versionName = $appObj->getVersionName();  // 版本名称
-        $versionCode = $appObj->getVersionCode();  // 版本代码
-        var_dump($versionCode, $versionName); exit;
+        include_once(DISCUZ_ROOT.'./source/class/lib/Apkparser.php');
+        $appObj = new Apkparser();
+        $uploadResult = uploadApk($_FILES['version_file'], $_POST['version_name'], 'data/apk');
+        $url = $uploadResult['url'];
+        $targetFile = $uploadResult['path'];
+
+        $res     = $appObj->open($targetFile);
+
+        $apkName = $appObj->getVersionName();    // 版本名称
+
+        $apkCode = $appObj->getVersionCode();    // 版本代码
         C::t('common_setting')->update_batch([
-            'version_name'=>$versionName,
-            'version_code'=>$versionCode,
+            'version_name'=>$apkName?:$_POST['version_name'],
+            'version_code'=>$apkCode?:$_POST['version_code'],
             'version_description'=>$_POST['version_description'],
-            'version_url'=>$targetFile,
+            'version_url'=>$url,
         ]);
         updatecache();
         cpmsg('index_appversion_succeed', 'action=misc&operation=appversion', 'succeed');
@@ -1683,7 +1687,9 @@ function uploadApk($file, $name, $basePath) {
     }
     $siteUrl = $_SERVER['HTTP_HOST'].DIRECTORY_SEPARATOR;
     $url = $siteUrl.$basePath;
-    return $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://' . $url.DIRECTORY_SEPARATOR.$fileName;
+    return [
+        'path'=>$basePath.DIRECTORY_SEPARATOR.$fileName,
+        'url'=>$_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://' . $url.DIRECTORY_SEPARATOR.$fileName];
 }
 
 function uploadFile ($file, $basePath) {
