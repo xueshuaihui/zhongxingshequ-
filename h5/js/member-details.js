@@ -14,7 +14,7 @@ xsh_addfriend.on("tap",function(){
         data:{uid:myid,who:uid},
         success:function(result){
             if(result.state == 10000){
-                window.location.href = "zxbbs:///finish";
+                window.location.href = "zxbbs://finish";
             }else{
                 window.location.href = "zxbbs://alert/"+result.msg;
             }
