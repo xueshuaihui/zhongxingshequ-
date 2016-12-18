@@ -4,7 +4,7 @@ var hrefdada = {};
 for(var i in windowhrsf){
     var arr = windowhrsf[i].split("=");
     if(arr[1].match('#xsh_foot')){
-        arr[1] = arr[1].split("#")[0];
+        arr[i] = arr[1].split("#")[0];
     }
     hrefdada[arr[0]] = arr[1];
 }
@@ -36,9 +36,9 @@ var http = window.location.href.split('/app')[0];
                             usericon = datas[i].me;
                         }
                         if(datas[i].position == "r"){
-                            str += '<li class="xsh_me"><div class="xsh_message_logobox"><a href="zxbbs://jump/'+(escape())+'"><img src="'+(datas[i].me)+'" alt="">';
+                            str += '<li class="xsh_me"><div class="xsh_message_logobox"><a href="javascript:;"><img src="'+(datas[i].me)+'" alt="">';
                         }else if(datas[i].position == "l"){
-                            str += '<li class="xsh_you"><div class="xsh_message_logobox"><a href="zxbbs://jump/'+(escape())+'"><img src="'+(datas[i].you)+'" alt="">';
+                            str += '<li class="xsh_you"><div class="xsh_message_logobox"><a href="javascript:;"><img src="'+(datas[i].you)+'" alt="">';
                         }
                         str +='</a></div><div class="xsh_message_text"><div class="xsh_you_trigon"></div><p>'+(datas[i].message)+'</p></div></li>';
                     }
@@ -79,7 +79,8 @@ message_submit.on("tap",function(){
                 if(data.state == 10000){
                     var str = '';
                     var zlxq = http+"app.php?show=member-details&uid="+hrefdada.uid;
-                    str += '<li class="xsh_me"><div class="xsh_message_logobox"><a href="zxbbs://jump/'+(escape(zlxq))+'" name ="'+(num)+'"><img src="'+(usericon)+'" alt=""></a></div><div class="xsh_message_text"><div class="xsh_you_trigon"></div><p>'+(val)+'</p></div></li>';
+                    /*头像地址：zxbbs://jump/'+(escape(zlxq))+'*/
+                    str += '<li class="xsh_me"><div class="xsh_message_logobox"><a href="javascript:;" name ="'+(num)+'"><img src="'+(usericon)+'" alt=""></a></div><div class="xsh_message_text"><div class="xsh_you_trigon"></div><p>'+(val)+'</p></div></li>';
                     xsh_foot.before(str);
                     window.location.href = "#"+num;
                     message_inputext.val("");
