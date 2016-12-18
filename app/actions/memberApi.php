@@ -116,7 +116,7 @@ class memberApi extends baseApi {
      *   consumes={"application/json"},
      *   produces={"application/json"},
      *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
-     *     @SWG\Parameter(name="who", in="formData", description="加谁？ID", required=true, type="file"),
+     *     @SWG\Parameter(name="who", in="formData", description="加谁？ID", required=true, type="string"),
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */

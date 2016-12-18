@@ -41,7 +41,7 @@
                         <img src="../static/h5/images/<?echo $img?>" alt="" class="xsh_hotimg">
                     <?}?>
                     <?if($item['displayorder']){?>
-                    <img src="../static/h5/images/zd01.png" alt="" class="xsh_hotimg">
+                    <img src="../static/h5/images/zhiding2.png" alt="" class="xsh_hotimg">
                     <?}?>
                 </p>
                 <a href="<?echo encodeUrl("app.php?show=page-pageContent&fid={$item['fid']}&tid={$item['tid']}&uid={$uid}")?>">
