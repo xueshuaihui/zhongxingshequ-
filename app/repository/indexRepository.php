@@ -48,16 +48,17 @@ class indexRepository extends baseRepository {
         if($start < 0){
             $start = 0;
         }
-        $datas = $this->table('forum_thread')->ass('zt')->join(' LEFT JOIN '.$this->prefix.'forum_post AS tz ON zt.tid = tz.tid')->where(['zt.sortid'=>$typeId, 'tz.first'=>1])->limit($start.','.$pcount)->select();
+        $datas = $this->table('forum_thread')->where('sortid', $typeId)->limit($start.','.$pcount)->select();
         $valueAble = [];
         foreach ($datas as $k=>$data) {
+            $tiezi = $this->table('forum_post')->where(['tid', $data['tid'], 'first'=>1])->find();
             $valueAble[$k]['title'] = $this->subString($data['subject'], 25);
             $valueAble[$k]['fid'] = $data['fid'];
             $valueAble[$k]['tid'] = $data['tid'];
-            $valueAble[$k]['description'] = $this->filterMessage($data['message']);
+            $valueAble[$k]['description'] = $this->filterMessage($tiezi['message']);
             $valueAble[$k]['views'] = $data['views'];
             $valueAble[$k]['date'] = date('Y-m-d', $data['dateline']);
-            $valueAble[$k]['image'] = $this->getFirstImage($data['message'], $data['tid']);
+            $valueAble[$k]['image'] = $this->getFirstImage($tiezi['message'], $data['tid']);
         }
         return $valueAble;
     }
