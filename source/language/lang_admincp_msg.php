@@ -651,6 +651,7 @@ $lang = array (
     /*************************************/
     'appversion_param_error' => '版本信息不全',
     'appversion_type_error' => '安装包的类型不是apk',
+    'appversion_apk_error'  =>  '安装包信息不全',
 );
 
 ?>

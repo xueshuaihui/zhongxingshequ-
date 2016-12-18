@@ -104,7 +104,6 @@ class pageApi extends baseApi {
         }
 
         $tags = explode(',', $tags);
-
         //获取用户
         $user = $this->tool->getUserByUid($uid);
         //保存主题
@@ -119,7 +118,7 @@ class pageApi extends baseApi {
             if(!$res){
                 return false;
             }
-            $maxposition = 0;
+            $maxposition = 1;
         }elseif($replyTid){
             $thread = $this->tool->getThread($replyTid);
             $tid = $replyTid;

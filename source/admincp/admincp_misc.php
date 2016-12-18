@@ -29,15 +29,20 @@ if($operation == 'appversion'){
         showtablefooter();
         showformfooter();
     }else{
-        $url = $_POST['version_url'];
-        if($_FILES['version_file']['size'] > 0){
-            $url = uploadApk($_FILES['version_file'], $_POST['version_name'], 'data/apk');
+        if(!$_FILES['version_file']['size']){
+            cpmsg('appversion_apk_error', '', 'error');
         }
+        $targetFile = uploadApk($_FILES['version_file'], $_POST['version_name'], 'data/apk');
+        include_once(DISCUZ_ROOT.'./source/class/lib/lib_apk.php');
+        $appObj  = new Apkparser();
+        $res   = $appObj->open($targetFile);
+        $versionName = $appObj->getVersionName();  // 版本名称
+        $versionCode = $appObj->getVersionCode();  // 版本代码
         C::t('common_setting')->update_batch([
-            'version_name'=>$_POST['version_name'],
-            'version_code'=>$_POST['version_code'],
+            'version_name'=>$versionName,
+            'version_code'=>$versionCode,
             'version_description'=>$_POST['version_description'],
-            'version_url'=>$url,
+            'version_url'=>$targetFile,
         ]);
         updatecache();
         cpmsg('index_appversion_succeed', 'action=misc&operation=appversion', 'succeed');

@@ -24,7 +24,7 @@ class pageRepository extends baseRepository {
             }
             $data->in('tid', $tagDatas);
         }elseif(is_null($tags)){
-            $tagDatas = $this->table('common_tagitem')->where('idtype', 'threadid')->in('tagid', $tags)->select();
+            $tagDatas = $this->table('common_tagitem')->where('idtype', 'threadid')->select();
             foreach ($tagDatas as $k=>$tagData) {
                 $tagDatas[$k] = $tagData['itemid'];
             }
@@ -88,6 +88,8 @@ class pageRepository extends baseRepository {
         $item['message'] = preg_replace('/\[quote\]([\s\S]*)\[\/quote\]/i', '', $item['message']);
         $item['message'] = preg_replace('/\[.*?\]/', '', $item['message']);
         $item['message'] = preg_replace('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i', '', $item['message']);
+        $item['message'] = str_replace('
+', '<br/><br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;', $item['message']);
         $item['message'] = trim($item['message']);
         preg_match_all('/\[attach\].*?\[\/attach\]/', $itemBak['message'], $res);
         preg_match('/\[quote\]([\s\S]*)\[\/quote\]/i', $itemBak['message'], $reply);
@@ -213,6 +215,7 @@ class pageRepository extends baseRepository {
         if($subject != ''){
             updatepostcredits('+',  [$uid], 'post', $fid);
         }else{
+            $this->table('forum_thread')->where('tid', $tid)->increase(['replies'=>'1']);
             updatepostcredits('+',  [$uid], 'reply', $fid);
         }
         C::t('common_member_field_home')->update($uid, array('recentnote'=>$subject));
