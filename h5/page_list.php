@@ -45,7 +45,7 @@
                     <?}?>
                 </p>
                 <a href="<?echo encodeUrl("app.php?show=page-pageContent&fid={$item['fid']}&tid={$item['tid']}&uid={$uid}")?>">
-                    <h3 class=" xsh_text_one"><?echo $item['subject']?></h3>
+                    <h3 class=" xsh_text_one"><?echo $item['displayorder'].$item['subject']?></h3>
                 </a>
                 <span class="xsh_circle_name"><center><?echo $item['author']?></center></span>
                 <span class="xsh_notice_time xsh_circle_time"><?echo date('Y-m-d H:i:m', $item['lastpost'])?></span>
