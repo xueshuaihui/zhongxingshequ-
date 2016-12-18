@@ -38,7 +38,7 @@ class pageRepository extends baseRepository {
         $threadDatas = $data->select('tid, fid, author, authorid, subject, lastpost, digest, highlight, bgcolor, stamp, displayorder');
         foreach ($threadDatas as $k=>$threadData) {
             $threadClassData = $this->table('forum_threadclass')->where(['fid'=>$fid, 'typeid'=>$threadData['typeid']])->find();
-            $threadDatas[$k] = array_merge($threadDatas[$k], $threadClassData);
+            $threadDatas[$k]['name'] = $threadClassData['name'];
         }
         return $threadDatas;
     }
