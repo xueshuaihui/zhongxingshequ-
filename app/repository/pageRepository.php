@@ -148,13 +148,9 @@ class pageRepository extends baseRepository {
         if($maxposition){
             $first = 0;
         }
-        $maxposition += 1;
-        if($subject == '' || !$subject){
-            $baseposition = 2;
-        }else{
-            $baseposition = 1;
-        }
-        $maxposition = max($maxposition, $baseposition);
+        $replys = $this->table('forum_post')->where(['fid'=>$fid, 'tid'=>$tid])->select();
+        $maxposition = count($replys);
+        $maxposition += 2;
         $pid = $this->table('forum_post_tableid')->store(['pid' => null], true);
         $res = $this->table('forum_post')->store([
             'pid' => $pid,
@@ -200,7 +196,7 @@ class pageRepository extends baseRepository {
 
     public function updateThreadData($fid, $tid, $author, $uid, $subject, $position, $admin = false) {
         //更新主题的maxposition
-        $this->table('forum_thread')->where('tid', $tid)->update(['maxposition'=>$position+1]);
+        $this->table('forum_thread')->where('tid', $tid)->update(['maxposition'=>$position+1, 'lastpost'=>time()]);
         //保存用户日志
         useractionlog($uid, 'tid');
         //增加圈子积分
