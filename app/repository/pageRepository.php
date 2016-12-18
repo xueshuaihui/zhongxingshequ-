@@ -196,7 +196,7 @@ class pageRepository extends baseRepository {
 
     public function updateThreadData($fid, $tid, $author, $uid, $subject, $position, $admin = false) {
         //更新主题的maxposition
-        $this->table('forum_thread')->where('tid', $tid)->update(['maxposition'=>$position+1]);
+        $this->table('forum_thread')->where('tid', $tid)->update(['maxposition'=>$position+1, 'lastpost'=>time()]);
         //保存用户日志
         useractionlog($uid, 'tid');
         //增加圈子积分
