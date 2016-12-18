@@ -44,7 +44,11 @@ class circleRepository extends baseRepository {
             if($value['icon'] == ''){
                 $res[$k]['icon'] = BASEURL.__.'static/image/common/groupicon.gif';
             }else{
-                $res[$k]['icon'] = BASEURL.__.$value['icon'];
+                if($type == 1){
+                    $res[$k]['icon'] = BASEURL.__.$value['icon'];
+                }else{
+                    $res[$k]['icon'] = BASEURL.__.'data/attachment/group/'.$value['icon'];
+                }
             }
             if($type == 2 ){
                 $join = 1;
