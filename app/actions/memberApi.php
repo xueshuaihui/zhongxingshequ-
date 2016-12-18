@@ -134,7 +134,7 @@ class memberApi extends baseApi {
         }
         $res = $this->tool->addFriendApply($uid, $who, $me['username']);
         if($res || 1){
-            $note = '<a href="home.php?mod=space&uid='.$uid.'">'.$me['username'].'</a> 请求加您为好友&nbsp;&nbsp;<a onclick="showWindow(this.id, this.href, \'get\', 0);" class="xw1" id="afr_1" href="home.php?mod=spacecp&ac=friend&op=add&uid='.$who.'&from=notice">批准申请</a>';
+            $note = '<a href="home.php?mod=space&uid='.$uid.'">'.$me['username'].'</a> 请求加您为好友&nbsp;&nbsp;<a onclick="showWindow(this.id, this.href, \'get\', 0);" class="xw1" id="afr_1" href="home.php?mod=spacecp&ac=friend&op=add&uid='.$uid.'&from=notice">批准申请</a>';
             $this->tool->sendMessage($who, 'friend', $note);
         }else{
             return true;
