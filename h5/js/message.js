@@ -93,5 +93,3 @@ message_submit.on("tap",function(){
         window.location.href = "zxbbs://alert/请输入内容";
     }
 })
-
-window.location.href = "#xsh_foot";
