@@ -65,8 +65,9 @@ var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 if(isiOS){
     var xsh_search = $("#xsh_search");
     xsh_search.on("focusin",function(){
-        $(".xsh_search_box").css({position:"absolute",top:$(window).scrollTop(),left:"0"});
-        alert("absolute")
+        setTimeout(function(){
+            $(".xsh_search_box").css({position:"absolute",top:$(window).scrollTop(),left:"0"});
+        },100)
     })
     window.onscroll = function(){
         xsh_search.blur();
