@@ -95,6 +95,9 @@ function strfun(str,data,i){
         case "19":str +='<img src="/static/h5/images/bj@2x.png" alt="" class="xsh_hotimg">';break;
         default:str +='';break;
     }
+    if(data[i].displayorder){
+        str +='<img src="/static/h5/images/zd01.png" alt="" class="xsh_hotimg">'
+    }
     var tzxq = http+'/app.php?show=page-pageContent&fid='+fid+'&tid='+(data[i].tid)+'&uid='+uid;
     str +='</p><a href="zxbbs://jump/'+(escape(tzxq.replace(/\//g,"##")))+'" ><p class=" xsh_text_one" style="background: '+(data[i].bgcolor)+';color: '+(data[i].color)+';">';
     if(data[i].B){
