@@ -148,13 +148,9 @@ class pageRepository extends baseRepository {
         if($maxposition){
             $first = 0;
         }
+        $replys = $this->table('forum_post')->where(['fid'=>$fid, 'tid'=>$tid])->select();
+        $maxposition = count($replys);
         $maxposition += 1;
-        if($subject == '' || !$subject){
-            $baseposition = 2;
-        }else{
-            $baseposition = 1;
-        }
-        $maxposition = max($maxposition, $baseposition);
         $pid = $this->table('forum_post_tableid')->store(['pid' => null], true);
         $res = $this->table('forum_post')->store([
             'pid' => $pid,
