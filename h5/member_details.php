@@ -44,4 +44,5 @@
 </body>
 <script src="/static/h5/js/zepto.min.js"></script>
 <script src="/h5/js/touch.js"></script>
+<script src="/h5/js/member-details.js"></script>
 </html>
