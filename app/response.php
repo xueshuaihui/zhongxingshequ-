@@ -45,6 +45,7 @@ class response implements responseInterface{
         10023 =>  '加入成功！',
         10024 =>  '不能删除自己',
         10025 =>  '还未设置，请到PC端设置版本控制',
+        10026 =>  '已经申请了，请耐心等待'
     ];
     public function __construct($data = '') {
         if(is_bool($data)){

@@ -20,14 +20,18 @@ class memberRepository extends baseRepository {
         return $data;
     }
 
-    public function addFriendApply($uid, $username, $who) {
-        return $this->table('home_friend_request')->store([
-            'uid' => $uid,
-            'fuid'=> $who,
-            'fusername' => $username,
-            'gid' => 1,
-            'note' => 'app端申请加好友',
-            'dateline'=>time()
-        ]);
+    public function addFriendApply($uid, $who, $username = null) {
+        if($username){
+            return $this->table('home_friend_request')->store([
+                'uid' => $uid,
+                'fuid'=> $who,
+                'fusername' => $username,
+                'gid' => 1,
+                'note' => 'app端申请加好友',
+                'dateline'=>time()
+            ]);
+        }else{
+            return $this->table('home_friend_request')->where(['uid'=>$uid, 'fuid'=>$who])->find();
+        }
     }
 }

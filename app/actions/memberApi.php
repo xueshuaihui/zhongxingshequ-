@@ -125,10 +125,16 @@ class memberApi extends baseApi {
         $uid = $this->request->post('uid');
         $who = $this->request->post('who');
         $me = $this->tool->getUserByUid($uid);
-        $res = $this->tool->addFriendApply($uid, $me['username'], $who);
+        $check = $this->tool->addFriendApply($uid, $who);
+        if($check){
+            return 10026;
+        }
+        $res = $this->tool->addFriendApply($uid, $who, $me['username']);
         if($res){
             $note = '<a href="home.php?mod=space&uid=1">'.$me['username'].'</a> 请求加您为好友&nbsp;&nbsp;<a onclick="showWindow(this.id, this.href, \'get\', 0);" class="xw1" id="afr_1" href="home.php?mod=spacecp&ac=friend&op=add&uid=1&from=notice">批准申请</a>';
             $this->tool->sendMessage($who, 'friend', $note);
+        }else{
+            return true;
         }
         return true;
     }
