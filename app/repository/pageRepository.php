@@ -215,6 +215,7 @@ class pageRepository extends baseRepository {
         if($subject != ''){
             updatepostcredits('+',  [$uid], 'post', $fid);
         }else{
+            $this->table('forum_thread')->where('tid', $tid)->increase(['replies'=>'1']);
             updatepostcredits('+',  [$uid], 'reply', $fid);
         }
         C::t('common_member_field_home')->update($uid, array('recentnote'=>$subject));
