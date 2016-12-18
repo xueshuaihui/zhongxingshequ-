@@ -282,15 +282,20 @@ class pageApi extends baseApi {
 
         //获取用户身份
         $userTags = null;
-        $user = $this->tool->getUserByUid($uid);
-        if(!$user['adminid']){
-            //获取用户标签
-            $userTags = $this->tool->getUserTags($uid);
-            foreach ($userTags as $k=>$userTag){
-                $userTags[$k] = $userTag['tagid'];
-            }
-            if(!$userTags){
-                return '用户无标签';
+        $setting = $this->tool->getSetting('grouppowerpluginidisopen');
+        if($setting['svalue']){
+            $user = $this->tool->getUserByUid($uid);
+            if(!$user['adminid']){
+                //获取用户标签
+                $userTags = $this->tool->getUserTags($uid);
+                foreach ($userTags as $k=>$userTag){
+                    $userTags[$k] = $userTag['tagid'];
+                }
+                if(!$userTags){
+                    $userTags = null;
+                }
+            }else{
+                $userTags = 'admin';
             }
         }
         //根据用户标签获取帖子
