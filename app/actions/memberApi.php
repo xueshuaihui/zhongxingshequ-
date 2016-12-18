@@ -104,4 +104,32 @@ class memberApi extends baseApi {
         $user = $this->tool->getUserByUid($uid);
         return $user['credits'];
     }
+
+
+    /**
+     * @SWG\Post(
+     *   path="member-applyFriend",
+     *   tags={"用户信息"},
+     *   summary="申请加好友",
+     *   description="申请加好友",
+     *   operationId="changeAvatar",
+     *   consumes={"application/json"},
+     *   produces={"application/json"},
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Parameter(name="who", in="formData", description="加谁？ID", required=true, type="file"),
+     *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
+     * )
+     */
+    public function applyFriend() {
+        $this->checkParam(['uid', 'who']);
+        $uid = $this->request->post('uid');
+        $who = $this->request->post('who');
+        $me = $this->tool->getUserByUid($uid);
+        $res = $this->tool->addFriendApply($uid, $me['username'], $who);
+        if($res){
+            $note = '<a href="home.php?mod=space&uid=1">'.$me['username'].'</a> 请求加您为好友&nbsp;&nbsp;<a onclick="showWindow(this.id, this.href, \'get\', 0);" class="xw1" id="afr_1" href="home.php?mod=spacecp&ac=friend&op=add&uid=1&from=notice">批准申请</a>';
+            $this->tool->sendMessage($who, 'friend', $note);
+        }
+        return true;
+    }
 }
