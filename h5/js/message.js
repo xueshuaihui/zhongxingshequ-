@@ -3,8 +3,8 @@ var windowhrsf = window.location.href.split("?")[1].split("&");
 var hrefdada = {};
 for(var i in windowhrsf){
     var arr = windowhrsf[i].split("=");
-    if(arr[i].match('#xsh_foot')){
-        arr[i] = arr[i].split("#")[0];
+    if(arr[1].match('#xsh_foot')){
+        arr[1] = arr[1].split("#")[0];
     }
     hrefdada[arr[0]] = arr[1];
 }
