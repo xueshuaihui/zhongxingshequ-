@@ -8,7 +8,6 @@ class pageApp extends pageApi {
         $uid = $this->request->get('uid');
         $page = $this->request->get('page')?:1;
         $list = $this->threadList($uid, $fid, $page);
-        dd($list);
         require_once ROOT.'h5'.__.'page_list.php';
     }
 
