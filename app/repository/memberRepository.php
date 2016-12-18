@@ -23,8 +23,8 @@ class memberRepository extends baseRepository {
     public function addFriendApply($uid, $who, $username = null) {
         if($username){
             return $this->table('home_friend_request')->store([
-                'uid' => $uid,
-                'fuid'=> $who,
+                'uid' => $who,
+                'fuid'=> $uid,
                 'fusername' => $username,
                 'gid' => 1,
                 'note' => 'app端申请加好友',
