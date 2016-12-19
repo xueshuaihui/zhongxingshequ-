@@ -5,13 +5,38 @@
     <title>文档</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="../static/h5/css/reset.css">
+    <link rel="stylesheet" href="../static/h5/css/style.css">
     <style>
         body{background: #ffffff;}
         .nav_box{width: 25%;height: 100%;font-size: 14px;float: left;background: #f2fafc;color: #999999;}
         .nav_title{height: 55px;line-height: 55px;padding-left: 3px;}
         .nav_title_hot{background: #ffffff;}
         .tab_box{float: left;width: 74%}
-        .tab_box img{width: 100%;}
+        /*.tab_box img{width: 100%;}*/
+        .tab_box>a>ul>li{border-bottom: 1px solid #dcdcdc;overflow: hidden;padding: 15px 0;}
+        .box{border: 2px solid #dcdcdc;width: 50px;height: 80px;overflow: hidden;margin: 0 15px;}
+        .box>h3{color: #2d99bf;margin-top: 20px;}
+        .xian{width: 150%;height: 2px;background: #EEEEEE;
+            -webkit-transform: rotate(10deg) translateY(30px);
+            -moz-transform: rotate(10deg) translateY(30px);
+            -ms-transform: rotate(10deg) translateY(30px);
+            -o-transform: rotate(10deg) translateY(30px);
+            transform: rotate(10deg) translateY(30px);}
+        .box,.box_text{float: left;}
+        .title{font-size: 15px;font-weight: bold;}
+        .text_number{color: #2d99bf;float: right;}
+        .jianjie{margin: 10px 0;}
+        .zhidao{padding: 2px 5px;border: 1px solid #dcdcdc;float: right;}
+        .box_text{width: 150px;}
+        @media screen and (max-width: 374px){
+            .text_number{display: none;}
+        }
+        @media screen and (min-width: 374px){
+            .box_text{width: 185px;}
+        }
+        @media screen and (min-width: 400px){
+            .box_text{width: 210px;}
+        }
     </style>
 </head>
 <body>
@@ -45,7 +70,64 @@
     <a href="zxbbs://alert/尚未开放!">
         <ul>
             <li>
-                <img src="/static/h5/images/1.jpg" alt="">
+                <!--<img src="/static/h5/images/1.jpg" alt="">-->
+                <div class="box">
+                    <h3>ZTE中兴</h3>
+                    <div class="xian"></div>
+                </div>
+                <div class="box_text">
+                    <p>
+                        <span class="title">固网产品指导手册</span>
+                        <span class="text_number">33040阅读</span>
+                    </p>
+                    <p class="xsh_text_one jianjie">本文简单介绍了固网产品的相关开局教学，为您开局提供相关服务</p>
+                    <p><img src="/static/h5/images/1_03.jpg" alt=""><span>固网刘涛</span><span class="zhidao">开局指导</span></p>
+                </div>
+            </li>
+            <li>
+                <!--<img src="/static/h5/images/1.jpg" alt="">-->
+                <div class="box">
+                    <h3>ZTE中兴</h3>
+                    <div class="xian"></div>
+                </div>
+                <div class="box_text">
+                    <p>
+                        <span class="title">固网产品指导手册</span>
+                        <span class="text_number">33040阅读</span>
+                    </p>
+                    <p class="xsh_text_one jianjie">本文简单介绍了固网产品的相关开局教学，为您开局提供相关服务</p>
+                    <p><img src="/static/h5/images/1_03.jpg" alt=""><span>固网刘涛</span><span class="zhidao">开局指导</span></p>
+                </div>
+            </li>
+            <li>
+                <!--<img src="/static/h5/images/1.jpg" alt="">-->
+                <div class="box">
+                    <h3>ZTE中兴</h3>
+                    <div class="xian"></div>
+                </div>
+                <div class="box_text">
+                    <p>
+                        <span class="title">固网产品指导手册</span>
+                        <span class="text_number">33040阅读</span>
+                    </p>
+                    <p class="xsh_text_one jianjie">本文简单介绍了固网产品的相关开局教学，为您开局提供相关服务</p>
+                    <p><img src="/static/h5/images/1_03.jpg" alt=""><span>固网刘涛</span><span class="zhidao">开局指导</span></p>
+                </div>
+            </li>
+            <li>
+                <!--<img src="/static/h5/images/1.jpg" alt="">-->
+                <div class="box">
+                    <h3>ZTE中兴</h3>
+                    <div class="xian"></div>
+                </div>
+                <div class="box_text">
+                    <p>
+                        <span class="title">固网产品指导手册</span>
+                        <span class="text_number">33040阅读</span>
+                    </p>
+                    <p class="xsh_text_one jianjie">本文简单介绍了固网产品的相关开局教学，为您开局提供相关服务</p>
+                    <p><img src="/static/h5/images/1_03.jpg" alt=""><span>固网刘涛</span><span class="zhidao">开局指导</span></p>
+                </div>
             </li>
         </ul>
     </a>
