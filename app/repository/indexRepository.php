@@ -53,7 +53,7 @@ class indexRepository extends baseRepository {
         foreach ($datas as $k=>$data) {
             $tiezi = $this->table('forum_post')->where(['tid'=>$data['tid'], 'first'=>1])->find();
             if(!$tiezi){
-                break;
+                continue;
             }
             $valueAble[$k]['title'] = $this->subString($data['subject'], 25);
             $valueAble[$k]['fid'] = $data['fid'];
