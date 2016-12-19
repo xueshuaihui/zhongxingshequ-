@@ -245,6 +245,8 @@ class pageApi extends baseApi {
             }else{
                 $userTags = 'admin';
             }
+        }else{
+            $userTags = 'admin';
         }
         //根据用户标签获取帖子
         $pagesData = $this->tool->getPages($fid, $uid, $page, $userTags);

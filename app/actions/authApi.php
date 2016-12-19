@@ -64,6 +64,23 @@ class authApi extends baseApi {
         $email = $this->request->post('email');
         $tagid = $this->request->post('tagid');
         $code = $this->request->post('code');
+        $setting = $this->tool->getSetting('regstatus');
+        switch ($setting['svalue']){
+            case '0' :
+                return 10027;
+            break;
+            case '1' :
+                if($code){
+                    return 10028;
+                }
+            break;
+            case '2' :
+                if(!$code){
+                    return 10029;
+                }
+            break;
+            default:break;
+        }
         if($code){
             $res = $this->tool->checkCode($code, $email);
             if(!$res){

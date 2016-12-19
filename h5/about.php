@@ -22,7 +22,7 @@
     </div>
     <h3 class="xsh_name">Zone线上社区</h3>
         <p class="xsh_text">未来由您定义</p>
-    <p class="xsh_text">ver 1.0.0</p>
+    <p class="xsh_text"><?echo $version?></p>
     <div class="xsh_guanzhu">
         <a href="http://weibo.com/u/6072615561">
             <div class="xsh_guanzhubox">
