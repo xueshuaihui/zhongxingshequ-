@@ -51,7 +51,7 @@ class indexRepository extends baseRepository {
         $datas = $this->table('forum_thread')->where('sortid', $typeId)->limit($start.','.$pcount)->select();
         $valueAble = [];
         foreach ($datas as $k=>$data) {
-            $tiezi = $this->table('forum_post')->where(['tid', $data['tid'], 'first'=>1])->find();
+            $tiezi = $this->table('forum_post')->where(['tid'=>$data['tid'], 'first'=>1])->find();
             $valueAble[$k]['title'] = $this->subString($data['subject'], 25);
             $valueAble[$k]['fid'] = $data['fid'];
             $valueAble[$k]['tid'] = $data['tid'];

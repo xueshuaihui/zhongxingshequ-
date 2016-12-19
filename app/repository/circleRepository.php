@@ -7,18 +7,26 @@ class circleRepository extends baseRepository {
          * 0:all  1: recommend  2: mine
          */
         $start = ($page - 1)*10;
+        $list = [];
         if($type == 2){
-            $list = $this->table('forum_groupuser')
-                ->ass('g')
-                ->join(' LEFT JOIN '.$this->prefix.'forum_forum as f ON g.fid = f.fid')
-                ->join(' LEFT JOIN '.$this->prefix.'forum_forumfield as ff ON ff.fid = g.fid')
-                ->where(['g.uid'=>$uid, 'f.type'=>'sub', 'f.status'=>3])
-                ->whereOr('ff.founderuid', $uid)
-                ->whereWhere('g.level', '!=', 0);
-            if($page > 0){
-                $list->limit($start.', 10');
+            $forumGroupUsers = $this->table('forum_groupuser')->where('uid', $uid)->select();
+            $forumFounderGroup = $this->table('forum_forumfield')->where('founderuid', $uid)->find();
+            $forumGroupIds = [];
+            foreach ($forumGroupUsers as $k => $forumGroupUser){
+                $forumGroupIds[$k] = $forumGroupUser['fid'];
             }
-            $list = $list->select('f.*, ff.*');
+            if(!in_array($forumFounderGroup['fid'], $forumGroupIds)){
+                array_unshift($forumGroupIds, $forumFounderGroup['fid']);
+            }
+            $forumForums = $this->table('forum_forum')
+                ->ass('f')
+                ->join(' LEFT JOIN '.$this->prefix.'forum_forumfield AS ff ON f.fid = ff.fid')
+                ->where(['f.type'=>'sub', 'f.status'=>3])->in('f.fid', $forumGroupIds)
+                ->order('f.lastpost desc');
+            if($page > 0){
+                $forumForums->limit($start.', 10');
+            }
+            $list = $forumForums->select();
         }elseif($type == 1){
             $list = $this->table('common_setting')->where('skey', 'group_recommend')->find();
             $list = array_values(dunserialize($list['svalue']));
