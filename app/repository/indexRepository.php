@@ -48,10 +48,16 @@ class indexRepository extends baseRepository {
         if($start < 0){
             $start = 0;
         }
-        $datas = $this->table('forum_thread')->where('sortid', $typeId)->limit($start.','.$pcount)->select();
+        $datas = $this->table('forum_thread')->where('sortid', $typeId)->order('dateline desc')->limit($start.','.$pcount)->select();
         $valueAble = [];
         foreach ($datas as $k=>$data) {
+            if(!$data['fid']){
+                continue;
+            }
             $tiezi = $this->table('forum_post')->where(['tid'=>$data['tid'], 'first'=>1])->find();
+            if(!$tiezi){
+                continue;
+            }
             $valueAble[$k]['title'] = $this->subString($data['subject'], 25);
             $valueAble[$k]['fid'] = $data['fid'];
             $valueAble[$k]['tid'] = $data['tid'];
