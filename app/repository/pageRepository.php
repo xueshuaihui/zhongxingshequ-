@@ -37,8 +37,9 @@ class pageRepository extends baseRepository {
         }
         $threadDatas = $data->select('tid, fid, typeid, author, authorid, subject, lastpost, digest, highlight, bgcolor, stamp, displayorder');
         foreach ($threadDatas as $k=>$threadData) {
-            $threadClassData = $this->table('forum_threadclass')->where('typeid', $threadData['typeid'])->find();
-            $threadDatas[$k]['name'] = $threadClassData['name']?:'未分类';
+            $threadClassData = $this->table('forum_threadclass')->where(['fid'=>$threadData['fid'], 'typeid'=>$threadData['typeid']])->find();
+            $groupProfile = $this->table('forum_forum')->where('fid', $threadData['fid'])->find();
+            $threadDatas[$k]['name'] = $groupProfile['name'].']['.($threadClassData['name']?:'未分类');
         }
         return $threadDatas;
     }
