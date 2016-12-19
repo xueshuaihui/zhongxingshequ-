@@ -30,4 +30,10 @@ class pageApp extends pageApi {
         $user = $this->tool->getUserByUid($uid);
         require_once ROOT.'h5'.__.'page_my.php';
     }
+
+    public function about() {
+        $setting = $this->tool->getSetting('version_name');
+        $version = $setting['svalue']{0} == 'v' ? $setting['svalue'] : 'v'.$setting['svalue'];
+        require_once ROOT.'h5'.__.'about.php';
+    }
 }

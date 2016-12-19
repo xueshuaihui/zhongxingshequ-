@@ -85,13 +85,25 @@ class circleRepository extends baseRepository {
                ->find();
     }
 
-    public function searchCircle($keyword) {
+    public function searchCircle($keyword, $uid) {
         $list = $this->table()->searchGroup($keyword);
         $res = [];
         foreach ($list as $k=>$value){
+            $userFromGroup = $this->getUserFromGroup($uid, $value['fid']);
+            if(!$userFromGroup){
+                $founder = $this->table('forum_forumfield')->where('fid', $value['fid'])->find();
+                if($founder['founderuid'] == $uid){
+                    $relation = 1;
+                }else{
+                    $relation = 0;
+                }
+            }else{
+                $relation = 1;
+            }
             $res[$k]['icon'] = BASEURL.__.($value['icon']?:'static/image/common/groupicon.gif');
             $res[$k]['name'] = $value['name'];
             $res[$k]['fid'] = $value['fid'];
+            $res[$k]['join'] = $relation;
             $res[$k]['description'] = $value['description'];
         }
         return $res;

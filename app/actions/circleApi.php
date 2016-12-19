@@ -42,14 +42,16 @@ class circleApi extends baseApi {
      *   operationId="circleSearch",
      *   consumes={"application/json"},
      *   produces={"application/json"},
+     *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
      *     @SWG\Parameter(name="keyword", in="formData", description="关键字", required=true, type="string"),
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
     public function circleSearch() {
         $this->checkParam('keyword');
+        $uid = $this->request->post('uid');
         $keyword = $this->request->post('keyword');
-        return $this->tool->searchCircle($keyword);
+        return $this->tool->searchCircle($keyword, $uid);
     }
 
     /**
