@@ -63,7 +63,7 @@
 .xsh_tab_header{font-family: '微软雅黑 Bold', '微软雅黑 Regular', '微软雅黑';font-size: 16px;margin: 0 20px;}
 .xsh_tab_title{float: left;margin-right: 30px;display: block;padding-bottom: 5px;border: 2px solid #ffffff;height: 25px;margin-bottom: 30px;}
 .xsh_tab_title:hover{cursor: pointer;}
-.xsh_tab_title_hot{color: #0186D1;font-weight: 900;border-bottom: 2px solid #0186D1;}
+.xsh_tab_title_hot{color: #0186D1;font-weight: 900;border-bottom: 2px solid #0186D1; }
 .xsh_tab_content{margin:  0 20px;}
 .xsh_tab_con{display: none;}
 .xsh_tab_now{display: block;}
