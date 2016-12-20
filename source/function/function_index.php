@@ -23,7 +23,7 @@ function getInfo($sortId, $pageId, $perpage){
     $data =  C::t('forum_thread')->fetch_all_by_sortid($sortId, ($pageId-1)*$perpage, $perpage);
     foreach ($data as $k => $v){
         $data[$k]['tid'] = $v['tid'];
-        $data[$k] = C::t('forum_post')->fetch_visiblepost_by_tid(0, $v['tid']);
+        $data[$k] = C::t('forum_post')->fetch_by_tid(0, $v['tid']);
         $data[$k]['message'] = preg_replace('/\[.*?\]/', '', $data[$k]['message']);
         preg_match_all('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i', $data[$k]['message'], $imgUrl);
         $data[$k]['message'] = preg_replace('/(https|http):\/\/(.*?)(png|jpeg|gif|jpg)/i','',$data[$k]['message']);
