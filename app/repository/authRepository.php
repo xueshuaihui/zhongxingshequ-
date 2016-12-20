@@ -130,12 +130,12 @@ class authRepository extends baseRepository {
         if($item['endtime'] && $item['endtime'] < getglobal('timestamp')){
             return false;
         }
-        if($item['email'] && $item['email'] != $email){
-            return false;
-        }
-        if($item['inviteip'] && $item['inviteip'] != getglobal('clentip')){
-            return false;
-        }
+//        if($item['email'] && $item['email'] != $email){
+//            return false;
+//        }
+//        if($item['inviteip'] && $item['inviteip'] != getglobal('clentip')){
+//            return false;
+//        }
         return true;
     }
 }

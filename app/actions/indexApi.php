@@ -95,7 +95,8 @@ class indexApi extends baseApi {
         $this->checkParam(['typeid', 'page']);
         $typeId = $this->request->post('typeid');
         $page = $this->request->post('page');
-        return $this->tool->getInfo($typeId, $page);
+        $data = $this->tool->getInfo($typeId, $page);
+        return array_values($data);
     }
 
     /**

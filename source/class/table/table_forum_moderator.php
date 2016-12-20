@@ -91,9 +91,12 @@ class table_forum_moderator extends discuz_table
 		}
 		$fid = dintval($fid);
 		$uid = dintval($uid);
-		$fidarray = array_map('addslashes', $fidarray);
-		return DB::delete($this->_table, "uid='$uid' AND ((fid='$fid' AND inherited='0') OR (fid IN (".dimplode($fidarray).") AND inherited='1'))");
-	}
+        if($fidarray){
+            $fidarray = array_map('addslashes', $fidarray);
+            return DB::delete($this->_table, "uid='$uid' AND ((fid='$fid' AND inherited='0') OR (fid IN (".dimplode($fidarray).") AND inherited='1'))");
+        }
+        return DB::delete($this->_table, "uid='$uid' AND ((fid='$fid' AND inherited='0') OR inherited='1')");
+    }
 
 	public function delete_by_uid_fid($uid, $fid) {
 		if(!$fid || !$uid) {
