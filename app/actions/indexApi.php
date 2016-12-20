@@ -132,15 +132,20 @@ class indexApi extends baseApi {
      *   consumes={"application/json"},
      *   produces={"application/json"},
      *     @SWG\Parameter(name="uid", in="formData", description="用户ID", required=true, type="string"),
+     *     @SWG\Parameter(name="type", in="formData", description="类型0->daylogin, 1->post, 2->reply", required=true, type="string"),
      *     @SWG\Response(response=200, description="{'state':{结果代码},'result':{返回结果}}"),
      * )
      */
     public function addCredit() {
         $this->checkParam('uid');
         $uid = $this->request->post('uid');
-        $res =$this->tool->creditHook($uid, 'daylogin');
+        $type = $this->request->post('type');
+        $typeArr = [['daylogin', '每日签到 积分+%d'],
+                    ['post', '发表帖子 金钱+%d'],
+                    ['reply', '发表回复 金钱+%d']];
+        $res =$this->tool->creditHook($uid, $typeArr[$type][0]);
         if(is_numeric($res)){
-            return '每日签到 积分+'.$res;
+            return sprintf($typeArr[$type][1], $res);
         }
         return true;
     }

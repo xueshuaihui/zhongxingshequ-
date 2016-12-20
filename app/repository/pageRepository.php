@@ -209,12 +209,12 @@ class pageRepository extends baseRepository {
         if($admin){
             updatemoderate('tid', $tid);
         }
-        if($subject != ''){
-            updatepostcredits('+',  [$uid], 'post', $fid);
-        }else{
-            $this->table('forum_thread')->where('tid', $tid)->increase(['replies'=>'1']);
-            updatepostcredits('+',  [$uid], 'reply', $fid);
-        }
+//        if($subject != ''){
+//            updatepostcredits('+',  [$uid], 'post', $fid);
+//        }else{
+//            $this->table('forum_thread')->where('tid', $tid)->increase(['replies'=>'1']);
+//            updatepostcredits('+',  [$uid], 'reply', $fid);
+//        }
         C::t('common_member_field_home')->update($uid, array('recentnote'=>$subject));
         C::t('forum_groupuser')->update_counter_for_user($uid, $fid, 1);
         $subject = str_replace("\t", ' ', $subject);
