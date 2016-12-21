@@ -13,7 +13,7 @@
     <div class="xsh_private_letter_box">
         <img src="<?echo $value['you']?>" alt="" class="xsh_user_logo">
         <div>
-            <a href="">
+            <a href="<?echo encodeUrl('app.php?show=message-pmc&page=1&uid='.$uid.'&touid='.$value['touid'])?>">
                 <h3 class="xsh_private_letter_name"><?echo $value['lastauthor']?></h3>
                 <p class="xsh_notice_text xsh_remind_text xsh_private_letter_text"><?echo $value['message']?></p>
         </a>

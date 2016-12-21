@@ -10,7 +10,7 @@
 <body>
 <?foreach ($tips as $tip){?>
 <div class="xsh_noticebox">
-    <a href="app.php?show=message-ptc&mid=<?echo $tip['id']?>">
+    <a href="<?php echo encodeUrl('app.php?show=message-ptc&mid='. $tip['id']);?>">
         <p class="xsh_notice_text"><?echo $tip['subject']?></p>
         <p class="xsh_notice_text xsh_notice_time"><?echo date('Y-m-d H:i:s', $tip['starttime'])?></p>
     </a>
