@@ -24,6 +24,5 @@
 <?}?>
 </body>
 <script src="../static/h5/js/zepto.min.js"></script>
-<script src="../static/h5/js/reload.js"></script>
 <script src="../static/h5/js/private_letter.js"></script>
 </html>
