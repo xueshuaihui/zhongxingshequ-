@@ -100,7 +100,7 @@
 .xsh_intera_content>ul>a>li{border: 1px solid #eee;;width: 119px;float: left;border-left: 1px solid rgba(255,255,255,0);margin-right: -1px;margin-bottom: -1px;}
 .xsh_intera_content>ul>a>li:hover{background: #EEEEEE;}
 .xsh_intera_logo,.xsh_intera_text{float: left;display: block;line-height: 50px;font-size: 14px;}
-.xsh_intera_logo{width: 25px;height: 25px;margin-right: 10px;margin-top: 8px;}
+.xsh_intera_logo{width: 25px;height: 25px;margin-right: 10px;margin-top: 14px;}
 .xsh_intera_logo>img{width: 100%;height: 100%;}
 /*专家互动*/
 .xsh_con_right_header{border-bottom: 1px solid #eee;position: relative;}
@@ -119,7 +119,7 @@
 .xsh_expert_name>a>.xsh_expert_logo>img{width: 100%;height: 100%;border-radius: 50%;overflow: hidden;}
 .xsh_expert_name>a>.xsh_expert_user{text-align: center;width: 100%;font-size: 12px;margin-top: 15px;color: #000000;}
 .xsh_expert_add{width: 116px;overflow: hidden;}
-.xsh_expert_integral{width: 70px;height: 25px;font-size: 14px;margin: 5px auto;}
+.xsh_expert_integral{width: 70px;height: 25px;font-size: 14px;margin: 5px auto;text-align: center;}
 .xsh_expert_addbtn{width: 70px;height: 25px;border-radius: 1px;border: 1px solid #5597ED;margin: 15px auto;}
 .xsh_expert_addbtn>a{display: block;font-size: 15px;text-align: center;line-height: 25px;color: #5597ED;}
 /*浮层*/
@@ -136,9 +136,10 @@
 .xsh_expert_radio{overflow: hidden;font-size: 14px;}
 .xsh_expert_form>h3{font-size: 14px;height: 30px;line-height: 30px;margin-bottom: 15px;}
 .xsh_expert_radio>label{display: block;float: left;margin-right: 15px;margin-bottom: 20px;}
+.xsh_expert_radio>label>input{margin-right: 5px;}
 .xsh_expert_textarea{border: 1px solid #CCCCCC;border-radius: 1px;padding: 2px;}
 .xsh_expert_textarea>textarea{border: none;font-size: 14px;width: 100%;}
-.xsh_expert_form_submit{font-size: 14px;color: #ffffff;background: #00a7ea;position: relative;left: 80%;width: 130px;height: 50px;text-align: center;line-height: 50px;border-radius: 1px;display: block;margin-top: 20px;}
+.xsh_expert_form_submit{font-size: 14px;color: #ffffff;background: #00a7ea;position: relative;left: 80%;width: 130px;height: 50px;text-align: center;line-height: 50px;border-radius: 1px;display: block;margin-top: 20px;border: none;}
 .xsh_input_submit{width: 130px;height: 50px;background: none;border: none;}
 .xsh_close{width: 20px;height: 20px;position: absolute;top: 20px;right: 30px;background: url("/static/zte/images/close.jpg") no-repeat center;background-size: 100% 100%;}
 /*积分兑换*/
